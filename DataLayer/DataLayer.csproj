@@ -50,6 +50,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Persistence\Measuring\IPersonMeasuringRepository.cs" />
+    <Compile Include="Persistence\Measuring\PersonMeasuringFactory.cs" />
+    <Compile Include="Persistence\Measuring\PersonMeasuringRepository.cs" />
+    <Compile Include="Persistence\Medicament\IPersonMedicamentRepository.cs" />
+    <Compile Include="Persistence\Medicament\PersonMedicamentFactory.cs" />
+    <Compile Include="Persistence\Medicament\PersonMedicamentRepository.cs" />
+    <Compile Include="Persistence\Message\INotificationRepository.cs" />
+    <Compile Include="Persistence\Message\NotificationFactory.cs" />
+    <Compile Include="Persistence\Message\NotificationRepository.cs" />
+    <Compile Include="Persistence\Message\IMessageRepository.cs" />
+    <Compile Include="Persistence\Message\MessageFactory.cs" />
+    <Compile Include="Persistence\Message\MessageRepository.cs" />
+    <Compile Include="Persistence\RiskFactor\IPersonRiskFactorRepository.cs" />
+    <Compile Include="Persistence\RiskFactor\PersonRiskFactorFactory.cs" />
+    <Compile Include="Persistence\RiskFactor\PersonRiskFactorRepository.cs" />
+    <Compile Include="Persistence\Symptom\IPersonSymptomRepository.cs" />
+    <Compile Include="Persistence\Symptom\PersonSymptomFactory.cs" />
+    <Compile Include="Persistence\Symptom\PersonSymptomRepository.cs" />
     <Compile Include="TrashDomainContext.cs" />
     <Compile Include="DataBaseModels\MainDataBaseModel.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -99,9 +117,9 @@
     <Compile Include="Persistence\RiskFactor\IRiskFactorRepository.cs" />
     <Compile Include="Persistence\RiskFactor\RiskFactorFactory.cs" />
     <Compile Include="Persistence\RiskFactor\RiskFactorRepository.cs" />
-    <Compile Include="Persistence\Symptom\IPersonSymptomRepository.cs" />
-    <Compile Include="Persistence\Symptom\PersonSymptomFactory.cs" />
-    <Compile Include="Persistence\Symptom\PersonSymptomRepository.cs" />
+    <Compile Include="Persistence\Symptom\IAsignedSymptomRepository.cs" />
+    <Compile Include="Persistence\Symptom\AsignedSymptomFactory.cs" />
+    <Compile Include="Persistence\Symptom\AsignedSymptomRepository.cs" />
     <Compile Include="Persistence\Symptom\ISymptomRepository.cs" />
     <Compile Include="Persistence\Symptom\SymptomFactory.cs" />
     <Compile Include="Persistence\Symptom\SymptomRepository.cs" />

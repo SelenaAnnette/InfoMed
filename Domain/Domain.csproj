@@ -47,8 +47,12 @@
   <ItemGroup>
     <Compile Include="DomainBase.cs" />
     <Compile Include="Measuring\MeasuringType.cs" />
+    <Compile Include="Measuring\PersonMeasuring.cs" />
+    <Compile Include="Medicament\PersonMedicament.cs" />
     <Compile Include="Medicament\Medicament.cs" />
     <Compile Include="Medicament\AsignedMedicament.cs" />
+    <Compile Include="Message\Notification.cs" />
+    <Compile Include="Message\Message.cs" />
     <Compile Include="Person\PersonContact.cs" />
     <Compile Include="Person\ContactType.cs" />
     <Compile Include="Person\Credentials.cs" />
@@ -57,8 +61,10 @@
     <Compile Include="Group\PersonGroup.cs" />
     <Compile Include="Person\PersonPerson.cs" />
     <Compile Include="RiskFactor\AsignedRiskFactor.cs" />
-    <Compile Include="Symptom\PersonSymptom.cs" />
+    <Compile Include="RiskFactor\PersonRiskFactor.cs" />
+    <Compile Include="Symptom\AsignedSymptom.cs" />
     <Compile Include="RiskFactor\RiskFactor.cs" />
+    <Compile Include="Symptom\PersonSymptom.cs" />
     <Compile Include="Symptom\Symptom.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
