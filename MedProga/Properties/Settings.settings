@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="MedProga.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="MainDBConnectionString" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">data source=MYCOMP\SQLEXPRESS;initial catalog=InfoMedMainDB;persist security info=True;user id=InfoMed;password=infomed523;multipleactiveresultsets=True</Value>
+    </Setting>
+    <Setting Name="TrashDBConnectionString" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">data source=MYCOMP\SQLEXPRESS;initial catalog=InfoMedTrashDB;persist security info=True;user id=InfoMed;password=infomed523;multipleactiveresultsets=True</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

@@ -6,3 +6,7 @@
 /TestConsole/obj
 /packages/EntityFramework.5.0.0
 /packages/Ninject.3.0.1.10
+/MedProga/bin
+/MedProga/obj
+/MedProga/App_Data
+/MedProga/conn1.txt
