@@ -1,0 +1,8 @@
+/DataLayer/bin
+/DataLayer/obj
+/Domain/bin
+/Domain/obj
+/TestConsole/bin
+/TestConsole/obj
+/packages/EntityFramework.5.0.0
+/packages/Ninject.3.0.1.10

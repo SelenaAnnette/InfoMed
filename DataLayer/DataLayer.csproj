@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{015E9DC3-95EF-4737-BD76-92F81D65B260}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DataLayer</RootNamespace>
+    <AssemblyName>DataLayer</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject">
+      <HintPath>..\packages\Ninject.3.0.1.10\lib\net40\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="TrashDomainContext.cs" />
+    <Compile Include="DataBaseModels\MainDataBaseModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MainDataBaseModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseModels\TrashDataBaseModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TrashDataBaseModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DomainContext.cs" />
+    <Compile Include="IRepository.cs" />
+    <Compile Include="Persistence\Group\PersonGroupFactory.cs" />
+    <Compile Include="Persistence\Group\PersonGroupRepository.cs" />
+    <Compile Include="Persistence\Group\IPersonGroupRepository.cs" />
+    <Compile Include="Persistence\Group\IGroupRepository.cs" />
+    <Compile Include="Persistence\Group\GroupFactory.cs" />
+    <Compile Include="Persistence\Group\GroupRepository.cs" />
+    <Compile Include="Persistence\Measuring\IMeasuringTypeRepository.cs" />
+    <Compile Include="Persistence\Measuring\MeasuringTypeFactory.cs" />
+    <Compile Include="Persistence\Measuring\MeasuringTypeRepository.cs" />
+    <Compile Include="Persistence\Medicament\IAsignedMedicamentRepository.cs" />
+    <Compile Include="Persistence\Medicament\AsignedMedicamentFactory.cs" />
+    <Compile Include="Persistence\Medicament\AsignedMedicamentRepository.cs" />
+    <Compile Include="Persistence\Medicament\IMedicamentRepository.cs" />
+    <Compile Include="Persistence\Medicament\MedicamentFactory.cs" />
+    <Compile Include="Persistence\Medicament\MedicamentRepository.cs" />
+    <Compile Include="Persistence\Person\PersonContactRepository.cs" />
+    <Compile Include="Persistence\Person\IPersonContactRepository.cs" />
+    <Compile Include="Persistence\Person\PersonContactFactory.cs" />
+    <Compile Include="Persistence\Person\IPersonPersonRepository.cs" />
+    <Compile Include="Persistence\Person\PersonPersonFactory.cs" />
+    <Compile Include="Persistence\Person\PersonPersonRepository.cs" />
+    <Compile Include="Persistence\Person\ICredentialsRepository.cs" />
+    <Compile Include="Persistence\Person\CredentialsFactory.cs" />
+    <Compile Include="Persistence\Person\CredentialsRepository.cs" />
+    <Compile Include="Persistence\Person\IContactTypeRepository.cs" />
+    <Compile Include="Persistence\Person\ContactTypeFactory.cs" />
+    <Compile Include="Persistence\Person\ContactTypeRepository.cs" />
+    <Compile Include="Persistence\Person\IPersonRepository.cs" />
+    <Compile Include="Persistence\Person\PersonFactory.cs" />
+    <Compile Include="Persistence\Person\PersonRepository.cs" />
+    <Compile Include="Persistence\RiskFactor\IAsignedRiskFactorRepository.cs" />
+    <Compile Include="Persistence\RiskFactor\AsignedRiskFactorFactory.cs" />
+    <Compile Include="Persistence\RiskFactor\AsignedRiskFactorRepository.cs" />
+    <Compile Include="Persistence\RiskFactor\IRiskFactorRepository.cs" />
+    <Compile Include="Persistence\RiskFactor\RiskFactorFactory.cs" />
+    <Compile Include="Persistence\RiskFactor\RiskFactorRepository.cs" />
+    <Compile Include="Persistence\Symptom\IPersonSymptomRepository.cs" />
+    <Compile Include="Persistence\Symptom\PersonSymptomFactory.cs" />
+    <Compile Include="Persistence\Symptom\PersonSymptomRepository.cs" />
+    <Compile Include="Persistence\Symptom\ISymptomRepository.cs" />
+    <Compile Include="Persistence\Symptom\SymptomFactory.cs" />
+    <Compile Include="Persistence\Symptom\SymptomRepository.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <EntityDeploy Include="DataBaseModels\MainDataBaseModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MainDataBaseModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="DataBaseModels\TrashDataBaseModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TrashDataBaseModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{F1E8D055-B00E-4539-8EDE-244313442F27}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
