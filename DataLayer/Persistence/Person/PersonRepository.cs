@@ -19,14 +19,14 @@
         public IEnumerable<Person> GetAll()
         {
             var context = new DomainContext(this.ConnectionString);
-            return context.Persons.Include("AsignedSymptoms").Include("FirstPersonPersons").Include("SecondPersonPersons").Include("PersonContacts").Include("AsignedRiskFactors").Include("AsignedMedicaments").Include("Credentials").Include("PersonGroups");
+            return context.Persons.Include("AssignedSymptoms").Include("FirstPersonPersons").Include("SecondPersonPersons").Include("PersonContacts").Include("AssignedRiskFactors").Include("AssignedMedicaments").Include("Credentials").Include("PersonGroups");
         }
 
         public Person GetEntityById(Guid id)
         {
             using (var context = new DomainContext(this.ConnectionString))
             {
-                return context.Persons.Include("AsignedSymptoms").Include("FirstPersonPersons").Include("SecondPersonPersons").Include("PersonContacts").Include("AsignedRiskFactors").Include("AsignedMedicaments").Include("Credentials").Include("PersonGroups").FirstOrDefault(v => v.Id == id);
+                return context.Persons.Include("AssignedSymptoms").Include("FirstPersonPersons").Include("SecondPersonPersons").Include("PersonContacts").Include("AssignedRiskFactors").Include("AssignedMedicaments").Include("Credentials").Include("PersonGroups").FirstOrDefault(v => v.Id == id);
             }
         }
 
@@ -39,7 +39,7 @@
 
             using (var context = new DomainContext(this.ConnectionString))
             {
-                return context.Persons.Include("AsignedSymptoms").Include("FirstPersonPersons").Include("SecondPersonPersons").Include("PersonContacts").Include("AsignedRiskFactors").Include("AsignedMedicaments").Include("Credentials").Include("PersonGroups").Where(query);
+                return context.Persons.Include("AssignedSymptoms").Include("FirstPersonPersons").Include("SecondPersonPersons").Include("PersonContacts").Include("AssignedRiskFactors").Include("AssignedMedicaments").Include("Credentials").Include("PersonGroups").Where(query);
             }                                    
         }
 

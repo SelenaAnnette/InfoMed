@@ -1,33 +1,33 @@
-﻿namespace DataLayer.Persistence.Symptom
+﻿namespace DataLayer.Persistence.Medicament
 {
     using System;
-    using System.Collections.Generic;
+    using System.Collections.Generic;    
+    using System.Data;
     using System.Linq;
-    using System.Data;    
 
-    using Domain.Symptom;
+    using Domain.Medicament;
 
-    public class AsignedSymptomRepository : IAsignedSymptomRepository
+    public class AssignedMedicamentRepository : IAssignedMedicamentRepository
     {
         private readonly string ConnectionString;
 
-        public AsignedSymptomRepository(string connectionString)
+        public AssignedMedicamentRepository(string connectionString)
         {
             this.ConnectionString = connectionString;
         }
 
-        public IEnumerable<AsignedSymptom> GetAll()
+        public IEnumerable<AssignedMedicament> GetAll()
         {
             var context = new DomainContext(this.ConnectionString);
-            return context.AsignedSymptoms.Include("Person").Include("Symptom");
+            return context.AssignedMedicaments.Include("Person").Include("Medicament");
         }
 
-        public AsignedSymptom GetEntityById(Guid id)
+        public AssignedMedicament GetEntityById(Guid id)
         {
-            throw new NotImplementedException("This method is not implemented");
+            throw new NotImplementedException("this method is not implemented");
         }
 
-        public IEnumerable<AsignedSymptom> GetEntitiesByQuery(Func<AsignedSymptom, bool> query)
+        public IEnumerable<AssignedMedicament> GetEntitiesByQuery(Func<AssignedMedicament, bool> query)
         {
             if (query == null)
             {
@@ -36,11 +36,11 @@
 
             using (var context = new DomainContext(this.ConnectionString))
             {
-                return context.AsignedSymptoms.Include("Person").Include("Symptom").Where(query);
+                return context.AssignedMedicaments.Include("Person").Include("Medicament").Where(query);
             }                                    
         }
 
-        public AsignedSymptom CreateOrUpdateEntity(AsignedSymptom entity)
+        public AssignedMedicament CreateOrUpdateEntity(AssignedMedicament entity)
         {
             if (entity == null)
             {
@@ -49,9 +49,9 @@
 
             using (var context = new DomainContext(this.ConnectionString))
             {                                
-                if (this.GetEntitiesByQuery(v => v.PersonId == entity.PersonId && v.SymptomId == entity.SymptomId) == null)
+                if (this.GetEntitiesByQuery(v => v.PersonId == entity.PersonId && v.MedicamentId == entity.MedicamentId) == null)
                 {
-                    context.AsignedSymptoms.Add(entity);
+                    context.AssignedMedicaments.Add(entity);
                 }
                 else
                 {
@@ -66,7 +66,7 @@
 
         public void DeleteEntity(Guid id)
         {
-            throw new NotImplementedException("This method is not implemented");
+            throw new NotImplementedException("this method is not implemented");
         }
     }
 }

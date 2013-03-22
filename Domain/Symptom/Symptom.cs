@@ -14,6 +14,6 @@
         public string Description { get; set; }
 
         [InverseProperty("Symptom")]
-        public virtual ICollection<AsignedSymptom> AsignedSymptoms { get; set; }
+        public virtual ICollection<AssignedSymptom> AssignedSymptoms { get; set; }
     }
 }

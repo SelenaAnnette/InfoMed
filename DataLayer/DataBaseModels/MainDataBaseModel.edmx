@@ -6,6 +6,9 @@
     <edmx:StorageModels>
     <Schema Namespace="InfoMedMainDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="InfoMedMainDBModelStoreContainer">
+          <EntitySet Name="AssignedMedicament" EntityType="InfoMedMainDBModel.Store.AssignedMedicament" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="AssignedRiskFactor" EntityType="InfoMedMainDBModel.Store.AssignedRiskFactor" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="AssignedSymptom" EntityType="InfoMedMainDBModel.Store.AssignedSymptom" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ContactTypes" EntityType="InfoMedMainDBModel.Store.ContactTypes" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Credentials" EntityType="InfoMedMainDBModel.Store.Credentials" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Groups" EntityType="InfoMedMainDBModel.Store.Groups" store:Type="Tables" Schema="dbo" />
@@ -13,11 +16,8 @@
           <EntitySet Name="Medicaments" EntityType="InfoMedMainDBModel.Store.Medicaments" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="PersonContact" EntityType="InfoMedMainDBModel.Store.PersonContact" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="PersonGroup" EntityType="InfoMedMainDBModel.Store.PersonGroup" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="PersonMedicament" EntityType="InfoMedMainDBModel.Store.PersonMedicament" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="PersonPerson" EntityType="InfoMedMainDBModel.Store.PersonPerson" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="PersonRiskFactor" EntityType="InfoMedMainDBModel.Store.PersonRiskFactor" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Persons" EntityType="InfoMedMainDBModel.Store.Persons" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="PersonSymptom" EntityType="InfoMedMainDBModel.Store.PersonSymptom" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="RiskFactors" EntityType="InfoMedMainDBModel.Store.RiskFactors" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Symptoms" EntityType="InfoMedMainDBModel.Store.Symptoms" store:Type="Tables" Schema="dbo" />
           <AssociationSet Name="FK_Credentials_Persons" Association="InfoMedMainDBModel.Store.FK_Credentials_Persons">
@@ -42,11 +42,11 @@
           </AssociationSet>
           <AssociationSet Name="FK_PersonMedicament_Medicaments" Association="InfoMedMainDBModel.Store.FK_PersonMedicament_Medicaments">
             <End Role="Medicaments" EntitySet="Medicaments" />
-            <End Role="PersonMedicament" EntitySet="PersonMedicament" />
+            <End Role="AssignedMedicament" EntitySet="AssignedMedicament" />
           </AssociationSet>
           <AssociationSet Name="FK_PersonMedicament_Persons" Association="InfoMedMainDBModel.Store.FK_PersonMedicament_Persons">
             <End Role="Persons" EntitySet="Persons" />
-            <End Role="PersonMedicament" EntitySet="PersonMedicament" />
+            <End Role="AssignedMedicament" EntitySet="AssignedMedicament" />
           </AssociationSet>
           <AssociationSet Name="FK_PersonPerson_Person" Association="InfoMedMainDBModel.Store.FK_PersonPerson_Person">
             <End Role="Persons" EntitySet="Persons" />
@@ -58,21 +58,53 @@
           </AssociationSet>
           <AssociationSet Name="FK_PersonRiskFactor_Persons" Association="InfoMedMainDBModel.Store.FK_PersonRiskFactor_Persons">
             <End Role="Persons" EntitySet="Persons" />
-            <End Role="PersonRiskFactor" EntitySet="PersonRiskFactor" />
+            <End Role="AssignedRiskFactor" EntitySet="AssignedRiskFactor" />
           </AssociationSet>
           <AssociationSet Name="FK_PersonRiskFactor_RiskFactors" Association="InfoMedMainDBModel.Store.FK_PersonRiskFactor_RiskFactors">
             <End Role="RiskFactors" EntitySet="RiskFactors" />
-            <End Role="PersonRiskFactor" EntitySet="PersonRiskFactor" />
+            <End Role="AssignedRiskFactor" EntitySet="AssignedRiskFactor" />
           </AssociationSet>
           <AssociationSet Name="FK_PersonSymptom_Person" Association="InfoMedMainDBModel.Store.FK_PersonSymptom_Person">
             <End Role="Persons" EntitySet="Persons" />
-            <End Role="PersonSymptom" EntitySet="PersonSymptom" />
+            <End Role="AssignedSymptom" EntitySet="AssignedSymptom" />
           </AssociationSet>
           <AssociationSet Name="FK_PersonSymptom_Symptoms" Association="InfoMedMainDBModel.Store.FK_PersonSymptom_Symptoms">
             <End Role="Symptoms" EntitySet="Symptoms" />
-            <End Role="PersonSymptom" EntitySet="PersonSymptom" />
+            <End Role="AssignedSymptom" EntitySet="AssignedSymptom" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="AssignedMedicament">
+          <Key>
+            <PropertyRef Name="PersonId" />
+            <PropertyRef Name="MedicamentId" />
+          </Key>
+          <Property Name="PersonId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MedicamentId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Dosage" Type="float" Nullable="false" />
+          <Property Name="Measure" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Frequency" Type="datetime" Nullable="false" />
+          <Property Name="IsActual" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AssignedRiskFactor">
+          <Key>
+            <PropertyRef Name="PersonId" />
+            <PropertyRef Name="RiskFactorId" />
+          </Key>
+          <Property Name="PersonId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RiskFactorId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IsActual" Type="bit" Nullable="false" />
+          <Property Name="Value" Type="float" Nullable="false" />
+          <Property Name="Measure" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AssignedSymptom">
+          <Key>
+            <PropertyRef Name="PersonId" />
+            <PropertyRef Name="SymptomId" />
+          </Key>
+          <Property Name="PersonId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SymptomId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IsActual" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="ContactTypes">
           <Key>
             <PropertyRef Name="Id" />
@@ -129,18 +161,6 @@
           <Property Name="GroupId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="EntryDate" Type="datetime" Nullable="false" />
         </EntityType>
-        <EntityType Name="PersonMedicament">
-          <Key>
-            <PropertyRef Name="PersonId" />
-            <PropertyRef Name="MedicamentId" />
-          </Key>
-          <Property Name="PersonId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="MedicamentId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Dosage" Type="float" Nullable="false" />
-          <Property Name="Measure" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Frequency" Type="datetime" Nullable="false" />
-          <Property Name="IsActual" Type="bit" Nullable="false" />
-        </EntityType>
         <EntityType Name="PersonPerson">
           <Key>
             <PropertyRef Name="Id" />
@@ -150,17 +170,6 @@
           <Property Name="SecondPersonId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="IsExist" Type="bit" Nullable="false" />
         </EntityType>
-        <EntityType Name="PersonRiskFactor">
-          <Key>
-            <PropertyRef Name="PersonId" />
-            <PropertyRef Name="RiskFactorId" />
-          </Key>
-          <Property Name="PersonId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="RiskFactorId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="IsActual" Type="bit" Nullable="false" />
-          <Property Name="Value" Type="float" Nullable="false" />
-          <Property Name="Measure" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
         <EntityType Name="Persons">
           <Key>
             <PropertyRef Name="Id" />
@@ -169,15 +178,6 @@
           <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="MiddleName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <EntityType Name="PersonSymptom">
-          <Key>
-            <PropertyRef Name="PersonId" />
-            <PropertyRef Name="SymptomId" />
-          </Key>
-          <Property Name="PersonId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="SymptomId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="IsActual" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="RiskFactors">
           <Key>
@@ -257,24 +257,24 @@
         </Association>
         <Association Name="FK_PersonMedicament_Medicaments">
           <End Role="Medicaments" Type="InfoMedMainDBModel.Store.Medicaments" Multiplicity="1" />
-          <End Role="PersonMedicament" Type="InfoMedMainDBModel.Store.PersonMedicament" Multiplicity="*" />
+          <End Role="AssignedMedicament" Type="InfoMedMainDBModel.Store.AssignedMedicament" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Medicaments">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="PersonMedicament">
+            <Dependent Role="AssignedMedicament">
               <PropertyRef Name="MedicamentId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PersonMedicament_Persons">
           <End Role="Persons" Type="InfoMedMainDBModel.Store.Persons" Multiplicity="1" />
-          <End Role="PersonMedicament" Type="InfoMedMainDBModel.Store.PersonMedicament" Multiplicity="*" />
+          <End Role="AssignedMedicament" Type="InfoMedMainDBModel.Store.AssignedMedicament" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Persons">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="PersonMedicament">
+            <Dependent Role="AssignedMedicament">
               <PropertyRef Name="PersonId" />
             </Dependent>
           </ReferentialConstraint>
@@ -305,48 +305,48 @@
         </Association>
         <Association Name="FK_PersonRiskFactor_Persons">
           <End Role="Persons" Type="InfoMedMainDBModel.Store.Persons" Multiplicity="1" />
-          <End Role="PersonRiskFactor" Type="InfoMedMainDBModel.Store.PersonRiskFactor" Multiplicity="*" />
+          <End Role="AssignedRiskFactor" Type="InfoMedMainDBModel.Store.AssignedRiskFactor" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Persons">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="PersonRiskFactor">
+            <Dependent Role="AssignedRiskFactor">
               <PropertyRef Name="PersonId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PersonRiskFactor_RiskFactors">
           <End Role="RiskFactors" Type="InfoMedMainDBModel.Store.RiskFactors" Multiplicity="1" />
-          <End Role="PersonRiskFactor" Type="InfoMedMainDBModel.Store.PersonRiskFactor" Multiplicity="*" />
+          <End Role="AssignedRiskFactor" Type="InfoMedMainDBModel.Store.AssignedRiskFactor" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="RiskFactors">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="PersonRiskFactor">
+            <Dependent Role="AssignedRiskFactor">
               <PropertyRef Name="RiskFactorId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PersonSymptom_Person">
           <End Role="Persons" Type="InfoMedMainDBModel.Store.Persons" Multiplicity="1" />
-          <End Role="PersonSymptom" Type="InfoMedMainDBModel.Store.PersonSymptom" Multiplicity="*" />
+          <End Role="AssignedSymptom" Type="InfoMedMainDBModel.Store.AssignedSymptom" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Persons">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="PersonSymptom">
+            <Dependent Role="AssignedSymptom">
               <PropertyRef Name="PersonId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PersonSymptom_Symptoms">
           <End Role="Symptoms" Type="InfoMedMainDBModel.Store.Symptoms" Multiplicity="1" />
-          <End Role="PersonSymptom" Type="InfoMedMainDBModel.Store.PersonSymptom" Multiplicity="*" />
+          <End Role="AssignedSymptom" Type="InfoMedMainDBModel.Store.AssignedSymptom" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Symptoms">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="PersonSymptom">
+            <Dependent Role="AssignedSymptom">
               <PropertyRef Name="SymptomId" />
             </Dependent>
           </ReferentialConstraint>
@@ -361,9 +361,7 @@
           <EntitySet Name="Medicaments" EntityType="InfoMedMainDBModel.Medicaments" />
           <EntitySet Name="PersonContact" EntityType="InfoMedMainDBModel.PersonContact" />
           <EntitySet Name="PersonPerson" EntityType="InfoMedMainDBModel.PersonPerson" />
-          <EntitySet Name="PersonRiskFactor" EntityType="InfoMedMainDBModel.PersonRiskFactor" />
           <EntitySet Name="Persons" EntityType="InfoMedMainDBModel.Persons" />
-          <EntitySet Name="PersonSymptom" EntityType="InfoMedMainDBModel.PersonSymptom" />
           <EntitySet Name="RiskFactors" EntityType="InfoMedMainDBModel.RiskFactors" />
           <EntitySet Name="Symptoms" EntityType="InfoMedMainDBModel.Symptoms" />
           <AssociationSet Name="FK_PersonContact_ContactTypes" Association="InfoMedMainDBModel.FK_PersonContact_ContactTypes">
@@ -382,31 +380,6 @@
             <End Role="Persons" EntitySet="Persons" />
             <End Role="PersonPerson" EntitySet="PersonPerson" />
           </AssociationSet>
-          <AssociationSet Name="FK_PersonRiskFactor_Persons" Association="InfoMedMainDBModel.FK_PersonRiskFactor_Persons">
-            <End Role="Persons" EntitySet="Persons" />
-            <End Role="PersonRiskFactor" EntitySet="PersonRiskFactor" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PersonRiskFactor_RiskFactors" Association="InfoMedMainDBModel.FK_PersonRiskFactor_RiskFactors">
-            <End Role="RiskFactors" EntitySet="RiskFactors" />
-            <End Role="PersonRiskFactor" EntitySet="PersonRiskFactor" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PersonSymptom_Person" Association="InfoMedMainDBModel.FK_PersonSymptom_Person">
-            <End Role="Persons" EntitySet="Persons" />
-            <End Role="PersonSymptom" EntitySet="PersonSymptom" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PersonSymptom_Symptoms" Association="InfoMedMainDBModel.FK_PersonSymptom_Symptoms">
-            <End Role="Symptoms" EntitySet="Symptoms" />
-            <End Role="PersonSymptom" EntitySet="PersonSymptom" />
-          </AssociationSet>
-          <EntitySet Name="PersonMedicament" EntityType="InfoMedMainDBModel.PersonMedicament" />
-          <AssociationSet Name="FK_PersonMedicament_Medicaments" Association="InfoMedMainDBModel.FK_PersonMedicament_Medicaments">
-            <End Role="Medicaments" EntitySet="Medicaments" />
-            <End Role="PersonMedicament" EntitySet="PersonMedicament" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PersonMedicament_Persons" Association="InfoMedMainDBModel.FK_PersonMedicament_Persons">
-            <End Role="Persons" EntitySet="Persons" />
-            <End Role="PersonMedicament" EntitySet="PersonMedicament" />
-          </AssociationSet>
           <EntitySet Name="Credentials" EntityType="InfoMedMainDBModel.Credentials" />
           <AssociationSet Name="FK_Credentials_Persons" Association="InfoMedMainDBModel.FK_Credentials_Persons">
             <End Role="Persons" EntitySet="Persons" />
@@ -421,6 +394,33 @@
           <AssociationSet Name="FK_PersonGroup_Persons" Association="InfoMedMainDBModel.FK_PersonGroup_Persons">
             <End Role="Persons" EntitySet="Persons" />
             <End Role="PersonGroup" EntitySet="PersonGroup" />
+          </AssociationSet>
+          <EntitySet Name="AssignedMedicament" EntityType="InfoMedMainDBModel.AssignedMedicament" />
+          <EntitySet Name="AssignedRiskFactor" EntityType="InfoMedMainDBModel.AssignedRiskFactor" />
+          <EntitySet Name="AssignedSymptom" EntityType="InfoMedMainDBModel.AssignedSymptom" />
+          <AssociationSet Name="FK_PersonMedicament_Medicaments" Association="InfoMedMainDBModel.FK_PersonMedicament_Medicaments">
+            <End Role="Medicaments" EntitySet="Medicaments" />
+            <End Role="AssignedMedicament" EntitySet="AssignedMedicament" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonMedicament_Persons" Association="InfoMedMainDBModel.FK_PersonMedicament_Persons">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="AssignedMedicament" EntitySet="AssignedMedicament" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonRiskFactor_Persons" Association="InfoMedMainDBModel.FK_PersonRiskFactor_Persons">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="AssignedRiskFactor" EntitySet="AssignedRiskFactor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonRiskFactor_RiskFactors" Association="InfoMedMainDBModel.FK_PersonRiskFactor_RiskFactors">
+            <End Role="RiskFactors" EntitySet="RiskFactors" />
+            <End Role="AssignedRiskFactor" EntitySet="AssignedRiskFactor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonSymptom_Person" Association="InfoMedMainDBModel.FK_PersonSymptom_Person">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="AssignedSymptom" EntitySet="AssignedSymptom" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonSymptom_Symptoms" Association="InfoMedMainDBModel.FK_PersonSymptom_Symptoms">
+            <End Role="Symptoms" EntitySet="Symptoms" />
+            <End Role="AssignedSymptom" EntitySet="AssignedSymptom" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="ContactTypes">
@@ -446,7 +446,7 @@
           <Property Type="String" Name="Code" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Name" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Description" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="PersonMedicament" Relationship="InfoMedMainDBModel.FK_PersonMedicament_Medicaments" FromRole="Medicaments" ToRole="PersonMedicament" />
+          <NavigationProperty Name="AssignedMedicament" Relationship="InfoMedMainDBModel.FK_PersonMedicament_Medicaments" FromRole="Medicaments" ToRole="AssignedMedicament" />
         </EntityType>
         <EntityType Name="PersonContact">
           <Key>
@@ -470,19 +470,6 @@
           <NavigationProperty Name="FirstPerson" Relationship="InfoMedMainDBModel.FK_PersonPerson_Person" FromRole="PersonPerson" ToRole="Persons" />
           <NavigationProperty Name="SecondPerson" Relationship="InfoMedMainDBModel.FK_PersonPerson_Persons" FromRole="PersonPerson" ToRole="Persons" />
         </EntityType>
-        <EntityType Name="PersonRiskFactor">
-          <Key>
-            <PropertyRef Name="PersonId" />
-            <PropertyRef Name="RiskFactorId" />
-          </Key>
-          <Property Type="Guid" Name="PersonId" Nullable="false" />
-          <Property Type="Guid" Name="RiskFactorId" Nullable="false" />
-          <Property Type="Boolean" Name="IsActual" Nullable="false" />
-          <Property Type="Double" Name="Value" Nullable="false" />
-          <Property Type="String" Name="Measure" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Persons" Relationship="InfoMedMainDBModel.FK_PersonRiskFactor_Persons" FromRole="PersonRiskFactor" ToRole="Persons" />
-          <NavigationProperty Name="RiskFactors" Relationship="InfoMedMainDBModel.FK_PersonRiskFactor_RiskFactors" FromRole="PersonRiskFactor" ToRole="RiskFactors" />
-        </EntityType>
         <EntityType Name="Persons">
           <Key>
             <PropertyRef Name="Id" />
@@ -494,22 +481,11 @@
           <NavigationProperty Name="PersonContact" Relationship="InfoMedMainDBModel.FK_PersonContact_Persons" FromRole="Persons" ToRole="PersonContact" />
           <NavigationProperty Name="FirstPersonPersons" Relationship="InfoMedMainDBModel.FK_PersonPerson_Person" FromRole="Persons" ToRole="PersonPerson" />
           <NavigationProperty Name="SecondPersonPersons" Relationship="InfoMedMainDBModel.FK_PersonPerson_Persons" FromRole="Persons" ToRole="PersonPerson" />
-          <NavigationProperty Name="PersonRiskFactor" Relationship="InfoMedMainDBModel.FK_PersonRiskFactor_Persons" FromRole="Persons" ToRole="PersonRiskFactor" />
-          <NavigationProperty Name="PersonSymptom" Relationship="InfoMedMainDBModel.FK_PersonSymptom_Person" FromRole="Persons" ToRole="PersonSymptom" />
-          <NavigationProperty Name="PersonMedicament" Relationship="InfoMedMainDBModel.FK_PersonMedicament_Persons" FromRole="Persons" ToRole="PersonMedicament" />
           <NavigationProperty Name="Credentials" Relationship="InfoMedMainDBModel.FK_Credentials_Persons" FromRole="Persons" ToRole="Credentials" />
           <NavigationProperty Name="PersonGroup" Relationship="InfoMedMainDBModel.FK_PersonGroup_Persons" FromRole="Persons" ToRole="PersonGroup" />
-        </EntityType>
-        <EntityType Name="PersonSymptom">
-          <Key>
-            <PropertyRef Name="PersonId" />
-            <PropertyRef Name="SymptomId" />
-          </Key>
-          <Property Type="Guid" Name="PersonId" Nullable="false" />
-          <Property Type="Guid" Name="SymptomId" Nullable="false" />
-          <Property Type="Boolean" Name="IsActual" Nullable="false" />
-          <NavigationProperty Name="Persons" Relationship="InfoMedMainDBModel.FK_PersonSymptom_Person" FromRole="PersonSymptom" ToRole="Persons" />
-          <NavigationProperty Name="Symptoms" Relationship="InfoMedMainDBModel.FK_PersonSymptom_Symptoms" FromRole="PersonSymptom" ToRole="Symptoms" />
+          <NavigationProperty Name="AssignedMedicament" Relationship="InfoMedMainDBModel.FK_PersonMedicament_Persons" FromRole="Persons" ToRole="AssignedMedicament" />
+          <NavigationProperty Name="AssignedRiskFactor" Relationship="InfoMedMainDBModel.FK_PersonRiskFactor_Persons" FromRole="Persons" ToRole="AssignedRiskFactor" />
+          <NavigationProperty Name="AssignedSymptom" Relationship="InfoMedMainDBModel.FK_PersonSymptom_Person" FromRole="Persons" ToRole="AssignedSymptom" />
         </EntityType>
         <EntityType Name="RiskFactors">
           <Key>
@@ -518,7 +494,7 @@
           <Property Type="Guid" Name="Id" Nullable="false" />
           <Property Type="String" Name="Name" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Description" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="PersonRiskFactor" Relationship="InfoMedMainDBModel.FK_PersonRiskFactor_RiskFactors" FromRole="RiskFactors" ToRole="PersonRiskFactor" />
+          <NavigationProperty Name="AssignedRiskFactor" Relationship="InfoMedMainDBModel.FK_PersonRiskFactor_RiskFactors" FromRole="RiskFactors" ToRole="AssignedRiskFactor" />
         </EntityType>
         <EntityType Name="Symptoms">
           <Key>
@@ -527,7 +503,7 @@
           <Property Type="Guid" Name="Id" Nullable="false" />
           <Property Type="String" Name="Name" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Description" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="PersonSymptom" Relationship="InfoMedMainDBModel.FK_PersonSymptom_Symptoms" FromRole="Symptoms" ToRole="PersonSymptom" />
+          <NavigationProperty Name="AssignedSymptom" Relationship="InfoMedMainDBModel.FK_PersonSymptom_Symptoms" FromRole="Symptoms" ToRole="AssignedSymptom" />
         </EntityType>
         <Association Name="FK_PersonContact_ContactTypes">
           <End Type="InfoMedMainDBModel.ContactTypes" Role="ContactTypes" Multiplicity="1" />
@@ -574,92 +550,6 @@
             </Principal>
             <Dependent Role="PersonPerson">
               <PropertyRef Name="FirstPersonId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PersonRiskFactor_Persons">
-          <End Type="InfoMedMainDBModel.Persons" Role="Persons" Multiplicity="1" />
-          <End Type="InfoMedMainDBModel.PersonRiskFactor" Role="PersonRiskFactor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Persons">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PersonRiskFactor">
-              <PropertyRef Name="PersonId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PersonRiskFactor_RiskFactors">
-          <End Type="InfoMedMainDBModel.RiskFactors" Role="RiskFactors" Multiplicity="1" />
-          <End Type="InfoMedMainDBModel.PersonRiskFactor" Role="PersonRiskFactor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RiskFactors">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PersonRiskFactor">
-              <PropertyRef Name="RiskFactorId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PersonSymptom_Person">
-          <End Type="InfoMedMainDBModel.Persons" Role="Persons" Multiplicity="1" />
-          <End Type="InfoMedMainDBModel.PersonSymptom" Role="PersonSymptom" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Persons">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PersonSymptom">
-              <PropertyRef Name="PersonId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PersonSymptom_Symptoms">
-          <End Type="InfoMedMainDBModel.Symptoms" Role="Symptoms" Multiplicity="1" />
-          <End Type="InfoMedMainDBModel.PersonSymptom" Role="PersonSymptom" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Symptoms">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PersonSymptom">
-              <PropertyRef Name="SymptomId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="PersonMedicament">
-          <Key>
-            <PropertyRef Name="PersonId" />
-            <PropertyRef Name="MedicamentId" />
-          </Key>
-          <Property Type="Guid" Name="PersonId" Nullable="false" />
-          <Property Type="Guid" Name="MedicamentId" Nullable="false" />
-          <Property Type="Double" Name="Dosage" Nullable="false" />
-          <Property Type="String" Name="Measure" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="DateTime" Name="Frequency" Nullable="false" />
-          <Property Type="Boolean" Name="IsActual" Nullable="false" />
-          <NavigationProperty Name="Medicaments" Relationship="InfoMedMainDBModel.FK_PersonMedicament_Medicaments" FromRole="PersonMedicament" ToRole="Medicaments" />
-          <NavigationProperty Name="Persons" Relationship="InfoMedMainDBModel.FK_PersonMedicament_Persons" FromRole="PersonMedicament" ToRole="Persons" />
-        </EntityType>
-        <Association Name="FK_PersonMedicament_Medicaments">
-          <End Type="InfoMedMainDBModel.Medicaments" Role="Medicaments" Multiplicity="1" />
-          <End Type="InfoMedMainDBModel.PersonMedicament" Role="PersonMedicament" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Medicaments">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PersonMedicament">
-              <PropertyRef Name="MedicamentId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PersonMedicament_Persons">
-          <End Type="InfoMedMainDBModel.Persons" Role="Persons" Multiplicity="1" />
-          <End Type="InfoMedMainDBModel.PersonMedicament" Role="PersonMedicament" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Persons">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PersonMedicament">
-              <PropertyRef Name="PersonId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -727,6 +617,116 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="AssignedMedicament">
+          <Key>
+            <PropertyRef Name="PersonId" />
+            <PropertyRef Name="MedicamentId" />
+          </Key>
+          <Property Type="Guid" Name="PersonId" Nullable="false" />
+          <Property Type="Guid" Name="MedicamentId" Nullable="false" />
+          <Property Type="Double" Name="Dosage" Nullable="false" />
+          <Property Type="String" Name="Measure" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="Frequency" Nullable="false" />
+          <Property Type="Boolean" Name="IsActual" Nullable="false" />
+          <NavigationProperty Name="Medicaments" Relationship="InfoMedMainDBModel.FK_PersonMedicament_Medicaments" FromRole="AssignedMedicament" ToRole="Medicaments" />
+          <NavigationProperty Name="Persons" Relationship="InfoMedMainDBModel.FK_PersonMedicament_Persons" FromRole="AssignedMedicament" ToRole="Persons" />
+        </EntityType>
+        <EntityType Name="AssignedRiskFactor">
+          <Key>
+            <PropertyRef Name="PersonId" />
+            <PropertyRef Name="RiskFactorId" />
+          </Key>
+          <Property Type="Guid" Name="PersonId" Nullable="false" />
+          <Property Type="Guid" Name="RiskFactorId" Nullable="false" />
+          <Property Type="Boolean" Name="IsActual" Nullable="false" />
+          <Property Type="Double" Name="Value" Nullable="false" />
+          <Property Type="String" Name="Measure" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Persons" Relationship="InfoMedMainDBModel.FK_PersonRiskFactor_Persons" FromRole="AssignedRiskFactor" ToRole="Persons" />
+          <NavigationProperty Name="RiskFactors" Relationship="InfoMedMainDBModel.FK_PersonRiskFactor_RiskFactors" FromRole="AssignedRiskFactor" ToRole="RiskFactors" />
+        </EntityType>
+        <EntityType Name="AssignedSymptom">
+          <Key>
+            <PropertyRef Name="PersonId" />
+            <PropertyRef Name="SymptomId" />
+          </Key>
+          <Property Type="Guid" Name="PersonId" Nullable="false" />
+          <Property Type="Guid" Name="SymptomId" Nullable="false" />
+          <Property Type="Boolean" Name="IsActual" Nullable="false" />
+          <NavigationProperty Name="Persons" Relationship="InfoMedMainDBModel.FK_PersonSymptom_Person" FromRole="AssignedSymptom" ToRole="Persons" />
+          <NavigationProperty Name="Symptoms" Relationship="InfoMedMainDBModel.FK_PersonSymptom_Symptoms" FromRole="AssignedSymptom" ToRole="Symptoms" />
+        </EntityType>
+        <Association Name="FK_PersonMedicament_Medicaments">
+          <End Type="InfoMedMainDBModel.Medicaments" Role="Medicaments" Multiplicity="1" />
+          <End Type="InfoMedMainDBModel.AssignedMedicament" Role="AssignedMedicament" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medicaments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AssignedMedicament">
+              <PropertyRef Name="MedicamentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonMedicament_Persons">
+          <End Type="InfoMedMainDBModel.Persons" Role="Persons" Multiplicity="1" />
+          <End Type="InfoMedMainDBModel.AssignedMedicament" Role="AssignedMedicament" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AssignedMedicament">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonRiskFactor_Persons">
+          <End Type="InfoMedMainDBModel.Persons" Role="Persons" Multiplicity="1" />
+          <End Type="InfoMedMainDBModel.AssignedRiskFactor" Role="AssignedRiskFactor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AssignedRiskFactor">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonRiskFactor_RiskFactors">
+          <End Type="InfoMedMainDBModel.RiskFactors" Role="RiskFactors" Multiplicity="1" />
+          <End Type="InfoMedMainDBModel.AssignedRiskFactor" Role="AssignedRiskFactor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RiskFactors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AssignedRiskFactor">
+              <PropertyRef Name="RiskFactorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonSymptom_Person">
+          <End Type="InfoMedMainDBModel.Persons" Role="Persons" Multiplicity="1" />
+          <End Type="InfoMedMainDBModel.AssignedSymptom" Role="AssignedSymptom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AssignedSymptom">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonSymptom_Symptoms">
+          <End Type="InfoMedMainDBModel.Symptoms" Role="Symptoms" Multiplicity="1" />
+          <End Type="InfoMedMainDBModel.AssignedSymptom" Role="AssignedSymptom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Symptoms">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AssignedSymptom">
+              <PropertyRef Name="SymptomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -779,17 +779,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PersonRiskFactor">
-            <EntityTypeMapping TypeName="InfoMedMainDBModel.PersonRiskFactor">
-              <MappingFragment StoreEntitySet="PersonRiskFactor">
-                <ScalarProperty Name="Measure" ColumnName="Measure" />
-                <ScalarProperty Name="Value" ColumnName="Value" />
-                <ScalarProperty Name="IsActual" ColumnName="IsActual" />
-                <ScalarProperty Name="RiskFactorId" ColumnName="RiskFactorId" />
-                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Persons">
             <EntityTypeMapping TypeName="InfoMedMainDBModel.Persons">
               <MappingFragment StoreEntitySet="Persons">
@@ -797,15 +786,6 @@
                 <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PersonSymptom">
-            <EntityTypeMapping TypeName="InfoMedMainDBModel.PersonSymptom">
-              <MappingFragment StoreEntitySet="PersonSymptom">
-                <ScalarProperty Name="IsActual" ColumnName="IsActual" />
-                <ScalarProperty Name="SymptomId" ColumnName="SymptomId" />
-                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -824,18 +804,6 @@
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PersonMedicament">
-            <EntityTypeMapping TypeName="InfoMedMainDBModel.PersonMedicament">
-              <MappingFragment StoreEntitySet="PersonMedicament">
-                <ScalarProperty Name="IsActual" ColumnName="IsActual" />
-                <ScalarProperty Name="Frequency" ColumnName="Frequency" />
-                <ScalarProperty Name="Measure" ColumnName="Measure" />
-                <ScalarProperty Name="Dosage" ColumnName="Dosage" />
-                <ScalarProperty Name="MedicamentId" ColumnName="MedicamentId" />
-                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -861,6 +829,38 @@
               <MappingFragment StoreEntitySet="PersonGroup">
                 <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
                 <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AssignedMedicament">
+            <EntityTypeMapping TypeName="InfoMedMainDBModel.AssignedMedicament">
+              <MappingFragment StoreEntitySet="AssignedMedicament">
+                <ScalarProperty Name="IsActual" ColumnName="IsActual" />
+                <ScalarProperty Name="Frequency" ColumnName="Frequency" />
+                <ScalarProperty Name="Measure" ColumnName="Measure" />
+                <ScalarProperty Name="Dosage" ColumnName="Dosage" />
+                <ScalarProperty Name="MedicamentId" ColumnName="MedicamentId" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AssignedRiskFactor">
+            <EntityTypeMapping TypeName="InfoMedMainDBModel.AssignedRiskFactor">
+              <MappingFragment StoreEntitySet="AssignedRiskFactor">
+                <ScalarProperty Name="Measure" ColumnName="Measure" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="IsActual" ColumnName="IsActual" />
+                <ScalarProperty Name="RiskFactorId" ColumnName="RiskFactorId" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AssignedSymptom">
+            <EntityTypeMapping TypeName="InfoMedMainDBModel.AssignedSymptom">
+              <MappingFragment StoreEntitySet="AssignedSymptom">
+                <ScalarProperty Name="IsActual" ColumnName="IsActual" />
+                <ScalarProperty Name="SymptomId" ColumnName="SymptomId" />
                 <ScalarProperty Name="PersonId" ColumnName="PersonId" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -891,9 +891,7 @@
         <EntityTypeShape EntityType="InfoMedMainDBModel.Medicaments" Width="1.5" PointX="6" PointY="1.25" Height="1.9802864583333388" />
         <EntityTypeShape EntityType="InfoMedMainDBModel.PersonContact" Width="1.5" PointX="5.25" PointY="11.125" Height="2.172587890624996" />
         <EntityTypeShape EntityType="InfoMedMainDBModel.PersonPerson" Width="1.5" PointX="5.25" PointY="17" Height="2.1725878906249996" />
-        <EntityTypeShape EntityType="InfoMedMainDBModel.PersonRiskFactor" Width="1.5" PointX="8.25" PointY="5.125" Height="2.3648893229166674" />
         <EntityTypeShape EntityType="InfoMedMainDBModel.Persons" Width="1.5" PointX="3" PointY="8.625" Height="3.3263964843750102" />
-        <EntityTypeShape EntityType="InfoMedMainDBModel.PersonSymptom" Width="1.5" PointX="8.25" PointY="13.25" Height="1.9802864583333388" />
         <EntityTypeShape EntityType="InfoMedMainDBModel.RiskFactors" Width="1.5" PointX="6" PointY="4.375" Height="1.7879850260416674" />
         <EntityTypeShape EntityType="InfoMedMainDBModel.Symptoms" Width="1.5" PointX="6" PointY="14.375" Height="1.7879850260416657" />
         <AssociationConnector Association="InfoMedMainDBModel.FK_PersonContact_ContactTypes" >
@@ -904,8 +902,8 @@
           <ConnectorPoint PointX="5.59375" PointY="13.297587890624996" />
         </AssociationConnector>
         <AssociationConnector Association="InfoMedMainDBModel.FK_PersonContact_Persons" >
-          <ConnectorPoint PointX="4.5" PointY="11.44539877263411" />
-          <ConnectorPoint PointX="5.25" PointY="11.44539877263411" />
+          <ConnectorPoint PointX="4.5" PointY="11.347363628378425" />
+          <ConnectorPoint PointX="5.25" PointY="11.347363628378425" />
         </AssociationConnector>
         <AssociationConnector Association="InfoMedMainDBModel.FK_PersonPerson_Person" >
           <ConnectorPoint PointX="4.5" PointY="11.926010868990385" />
@@ -919,67 +917,72 @@
           <ConnectorPoint PointX="4.875" PointY="18.086293945312498" />
           <ConnectorPoint PointX="5.25" PointY="18.086293945312498" />
         </AssociationConnector>
-        <AssociationConnector Association="InfoMedMainDBModel.FK_PersonRiskFactor_Persons" >
-          <ConnectorPoint PointX="3.75" PointY="8.625" />
-          <ConnectorPoint PointX="3.75" PointY="6.8576871744791674" />
-          <ConnectorPoint PointX="7.791666666666667" PointY="6.8576871744791665" />
-          <ConnectorPoint PointX="7.958333333333333" PointY="6.8576871744791674" />
-          <ConnectorPoint PointX="8.25" PointY="6.8576871744791674" />
-        </AssociationConnector>
-        <AssociationConnector Association="InfoMedMainDBModel.FK_PersonRiskFactor_RiskFactors" >
-          <ConnectorPoint PointX="7.5" PointY="5.6439925130208337" />
-          <ConnectorPoint PointX="7.791666666666667" PointY="5.6439925130208328" />
-          <ConnectorPoint PointX="7.958333333333333" PointY="5.6439925130208337" />
-          <ConnectorPoint PointX="8.25" PointY="5.6439925130208337" />
-        </AssociationConnector>
-        <AssociationConnector Association="InfoMedMainDBModel.FK_PersonSymptom_Person" >
-          <ConnectorPoint PointX="4.5" PointY="10.434961431477865" />
-          <ConnectorPoint PointX="8" PointY="10.434961431477865" />
-          <ConnectorPoint PointX="8" PointY="11.182190755208339" />
-          <ConnectorPoint PointX="9" PointY="11.182190755208339" />
-          <ConnectorPoint PointX="9" PointY="13.25" />
-        </AssociationConnector>
-        <AssociationConnector Association="InfoMedMainDBModel.FK_PersonSymptom_Symptoms" >
-          <ConnectorPoint PointX="7.5" PointY="14.802643229166669" />
-          <ConnectorPoint PointX="8.25" PointY="14.802643229166669" />
-        </AssociationConnector>
-        <EntityTypeShape EntityType="InfoMedMainDBModel.PersonMedicament" Width="1.5" PointX="8.25" PointY="8.375" Height="2.5571907552083388" />
-        <AssociationConnector Association="InfoMedMainDBModel.FK_PersonMedicament_Medicaments" >
-          <ConnectorPoint PointX="7.5" PointY="3.2302864583333339" />
-          <ConnectorPoint PointX="7.875" PointY="3.6052864583333335" />
-          <ConnectorPoint PointX="7.875" PointY="9.4325721145833334" />
-          <ConnectorPoint PointX="8.25" PointY="9.4325721145833334" />
-        </AssociationConnector>
-        <AssociationConnector Association="InfoMedMainDBModel.FK_PersonMedicament_Persons" >
-          <ConnectorPoint PointX="4.5" PointY="10.746076093343103" />
-          <ConnectorPoint PointX="7.916666666666667" PointY="10.746076093343103" />
-          <ConnectorPoint PointX="8.0833333333333339" PointY="10.746076093343103" />
-          <ConnectorPoint PointX="8.25" PointY="10.746076093343103" />
-        </AssociationConnector>
         <EntityTypeShape EntityType="InfoMedMainDBModel.Credentials" Width="1.5" PointX="5.25" PointY="8.375" Height="1.7879850260416674" />
         <AssociationConnector Association="InfoMedMainDBModel.FK_Credentials_Persons" >
           <ConnectorPoint PointX="4.5" PointY="9.3939925130208337" />
-          <ConnectorPoint PointX="4.916666666666667" PointY="9.3939925130208337" />
-          <ConnectorPoint PointX="5.083333333333333" PointY="9.3939925130208337" />
           <ConnectorPoint PointX="5.25" PointY="9.3939925130208337" />
         </AssociationConnector>
         <EntityTypeShape EntityType="InfoMedMainDBModel.Groups" Width="1.5" PointX="9" PointY="2.5" Height="1.5956835937500031" />
         <EntityTypeShape EntityType="InfoMedMainDBModel.PersonGroup" Width="1.5" PointX="11.25" PointY="9.25" Height="1.9802864583333388" />
         <AssociationConnector Association="InfoMedMainDBModel.FK_PersonGroup_Groups" >
-          <ConnectorPoint PointX="10.15625" PointY="4.0956835937500031" />
-          <ConnectorPoint PointX="10.15625" PointY="11.112488606770839" />
-          <ConnectorPoint PointX="11.25" PointY="11.112488606770839" />
+          <ConnectorPoint PointX="10.5" PointY="3.2978417968750016" />
+          <ConnectorPoint PointX="12" PointY="3.2978417968750016" />
+          <ConnectorPoint PointX="12" PointY="9.25" />
         </AssociationConnector>
         <AssociationConnector Association="InfoMedMainDBModel.FK_PersonGroup_Persons" >
-          <ConnectorPoint PointX="4.5" PointY="9.9144769722493482" />
-          <ConnectorPoint PointX="5" PointY="9.9144769722493482" />
-          <ConnectorPoint PointX="5" PointY="8.125" />
-          <ConnectorPoint PointX="7.791666666666667" PointY="8.125" />
-          <ConnectorPoint PointX="7.958333333333333" PointY="8.125" />
-          <ConnectorPoint PointX="10.072916666666666" PointY="8.125" />
-          <ConnectorPoint PointX="10.239583333333334" PointY="8.125" />
-          <ConnectorPoint PointX="12" PointY="8.125" />
-          <ConnectorPoint PointX="12" PointY="9.25" />
+          <ConnectorPoint PointX="4.5" PointY="10.643992513020834" />
+          <ConnectorPoint PointX="7.072916666666667" PointY="10.643992513020834" />
+          <ConnectorPoint PointX="7.239583333333333" PointY="10.643992513020834" />
+          <ConnectorPoint PointX="8" PointY="10.643992513020834" />
+          <ConnectorPoint PointX="8" PointY="11.614889322916667" />
+          <ConnectorPoint PointX="12" PointY="11.614889322916667" />
+          <ConnectorPoint PointX="12" PointY="11.230286458333339" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="InfoMedMainDBModel.AssignedMedicament" Width="1.5" PointX="8.25" PointY="5.375" Height="2.5571907552083388" />
+        <EntityTypeShape EntityType="InfoMedMainDBModel.AssignedRiskFactor" Width="1.5" PointX="8.25" PointY="9" Height="2.3648893229166674" />
+        <EntityTypeShape EntityType="InfoMedMainDBModel.AssignedSymptom" Width="1.5" PointX="8.25" PointY="12.375" Height="1.9802864583333388" />
+        <AssociationConnector Association="InfoMedMainDBModel.FK_PersonMedicament_Medicaments" >
+          <ConnectorPoint PointX="7.5" PointY="1.84375" />
+          <ConnectorPoint PointX="8.59375" PointY="1.84375" />
+          <ConnectorPoint PointX="8.59375" PointY="5.375" />
+        </AssociationConnector>
+        <AssociationConnector Association="InfoMedMainDBModel.FK_PersonMedicament_Persons" >
+          <ConnectorPoint PointX="3.75" PointY="8.625" />
+          <ConnectorPoint PointX="3.75" PointY="7.0788378906250031" />
+          <ConnectorPoint PointX="7.072916666666667" PointY="7.0788378906250022" />
+          <ConnectorPoint PointX="7.239583333333333" PointY="7.0788378906250031" />
+          <ConnectorPoint PointX="8.25" PointY="7.0788378906250031" />
+        </AssociationConnector>
+        <AssociationConnector Association="InfoMedMainDBModel.FK_PersonRiskFactor_Persons" >
+          <ConnectorPoint PointX="4.5" PointY="10.372238769531251" />
+          <ConnectorPoint PointX="7.072916666666667" PointY="10.372238769531251" />
+          <ConnectorPoint PointX="7.239583333333333" PointY="10.372238769531251" />
+          <ConnectorPoint PointX="8.25" PointY="10.372238769531251" />
+        </AssociationConnector>
+        <AssociationConnector Association="InfoMedMainDBModel.FK_PersonRiskFactor_RiskFactors" >
+          <ConnectorPoint PointX="7.15625" PointY="6.1629850260416665" />
+          <ConnectorPoint PointX="7.15625" PointY="10.853246256510417" />
+          <ConnectorPoint PointX="7.916666666666667" PointY="10.853246256510417" />
+          <ConnectorPoint PointX="8.0833333333333339" PointY="10.853246256510417" />
+          <ConnectorPoint PointX="8.25" PointY="10.853246256510417" />
+        </AssociationConnector>
+        <AssociationConnector Association="InfoMedMainDBModel.FK_PersonSymptom_Person" >
+          <ConnectorPoint PointX="3.7066326153846152" PointY="11.951396484375" />
+          <ConnectorPoint PointX="3.7066326153846152" PointY="13.365143229166669" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="13.365143229166669" />
+          <ConnectorPoint PointX="5.020833333333333" PointY="13.365143229166669" />
+          <ConnectorPoint PointX="5.125" PointY="13.365143229166669" />
+          <ConnectorPoint PointX="5.125" PointY="13.547587890624996" />
+          <ConnectorPoint PointX="5.510416666666667" PointY="13.547587890624996" />
+          <ConnectorPoint PointX="5.677083333333333" PointY="13.547587890624996" />
+          <ConnectorPoint PointX="7.875" PointY="13.547587890624996" />
+          <ConnectorPoint PointX="7.875" PointY="13.365143229166669" />
+          <ConnectorPoint PointX="8.25" PointY="13.365143229166669" />
+        </AssociationConnector>
+        <AssociationConnector Association="InfoMedMainDBModel.FK_PersonSymptom_Symptoms" >
+          <ConnectorPoint PointX="7.5" PointY="15.268992513020834" />
+          <ConnectorPoint PointX="9" PointY="15.268992513020834" />
+          <ConnectorPoint PointX="9" PointY="14.355286458333339" />
         </AssociationConnector>
         </Diagram>
     </Diagrams>

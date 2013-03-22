@@ -21,7 +21,7 @@
 
         public DbSet<MeasuringType> MeasuringTypes { get; set; }
 
-        public DbSet<AsignedMedicament> AsignedMedicaments { get; set; }
+        public DbSet<AssignedMedicament> AssignedMedicaments { get; set; }
         
         public DbSet<Medicament> Medicaments { get; set; }
         
@@ -39,11 +39,11 @@
         
         public DbSet<RiskFactor> RiskFactors { get; set; }
 
-        public DbSet<AsignedRiskFactor> AsignedRiskFactors { get; set; }
+        public DbSet<AssignedRiskFactor> AssignedRiskFactors { get; set; }
         
         public DbSet<Symptom> Symptoms { get; set; }
 
-        public DbSet<AsignedSymptom> AsignedSymptoms { get; set; }
+        public DbSet<AssignedSymptom> AssignedSymptoms { get; set; }
 
         public DbSet<PersonPerson> PersonPersons { get; set; }
     }

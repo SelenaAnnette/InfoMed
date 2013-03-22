@@ -22,15 +22,15 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("InfoMedMainDBModel", "FK_PersonContact_Persons", "Persons", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataLayer.DataBaseModels.Persons), "PersonContact", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataLayer.DataBaseModels.PersonContact), true)]
 [assembly: EdmRelationshipAttribute("InfoMedMainDBModel", "FK_PersonPerson_Person", "Persons", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataLayer.DataBaseModels.Persons), "PersonPerson", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataLayer.DataBaseModels.PersonPerson), true)]
 [assembly: EdmRelationshipAttribute("InfoMedMainDBModel", "FK_PersonPerson_Persons", "Persons", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataLayer.DataBaseModels.Persons), "PersonPerson", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataLayer.DataBaseModels.PersonPerson), true)]
-[assembly: EdmRelationshipAttribute("InfoMedMainDBModel", "FK_PersonRiskFactor_Persons", "Persons", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataLayer.DataBaseModels.Persons), "PersonRiskFactor", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataLayer.DataBaseModels.PersonRiskFactor), true)]
-[assembly: EdmRelationshipAttribute("InfoMedMainDBModel", "FK_PersonRiskFactor_RiskFactors", "RiskFactors", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataLayer.DataBaseModels.RiskFactors), "PersonRiskFactor", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataLayer.DataBaseModels.PersonRiskFactor), true)]
-[assembly: EdmRelationshipAttribute("InfoMedMainDBModel", "FK_PersonSymptom_Person", "Persons", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataLayer.DataBaseModels.Persons), "PersonSymptom", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataLayer.DataBaseModels.PersonSymptom), true)]
-[assembly: EdmRelationshipAttribute("InfoMedMainDBModel", "FK_PersonSymptom_Symptoms", "Symptoms", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataLayer.DataBaseModels.Symptoms), "PersonSymptom", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataLayer.DataBaseModels.PersonSymptom), true)]
-[assembly: EdmRelationshipAttribute("InfoMedMainDBModel", "FK_PersonMedicament_Medicaments", "Medicaments", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataLayer.DataBaseModels.Medicaments), "PersonMedicament", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataLayer.DataBaseModels.PersonMedicament), true)]
-[assembly: EdmRelationshipAttribute("InfoMedMainDBModel", "FK_PersonMedicament_Persons", "Persons", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataLayer.DataBaseModels.Persons), "PersonMedicament", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataLayer.DataBaseModels.PersonMedicament), true)]
 [assembly: EdmRelationshipAttribute("InfoMedMainDBModel", "FK_Credentials_Persons", "Persons", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataLayer.DataBaseModels.Persons), "Credentials", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataLayer.DataBaseModels.Credentials), true)]
 [assembly: EdmRelationshipAttribute("InfoMedMainDBModel", "FK_PersonGroup_Groups", "Groups", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataLayer.DataBaseModels.Groups), "PersonGroup", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataLayer.DataBaseModels.PersonGroup), true)]
 [assembly: EdmRelationshipAttribute("InfoMedMainDBModel", "FK_PersonGroup_Persons", "Persons", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataLayer.DataBaseModels.Persons), "PersonGroup", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataLayer.DataBaseModels.PersonGroup), true)]
+[assembly: EdmRelationshipAttribute("InfoMedMainDBModel", "FK_PersonMedicament_Medicaments", "Medicaments", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataLayer.DataBaseModels.Medicaments), "AssignedMedicament", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataLayer.DataBaseModels.AssignedMedicament), true)]
+[assembly: EdmRelationshipAttribute("InfoMedMainDBModel", "FK_PersonMedicament_Persons", "Persons", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataLayer.DataBaseModels.Persons), "AssignedMedicament", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataLayer.DataBaseModels.AssignedMedicament), true)]
+[assembly: EdmRelationshipAttribute("InfoMedMainDBModel", "FK_PersonRiskFactor_Persons", "Persons", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataLayer.DataBaseModels.Persons), "AssignedRiskFactor", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataLayer.DataBaseModels.AssignedRiskFactor), true)]
+[assembly: EdmRelationshipAttribute("InfoMedMainDBModel", "FK_PersonRiskFactor_RiskFactors", "RiskFactors", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataLayer.DataBaseModels.RiskFactors), "AssignedRiskFactor", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataLayer.DataBaseModels.AssignedRiskFactor), true)]
+[assembly: EdmRelationshipAttribute("InfoMedMainDBModel", "FK_PersonSymptom_Person", "Persons", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataLayer.DataBaseModels.Persons), "AssignedSymptom", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataLayer.DataBaseModels.AssignedSymptom), true)]
+[assembly: EdmRelationshipAttribute("InfoMedMainDBModel", "FK_PersonSymptom_Symptoms", "Symptoms", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataLayer.DataBaseModels.Symptoms), "AssignedSymptom", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataLayer.DataBaseModels.AssignedSymptom), true)]
 
 #endregion
 
@@ -165,22 +165,6 @@ namespace DataLayer.DataBaseModels
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<PersonRiskFactor> PersonRiskFactor
-        {
-            get
-            {
-                if ((_PersonRiskFactor == null))
-                {
-                    _PersonRiskFactor = base.CreateObjectSet<PersonRiskFactor>("PersonRiskFactor");
-                }
-                return _PersonRiskFactor;
-            }
-        }
-        private ObjectSet<PersonRiskFactor> _PersonRiskFactor;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<Persons> Persons
         {
             get
@@ -193,22 +177,6 @@ namespace DataLayer.DataBaseModels
             }
         }
         private ObjectSet<Persons> _Persons;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<PersonSymptom> PersonSymptom
-        {
-            get
-            {
-                if ((_PersonSymptom == null))
-                {
-                    _PersonSymptom = base.CreateObjectSet<PersonSymptom>("PersonSymptom");
-                }
-                return _PersonSymptom;
-            }
-        }
-        private ObjectSet<PersonSymptom> _PersonSymptom;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -241,22 +209,6 @@ namespace DataLayer.DataBaseModels
             }
         }
         private ObjectSet<Symptoms> _Symptoms;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<PersonMedicament> PersonMedicament
-        {
-            get
-            {
-                if ((_PersonMedicament == null))
-                {
-                    _PersonMedicament = base.CreateObjectSet<PersonMedicament>("PersonMedicament");
-                }
-                return _PersonMedicament;
-            }
-        }
-        private ObjectSet<PersonMedicament> _PersonMedicament;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -305,6 +257,54 @@ namespace DataLayer.DataBaseModels
             }
         }
         private ObjectSet<PersonGroup> _PersonGroup;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<AssignedMedicament> AssignedMedicament
+        {
+            get
+            {
+                if ((_AssignedMedicament == null))
+                {
+                    _AssignedMedicament = base.CreateObjectSet<AssignedMedicament>("AssignedMedicament");
+                }
+                return _AssignedMedicament;
+            }
+        }
+        private ObjectSet<AssignedMedicament> _AssignedMedicament;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<AssignedRiskFactor> AssignedRiskFactor
+        {
+            get
+            {
+                if ((_AssignedRiskFactor == null))
+                {
+                    _AssignedRiskFactor = base.CreateObjectSet<AssignedRiskFactor>("AssignedRiskFactor");
+                }
+                return _AssignedRiskFactor;
+            }
+        }
+        private ObjectSet<AssignedRiskFactor> _AssignedRiskFactor;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<AssignedSymptom> AssignedSymptom
+        {
+            get
+            {
+                if ((_AssignedSymptom == null))
+                {
+                    _AssignedSymptom = base.CreateObjectSet<AssignedSymptom>("AssignedSymptom");
+                }
+                return _AssignedSymptom;
+            }
+        }
+        private ObjectSet<AssignedSymptom> _AssignedSymptom;
 
         #endregion
         #region AddTo Methods
@@ -350,27 +350,11 @@ namespace DataLayer.DataBaseModels
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the PersonRiskFactor EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToPersonRiskFactor(PersonRiskFactor personRiskFactor)
-        {
-            base.AddObject("PersonRiskFactor", personRiskFactor);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the Persons EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToPersons(Persons persons)
         {
             base.AddObject("Persons", persons);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the PersonSymptom EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToPersonSymptom(PersonSymptom personSymptom)
-        {
-            base.AddObject("PersonSymptom", personSymptom);
         }
     
         /// <summary>
@@ -387,14 +371,6 @@ namespace DataLayer.DataBaseModels
         public void AddToSymptoms(Symptoms symptoms)
         {
             base.AddObject("Symptoms", symptoms);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the PersonMedicament EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToPersonMedicament(PersonMedicament personMedicament)
-        {
-            base.AddObject("PersonMedicament", personMedicament);
         }
     
         /// <summary>
@@ -420,6 +396,30 @@ namespace DataLayer.DataBaseModels
         {
             base.AddObject("PersonGroup", personGroup);
         }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the AssignedMedicament EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToAssignedMedicament(AssignedMedicament assignedMedicament)
+        {
+            base.AddObject("AssignedMedicament", assignedMedicament);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the AssignedRiskFactor EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToAssignedRiskFactor(AssignedRiskFactor assignedRiskFactor)
+        {
+            base.AddObject("AssignedRiskFactor", assignedRiskFactor);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the AssignedSymptom EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToAssignedSymptom(AssignedSymptom assignedSymptom)
+        {
+            base.AddObject("AssignedSymptom", assignedSymptom);
+        }
 
         #endregion
     }
@@ -428,6 +428,703 @@ namespace DataLayer.DataBaseModels
     #endregion
     
     #region Entities
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="InfoMedMainDBModel", Name="AssignedMedicament")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class AssignedMedicament : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new AssignedMedicament object.
+        /// </summary>
+        /// <param name="personId">Initial value of the PersonId property.</param>
+        /// <param name="medicamentId">Initial value of the MedicamentId property.</param>
+        /// <param name="dosage">Initial value of the Dosage property.</param>
+        /// <param name="measure">Initial value of the Measure property.</param>
+        /// <param name="frequency">Initial value of the Frequency property.</param>
+        /// <param name="isActual">Initial value of the IsActual property.</param>
+        public static AssignedMedicament CreateAssignedMedicament(global::System.Guid personId, global::System.Guid medicamentId, global::System.Double dosage, global::System.String measure, global::System.DateTime frequency, global::System.Boolean isActual)
+        {
+            AssignedMedicament assignedMedicament = new AssignedMedicament();
+            assignedMedicament.PersonId = personId;
+            assignedMedicament.MedicamentId = medicamentId;
+            assignedMedicament.Dosage = dosage;
+            assignedMedicament.Measure = measure;
+            assignedMedicament.Frequency = frequency;
+            assignedMedicament.IsActual = isActual;
+            return assignedMedicament;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid PersonId
+        {
+            get
+            {
+                return _PersonId;
+            }
+            set
+            {
+                if (_PersonId != value)
+                {
+                    OnPersonIdChanging(value);
+                    ReportPropertyChanging("PersonId");
+                    _PersonId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("PersonId");
+                    OnPersonIdChanged();
+                }
+            }
+        }
+        private global::System.Guid _PersonId;
+        partial void OnPersonIdChanging(global::System.Guid value);
+        partial void OnPersonIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid MedicamentId
+        {
+            get
+            {
+                return _MedicamentId;
+            }
+            set
+            {
+                if (_MedicamentId != value)
+                {
+                    OnMedicamentIdChanging(value);
+                    ReportPropertyChanging("MedicamentId");
+                    _MedicamentId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("MedicamentId");
+                    OnMedicamentIdChanged();
+                }
+            }
+        }
+        private global::System.Guid _MedicamentId;
+        partial void OnMedicamentIdChanging(global::System.Guid value);
+        partial void OnMedicamentIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Double Dosage
+        {
+            get
+            {
+                return _Dosage;
+            }
+            set
+            {
+                OnDosageChanging(value);
+                ReportPropertyChanging("Dosage");
+                _Dosage = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Dosage");
+                OnDosageChanged();
+            }
+        }
+        private global::System.Double _Dosage;
+        partial void OnDosageChanging(global::System.Double value);
+        partial void OnDosageChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Measure
+        {
+            get
+            {
+                return _Measure;
+            }
+            set
+            {
+                OnMeasureChanging(value);
+                ReportPropertyChanging("Measure");
+                _Measure = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Measure");
+                OnMeasureChanged();
+            }
+        }
+        private global::System.String _Measure;
+        partial void OnMeasureChanging(global::System.String value);
+        partial void OnMeasureChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime Frequency
+        {
+            get
+            {
+                return _Frequency;
+            }
+            set
+            {
+                OnFrequencyChanging(value);
+                ReportPropertyChanging("Frequency");
+                _Frequency = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Frequency");
+                OnFrequencyChanged();
+            }
+        }
+        private global::System.DateTime _Frequency;
+        partial void OnFrequencyChanging(global::System.DateTime value);
+        partial void OnFrequencyChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsActual
+        {
+            get
+            {
+                return _IsActual;
+            }
+            set
+            {
+                OnIsActualChanging(value);
+                ReportPropertyChanging("IsActual");
+                _IsActual = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsActual");
+                OnIsActualChanged();
+            }
+        }
+        private global::System.Boolean _IsActual;
+        partial void OnIsActualChanging(global::System.Boolean value);
+        partial void OnIsActualChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("InfoMedMainDBModel", "FK_PersonMedicament_Medicaments", "Medicaments")]
+        public Medicaments Medicaments
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Medicaments>("InfoMedMainDBModel.FK_PersonMedicament_Medicaments", "Medicaments").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Medicaments>("InfoMedMainDBModel.FK_PersonMedicament_Medicaments", "Medicaments").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Medicaments> MedicamentsReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Medicaments>("InfoMedMainDBModel.FK_PersonMedicament_Medicaments", "Medicaments");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Medicaments>("InfoMedMainDBModel.FK_PersonMedicament_Medicaments", "Medicaments", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("InfoMedMainDBModel", "FK_PersonMedicament_Persons", "Persons")]
+        public Persons Persons
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Persons>("InfoMedMainDBModel.FK_PersonMedicament_Persons", "Persons").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Persons>("InfoMedMainDBModel.FK_PersonMedicament_Persons", "Persons").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Persons> PersonsReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Persons>("InfoMedMainDBModel.FK_PersonMedicament_Persons", "Persons");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Persons>("InfoMedMainDBModel.FK_PersonMedicament_Persons", "Persons", value);
+                }
+            }
+        }
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="InfoMedMainDBModel", Name="AssignedRiskFactor")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class AssignedRiskFactor : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new AssignedRiskFactor object.
+        /// </summary>
+        /// <param name="personId">Initial value of the PersonId property.</param>
+        /// <param name="riskFactorId">Initial value of the RiskFactorId property.</param>
+        /// <param name="isActual">Initial value of the IsActual property.</param>
+        /// <param name="value">Initial value of the Value property.</param>
+        /// <param name="measure">Initial value of the Measure property.</param>
+        public static AssignedRiskFactor CreateAssignedRiskFactor(global::System.Guid personId, global::System.Guid riskFactorId, global::System.Boolean isActual, global::System.Double value, global::System.String measure)
+        {
+            AssignedRiskFactor assignedRiskFactor = new AssignedRiskFactor();
+            assignedRiskFactor.PersonId = personId;
+            assignedRiskFactor.RiskFactorId = riskFactorId;
+            assignedRiskFactor.IsActual = isActual;
+            assignedRiskFactor.Value = value;
+            assignedRiskFactor.Measure = measure;
+            return assignedRiskFactor;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid PersonId
+        {
+            get
+            {
+                return _PersonId;
+            }
+            set
+            {
+                if (_PersonId != value)
+                {
+                    OnPersonIdChanging(value);
+                    ReportPropertyChanging("PersonId");
+                    _PersonId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("PersonId");
+                    OnPersonIdChanged();
+                }
+            }
+        }
+        private global::System.Guid _PersonId;
+        partial void OnPersonIdChanging(global::System.Guid value);
+        partial void OnPersonIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid RiskFactorId
+        {
+            get
+            {
+                return _RiskFactorId;
+            }
+            set
+            {
+                if (_RiskFactorId != value)
+                {
+                    OnRiskFactorIdChanging(value);
+                    ReportPropertyChanging("RiskFactorId");
+                    _RiskFactorId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("RiskFactorId");
+                    OnRiskFactorIdChanged();
+                }
+            }
+        }
+        private global::System.Guid _RiskFactorId;
+        partial void OnRiskFactorIdChanging(global::System.Guid value);
+        partial void OnRiskFactorIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsActual
+        {
+            get
+            {
+                return _IsActual;
+            }
+            set
+            {
+                OnIsActualChanging(value);
+                ReportPropertyChanging("IsActual");
+                _IsActual = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsActual");
+                OnIsActualChanged();
+            }
+        }
+        private global::System.Boolean _IsActual;
+        partial void OnIsActualChanging(global::System.Boolean value);
+        partial void OnIsActualChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Double Value
+        {
+            get
+            {
+                return _Value;
+            }
+            set
+            {
+                OnValueChanging(value);
+                ReportPropertyChanging("Value");
+                _Value = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Value");
+                OnValueChanged();
+            }
+        }
+        private global::System.Double _Value;
+        partial void OnValueChanging(global::System.Double value);
+        partial void OnValueChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Measure
+        {
+            get
+            {
+                return _Measure;
+            }
+            set
+            {
+                OnMeasureChanging(value);
+                ReportPropertyChanging("Measure");
+                _Measure = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Measure");
+                OnMeasureChanged();
+            }
+        }
+        private global::System.String _Measure;
+        partial void OnMeasureChanging(global::System.String value);
+        partial void OnMeasureChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("InfoMedMainDBModel", "FK_PersonRiskFactor_Persons", "Persons")]
+        public Persons Persons
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Persons>("InfoMedMainDBModel.FK_PersonRiskFactor_Persons", "Persons").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Persons>("InfoMedMainDBModel.FK_PersonRiskFactor_Persons", "Persons").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Persons> PersonsReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Persons>("InfoMedMainDBModel.FK_PersonRiskFactor_Persons", "Persons");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Persons>("InfoMedMainDBModel.FK_PersonRiskFactor_Persons", "Persons", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("InfoMedMainDBModel", "FK_PersonRiskFactor_RiskFactors", "RiskFactors")]
+        public RiskFactors RiskFactors
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<RiskFactors>("InfoMedMainDBModel.FK_PersonRiskFactor_RiskFactors", "RiskFactors").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<RiskFactors>("InfoMedMainDBModel.FK_PersonRiskFactor_RiskFactors", "RiskFactors").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<RiskFactors> RiskFactorsReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<RiskFactors>("InfoMedMainDBModel.FK_PersonRiskFactor_RiskFactors", "RiskFactors");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<RiskFactors>("InfoMedMainDBModel.FK_PersonRiskFactor_RiskFactors", "RiskFactors", value);
+                }
+            }
+        }
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="InfoMedMainDBModel", Name="AssignedSymptom")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class AssignedSymptom : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new AssignedSymptom object.
+        /// </summary>
+        /// <param name="personId">Initial value of the PersonId property.</param>
+        /// <param name="symptomId">Initial value of the SymptomId property.</param>
+        /// <param name="isActual">Initial value of the IsActual property.</param>
+        public static AssignedSymptom CreateAssignedSymptom(global::System.Guid personId, global::System.Guid symptomId, global::System.Boolean isActual)
+        {
+            AssignedSymptom assignedSymptom = new AssignedSymptom();
+            assignedSymptom.PersonId = personId;
+            assignedSymptom.SymptomId = symptomId;
+            assignedSymptom.IsActual = isActual;
+            return assignedSymptom;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid PersonId
+        {
+            get
+            {
+                return _PersonId;
+            }
+            set
+            {
+                if (_PersonId != value)
+                {
+                    OnPersonIdChanging(value);
+                    ReportPropertyChanging("PersonId");
+                    _PersonId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("PersonId");
+                    OnPersonIdChanged();
+                }
+            }
+        }
+        private global::System.Guid _PersonId;
+        partial void OnPersonIdChanging(global::System.Guid value);
+        partial void OnPersonIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid SymptomId
+        {
+            get
+            {
+                return _SymptomId;
+            }
+            set
+            {
+                if (_SymptomId != value)
+                {
+                    OnSymptomIdChanging(value);
+                    ReportPropertyChanging("SymptomId");
+                    _SymptomId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("SymptomId");
+                    OnSymptomIdChanged();
+                }
+            }
+        }
+        private global::System.Guid _SymptomId;
+        partial void OnSymptomIdChanging(global::System.Guid value);
+        partial void OnSymptomIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsActual
+        {
+            get
+            {
+                return _IsActual;
+            }
+            set
+            {
+                OnIsActualChanging(value);
+                ReportPropertyChanging("IsActual");
+                _IsActual = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsActual");
+                OnIsActualChanged();
+            }
+        }
+        private global::System.Boolean _IsActual;
+        partial void OnIsActualChanging(global::System.Boolean value);
+        partial void OnIsActualChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("InfoMedMainDBModel", "FK_PersonSymptom_Person", "Persons")]
+        public Persons Persons
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Persons>("InfoMedMainDBModel.FK_PersonSymptom_Person", "Persons").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Persons>("InfoMedMainDBModel.FK_PersonSymptom_Person", "Persons").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Persons> PersonsReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Persons>("InfoMedMainDBModel.FK_PersonSymptom_Person", "Persons");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Persons>("InfoMedMainDBModel.FK_PersonSymptom_Person", "Persons", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("InfoMedMainDBModel", "FK_PersonSymptom_Symptoms", "Symptoms")]
+        public Symptoms Symptoms
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Symptoms>("InfoMedMainDBModel.FK_PersonSymptom_Symptoms", "Symptoms").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Symptoms>("InfoMedMainDBModel.FK_PersonSymptom_Symptoms", "Symptoms").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Symptoms> SymptomsReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Symptoms>("InfoMedMainDBModel.FK_PersonSymptom_Symptoms", "Symptoms");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Symptoms>("InfoMedMainDBModel.FK_PersonSymptom_Symptoms", "Symptoms", value);
+                }
+            }
+        }
+
+        #endregion
+    }
     
     /// <summary>
     /// No Metadata Documentation available.
@@ -1007,18 +1704,18 @@ namespace DataLayer.DataBaseModels
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("InfoMedMainDBModel", "FK_PersonMedicament_Medicaments", "PersonMedicament")]
-        public EntityCollection<PersonMedicament> PersonMedicament
+        [EdmRelationshipNavigationPropertyAttribute("InfoMedMainDBModel", "FK_PersonMedicament_Medicaments", "AssignedMedicament")]
+        public EntityCollection<AssignedMedicament> AssignedMedicament
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PersonMedicament>("InfoMedMainDBModel.FK_PersonMedicament_Medicaments", "PersonMedicament");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<AssignedMedicament>("InfoMedMainDBModel.FK_PersonMedicament_Medicaments", "AssignedMedicament");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PersonMedicament>("InfoMedMainDBModel.FK_PersonMedicament_Medicaments", "PersonMedicament", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<AssignedMedicament>("InfoMedMainDBModel.FK_PersonMedicament_Medicaments", "AssignedMedicament", value);
                 }
             }
         }
@@ -1430,273 +2127,6 @@ namespace DataLayer.DataBaseModels
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="InfoMedMainDBModel", Name="PersonMedicament")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class PersonMedicament : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new PersonMedicament object.
-        /// </summary>
-        /// <param name="personId">Initial value of the PersonId property.</param>
-        /// <param name="medicamentId">Initial value of the MedicamentId property.</param>
-        /// <param name="dosage">Initial value of the Dosage property.</param>
-        /// <param name="measure">Initial value of the Measure property.</param>
-        /// <param name="frequency">Initial value of the Frequency property.</param>
-        /// <param name="isActual">Initial value of the IsActual property.</param>
-        public static PersonMedicament CreatePersonMedicament(global::System.Guid personId, global::System.Guid medicamentId, global::System.Double dosage, global::System.String measure, global::System.DateTime frequency, global::System.Boolean isActual)
-        {
-            PersonMedicament personMedicament = new PersonMedicament();
-            personMedicament.PersonId = personId;
-            personMedicament.MedicamentId = medicamentId;
-            personMedicament.Dosage = dosage;
-            personMedicament.Measure = measure;
-            personMedicament.Frequency = frequency;
-            personMedicament.IsActual = isActual;
-            return personMedicament;
-        }
-
-        #endregion
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Guid PersonId
-        {
-            get
-            {
-                return _PersonId;
-            }
-            set
-            {
-                if (_PersonId != value)
-                {
-                    OnPersonIdChanging(value);
-                    ReportPropertyChanging("PersonId");
-                    _PersonId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("PersonId");
-                    OnPersonIdChanged();
-                }
-            }
-        }
-        private global::System.Guid _PersonId;
-        partial void OnPersonIdChanging(global::System.Guid value);
-        partial void OnPersonIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Guid MedicamentId
-        {
-            get
-            {
-                return _MedicamentId;
-            }
-            set
-            {
-                if (_MedicamentId != value)
-                {
-                    OnMedicamentIdChanging(value);
-                    ReportPropertyChanging("MedicamentId");
-                    _MedicamentId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("MedicamentId");
-                    OnMedicamentIdChanged();
-                }
-            }
-        }
-        private global::System.Guid _MedicamentId;
-        partial void OnMedicamentIdChanging(global::System.Guid value);
-        partial void OnMedicamentIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Double Dosage
-        {
-            get
-            {
-                return _Dosage;
-            }
-            set
-            {
-                OnDosageChanging(value);
-                ReportPropertyChanging("Dosage");
-                _Dosage = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Dosage");
-                OnDosageChanged();
-            }
-        }
-        private global::System.Double _Dosage;
-        partial void OnDosageChanging(global::System.Double value);
-        partial void OnDosageChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Measure
-        {
-            get
-            {
-                return _Measure;
-            }
-            set
-            {
-                OnMeasureChanging(value);
-                ReportPropertyChanging("Measure");
-                _Measure = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Measure");
-                OnMeasureChanged();
-            }
-        }
-        private global::System.String _Measure;
-        partial void OnMeasureChanging(global::System.String value);
-        partial void OnMeasureChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.DateTime Frequency
-        {
-            get
-            {
-                return _Frequency;
-            }
-            set
-            {
-                OnFrequencyChanging(value);
-                ReportPropertyChanging("Frequency");
-                _Frequency = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Frequency");
-                OnFrequencyChanged();
-            }
-        }
-        private global::System.DateTime _Frequency;
-        partial void OnFrequencyChanging(global::System.DateTime value);
-        partial void OnFrequencyChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Boolean IsActual
-        {
-            get
-            {
-                return _IsActual;
-            }
-            set
-            {
-                OnIsActualChanging(value);
-                ReportPropertyChanging("IsActual");
-                _IsActual = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("IsActual");
-                OnIsActualChanged();
-            }
-        }
-        private global::System.Boolean _IsActual;
-        partial void OnIsActualChanging(global::System.Boolean value);
-        partial void OnIsActualChanged();
-
-        #endregion
-    
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("InfoMedMainDBModel", "FK_PersonMedicament_Medicaments", "Medicaments")]
-        public Medicaments Medicaments
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Medicaments>("InfoMedMainDBModel.FK_PersonMedicament_Medicaments", "Medicaments").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Medicaments>("InfoMedMainDBModel.FK_PersonMedicament_Medicaments", "Medicaments").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Medicaments> MedicamentsReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Medicaments>("InfoMedMainDBModel.FK_PersonMedicament_Medicaments", "Medicaments");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Medicaments>("InfoMedMainDBModel.FK_PersonMedicament_Medicaments", "Medicaments", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("InfoMedMainDBModel", "FK_PersonMedicament_Persons", "Persons")]
-        public Persons Persons
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Persons>("InfoMedMainDBModel.FK_PersonMedicament_Persons", "Persons").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Persons>("InfoMedMainDBModel.FK_PersonMedicament_Persons", "Persons").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Persons> PersonsReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Persons>("InfoMedMainDBModel.FK_PersonMedicament_Persons", "Persons");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Persons>("InfoMedMainDBModel.FK_PersonMedicament_Persons", "Persons", value);
-                }
-            }
-        }
-
-        #endregion
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
     [EdmEntityTypeAttribute(NamespaceName="InfoMedMainDBModel", Name="PersonPerson")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
@@ -1909,247 +2339,6 @@ namespace DataLayer.DataBaseModels
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="InfoMedMainDBModel", Name="PersonRiskFactor")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class PersonRiskFactor : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new PersonRiskFactor object.
-        /// </summary>
-        /// <param name="personId">Initial value of the PersonId property.</param>
-        /// <param name="riskFactorId">Initial value of the RiskFactorId property.</param>
-        /// <param name="isActual">Initial value of the IsActual property.</param>
-        /// <param name="value">Initial value of the Value property.</param>
-        /// <param name="measure">Initial value of the Measure property.</param>
-        public static PersonRiskFactor CreatePersonRiskFactor(global::System.Guid personId, global::System.Guid riskFactorId, global::System.Boolean isActual, global::System.Double value, global::System.String measure)
-        {
-            PersonRiskFactor personRiskFactor = new PersonRiskFactor();
-            personRiskFactor.PersonId = personId;
-            personRiskFactor.RiskFactorId = riskFactorId;
-            personRiskFactor.IsActual = isActual;
-            personRiskFactor.Value = value;
-            personRiskFactor.Measure = measure;
-            return personRiskFactor;
-        }
-
-        #endregion
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Guid PersonId
-        {
-            get
-            {
-                return _PersonId;
-            }
-            set
-            {
-                if (_PersonId != value)
-                {
-                    OnPersonIdChanging(value);
-                    ReportPropertyChanging("PersonId");
-                    _PersonId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("PersonId");
-                    OnPersonIdChanged();
-                }
-            }
-        }
-        private global::System.Guid _PersonId;
-        partial void OnPersonIdChanging(global::System.Guid value);
-        partial void OnPersonIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Guid RiskFactorId
-        {
-            get
-            {
-                return _RiskFactorId;
-            }
-            set
-            {
-                if (_RiskFactorId != value)
-                {
-                    OnRiskFactorIdChanging(value);
-                    ReportPropertyChanging("RiskFactorId");
-                    _RiskFactorId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("RiskFactorId");
-                    OnRiskFactorIdChanged();
-                }
-            }
-        }
-        private global::System.Guid _RiskFactorId;
-        partial void OnRiskFactorIdChanging(global::System.Guid value);
-        partial void OnRiskFactorIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Boolean IsActual
-        {
-            get
-            {
-                return _IsActual;
-            }
-            set
-            {
-                OnIsActualChanging(value);
-                ReportPropertyChanging("IsActual");
-                _IsActual = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("IsActual");
-                OnIsActualChanged();
-            }
-        }
-        private global::System.Boolean _IsActual;
-        partial void OnIsActualChanging(global::System.Boolean value);
-        partial void OnIsActualChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Double Value
-        {
-            get
-            {
-                return _Value;
-            }
-            set
-            {
-                OnValueChanging(value);
-                ReportPropertyChanging("Value");
-                _Value = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Value");
-                OnValueChanged();
-            }
-        }
-        private global::System.Double _Value;
-        partial void OnValueChanging(global::System.Double value);
-        partial void OnValueChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Measure
-        {
-            get
-            {
-                return _Measure;
-            }
-            set
-            {
-                OnMeasureChanging(value);
-                ReportPropertyChanging("Measure");
-                _Measure = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Measure");
-                OnMeasureChanged();
-            }
-        }
-        private global::System.String _Measure;
-        partial void OnMeasureChanging(global::System.String value);
-        partial void OnMeasureChanged();
-
-        #endregion
-    
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("InfoMedMainDBModel", "FK_PersonRiskFactor_Persons", "Persons")]
-        public Persons Persons
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Persons>("InfoMedMainDBModel.FK_PersonRiskFactor_Persons", "Persons").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Persons>("InfoMedMainDBModel.FK_PersonRiskFactor_Persons", "Persons").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Persons> PersonsReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Persons>("InfoMedMainDBModel.FK_PersonRiskFactor_Persons", "Persons");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Persons>("InfoMedMainDBModel.FK_PersonRiskFactor_Persons", "Persons", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("InfoMedMainDBModel", "FK_PersonRiskFactor_RiskFactors", "RiskFactors")]
-        public RiskFactors RiskFactors
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<RiskFactors>("InfoMedMainDBModel.FK_PersonRiskFactor_RiskFactors", "RiskFactors").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<RiskFactors>("InfoMedMainDBModel.FK_PersonRiskFactor_RiskFactors", "RiskFactors").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<RiskFactors> RiskFactorsReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<RiskFactors>("InfoMedMainDBModel.FK_PersonRiskFactor_RiskFactors", "RiskFactors");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<RiskFactors>("InfoMedMainDBModel.FK_PersonRiskFactor_RiskFactors", "RiskFactors", value);
-                }
-            }
-        }
-
-        #endregion
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
     [EdmEntityTypeAttribute(NamespaceName="InfoMedMainDBModel", Name="Persons")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
@@ -2352,72 +2541,6 @@ namespace DataLayer.DataBaseModels
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("InfoMedMainDBModel", "FK_PersonRiskFactor_Persons", "PersonRiskFactor")]
-        public EntityCollection<PersonRiskFactor> PersonRiskFactor
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PersonRiskFactor>("InfoMedMainDBModel.FK_PersonRiskFactor_Persons", "PersonRiskFactor");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PersonRiskFactor>("InfoMedMainDBModel.FK_PersonRiskFactor_Persons", "PersonRiskFactor", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("InfoMedMainDBModel", "FK_PersonSymptom_Person", "PersonSymptom")]
-        public EntityCollection<PersonSymptom> PersonSymptom
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PersonSymptom>("InfoMedMainDBModel.FK_PersonSymptom_Person", "PersonSymptom");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PersonSymptom>("InfoMedMainDBModel.FK_PersonSymptom_Person", "PersonSymptom", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("InfoMedMainDBModel", "FK_PersonMedicament_Persons", "PersonMedicament")]
-        public EntityCollection<PersonMedicament> PersonMedicament
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PersonMedicament>("InfoMedMainDBModel.FK_PersonMedicament_Persons", "PersonMedicament");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PersonMedicament>("InfoMedMainDBModel.FK_PersonMedicament_Persons", "PersonMedicament", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("InfoMedMainDBModel", "FK_Credentials_Persons", "Credentials")]
         public Credentials Credentials
         {
@@ -2471,119 +2594,6 @@ namespace DataLayer.DataBaseModels
                 }
             }
         }
-
-        #endregion
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="InfoMedMainDBModel", Name="PersonSymptom")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class PersonSymptom : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new PersonSymptom object.
-        /// </summary>
-        /// <param name="personId">Initial value of the PersonId property.</param>
-        /// <param name="symptomId">Initial value of the SymptomId property.</param>
-        /// <param name="isActual">Initial value of the IsActual property.</param>
-        public static PersonSymptom CreatePersonSymptom(global::System.Guid personId, global::System.Guid symptomId, global::System.Boolean isActual)
-        {
-            PersonSymptom personSymptom = new PersonSymptom();
-            personSymptom.PersonId = personId;
-            personSymptom.SymptomId = symptomId;
-            personSymptom.IsActual = isActual;
-            return personSymptom;
-        }
-
-        #endregion
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Guid PersonId
-        {
-            get
-            {
-                return _PersonId;
-            }
-            set
-            {
-                if (_PersonId != value)
-                {
-                    OnPersonIdChanging(value);
-                    ReportPropertyChanging("PersonId");
-                    _PersonId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("PersonId");
-                    OnPersonIdChanged();
-                }
-            }
-        }
-        private global::System.Guid _PersonId;
-        partial void OnPersonIdChanging(global::System.Guid value);
-        partial void OnPersonIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Guid SymptomId
-        {
-            get
-            {
-                return _SymptomId;
-            }
-            set
-            {
-                if (_SymptomId != value)
-                {
-                    OnSymptomIdChanging(value);
-                    ReportPropertyChanging("SymptomId");
-                    _SymptomId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("SymptomId");
-                    OnSymptomIdChanged();
-                }
-            }
-        }
-        private global::System.Guid _SymptomId;
-        partial void OnSymptomIdChanging(global::System.Guid value);
-        partial void OnSymptomIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Boolean IsActual
-        {
-            get
-            {
-                return _IsActual;
-            }
-            set
-            {
-                OnIsActualChanging(value);
-                ReportPropertyChanging("IsActual");
-                _IsActual = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("IsActual");
-                OnIsActualChanged();
-            }
-        }
-        private global::System.Boolean _IsActual;
-        partial void OnIsActualChanging(global::System.Boolean value);
-        partial void OnIsActualChanged();
-
-        #endregion
-    
-        #region Navigation Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -2591,34 +2601,18 @@ namespace DataLayer.DataBaseModels
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("InfoMedMainDBModel", "FK_PersonSymptom_Person", "Persons")]
-        public Persons Persons
+        [EdmRelationshipNavigationPropertyAttribute("InfoMedMainDBModel", "FK_PersonMedicament_Persons", "AssignedMedicament")]
+        public EntityCollection<AssignedMedicament> AssignedMedicament
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Persons>("InfoMedMainDBModel.FK_PersonSymptom_Person", "Persons").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Persons>("InfoMedMainDBModel.FK_PersonSymptom_Person", "Persons").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Persons> PersonsReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Persons>("InfoMedMainDBModel.FK_PersonSymptom_Person", "Persons");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<AssignedMedicament>("InfoMedMainDBModel.FK_PersonMedicament_Persons", "AssignedMedicament");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Persons>("InfoMedMainDBModel.FK_PersonSymptom_Person", "Persons", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<AssignedMedicament>("InfoMedMainDBModel.FK_PersonMedicament_Persons", "AssignedMedicament", value);
                 }
             }
         }
@@ -2629,34 +2623,40 @@ namespace DataLayer.DataBaseModels
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("InfoMedMainDBModel", "FK_PersonSymptom_Symptoms", "Symptoms")]
-        public Symptoms Symptoms
+        [EdmRelationshipNavigationPropertyAttribute("InfoMedMainDBModel", "FK_PersonRiskFactor_Persons", "AssignedRiskFactor")]
+        public EntityCollection<AssignedRiskFactor> AssignedRiskFactor
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Symptoms>("InfoMedMainDBModel.FK_PersonSymptom_Symptoms", "Symptoms").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Symptoms>("InfoMedMainDBModel.FK_PersonSymptom_Symptoms", "Symptoms").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Symptoms> SymptomsReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Symptoms>("InfoMedMainDBModel.FK_PersonSymptom_Symptoms", "Symptoms");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<AssignedRiskFactor>("InfoMedMainDBModel.FK_PersonRiskFactor_Persons", "AssignedRiskFactor");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Symptoms>("InfoMedMainDBModel.FK_PersonSymptom_Symptoms", "Symptoms", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<AssignedRiskFactor>("InfoMedMainDBModel.FK_PersonRiskFactor_Persons", "AssignedRiskFactor", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("InfoMedMainDBModel", "FK_PersonSymptom_Person", "AssignedSymptom")]
+        public EntityCollection<AssignedSymptom> AssignedSymptom
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<AssignedSymptom>("InfoMedMainDBModel.FK_PersonSymptom_Person", "AssignedSymptom");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<AssignedSymptom>("InfoMedMainDBModel.FK_PersonSymptom_Person", "AssignedSymptom", value);
                 }
             }
         }
@@ -2775,18 +2775,18 @@ namespace DataLayer.DataBaseModels
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("InfoMedMainDBModel", "FK_PersonRiskFactor_RiskFactors", "PersonRiskFactor")]
-        public EntityCollection<PersonRiskFactor> PersonRiskFactor
+        [EdmRelationshipNavigationPropertyAttribute("InfoMedMainDBModel", "FK_PersonRiskFactor_RiskFactors", "AssignedRiskFactor")]
+        public EntityCollection<AssignedRiskFactor> AssignedRiskFactor
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PersonRiskFactor>("InfoMedMainDBModel.FK_PersonRiskFactor_RiskFactors", "PersonRiskFactor");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<AssignedRiskFactor>("InfoMedMainDBModel.FK_PersonRiskFactor_RiskFactors", "AssignedRiskFactor");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PersonRiskFactor>("InfoMedMainDBModel.FK_PersonRiskFactor_RiskFactors", "PersonRiskFactor", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<AssignedRiskFactor>("InfoMedMainDBModel.FK_PersonRiskFactor_RiskFactors", "AssignedRiskFactor", value);
                 }
             }
         }
@@ -2905,18 +2905,18 @@ namespace DataLayer.DataBaseModels
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("InfoMedMainDBModel", "FK_PersonSymptom_Symptoms", "PersonSymptom")]
-        public EntityCollection<PersonSymptom> PersonSymptom
+        [EdmRelationshipNavigationPropertyAttribute("InfoMedMainDBModel", "FK_PersonSymptom_Symptoms", "AssignedSymptom")]
+        public EntityCollection<AssignedSymptom> AssignedSymptom
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PersonSymptom>("InfoMedMainDBModel.FK_PersonSymptom_Symptoms", "PersonSymptom");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<AssignedSymptom>("InfoMedMainDBModel.FK_PersonSymptom_Symptoms", "AssignedSymptom");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PersonSymptom>("InfoMedMainDBModel.FK_PersonSymptom_Symptoms", "PersonSymptom", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<AssignedSymptom>("InfoMedMainDBModel.FK_PersonSymptom_Symptoms", "AssignedSymptom", value);
                 }
             }
         }

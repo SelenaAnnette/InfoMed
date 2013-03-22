@@ -32,9 +32,9 @@
             NinjectKernel.Bind<IMeasuringTypeRepository>().To<MeasuringTypeRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
             NinjectKernel.Bind<ICredentialsRepository>().To<CredentialsRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
             NinjectKernel.Bind<IContactTypeRepository>().To<ContactTypeRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
-            NinjectKernel.Bind<IAsignedSymptomRepository>().To<AsignedSymptomRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
-            NinjectKernel.Bind<IAsignedRiskFactorRepository>().To<AsignedRiskFactorRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
-            NinjectKernel.Bind<IAsignedMedicamentRepository>().To<AsignedMedicamentRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
+            NinjectKernel.Bind<IAssignedSymptomRepository>().To<AssignedSymptomRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
+            NinjectKernel.Bind<IAssignedRiskFactorRepository>().To<AssignedRiskFactorRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
+            NinjectKernel.Bind<IAssignedMedicamentRepository>().To<AssignedMedicamentRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
             NinjectKernel.Bind<IPersonPersonRepository>().To<PersonPersonRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
             NinjectKernel.Bind<IPersonGroupRepository>().To<PersonGroupRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
 
