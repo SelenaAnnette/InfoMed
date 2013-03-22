@@ -35,12 +35,12 @@
 //            symptomRepo.CreateOrUpdateEntity(symptom);
             var foundSymptoms = symptomRepo.GetAll().ToList();
             Console.ReadKey();
-            //var measuringTypeRep = Binder.NinjectKernel.Get<IMeasuringTypeRepository>();
-            //var measuringType = measuringTypeRep.GetEntitiesByQuery(m => m.Title == "САД").FirstOrDefault();
-            //var personMeasuringRep = Binder.NinjectKernel.Get<IPersonMeasuringRepository>();
-            //var personMeasuringFactory = new PersonMeasuringFactory();
-            //var personMeasuring = personMeasuringFactory.Create(Guid.NewGuid(),measuringType.Id,Guid.NewGuid(),DateTime.Now,120);
-            //personMeasuringRep.CreateOrUpdateEntity(personMeasuring);
+            var measuringTypeRep = Binder.NinjectKernel.Get<IMeasuringTypeRepository>();
+            var measuringType = measuringTypeRep.GetEntitiesByQuery(m => m.Title == "САД").FirstOrDefault();
+            var personMeasuringRep = Binder.NinjectKernel.Get<IPersonMeasuringRepository>();
+            var personMeasuringFactory = new PersonMeasuringFactory();
+            var personMeasuring = personMeasuringFactory.Create(Guid.NewGuid(),measuringType.Id,Guid.NewGuid(),DateTime.Now,120);
+            personMeasuringRep.CreateOrUpdateEntity(personMeasuring);
 
         }
     }

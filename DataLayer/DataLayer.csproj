@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
+    <Reference Include="EntityFramework, Version=4.4.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Ninject">
@@ -52,6 +52,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataBaseModels\MainDataBaseModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MainDataBaseModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseModels\TrashDataBaseModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TrashDataBaseModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Measuring\IPersonMeasuringRepository.cs" />
     <Compile Include="Persistence\Measuring\PersonMeasuringFactory.cs" />
     <Compile Include="Persistence\Measuring\PersonMeasuringRepository.cs" />
@@ -71,16 +81,6 @@
     <Compile Include="Persistence\Symptom\PersonSymptomFactory.cs" />
     <Compile Include="Persistence\Symptom\PersonSymptomRepository.cs" />
     <Compile Include="TrashDomainContext.cs" />
-    <Compile Include="DataBaseModels\MainDataBaseModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MainDataBaseModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="DataBaseModels\TrashDataBaseModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TrashDataBaseModel.edmx</DependentUpon>
-    </Compile>
     <Compile Include="DomainContext.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="Persistence\Group\PersonGroupFactory.cs" />
