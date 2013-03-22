@@ -7,27 +7,27 @@
 
     using Domain.Symptom;
 
-    public class AsignedSymptomRepository : IAsignedSymptomRepository
+    public class AssignedSymptomRepository : IAssignedSymptomRepository
     {
         private readonly string ConnectionString;
 
-        public AsignedSymptomRepository(string connectionString)
+        public AssignedSymptomRepository(string connectionString)
         {
             this.ConnectionString = connectionString;
         }
 
-        public IEnumerable<AsignedSymptom> GetAll()
+        public IEnumerable<AssignedSymptom> GetAll()
         {
             var context = new DomainContext(this.ConnectionString);
-            return context.AsignedSymptoms.Include("Person").Include("Symptom");
+            return context.AssignedSymptoms.Include("Person").Include("Symptom");
         }
 
-        public AsignedSymptom GetEntityById(Guid id)
+        public AssignedSymptom GetEntityById(Guid id)
         {
             throw new NotImplementedException("This method is not implemented");
         }
 
-        public IEnumerable<AsignedSymptom> GetEntitiesByQuery(Func<AsignedSymptom, bool> query)
+        public IEnumerable<AssignedSymptom> GetEntitiesByQuery(Func<AssignedSymptom, bool> query)
         {
             if (query == null)
             {
@@ -36,11 +36,11 @@
 
             using (var context = new DomainContext(this.ConnectionString))
             {
-                return context.AsignedSymptoms.Include("Person").Include("Symptom").Where(query);
+                return context.AssignedSymptoms.Include("Person").Include("Symptom").Where(query);
             }                                    
         }
 
-        public AsignedSymptom CreateOrUpdateEntity(AsignedSymptom entity)
+        public AssignedSymptom CreateOrUpdateEntity(AssignedSymptom entity)
         {
             if (entity == null)
             {
@@ -51,7 +51,7 @@
             {                                
                 if (this.GetEntitiesByQuery(v => v.PersonId == entity.PersonId && v.SymptomId == entity.SymptomId) == null)
                 {
-                    context.AsignedSymptoms.Add(entity);
+                    context.AssignedSymptoms.Add(entity);
                 }
                 else
                 {

@@ -22,7 +22,7 @@
         public string LastName { get; set; }
 
         [InverseProperty("Person")]
-        public virtual ICollection<AsignedSymptom> AsignedSymptoms { get; set; }
+        public virtual ICollection<AssignedSymptom> AssignedSymptoms { get; set; }
 
         [InverseProperty("FirstPerson")]
         public virtual ICollection<PersonPerson> FirstPersonPersons { get; set; }
@@ -34,10 +34,10 @@
         public virtual ICollection<PersonContact> PersonContacts { get; set; }
 
         [InverseProperty("Person")]
-        public virtual ICollection<AsignedRiskFactor> AsignedRiskFactors { get; set; }
+        public virtual ICollection<AssignedRiskFactor> AssignedRiskFactors { get; set; }
 
         [InverseProperty("Person")]
-        public virtual ICollection<AsignedMedicament> AsignedMedicaments { get; set; }
+        public virtual ICollection<AssignedMedicament> AssignedMedicaments { get; set; }
 
         public Credentials Credentials { get; set; }
 

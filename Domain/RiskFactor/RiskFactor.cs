@@ -14,6 +14,6 @@
         public string Description { get; set; }
 
         [InverseProperty("RiskFactor")]
-        public virtual ICollection<AsignedRiskFactor> AsignedRiskFactors { get; set; }
+        public virtual ICollection<AssignedRiskFactor> AssignedRiskFactors { get; set; }
     }
 }

@@ -1,0 +1,247 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="InfoMedTrashDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="InfoMedTrashDBModelStoreContainer">
+          <EntitySet Name="Messages" EntityType="InfoMedTrashDBModel.Store.Messages" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Notification" EntityType="InfoMedTrashDBModel.Store.Notification" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PersonMeasuring" EntityType="InfoMedTrashDBModel.Store.PersonMeasuring" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PersonMedicament" EntityType="InfoMedTrashDBModel.Store.PersonMedicament" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PersonRiskFactor" EntityType="InfoMedTrashDBModel.Store.PersonRiskFactor" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PersonSymptom" EntityType="InfoMedTrashDBModel.Store.PersonSymptom" store:Type="Tables" Schema="dbo" />
+        </EntityContainer>
+        <EntityType Name="Messages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SenderPersonId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ReceiverPersonId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IsRead" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PersonId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SendingDate" Type="datetime" Nullable="false" />
+          <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ExecutedDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PersonMeasuring">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PersonId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MeasuringTypeId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Value" Type="float" Nullable="false" />
+          <Property Name="MeasuringDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PersonMedicament">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RecordingDate" Type="datetime" Nullable="false" />
+          <Property Name="PersonId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MedicamentId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PersonRiskFactor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RecordingDate" Type="datetime" Nullable="false" />
+          <Property Name="PersonId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RiskFactorId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Value" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PersonSymptom">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RecordingDate" Type="datetime" Nullable="false" />
+          <Property Name="PersonId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SymptomId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="InfoMedTrashDBModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="InfoMedTrashDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Messages" EntityType="InfoMedTrashDBModel.Messages" />
+          <EntitySet Name="Notification" EntityType="InfoMedTrashDBModel.Notification" />
+          <EntitySet Name="PersonMeasuring" EntityType="InfoMedTrashDBModel.PersonMeasuring" />
+          <EntitySet Name="PersonMedicament" EntityType="InfoMedTrashDBModel.PersonMedicament" />
+          <EntitySet Name="PersonRiskFactor" EntityType="InfoMedTrashDBModel.PersonRiskFactor" />
+          <EntitySet Name="PersonSymptom" EntityType="InfoMedTrashDBModel.PersonSymptom" />
+        </EntityContainer>
+        <EntityType Name="Messages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="Guid" Name="SenderPersonId" Nullable="false" />
+          <Property Type="Guid" Name="ReceiverPersonId" Nullable="false" />
+          <Property Type="String" Name="Text" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsRead" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="Guid" Name="PersonId" Nullable="false" />
+          <Property Type="DateTime" Name="SendingDate" Nullable="false" />
+          <Property Type="String" Name="Text" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="ExecutedDate" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PersonMeasuring">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="Guid" Name="PersonId" Nullable="false" />
+          <Property Type="Guid" Name="MeasuringTypeId" Nullable="false" />
+          <Property Type="Double" Name="Value" Nullable="false" />
+          <Property Type="DateTime" Name="MeasuringDate" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PersonMedicament">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="DateTime" Name="RecordingDate" Nullable="false" />
+          <Property Type="Guid" Name="PersonId" Nullable="false" />
+          <Property Type="Guid" Name="MedicamentId" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PersonRiskFactor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="DateTime" Name="RecordingDate" Nullable="false" />
+          <Property Type="Guid" Name="PersonId" Nullable="false" />
+          <Property Type="Guid" Name="RiskFactorId" Nullable="false" />
+          <Property Type="Double" Name="Value" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PersonSymptom">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="DateTime" Name="RecordingDate" Nullable="false" />
+          <Property Type="Guid" Name="PersonId" Nullable="false" />
+          <Property Type="Guid" Name="SymptomId" Nullable="false" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="InfoMedTrashDBModelStoreContainer" CdmEntityContainer="InfoMedTrashDBEntities">
+          <EntitySetMapping Name="Messages">
+            <EntityTypeMapping TypeName="InfoMedTrashDBModel.Messages">
+              <MappingFragment StoreEntitySet="Messages">
+                <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="ReceiverPersonId" ColumnName="ReceiverPersonId" />
+                <ScalarProperty Name="SenderPersonId" ColumnName="SenderPersonId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notification">
+            <EntityTypeMapping TypeName="InfoMedTrashDBModel.Notification">
+              <MappingFragment StoreEntitySet="Notification">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ExecutedDate" ColumnName="ExecutedDate" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="SendingDate" ColumnName="SendingDate" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PersonMeasuring">
+            <EntityTypeMapping TypeName="InfoMedTrashDBModel.PersonMeasuring">
+              <MappingFragment StoreEntitySet="PersonMeasuring">
+                <ScalarProperty Name="MeasuringDate" ColumnName="MeasuringDate" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="MeasuringTypeId" ColumnName="MeasuringTypeId" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PersonMedicament">
+            <EntityTypeMapping TypeName="InfoMedTrashDBModel.PersonMedicament">
+              <MappingFragment StoreEntitySet="PersonMedicament">
+                <ScalarProperty Name="MedicamentId" ColumnName="MedicamentId" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="RecordingDate" ColumnName="RecordingDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PersonRiskFactor">
+            <EntityTypeMapping TypeName="InfoMedTrashDBModel.PersonRiskFactor">
+              <MappingFragment StoreEntitySet="PersonRiskFactor">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="RiskFactorId" ColumnName="RiskFactorId" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="RecordingDate" ColumnName="RecordingDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PersonSymptom">
+            <EntityTypeMapping TypeName="InfoMedTrashDBModel.PersonSymptom">
+              <MappingFragment StoreEntitySet="PersonSymptom">
+                <ScalarProperty Name="SymptomId" ColumnName="SymptomId" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="RecordingDate" ColumnName="RecordingDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="TrashDataBaseModel">
+        <EntityTypeShape EntityType="InfoMedTrashDBModel.Messages" Width="1.5" PointX="0.75" PointY="0.75" Height="1.9802864583333317" />
+        <EntityTypeShape EntityType="InfoMedTrashDBModel.Notification" Width="1.5" PointX="2.75" PointY="0.75" Height="2.1725878906249996" />
+        <EntityTypeShape EntityType="InfoMedTrashDBModel.PersonMeasuring" Width="1.5" PointX="0.75" PointY="3.75" Height="1.9802864583333317" />
+        <EntityTypeShape EntityType="InfoMedTrashDBModel.PersonMedicament" Width="1.5" PointX="2.75" PointY="3.75" Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="InfoMedTrashDBModel.PersonRiskFactor" Width="1.5" PointX="4.75" PointY="0.75" Height="1.9802864583333353" />
+        <EntityTypeShape EntityType="InfoMedTrashDBModel.PersonSymptom" Width="1.5" PointX="4.75" PointY="3.75" Height="1.7879850260416674" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
