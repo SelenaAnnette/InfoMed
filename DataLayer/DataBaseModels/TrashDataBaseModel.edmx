@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="InfoMedTrashDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+      <Schema Namespace="InfoMedTrashDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="InfoMedTrashDBModelStoreContainer">
           <EntitySet Name="Messages" EntityType="InfoMedTrashDBModel.Store.Messages" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Notification" EntityType="InfoMedTrashDBModel.Store.Notification" store:Type="Tables" Schema="dbo" />
@@ -72,7 +72,8 @@
           <Property Name="PersonId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="SymptomId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="InfoMedTrashDBModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -88,132 +89,108 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Type="Guid" Name="Id" Nullable="false" />
-          <Property Type="Guid" Name="SenderPersonId" Nullable="false" />
-          <Property Type="Guid" Name="ReceiverPersonId" Nullable="false" />
-          <Property Type="String" Name="Text" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="Boolean" Name="IsRead" Nullable="false" />
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="SenderPersonId" Type="Guid" Nullable="false" />
+          <Property Name="ReceiverPersonId" Type="Guid" Nullable="false" />
+          <Property Name="Text" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="IsRead" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Notification">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Type="Guid" Name="Id" Nullable="false" />
-          <Property Type="Guid" Name="PersonId" Nullable="false" />
-          <Property Type="DateTime" Name="SendingDate" Nullable="false" />
-          <Property Type="String" Name="Text" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="DateTime" Name="ExecutedDate" />
-          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="PersonId" Type="Guid" Nullable="false" />
+          <Property Name="SendingDate" Type="DateTime" Nullable="false" />
+          <Property Name="Text" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="ExecutedDate" Type="DateTime" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="PersonMeasuring">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Type="Guid" Name="Id" Nullable="false" />
-          <Property Type="Guid" Name="PersonId" Nullable="false" />
-          <Property Type="Guid" Name="MeasuringTypeId" Nullable="false" />
-          <Property Type="Double" Name="Value" Nullable="false" />
-          <Property Type="DateTime" Name="MeasuringDate" Nullable="false" />
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="PersonId" Type="Guid" Nullable="false" />
+          <Property Name="MeasuringTypeId" Type="Guid" Nullable="false" />
+          <Property Name="Value" Type="Double" Nullable="false" />
+          <Property Name="MeasuringDate" Type="DateTime" Nullable="false" />
         </EntityType>
         <EntityType Name="PersonMedicament">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Type="Guid" Name="Id" Nullable="false" />
-          <Property Type="DateTime" Name="RecordingDate" Nullable="false" />
-          <Property Type="Guid" Name="PersonId" Nullable="false" />
-          <Property Type="Guid" Name="MedicamentId" Nullable="false" />
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="RecordingDate" Type="DateTime" Nullable="false" />
+          <Property Name="PersonId" Type="Guid" Nullable="false" />
+          <Property Name="MedicamentId" Type="Guid" Nullable="false" />
         </EntityType>
         <EntityType Name="PersonRiskFactor">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Type="Guid" Name="Id" Nullable="false" />
-          <Property Type="DateTime" Name="RecordingDate" Nullable="false" />
-          <Property Type="Guid" Name="PersonId" Nullable="false" />
-          <Property Type="Guid" Name="RiskFactorId" Nullable="false" />
-          <Property Type="Double" Name="Value" Nullable="false" />
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="RecordingDate" Type="DateTime" Nullable="false" />
+          <Property Name="PersonId" Type="Guid" Nullable="false" />
+          <Property Name="RiskFactorId" Type="Guid" Nullable="false" />
+          <Property Name="Value" Type="Double" Nullable="false" />
         </EntityType>
         <EntityType Name="PersonSymptom">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Type="Guid" Name="Id" Nullable="false" />
-          <Property Type="DateTime" Name="RecordingDate" Nullable="false" />
-          <Property Type="Guid" Name="PersonId" Nullable="false" />
-          <Property Type="Guid" Name="SymptomId" Nullable="false" />
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="RecordingDate" Type="DateTime" Nullable="false" />
+          <Property Name="PersonId" Type="Guid" Nullable="false" />
+          <Property Name="SymptomId" Type="Guid" Nullable="false" />
         </EntityType>
-        </Schema>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="InfoMedTrashDBModelStoreContainer" CdmEntityContainer="InfoMedTrashDBEntities">
-          <EntitySetMapping Name="Messages">
-            <EntityTypeMapping TypeName="InfoMedTrashDBModel.Messages">
-              <MappingFragment StoreEntitySet="Messages">
-                <ScalarProperty Name="IsRead" ColumnName="IsRead" />
-                <ScalarProperty Name="Text" ColumnName="Text" />
-                <ScalarProperty Name="ReceiverPersonId" ColumnName="ReceiverPersonId" />
-                <ScalarProperty Name="SenderPersonId" ColumnName="SenderPersonId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Notification">
-            <EntityTypeMapping TypeName="InfoMedTrashDBModel.Notification">
-              <MappingFragment StoreEntitySet="Notification">
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="ExecutedDate" ColumnName="ExecutedDate" />
-                <ScalarProperty Name="Text" ColumnName="Text" />
-                <ScalarProperty Name="SendingDate" ColumnName="SendingDate" />
-                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PersonMeasuring">
-            <EntityTypeMapping TypeName="InfoMedTrashDBModel.PersonMeasuring">
-              <MappingFragment StoreEntitySet="PersonMeasuring">
-                <ScalarProperty Name="MeasuringDate" ColumnName="MeasuringDate" />
-                <ScalarProperty Name="Value" ColumnName="Value" />
-                <ScalarProperty Name="MeasuringTypeId" ColumnName="MeasuringTypeId" />
-                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PersonMedicament">
-            <EntityTypeMapping TypeName="InfoMedTrashDBModel.PersonMedicament">
-              <MappingFragment StoreEntitySet="PersonMedicament">
-                <ScalarProperty Name="MedicamentId" ColumnName="MedicamentId" />
-                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
-                <ScalarProperty Name="RecordingDate" ColumnName="RecordingDate" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PersonRiskFactor">
-            <EntityTypeMapping TypeName="InfoMedTrashDBModel.PersonRiskFactor">
-              <MappingFragment StoreEntitySet="PersonRiskFactor">
-                <ScalarProperty Name="Value" ColumnName="Value" />
-                <ScalarProperty Name="RiskFactorId" ColumnName="RiskFactorId" />
-                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
-                <ScalarProperty Name="RecordingDate" ColumnName="RecordingDate" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PersonSymptom">
-            <EntityTypeMapping TypeName="InfoMedTrashDBModel.PersonSymptom">
-              <MappingFragment StoreEntitySet="PersonSymptom">
-                <ScalarProperty Name="SymptomId" ColumnName="SymptomId" />
-                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
-                <ScalarProperty Name="RecordingDate" ColumnName="RecordingDate" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+          <EntitySetMapping Name="Messages"><EntityTypeMapping TypeName="InfoMedTrashDBModel.Messages"><MappingFragment StoreEntitySet="Messages">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="SenderPersonId" ColumnName="SenderPersonId" />
+            <ScalarProperty Name="ReceiverPersonId" ColumnName="ReceiverPersonId" />
+            <ScalarProperty Name="Text" ColumnName="Text" />
+            <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Notification"><EntityTypeMapping TypeName="InfoMedTrashDBModel.Notification"><MappingFragment StoreEntitySet="Notification">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+            <ScalarProperty Name="SendingDate" ColumnName="SendingDate" />
+            <ScalarProperty Name="Text" ColumnName="Text" />
+            <ScalarProperty Name="ExecutedDate" ColumnName="ExecutedDate" />
+            <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="PersonMeasuring"><EntityTypeMapping TypeName="InfoMedTrashDBModel.PersonMeasuring"><MappingFragment StoreEntitySet="PersonMeasuring">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+            <ScalarProperty Name="MeasuringTypeId" ColumnName="MeasuringTypeId" />
+            <ScalarProperty Name="Value" ColumnName="Value" />
+            <ScalarProperty Name="MeasuringDate" ColumnName="MeasuringDate" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="PersonMedicament"><EntityTypeMapping TypeName="InfoMedTrashDBModel.PersonMedicament"><MappingFragment StoreEntitySet="PersonMedicament">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="RecordingDate" ColumnName="RecordingDate" />
+            <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+            <ScalarProperty Name="MedicamentId" ColumnName="MedicamentId" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="PersonRiskFactor"><EntityTypeMapping TypeName="InfoMedTrashDBModel.PersonRiskFactor"><MappingFragment StoreEntitySet="PersonRiskFactor">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="RecordingDate" ColumnName="RecordingDate" />
+            <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+            <ScalarProperty Name="RiskFactorId" ColumnName="RiskFactorId" />
+            <ScalarProperty Name="Value" ColumnName="Value" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="PersonSymptom"><EntityTypeMapping TypeName="InfoMedTrashDBModel.PersonSymptom"><MappingFragment StoreEntitySet="PersonSymptom">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="RecordingDate" ColumnName="RecordingDate" />
+            <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+            <ScalarProperty Name="SymptomId" ColumnName="SymptomId" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -235,12 +212,12 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="TrashDataBaseModel">
-        <EntityTypeShape EntityType="InfoMedTrashDBModel.Messages" Width="1.5" PointX="0.75" PointY="0.75" Height="1.9802864583333317" />
-        <EntityTypeShape EntityType="InfoMedTrashDBModel.Notification" Width="1.5" PointX="2.75" PointY="0.75" Height="2.1725878906249996" />
-        <EntityTypeShape EntityType="InfoMedTrashDBModel.PersonMeasuring" Width="1.5" PointX="0.75" PointY="3.75" Height="1.9802864583333317" />
-        <EntityTypeShape EntityType="InfoMedTrashDBModel.PersonMedicament" Width="1.5" PointX="2.75" PointY="3.75" Height="1.7879850260416674" />
-        <EntityTypeShape EntityType="InfoMedTrashDBModel.PersonRiskFactor" Width="1.5" PointX="4.75" PointY="0.75" Height="1.9802864583333353" />
-        <EntityTypeShape EntityType="InfoMedTrashDBModel.PersonSymptom" Width="1.5" PointX="4.75" PointY="3.75" Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="InfoMedTrashDBModel.Messages" Width="1.5" PointX="0.75" PointY="0.75" Height="1.7566536458333331" IsExpanded="true" />
+        <EntityTypeShape EntityType="InfoMedTrashDBModel.Notification" Width="1.5" PointX="2.75" PointY="0.75" Height="1.9210009765624996" IsExpanded="true" />
+        <EntityTypeShape EntityType="InfoMedTrashDBModel.PersonMeasuring" Width="1.5" PointX="0.75" PointY="3.75" Height="1.7566536458333322" IsExpanded="true" />
+        <EntityTypeShape EntityType="InfoMedTrashDBModel.PersonMedicament" Width="1.5" PointX="2.75" PointY="3.75" Height="1.5923063151041657" IsExpanded="true" />
+        <EntityTypeShape EntityType="InfoMedTrashDBModel.PersonRiskFactor" Width="1.5" PointX="4.75" PointY="0.75" Height="1.7566536458333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="InfoMedTrashDBModel.PersonSymptom" Width="1.5" PointX="4.75" PointY="3.75" Height="1.592306315104167" IsExpanded="true" />
       </Diagram>
     </Diagrams>
   </Designer>
