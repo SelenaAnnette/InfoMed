@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MedProga.Properties {
+namespace doc_int.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
