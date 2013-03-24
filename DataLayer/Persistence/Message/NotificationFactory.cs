@@ -6,9 +6,9 @@
 
     public class NotificationFactory
     {
-        public Notification Create(Guid id, Guid personId, DateTime sendingDate, string text)
+        public Notification Create(Guid id, Guid personId, Guid medicamentId, DateTime sendingDate, string text)
         {
-            return new Notification { Id = id, PersonId = personId, SendingDate = sendingDate, Text = text };
+            return new Notification { Id = id, PersonId = personId, MedicamentId = medicamentId, SendingDate = sendingDate, Text = text, IsActive = true };
         }
     }
 }

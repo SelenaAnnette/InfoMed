@@ -21,7 +21,7 @@
         public string Measure { get; set; }
 
         [Required]
-        public DateTime Frequency { get; set; }
+        public double Frequency { get; set; }
 
         [Required]
         public bool IsActual { get; set; }
