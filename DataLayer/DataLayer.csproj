@@ -52,16 +52,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataBaseModels\MainDataBaseModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MainDataBaseModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="DataBaseModels\TrashDataBaseModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TrashDataBaseModel.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Persistence\Measuring\IPersonMeasuringRepository.cs" />
     <Compile Include="Persistence\Measuring\PersonMeasuringFactory.cs" />
     <Compile Include="Persistence\Measuring\PersonMeasuringRepository.cs" />
@@ -133,15 +123,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <EntityDeploy Include="DataBaseModels\MainDataBaseModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>MainDataBaseModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <EntityDeploy Include="DataBaseModels\TrashDataBaseModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>TrashDataBaseModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -39,7 +39,7 @@
 
             using (var context = new TrashDomainContext(this.ConnectionString))
             {
-                return context.PersonMedicaments.Where(query);
+                return context.PersonMedicaments.Where(query).ToList();
             }                                    
         }
 

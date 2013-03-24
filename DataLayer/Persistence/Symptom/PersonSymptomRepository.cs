@@ -39,7 +39,7 @@
 
             using (var context = new TrashDomainContext(this.ConnectionString))
             {
-                return context.PersonSymptoms.Where(query);
+                return context.PersonSymptoms.Where(query).ToList();
             }                                    
         }
 

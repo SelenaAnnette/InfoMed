@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Data.Entity.Validation;
     using System.Linq;
     using System.Data;    
 
@@ -39,7 +40,7 @@
 
             using (var context = new TrashDomainContext(this.ConnectionString))
             {
-                return context.Notifications.Where(query);
+                return context.Notifications.Where(query).ToList();
             }                                    
         }
 
@@ -61,7 +62,7 @@
                     context.Entry(entity).State = EntityState.Modified;
                 }
 
-                context.SaveChanges();
+                context.SaveChanges();                
             }
 
             return entity;

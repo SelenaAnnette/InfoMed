@@ -3,10 +3,12 @@
   <Profiles />
   <Settings>
     <Setting Name="MainDBConnectionString" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">data source=MYCOMP\SQLEXPRESS;initial catalog=InfoMedMainDB;persist security info=True;user id=InfoMed;password=infomed523;multipleactiveresultsets=True</Value>
+      <Value Profile="(Default)">
+          Data Source=MYCOMP\SQLEXPRESS;Initial Catalog=InfoMedMainDB;Integrated Security=True;MultipleActiveResultSets=True
+        </Value>
     </Setting>
     <Setting Name="TrashDBConnectionString" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">data source=MYCOMP\SQLEXPRESS;initial catalog=InfoMedTrashDB;persist security info=True;user id=InfoMed;password=infomed523;multipleactiveresultsets=True</Value>
+      <Value Profile="(Default)">Data Source=MYCOMP\SQLEXPRESS;Initial Catalog=InfoMedTrashDB;Integrated Security=True;MultipleActiveResultSets=True</Value>
     </Setting>
   </Settings>
 </SettingsFile>

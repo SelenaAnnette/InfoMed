@@ -39,7 +39,7 @@
 
             using (var context = new TrashDomainContext(this.ConnectionString))
             {
-                return context.PersonMeasurings.Where(query);
+                return context.PersonMeasurings.Where(query).ToList();
             }                                    
         }
 

@@ -1,0 +1,14 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="doc_int.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="MainDBConnectionString" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">
+          Data Source=MYCOMP\SQLEXPRESS;Initial Catalog=InfoMedMainDB;Integrated Security=True;MultipleActiveResultSets=True
+        </Value>
+    </Setting>
+    <Setting Name="TrashDBConnectionString" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Data Source=MYCOMP\SQLEXPRESS;Initial Catalog=InfoMedTrashDB;Integrated Security=True;MultipleActiveResultSets=True</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

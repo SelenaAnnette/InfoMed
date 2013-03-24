@@ -1,0 +1,24 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ServerConsole.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="MainDBConnectionString" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">data source=ANDREYPC;initial catalog=InfoMedMainDB;persist security info=True;user id=InfoMed;password=infomed523;multipleactiveresultsets=True</Value>
+    </Setting>
+    <Setting Name="TrashDBConnectionString" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">data source=ANDREYPC;initial catalog=InfoMedTrashDB;persist security info=True;user id=InfoMed;password=infomed523;multipleactiveresultsets=True</Value>
+    </Setting>
+    <Setting Name="StartDayFromHour" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">9</Value>
+    </Setting>
+    <Setting Name="EndDayFromHour" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">21</Value>
+    </Setting>
+    <Setting Name="ReservHoursForAnsver" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="NotificationCreationFrequencyInMinutes" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

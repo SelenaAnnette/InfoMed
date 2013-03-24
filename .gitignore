@@ -12,3 +12,10 @@
 /MedProga/conn1.txt
 
 /InfoMed.suo
+/doc_int/bin
+/doc_int/obj
+/doc_int/doc_int.csproj.user
+/ServerLogic/bin
+/ServerLogic/obj
+/ServerConsole/bin
+/ServerConsole/obj

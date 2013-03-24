@@ -36,7 +36,7 @@
 
             using (var context = new DomainContext(this.ConnectionString))
             {
-                return context.AssignedMedicaments.Include("Person").Include("Medicament").Where(query);
+                return context.AssignedMedicaments.Include("Person").Include("Medicament").Where(query).ToList();
             }                                    
         }
 
