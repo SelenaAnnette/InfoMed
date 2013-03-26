@@ -8,7 +8,10 @@
     public class RiskFactor : DomainBase
     {
         [Required]
-        public string Name { get; set; }
+        public string Title { get; set; }
+
+        [Required]
+        public string Measuring { get; set; }
 
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
