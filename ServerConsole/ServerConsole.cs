@@ -9,33 +9,82 @@
 
     public class ServerConsole
     {
-        private static readonly ILogger Logger = Binder.NinjectKernel.Get<ILogger>();
+        private static ILogger Logger;
 
-        private static readonly INotificationService NotificationService = Binder.NinjectKernel.Get<INotificationService>();
+        private static INotificationService NotificationService;
+
+        private static bool areServicesRun;        
+
+        private static void InitializeFields()
+        {
+            Logger = Binder.NinjectKernel.Get<ILogger>();
+            NotificationService = Binder.NinjectKernel.Get<INotificationService>();
+            areServicesRun = false;
+        }
 
         static void Main(string[] args)
-        {
-            Logger.LogMessage("Server start OK");
-            StartWork();
-            Console.WriteLine("Press q to stop server console");
+        {            
+            InitializeFields();            
+            ShowConrolKeys();
             var runCicle = true;
             while (runCicle)
             {
                 var keyInfo = Console.ReadKey();
                 switch (keyInfo.Key)
-                {                    
-                    case ConsoleKey.Q:
-                        {                            
-                            runCicle = false;
+                {
+                    case ConsoleKey.S:
+                        {
+                            if (!areServicesRun)
+                            {
+                                StartWork();
+                            }
+
                             break;
                         }
+
+                    case ConsoleKey.Q:
+                        {
+                            if (areServicesRun)
+                            {
+                                StopWork();
+                            }
+
+                            break;
+                        }
+
+                    case ConsoleKey.Enter:
+                        {
+                            if (areServicesRun)
+                            {
+                                StopWork();
+                            }
+
+                            runCicle = false;
+                            break;
+                        }                    
                 }
             }
         }
 
+        private static void ShowConrolKeys()
+        {
+            Console.WriteLine("Press ENTER to terminate server console");
+            Console.WriteLine("Press Q to stop services");
+            Console.WriteLine("Press S to start services");
+        }
+
         private static void StartWork()
         {
+            areServicesRun = true;
             NotificationService.StartService();
+            Logger.LogMessage("Server started OK");
+        }
+
+        private static void StopWork()
+        {
+            areServicesRun = false;
+            NotificationService.StopService();
+            Logger.LogMessage("Server stopped OK");
         }
     }
 }
