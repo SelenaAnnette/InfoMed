@@ -31,9 +31,11 @@
 
         private readonly int ReservHoursForAnsver;
 
+        private readonly bool SendAndReceiveSms;
+
         public NotificationManager(IAssignedMedicamentRepository assignedMedicamentRepository, ILogger logger, 
             INotificationRepository notificationRepository, int startDayFromHour, int endDayFromHour, int reservHoursForAnsver,
-            IPersonContactRepository personContactRepository)
+            IPersonContactRepository personContactRepository, bool sendAndReceiveSms)
         {
             this.AssignedMedicamentRepository = assignedMedicamentRepository;
             this.NotificationRepository = notificationRepository;            
@@ -43,6 +45,7 @@
             this.StartDayFromHour = startDayFromHour;
             this.EndDayFromHour = endDayFromHour;
             this.ReservHoursForAnsver = reservHoursForAnsver;
+            this.SendAndReceiveSms = sendAndReceiveSms;
         }        
 
         public void CreateNewNotifications()
@@ -165,10 +168,13 @@
 
         private void SendNotification(Notification notification)
         {
-            var personContacts = this.PersonContactRepository.GetEntitiesByQuery(
-                v => v.PersonId == notification.PersonId && v.ContactType.Title == "Mobile");            
-            //TODO Replace sendAbstract to Send sms method
-//            personContacts.AsParallel().ForAll(v => sendAbstract(v.Value));
-        }
+            if (this.SendAndReceiveSms)
+            {
+                var personContacts = this.PersonContactRepository.GetEntitiesByQuery(
+                v => v.PersonId == notification.PersonId && v.ContactType.Title == "Mobile");
+                //TODO Replace sendAbstract to Send sms method
+                //            personContacts.AsParallel().ForAll(v => sendAbstract(v.Value));
+            }            
+        }        
     }
 }

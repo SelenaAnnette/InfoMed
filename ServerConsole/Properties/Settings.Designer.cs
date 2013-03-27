@@ -105,5 +105,14 @@ namespace ServerConsole.Properties {
                 return ((int)(this["DelayStartForNotificationSenderInSeconds"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool SendAndReceiveSms {
+            get {
+                return ((bool)(this["SendAndReceiveSms"]));
+            }
+        }
     }
 }

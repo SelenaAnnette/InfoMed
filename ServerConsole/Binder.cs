@@ -53,12 +53,13 @@
             NinjectKernel.Bind<INotificationManager>().To<NotificationManager>()
                 .WithConstructorArgument("startDayFromHour", Properties.Settings.Default.StartDayFromHour)
                 .WithConstructorArgument("endDayFromHour", Properties.Settings.Default.EndDayFromHour)
+                .WithConstructorArgument("reservHoursForAnsver", Properties.Settings.Default.ReservHoursForAnsver)
                 .WithConstructorArgument("reservHoursForAnsver", Properties.Settings.Default.ReservHoursForAnsver);
             NinjectKernel.Bind<INotificationService>().To<NotificationService>()
                 .WithConstructorArgument("notificationCreationFrequencyInMinutes", Properties.Settings.Default.NotificationCreationFrequencyInMinutes)
                 .WithConstructorArgument("notificationSendingFrequencyInMinutes", Properties.Settings.Default.NotificationSendingFrequencyInMinutes)
                 .WithConstructorArgument("delayStartForNotificationCreatorInSeconds", Properties.Settings.Default.DelayStartForNotificationCreatorInSeconds)
-                .WithConstructorArgument("delayStartForNotificationSenderInSeconds", Properties.Settings.Default.DelayStartForNotificationSenderInSeconds);
+                .WithConstructorArgument("sendAndReceiveSms", Properties.Settings.Default.SendAndReceiveSms);
         }
     }
 }
