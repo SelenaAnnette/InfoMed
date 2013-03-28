@@ -22,23 +22,5 @@ namespace DataLayer.Properties {
                 return defaultInstance;
             }
         }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string MainDBConnectionString {
-            get {
-                return ((string)(this["MainDBConnectionString"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string TrashDBConnectionString {
-            get {
-                return ((string)(this["TrashDBConnectionString"]));
-            }
-        }
     }
 }

@@ -36,7 +36,7 @@
 
             using (var context = new DomainContext(this.ConnectionString))
             {
-                return context.AssignedSymptoms.Include("Person").Include("Symptom").Where(query);
+                return context.AssignedSymptoms.Include("Person").Include("Symptom").Where(query).ToList();
             }                                    
         }
 

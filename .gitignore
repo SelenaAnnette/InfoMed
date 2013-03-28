@@ -15,3 +15,9 @@
 /doc_int/bin
 /doc_int/obj
 /doc_int/doc_int.csproj.user
+/ServerLogic/bin
+/ServerLogic/obj
+/ServerConsole/bin
+/ServerConsole/obj
+/SmsModule/bin
+/SmsModule/obj

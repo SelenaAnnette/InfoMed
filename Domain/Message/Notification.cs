@@ -8,6 +8,9 @@
     public class Notification : DomainBase
     {
         [Required]
+        public Guid MedicamentId { get; set; }
+
+        [Required]
         public Guid PersonId { get; set; }
 
         [Required]
@@ -15,8 +18,7 @@
 
         [DataType(DataType.MultilineText)]
         public string Text { get; set; }
-
-        [Required]
+        
         public DateTime? ExecutedDate { get; set; }
 
         [Required]

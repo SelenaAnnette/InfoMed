@@ -36,7 +36,7 @@
 
             using (var context = new DomainContext(this.ConnectionString))
             {
-                return context.PersonGroups.Include("Person").Include("Group").Where(query);
+                return context.PersonGroups.Include("Person").Include("Group").Where(query).ToList();
             }  
         }
 

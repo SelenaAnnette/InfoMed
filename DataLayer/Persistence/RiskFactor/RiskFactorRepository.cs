@@ -39,7 +39,7 @@
 
             using (var context = new DomainContext(this.ConnectionString))
             {
-                return context.RiskFactors.Include("AssignedRiskFactors").Where(query);
+                return context.RiskFactors.Include("AssignedRiskFactors").Where(query).ToList();
             }                                    
         }
 

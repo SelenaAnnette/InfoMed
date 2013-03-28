@@ -39,7 +39,7 @@
 
             using (var context = new DomainContext(this.ConnectionString))
             {
-                return context.MeasuringTypes.Where(query);
+                return context.MeasuringTypes.Where(query).ToList();
             }                                    
         }
 
