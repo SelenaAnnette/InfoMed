@@ -69,11 +69,14 @@ namespace doc_int
             GridView1.DataSource = foundPerson;
             GridView1.DataBind();
 
-            var medicamentRepo = Binder.NinjectKernel.Get<IMedicamentRepository>();
-            var getMedicament = medicamentRepo.GetAll().ToList();
-            GridView2.DataSource = getMedicament;
-            GridView2.DataBind();
+            //var medicamentRepo = Binder.NinjectKernel.Get<IMedicamentRepository>();
+           // var getMedicament = medicamentRepo.GetAll().ToList();
+           // GridView2.DataSource = getMedicament;
+            //GridView2.DataBind();
 
+
+            var MedicamentRepo = Binder.NinjectKernel.Get<IMedicamentRepository>();
+            var getMedicament = MedicamentRepo.GetAll().ToList();
         }
 
     }

@@ -9,6 +9,7 @@
     using DataLayer.Persistence.Measuring;
 
     using Ninject;
+    using DataLayer.Persistence.Medicament;
 
     class Program
     {
