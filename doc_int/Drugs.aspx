@@ -26,7 +26,7 @@
         </tr>
         <tr>
             <td style="text-align: center">
-                <asp:GridView ID="GridView1" runat="server" onrowcommand="GridView1_RowCommand" 
+                <asp:GridView ID="GridView1" runat="server" 
                     CellPadding="4" ForeColor="#333333" GridLines="None">
                     <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                     <Columns>
@@ -64,11 +64,10 @@
             <td style="text-align: center">
                 &nbsp;<br />
                 &nbsp;<br />
-                <asp:Button ID="Button1" runat="server" Text="Выписать" 
-                    onclick="Button1_Click" />
+                <asp:Button ID="Button1" runat="server" Text="Выписать" />
             </td>
             <td style="text-align: center">
-                <asp:GridView ID="GridView2" runat="server" onrowcommand="GridView2_RowCommand" 
+                <asp:GridView ID="GridView2" runat="server" 
                     CellPadding="4" ForeColor="#333333" GridLines="None">
                     <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                     <Columns>

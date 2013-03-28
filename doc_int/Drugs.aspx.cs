@@ -8,6 +8,13 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 
+using DataLayer.Persistence.Group;
+using DataLayer.Persistence.Person;
+using DataLayer.Persistence.Symptom;
+using DataLayer.Persistence.Measuring;
+using Ninject;
+using DataLayer.Persistence.Medicament;
+
 namespace doc_int
 {
     public partial class About : System.Web.UI.Page
@@ -33,34 +40,46 @@ namespace doc_int
         public string drugs_name;
         public DateTime day_for_pills;
         public TimeSpan time_for_pills;
-       
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
             var today = DateTime.Today;
             day_for_pills = DateTime.Today;
-           
+
 
 
 
 
             string sql = @"Select * from Preparat";
-            DataTable dt = GetDataTable(sql);
+            //DataTable dt = GetDataTable(sql);
 
-            GridView1.DataSource = dt;
-            GridView1.DataBind();
+           // GridView1.DataSource = dt;
+            //GridView1.DataBind();
 
             string sql2 = @"Select id,Imya as Имя,Otchestvo as Отчество, Familiya as Фамилия from Patient";
-            DataTable dt2 = GetDataTable2(sql2);
+           // DataTable dt2 = GetDataTable2(sql2);
 
-            GridView2.DataSource = dt2;
+           // GridView2.DataSource = dt2;
+           // GridView2.DataBind();
+
+
+            var personRepo = Binder.NinjectKernel.Get<IPersonRepository>();
+            var foundPerson = personRepo.GetAll().ToList();
+            GridView1.DataSource = foundPerson;
+            GridView1.DataBind();
+
+            var medicamentRepo = Binder.NinjectKernel.Get<IMedicamentRepository>();
+            var getMedicament = medicamentRepo.GetAll().ToList();
+            GridView2.DataSource = getMedicament;
             GridView2.DataBind();
-
-           
 
         }
 
+    }
+}
 
+        /*
         private DataTable GetDataTable(string sql)
         {
             DataTable dt = new DataTable();
@@ -162,3 +181,4 @@ namespace doc_int
 
     }
 }
+    */
