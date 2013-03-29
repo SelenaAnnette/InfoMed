@@ -19,68 +19,79 @@ namespace doc_int
 {
     public partial class About : System.Web.UI.Page
     {
-        public string id_ch;
-        public string name_ch;
-        public string mname_ch;
-        public string surname_ch;
-        public string symp_ch;
-        public string notif_ch;
-        public string risk_ch;
-        public string phone_ch;
-        public string email_ch;
-        public string sql;
-        public string sql2;
-        public string sql3;
-        public int day_end_num;
         public int interval;
-        public DataRow row;
-        public int id_pat;
+        public string id_patient;
+        public string id_drugs;
+        public Guid patient_guid;
+        public Guid drug_guid;
+
         public int times_in_day_num;
         public int pills_count_num;
-        public string drugs_name;
-        public DateTime day_for_pills;
-        public TimeSpan time_for_pills;
-
+        public string patient_surname;
+        public IPersonRepository personRepo = Binder.NinjectKernel.Get<IPersonRepository>();
+        public IMedicamentRepository medicamentRepo = Binder.NinjectKernel.Get<IMedicamentRepository>();
+        public IAssignedMedicamentRepository AssignedMedicamentRepo = Binder.NinjectKernel.Get<IAssignedMedicamentRepository>();
+        public AssignedMedicamentFactory AssignedMedicamentFactory = new AssignedMedicamentFactory();
 
         protected void Page_Load(object sender, EventArgs e)
         {
             var today = DateTime.Today;
-            day_for_pills = DateTime.Today;
-
-
-
-
-
-            string sql = @"Select * from Preparat";
-            //DataTable dt = GetDataTable(sql);
-
-           // GridView1.DataSource = dt;
-            //GridView1.DataBind();
-
-            string sql2 = @"Select id,Imya as Имя,Otchestvo as Отчество, Familiya as Фамилия from Patient";
-           // DataTable dt2 = GetDataTable2(sql2);
-
-           // GridView2.DataSource = dt2;
-           // GridView2.DataBind();
-
-
-            var personRepo = Binder.NinjectKernel.Get<IPersonRepository>();
+            
+            
             var foundPerson = personRepo.GetAll().ToList();
             GridView1.DataSource = foundPerson;
             GridView1.DataBind();
 
-            //var medicamentRepo = Binder.NinjectKernel.Get<IMedicamentRepository>();
-           // var getMedicament = medicamentRepo.GetAll().ToList();
-           // GridView2.DataSource = getMedicament;
-            //GridView2.DataBind();
+            
+            var getMedicament = medicamentRepo.GetAll().ToList();
+            GridView2.DataSource = getMedicament;
+            GridView2.DataBind();
 
 
-            var MedicamentRepo = Binder.NinjectKernel.Get<IMedicamentRepository>();
-            var getMedicament = MedicamentRepo.GetAll().ToList();
+
+
+        }
+
+        protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Select")
+            {
+                Int16 num = Convert.ToInt16(e.CommandArgument);
+
+                TextBox1.Text = GridView1.Rows[num].Cells[3].Text;
+                patient_surname = GridView1.Rows[num].Cells[3].Text;
+
+                id_patient=GridView1.Rows[num].Cells[4].Text;
+                Guid patient_guid = new Guid(id_patient);
+            }
+
+            
+
+        }
+
+        protected void GridView2_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Select")
+            {
+                Int16 num = Convert.ToInt16(e.CommandArgument);
+
+                TextBox2.Text = GridView2.Rows[num].Cells[2].Text;
+                id_drugs=GridView2.Rows[num].Cells[4].Text;
+                Guid drug_guid = new Guid(id_drugs);
+            }
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+
+            var AssignedMedicament = AssignedMedicamentFactory.Create(patient_guid, drug_guid, Convert.ToDouble(pill_count.Text), "unit", Convert.ToDouble(times_in_day.Text));            
+            AssignedMedicamentRepo.CreateOrUpdateEntity(AssignedMedicament);
         }
 
     }
 }
+
+
 
         /*
         private DataTable GetDataTable(string sql)
@@ -120,30 +131,7 @@ namespace doc_int
              return dt3;
          }
 
-         protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
-         {
-
-             if (e.CommandName == "Select")
-             {
-                 Int16 num = Convert.ToInt16(e.CommandArgument);
-
-                 TextBox1.Text = GridView1.Rows[num].Cells[3].Text;
-                 drugs_name = GridView1.Rows[num].Cells[3].Text;
-             }
-
-         }
-
-         protected void GridView2_RowCommand(object sender, GridViewCommandEventArgs e)
-         {
-             if (e.CommandName == "Select")
-             {
-                 Int16 num = Convert.ToInt16(e.CommandArgument);
-
-                 TextBox2.Text = GridView2.Rows[num].Cells[4].Text;
-                 id_pat = Convert.ToInt16(GridView2.Rows[num].Cells[1].Text);
-             }
-         }
-
+      
          protected void Button1_Click(object sender, EventArgs e)
          {
              sql3 = "Select * From Notificaions";
