@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace SmsModule
 {
-    class Modem
+    public class Modem : IModem
     {
         SerialPort serialPort;
         private string error_message = ""; //if error / catch
