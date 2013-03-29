@@ -25,8 +25,44 @@ namespace TestConsole.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("data source=ANDREYPC;initial catalog=InfoMedMainDB;persist security info=True;use" +
-            "r id=InfoMed;password=infomed523;multipleactiveresultsets=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("9")]
+        public int StartDayFromHour {
+            get {
+                return ((int)(this["StartDayFromHour"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("21")]
+        public int EndDayFromHour {
+            get {
+                return ((int)(this["EndDayFromHour"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        public int ReservHoursForAnsver {
+            get {
+                return ((int)(this["ReservHoursForAnsver"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public int NotificationCreationFrequencyInMinutes {
+            get {
+                return ((int)(this["NotificationCreationFrequencyInMinutes"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("data source=54.225.159.2;initial catalog=InfoMedMainDB;persist security info=True" +
+            ";user id=InfoMed;password=infomed523;multipleactiveresultsets=True")]
         public string MainDBConnectionString {
             get {
                 return ((string)(this["MainDBConnectionString"]));
@@ -35,11 +71,65 @@ namespace TestConsole.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("data source=ANDREYPC;initial catalog=InfoMedTrashDB;persist security info=True;us" +
-            "er id=InfoMed;password=infomed523;multipleactiveresultsets=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("data source=54.225.159.2;initial catalog=InfoMedTrashDB;persist security info=Tru" +
+            "e;user id=InfoMed;password=infomed523;multipleactiveresultsets=True")]
         public string TrashDBConnectionString {
             get {
                 return ((string)(this["TrashDBConnectionString"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public int NotificationSendingFrequencyInMinutes {
+            get {
+                return ((int)(this["NotificationSendingFrequencyInMinutes"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("30")]
+        public int DelayStartForNotificationCreatorInSeconds {
+            get {
+                return ((int)(this["DelayStartForNotificationCreatorInSeconds"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("60")]
+        public int DelayStartForNotificationSenderInSeconds {
+            get {
+                return ((int)(this["DelayStartForNotificationSenderInSeconds"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("30")]
+        public int DelayStartForModemCheckConnectionInSeconds {
+            get {
+                return ((int)(this["DelayStartForModemCheckConnectionInSeconds"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("30")]
+        public int PeriodOfModemCheckConnectionInSeconds {
+            get {
+                return ((int)(this["PeriodOfModemCheckConnectionInSeconds"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool SendAndReceiveSms {
+            get {
+                return ((bool)(this["SendAndReceiveSms"]));
             }
         }
     }

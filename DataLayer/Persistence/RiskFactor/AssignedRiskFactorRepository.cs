@@ -49,7 +49,7 @@
 
             using (var context = new DomainContext(this.ConnectionString))
             {                                
-                if (this.GetEntitiesByQuery(v => v.PersonId == entity.PersonId && v.RiskFactorId == entity.RiskFactorId) == null)
+                if (!this.GetEntitiesByQuery(v => v.PersonId == entity.PersonId && v.RiskFactorId == entity.RiskFactorId).Any())
                 {
                     context.AssignedRiskFactors.Add(entity);
                 }

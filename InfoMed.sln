@@ -22,6 +22,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerConsole", "ServerCons
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerLogic", "ServerLogic\ServerLogic.csproj", "{67F41138-85E9-449C-A51E-3B64B2242FC8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmsModule", "SmsModule\SmsModule.csproj", "{D10101B7-79CB-47EE-A432-E0E486A5053C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -102,6 +104,16 @@ Global
 		{67F41138-85E9-449C-A51E-3B64B2242FC8}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{67F41138-85E9-449C-A51E-3B64B2242FC8}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{67F41138-85E9-449C-A51E-3B64B2242FC8}.Release|x86.ActiveCfg = Release|Any CPU
+		{D10101B7-79CB-47EE-A432-E0E486A5053C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D10101B7-79CB-47EE-A432-E0E486A5053C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D10101B7-79CB-47EE-A432-E0E486A5053C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D10101B7-79CB-47EE-A432-E0E486A5053C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{D10101B7-79CB-47EE-A432-E0E486A5053C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D10101B7-79CB-47EE-A432-E0E486A5053C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D10101B7-79CB-47EE-A432-E0E486A5053C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D10101B7-79CB-47EE-A432-E0E486A5053C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D10101B7-79CB-47EE-A432-E0E486A5053C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{D10101B7-79CB-47EE-A432-E0E486A5053C}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

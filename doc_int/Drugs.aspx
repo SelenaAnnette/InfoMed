@@ -17,17 +17,18 @@
     <p>
     <table class="style1">
         <tr>
-            <td>
+            <td width="30%">
                 &nbsp;</td>
-            <td>
+            <td width="40%">
                 &nbsp;</td>
-            <td>
+            <td width="30%">
                 &nbsp;</td>
         </tr>
         <tr>
-            <td style="text-align: center">
-                <asp:GridView ID="GridView1" runat="server" onrowcommand="GridView1_RowCommand" 
-                    CellPadding="4" ForeColor="#333333" GridLines="None">
+            <td style="text-align: center" width="30%">
+                <asp:GridView ID="GridView1" runat="server" 
+                    CellPadding="4" ForeColor="#333333" GridLines="None" 
+                    onrowcommand="GridView1_RowCommand">
                     <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                     <Columns>
                         <asp:CommandField ShowSelectButton="True" />
@@ -44,10 +45,10 @@
                     <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
                 </asp:GridView>
             </td>
-            <td class="style2">
-                Препарат<asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+            <td class="style2" width="40%">
+                Пациент<asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
                 <br />
-                Пациент<asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+                Препарат<asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
                 <br />
                 <br />
                 Принимать препарат
@@ -55,21 +56,16 @@
                 <asp:TextBox ID="pill_count" runat="server" TextMode="Number" Width="30px">1</asp:TextBox>
 &nbsp; единице(ы)
                 <asp:TextBox ID="times_in_day" runat="server" Width="25px" TextMode="Number">2</asp:TextBox>
-&nbsp;раза в день каждый(ые)
-                <asp:TextBox ID="day_count" runat="server" TextMode="Number" Width="30px">1</asp:TextBox>
-&nbsp;дня/дней на продолжении
-                <asp:TextBox ID="day_end" runat="server" TextMode="Number" Width="30px">14</asp:TextBox>
-&nbsp;дня/дней.<br />
-            </td>
-            <td style="text-align: center">
-                &nbsp;<br />
-                &nbsp;<br />
+                &nbsp;раза в день.<br />
                 <asp:Button ID="Button1" runat="server" Text="Выписать" 
                     onclick="Button1_Click" />
             </td>
-            <td style="text-align: center">
-                <asp:GridView ID="GridView2" runat="server" onrowcommand="GridView2_RowCommand" 
-                    CellPadding="4" ForeColor="#333333" GridLines="None">
+            <td style="text-align: center" width="30%">
+                &nbsp;<br />
+                &nbsp;<br />
+                <asp:GridView ID="GridView2" runat="server" 
+                    CellPadding="4" ForeColor="#333333" GridLines="None" 
+                    onrowcommand="GridView2_RowCommand">
                     <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                     <Columns>
                         <asp:CommandField ShowSelectButton="True" />
@@ -86,11 +82,13 @@
                     <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
                 </asp:GridView>
             </td>
-        </tr>
-        <tr>
             <td>
                 &nbsp;</td>
-            <td>
+        </tr>
+        <tr>
+            <td width="30%">
+                &nbsp;</td>
+            <td width="40%">
                 <asp:Calendar ID="Calendar1" runat="server" BackColor="White" 
                     BorderColor="#3366CC" BorderWidth="1px" CellPadding="1" 
                     DayNameFormat="Shortest" Font-Names="Verdana" Font-Size="8pt" 
@@ -106,8 +104,10 @@
                     <WeekendDayStyle BackColor="#CCCCFF" />
                 </asp:Calendar>
             </td>
-            <td>
+            <td width="30%">
                 &nbsp;</td>
+            <td>
+            </td>
         </tr>
     </table>
 </p>

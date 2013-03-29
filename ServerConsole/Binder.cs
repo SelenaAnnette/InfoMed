@@ -13,6 +13,8 @@
     using ServerLogic.Logger;
     using ServerLogic.Notification;
 
+    using SmsModule;
+
     public static class Binder
     {
         public static readonly IKernel NinjectKernel = new StandardKernel();
@@ -28,6 +30,7 @@
             var trashDataBaseConnectionString = Properties.Settings.Default.TrashDBConnectionString;
 
             NinjectKernel.Bind<IPersonRepository>().To<PersonRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
+            NinjectKernel.Bind<IPersonContactRepository>().To<PersonContactRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
             NinjectKernel.Bind<IGroupRepository>().To<GroupRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
             NinjectKernel.Bind<ISymptomRepository>().To<SymptomRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
             NinjectKernel.Bind<IRiskFactorRepository>().To<RiskFactorRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
@@ -49,8 +52,20 @@
             NinjectKernel.Bind<IPersonSymptomRepository>().To<PersonSymptomRepository>().WithConstructorArgument("connectionString", trashDataBaseConnectionString);
 
             NinjectKernel.Bind<ILogger>().To<ConsoleLogger>();
-            NinjectKernel.Bind<INotificationManager>().To<NotificationManager>().WithConstructorArgument("startDayFromHour", Properties.Settings.Default.StartDayFromHour).WithConstructorArgument("endDayFromHour", Properties.Settings.Default.EndDayFromHour).WithConstructorArgument("reservHoursForAnsver", Properties.Settings.Default.ReservHoursForAnsver);
-            NinjectKernel.Bind<INotificationService>().To<NotificationService>().WithConstructorArgument("notificationCreationFrequencyInMinutes", Properties.Settings.Default.NotificationCreationFrequencyInMinutes);
+            NinjectKernel.Bind<INotificationManager>().To<NotificationManager>()
+                .WithConstructorArgument("startDayFromHour", Properties.Settings.Default.StartDayFromHour)
+                .WithConstructorArgument("endDayFromHour", Properties.Settings.Default.EndDayFromHour)
+                .WithConstructorArgument("reservHoursForAnsver", Properties.Settings.Default.ReservHoursForAnsver)                
+                .WithConstructorArgument("sendAndReceiveSms", Properties.Settings.Default.SendAndReceiveSms)
+                .WithConstructorArgument("delayStartForModemCheckConnectionInSeconds", Properties.Settings.Default.DelayStartForModemCheckConnectionInSeconds)
+                .WithConstructorArgument("periodOfModemCheckConnectionInSeconds", Properties.Settings.Default.PeriodOfModemCheckConnectionInSeconds);
+            NinjectKernel.Bind<INotificationService>().To<NotificationService>()
+                .WithConstructorArgument("notificationCreationFrequencyInMinutes", Properties.Settings.Default.NotificationCreationFrequencyInMinutes)
+                .WithConstructorArgument("notificationSendingFrequencyInMinutes", Properties.Settings.Default.NotificationSendingFrequencyInMinutes)
+                .WithConstructorArgument("delayStartForNotificationCreatorInSeconds", Properties.Settings.Default.DelayStartForNotificationCreatorInSeconds)
+                .WithConstructorArgument("delayStartForNotificationSenderInSeconds", Properties.Settings.Default.DelayStartForNotificationSenderInSeconds);
+
+            NinjectKernel.Bind<IModem>().To<Modem>();
         }
     }
 }

@@ -6,9 +6,14 @@
 
     public class RiskFactorFactory
     {
-        public RiskFactor Create(Guid id, string name)
+        public RiskFactor Create(Guid id, string title, string measuring)
         {
-            return new RiskFactor { Id = id, Name = name, Description = string.Empty };
+            return new RiskFactor { Id = id, Title = title, Measuring = measuring, Description = string.Empty };
+        }
+
+        public RiskFactor Create(Guid id, string title, string measuring, string description)
+        {
+            return new RiskFactor { Id = id, Title = title, Measuring = measuring, Description = description };
         }
     }
 }

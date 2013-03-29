@@ -10,5 +10,10 @@
         {
             return new Medicament { Id = id, Name = name, Code = code, Description = string.Empty };
         }
+
+        public Medicament Create(Guid id, string name, string code, string description)
+        {
+            return new Medicament { Id = id, Name = name, Code = code, Description = description };
+        }
     }
 }

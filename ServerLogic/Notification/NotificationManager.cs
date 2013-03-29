@@ -1,22 +1,28 @@
 ﻿namespace ServerLogic.Notification
 {
-    using System;
-    using System.Collections.Generic;
+    using System;    
     using System.Linq;
+    using System.Runtime.InteropServices;
+    using System.Threading;
 
     using DataLayer.Persistence.Medicament;
     using DataLayer.Persistence.Message;
+    using DataLayer.Persistence.Person;
 
-    using Domain.Medicament;
-    using Domain.Message;
+    using Domain.Medicament;    
+    using Domain.Message;    
 
     using ServerLogic.Logger;
+
+    using SmsModule;
 
     public class NotificationManager : INotificationManager
     {
         private readonly IAssignedMedicamentRepository AssignedMedicamentRepository;
 
-        private readonly INotificationRepository NotificationRepository;        
+        private readonly INotificationRepository NotificationRepository;
+
+        private readonly IPersonContactRepository PersonContactRepository;        
 
         private readonly NotificationFactory NotificationFactory;
 
@@ -28,25 +34,44 @@
 
         private readonly int ReservHoursForAnsver;
 
-        public NotificationManager(IAssignedMedicamentRepository assignedMedicamentRepository, ILogger logger, INotificationRepository notificationRepository, int startDayFromHour, int endDayFromHour, int reservHoursForAnsver)
+        private readonly bool SendAndReceiveSms;
+
+        private readonly IModem Modem;
+
+        private readonly Timer ModemTimer;
+
+        private readonly int DelayStartForModemCheckConnectionInSeconds;
+
+        private readonly int PeriodOfModemCheckConnectionInSeconds;
+
+        public NotificationManager(IAssignedMedicamentRepository assignedMedicamentRepository, ILogger logger,
+            INotificationRepository notificationRepository, IPersonContactRepository personContactRepository,
+            IModem modem, int startDayFromHour, int endDayFromHour, int reservHoursForAnsver, 
+            bool sendAndReceiveSms, int delayStartForModemCheckConnectionInSeconds, int periodOfModemCheckConnectionInSeconds)
         {
             this.AssignedMedicamentRepository = assignedMedicamentRepository;
             this.NotificationRepository = notificationRepository;            
+            this.PersonContactRepository = personContactRepository;            
             this.Logger = logger;
             this.NotificationFactory = new NotificationFactory();
             this.StartDayFromHour = startDayFromHour;
             this.EndDayFromHour = endDayFromHour;
             this.ReservHoursForAnsver = reservHoursForAnsver;
+            this.SendAndReceiveSms = sendAndReceiveSms;
+            this.Modem = modem;
+            this.DelayStartForModemCheckConnectionInSeconds = delayStartForModemCheckConnectionInSeconds;
+            this.PeriodOfModemCheckConnectionInSeconds = periodOfModemCheckConnectionInSeconds;
+
+            if (this.SendAndReceiveSms)
+            {
+                this.InitializeModem();
+                this.ModemTimer = new Timer(this.CheckModemConnection, this, TimeSpan.FromSeconds(this.DelayStartForModemCheckConnectionInSeconds), TimeSpan.FromSeconds(this.PeriodOfModemCheckConnectionInSeconds));
+            }            
         }
 
-        public IEnumerable<Notification> GetAllActiveNotifications()
+        ~NotificationManager()
         {
-            return this.NotificationRepository.GetEntitiesByQuery(v => v.IsActive);
-        }
-
-        public IEnumerable<Notification> GetActiveNotificationsByPersonId(Guid personId)
-        {
-            return this.NotificationRepository.GetEntitiesByQuery(v => v.IsActive && v.PersonId == personId);
+            this.ModemTimer.Dispose();
         }
 
         public void CreateNewNotifications()
@@ -66,11 +91,35 @@
             });            
         }
 
+        public void SendAllActiveNotifications()
+        {
+            var notifications =
+                this.NotificationRepository.GetEntitiesByQuery(v => v.IsActive && v.SendingDate <= DateTime.Now);
+            notifications.AsParallel().ForAll(this.SendNotification);
+        }
+
         public void CloseNatificationById(Guid notificationId)
         {
             var notification = this.NotificationRepository.GetEntityById(notificationId);
             notification.IsActive = false;
+            notification.ExecutedDate = DateTime.Now;
             this.NotificationRepository.CreateOrUpdateEntity(notification);
+        }
+
+        private void InitializeModem()
+        {
+            if (!this.Modem.Initialize())
+            {
+                throw new COMException("Modem is not initialized");
+            }
+        }
+
+        private void CheckModemConnection(object state)
+        {
+            if (!this.Modem.CheckConnection())
+            {
+                this.InitializeModem();
+            }
         }
 
         private void CreateNewNotification(AssignedMedicament assignedMedicament)
@@ -104,7 +153,7 @@
                         assignedMedicament.PersonId,
                         assignedMedicament.MedicamentId,
                         sendingDate,
-                        this.GetNotificationText(assignedMedicament));
+                        this.GetNotificationMessage(assignedMedicament));
             this.NotificationRepository.CreateOrUpdateEntity(newNotification);
         }
 
@@ -139,18 +188,18 @@
             var sendingDate = lastDate.AddMinutes(periodInMinutes);
             if (sendingDate.Hour < this.StartDayFromHour)
             {
-                return sendingDate = new DateTime(sendingDate.Year, sendingDate.Month, sendingDate.Day, 9, 0, 0);
+                return new DateTime(sendingDate.Year, sendingDate.Month, sendingDate.Day, this.StartDayFromHour, 0, 0);
             }
 
             if (sendingDate.Hour >= this.EndDayFromHour + this.ReservHoursForAnsver)
             {
-                return sendingDate = new DateTime(sendingDate.Year, sendingDate.Month, sendingDate.Day + 1, 9, 0, 0);
+                return new DateTime(sendingDate.Year, sendingDate.Month, sendingDate.Day + 1, this.StartDayFromHour, 0, 0);
             }
             
-            return sendingDate = new DateTime(sendingDate.Year, sendingDate.Month, sendingDate.Day, sendingDate.Hour, sendingDate.Minute, 0);            
+            return new DateTime(sendingDate.Year, sendingDate.Month, sendingDate.Day, sendingDate.Hour, sendingDate.Minute, 0);            
         }
 
-        private string GetNotificationText(AssignedMedicament assignedMedicament)
+        private string GetNotificationMessage(AssignedMedicament assignedMedicament)
         {
             return string.Format(
                 "Примите {0} {1} лекарства {2}",
@@ -158,5 +207,15 @@
                 assignedMedicament.Measure,
                 assignedMedicament.Medicament.Name);
         }
+
+        private void SendNotification(Notification notification)
+        {
+            if (this.SendAndReceiveSms)
+            {
+                var personContacts = this.PersonContactRepository.GetEntitiesByQuery(
+                v => v.PersonId == notification.PersonId && v.ContactType.Title == "Mobile");                
+                personContacts.AsParallel().ForAll(v => this.Modem.SendSms(v.Value, notification.Text));
+            }            
+        }        
     }
 }
