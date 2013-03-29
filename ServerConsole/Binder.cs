@@ -13,6 +13,8 @@
     using ServerLogic.Logger;
     using ServerLogic.Notification;
 
+    using SmsModule;
+
     public static class Binder
     {
         public static readonly IKernel NinjectKernel = new StandardKernel();
@@ -60,6 +62,10 @@
                 .WithConstructorArgument("notificationSendingFrequencyInMinutes", Properties.Settings.Default.NotificationSendingFrequencyInMinutes)
                 .WithConstructorArgument("delayStartForNotificationCreatorInSeconds", Properties.Settings.Default.DelayStartForNotificationCreatorInSeconds)
                 .WithConstructorArgument("sendAndReceiveSms", Properties.Settings.Default.SendAndReceiveSms);
+
+            NinjectKernel.Bind<IModem>().To<Modem>()
+                .WithConstructorArgument("delayStartForModemCheckConnectionInSeconds", Properties.Settings.Default.DelayStartForModemCheckConnectionInSeconds)
+                .WithConstructorArgument("periodOfModemCheckConnectionInSeconds", Properties.Settings.Default.PeriodOfModemCheckConnectionInSeconds);
         }
     }
 }

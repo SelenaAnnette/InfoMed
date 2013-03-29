@@ -99,7 +99,16 @@ namespace ServerConsole.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool SendAndReceiveSms {
+            get {
+                return ((bool)(this["SendAndReceiveSms"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("60")]
         public int DelayStartForNotificationSenderInSeconds {
             get {
                 return ((int)(this["DelayStartForNotificationSenderInSeconds"]));
@@ -108,10 +117,19 @@ namespace ServerConsole.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool SendAndReceiveSms {
+        [global::System.Configuration.DefaultSettingValueAttribute("30")]
+        public int DelayStartForModemCheckConnectionInSeconds {
             get {
-                return ((bool)(this["SendAndReceiveSms"]));
+                return ((int)(this["DelayStartForModemCheckConnectionInSeconds"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("30")]
+        public int PeriodOfModemCheckConnectionInSeconds {
+            get {
+                return ((int)(this["PeriodOfModemCheckConnectionInSeconds"]));
             }
         }
     }

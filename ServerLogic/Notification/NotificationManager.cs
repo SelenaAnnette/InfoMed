@@ -3,6 +3,8 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Runtime.InteropServices;
+    using System.Threading;
 
     using DataLayer.Persistence.Medicament;
     using DataLayer.Persistence.Message;
@@ -12,6 +14,8 @@
     using Domain.Message;    
 
     using ServerLogic.Logger;
+
+    using SmsModule;
 
     public class NotificationManager : INotificationManager
     {
@@ -33,9 +37,18 @@
 
         private readonly bool SendAndReceiveSms;
 
+        private readonly IModem Modem;
+
+        private readonly Timer ModemTimer;
+
+        private readonly int DelayStartForModemCheckConnectionInSeconds;
+
+        private readonly int PeriodOfModemCheckConnectionInSeconds;
+
         public NotificationManager(IAssignedMedicamentRepository assignedMedicamentRepository, ILogger logger, 
             INotificationRepository notificationRepository, int startDayFromHour, int endDayFromHour, int reservHoursForAnsver,
-            IPersonContactRepository personContactRepository, bool sendAndReceiveSms)
+            IPersonContactRepository personContactRepository, bool sendAndReceiveSms, IModem modem,
+            int delayStartForModemCheckConnectionInSeconds, int periodOfModemCheckConnectionInSeconds)
         {
             this.AssignedMedicamentRepository = assignedMedicamentRepository;
             this.NotificationRepository = notificationRepository;            
@@ -46,7 +59,21 @@
             this.EndDayFromHour = endDayFromHour;
             this.ReservHoursForAnsver = reservHoursForAnsver;
             this.SendAndReceiveSms = sendAndReceiveSms;
-        }        
+            this.Modem = modem;
+            this.DelayStartForModemCheckConnectionInSeconds = delayStartForModemCheckConnectionInSeconds;
+            this.PeriodOfModemCheckConnectionInSeconds = periodOfModemCheckConnectionInSeconds;
+
+            if (this.SendAndReceiveSms)
+            {
+                this.InitializeModem();
+                this.ModemTimer = new Timer(this.CheckModemConnection, this, TimeSpan.FromSeconds(this.DelayStartForModemCheckConnectionInSeconds), TimeSpan.FromSeconds(this.PeriodOfModemCheckConnectionInSeconds));
+            }            
+        }
+
+        ~NotificationManager()
+        {
+            this.ModemTimer.Dispose();
+        }
 
         public void CreateNewNotifications()
         {
@@ -78,6 +105,22 @@
             notification.IsActive = false;
             notification.ExecutedDate = DateTime.Now;
             this.NotificationRepository.CreateOrUpdateEntity(notification);
+        }
+
+        private void InitializeModem()
+        {
+            if (!this.Modem.Initialize())
+            {
+                throw new COMException("Modem is not initialized");
+            }
+        }
+
+        private void CheckModemConnection(object state)
+        {
+            if (!this.Modem.CheckConnection())
+            {
+                this.InitializeModem();
+            }
         }
 
         private void CreateNewNotification(AssignedMedicament assignedMedicament)
@@ -171,9 +214,8 @@
             if (this.SendAndReceiveSms)
             {
                 var personContacts = this.PersonContactRepository.GetEntitiesByQuery(
-                v => v.PersonId == notification.PersonId && v.ContactType.Title == "Mobile");
-                //TODO Replace sendAbstract to Send sms method
-                //            personContacts.AsParallel().ForAll(v => sendAbstract(v.Value));
+                v => v.PersonId == notification.PersonId && v.ContactType.Title == "Mobile");                
+                personContacts.AsParallel().ForAll(v => this.Modem.SendSms(v.Value, notification.Text));
             }            
         }        
     }
