@@ -21,7 +21,7 @@ namespace doc_int
     {
         public int interval;
         public string id_patient;
-        public string id_drugs;
+        public Guid id_drugs;
         public Guid patient_guid;
         public Guid drug_guid;
 
@@ -57,27 +57,21 @@ namespace doc_int
             if (e.CommandName == "Select")
             {
                 Int16 num = Convert.ToInt16(e.CommandArgument);
-
                 TextBox1.Text = GridView1.Rows[num].Cells[3].Text;
                 patient_surname = GridView1.Rows[num].Cells[3].Text;
-
                 id_patient=GridView1.Rows[num].Cells[4].Text;
                 Guid patient_guid = new Guid(id_patient);
-            }
-
-            
-
+            }         
         }
 
         protected void GridView2_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "Select")
             {
-                Int16 num = Convert.ToInt16(e.CommandArgument);
-
-                TextBox2.Text = GridView2.Rows[num].Cells[2].Text;
-                id_drugs=GridView2.Rows[num].Cells[4].Text;
-                Guid drug_guid = new Guid(id_drugs);
+                Int16 num2 = Convert.ToInt16(e.CommandArgument);
+                TextBox2.Text = GridView2.Rows[num2].Cells[2].Text;
+                id_drugs=Guid.Parse(GridView2.Rows[num2].Cells[4].Text);
+                //Guid drug_guid = new Guid(id_drugs);
             }
         }
 
