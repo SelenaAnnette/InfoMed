@@ -24,14 +24,15 @@
                 <asp:Label ID="Label_drugs" runat="server" Text="Препараты"></asp:Label>
             </td>
             <td> 
-                <asp:CheckBoxList ID="CheckBoxList_drugs" runat="server">
+                <asp:CheckBoxList ID="CheckBoxList_drugs" runat="server" 
+                    DataSourceID="SqlDataSource1" DataTextField="Name" DataValueField="Name">
                     <asp:ListItem>Препарат1</asp:ListItem>
                     <asp:ListItem>Препарат2</asp:ListItem>
                     <asp:ListItem>Препарат3</asp:ListItem>
                 </asp:CheckBoxList>
                 <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
-                    ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
-                    SelectCommand="SELECT [Препараты] FROM [Patients]"></asp:SqlDataSource>
+                    ConnectionString="<%$ ConnectionStrings:InfoMedMainDBConnectionString2 %>" 
+                    SelectCommand="SELECT [Name] FROM [Medicaments] ORDER BY [Name]"></asp:SqlDataSource>
             </td>
         </tr>
     </table>

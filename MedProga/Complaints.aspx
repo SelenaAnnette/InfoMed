@@ -38,7 +38,8 @@
             <td> </td>
             <td>
                 <asp:CheckBoxList ID="CheckBoxList_symptoms" runat="server" AutoPostBack="True" 
-                    RepeatColumns="4">
+                    RepeatColumns="4" DataSourceID="SqlDataSource1" DataTextField="Name" 
+                    DataValueField="Name">
                     <asp:ListItem>Апатия</asp:ListItem>
                     <asp:ListItem>Беспокойство, тревога</asp:ListItem>
                     <asp:ListItem>Бессонница (Нарушение сна)</asp:ListItem>
@@ -108,6 +109,10 @@
                     <asp:ListItem>Шум (звон) в ушах (Снижение слуха)</asp:ListItem>
                     <asp:ListItem>Эмоциональная лабильность (Слабость)</asp:ListItem>
                 </asp:CheckBoxList>
+                <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
+                    ConnectionString="<%$ ConnectionStrings:InfoMedMainDBConnectionString %>" 
+                    SelectCommand="SELECT [Name] FROM [Symptoms] ORDER BY [Name]">
+                </asp:SqlDataSource>
             </td>
         </tr>
     </table>
