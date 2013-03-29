@@ -49,7 +49,7 @@
 
             using (var context = new DomainContext(this.ConnectionString))
             {
-                if (this.GetEntitiesByQuery(v => v.GroupId == entity.GroupId && v.PersonId == entity.PersonId) == null)
+                if (!this.GetEntitiesByQuery(v => v.GroupId == entity.GroupId && v.PersonId == entity.PersonId).Any())
                 {
                     context.PersonGroups.Add(entity);
                 }
