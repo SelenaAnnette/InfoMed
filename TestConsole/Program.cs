@@ -9,7 +9,9 @@
 
     using Ninject;
 
-    using ServerLogic.Notification;    
+    using ServerLogic.Notification;
+
+    using SmsModule;
 
     class Program
     {
@@ -53,6 +55,9 @@
             {
                 notificationManager.SendAllActiveNotifications();
                 Console.WriteLine("Notification was sended");
+                var modem = Binder.NinjectKernel.Get<IModem>();
+                modem.Initialize();
+                modem.SendSms("89042114372", "Test sms");
             }
             catch (Exception ex)
             {
