@@ -28,7 +28,7 @@
                     </Columns>
                 </asp:GridView>
                 <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
-                    ConnectionString="<%$ ConnectionStrings:InfoMedTrashDBConnectionString %>" 
+                    ConnectionString="<%$ ConnectionStrings:InfoMedTrashDBConnectionString2_remote %>" 
                     
                     
                     SelectCommand="SELECT * FROM [PersonMeasuring]"></asp:SqlDataSource>

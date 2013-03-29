@@ -31,7 +31,7 @@
                     <asp:ListItem>Препарат3</asp:ListItem>
                 </asp:CheckBoxList>
                 <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
-                    ConnectionString="<%$ ConnectionStrings:InfoMedMainDBConnectionString2 %>" 
+                    ConnectionString="<%$ ConnectionStrings:InfoMedMainDBConnectionString3_remote %>" 
                     SelectCommand="SELECT [Name] FROM [Medicaments] ORDER BY [Name]"></asp:SqlDataSource>
             </td>
         </tr>

@@ -50,19 +50,19 @@ namespace MedProga
                 var personsRepo = Binder.NinjectKernel.Get<IPersonRepository>();
                 var personMeasuringRepo = Binder.NinjectKernel.Get<IPersonMeasuringRepository>();
                 var personMeasuringFactory = new PersonMeasuringFactory();
-                var personId = personsRepo.GetEntitiesByQuery(p => p.LastName == "Smith").First().Id;
+                var personId = personsRepo.GetEntitiesByQuery(p => p.LastName == "LastName").First().Id;
                 ////Сохранение САД
-                var sadId = measuringTypeRepo.GetEntitiesByQuery(m => m.Title == "САД").First().Id;
+                var sadId = measuringTypeRepo.GetEntitiesByQuery(m => m.Title == "Систолическое АД").First().Id;
                 var sad = personMeasuringFactory.Create(Guid.NewGuid(), sadId, personId, DateTime.Now, 0);
                 sad.Value = Convert.ToDouble(TextBox_sad.Text);
                 personMeasuringRepo.CreateOrUpdateEntity(sad);
                 ////Сохранение ДАД
-                var dadId = measuringTypeRepo.GetEntitiesByQuery(m => m.Title == "ДАД").First().Id;
+                var dadId = measuringTypeRepo.GetEntitiesByQuery(m => m.Title == "Диастолическое АД").First().Id;
                 var dad = personMeasuringFactory.Create(Guid.NewGuid(), dadId, personId, DateTime.Now, 0);
                 dad.Value = Convert.ToDouble(TextBox_dad.Text);
                 personMeasuringRepo.CreateOrUpdateEntity(dad);
                 ////Сохранение ЧСС
-                var chssId = measuringTypeRepo.GetEntitiesByQuery(m => m.Title == "ЧСС").First().Id;
+                var chssId = measuringTypeRepo.GetEntitiesByQuery(m => m.Title == "Частота сердечных сокращений").First().Id;
                 var chss = personMeasuringFactory.Create(Guid.NewGuid(), chssId, personId, DateTime.Now, 0);
                 chss.Value = Convert.ToDouble(TextBox_chss.Text);
                 personMeasuringRepo.CreateOrUpdateEntity(chss);
@@ -72,12 +72,12 @@ namespace MedProga
                 weight.Value = Convert.ToDouble(TextBox_weight.Text);
                 personMeasuringRepo.CreateOrUpdateEntity(weight);
                 ////Сохранение Окр_талии
-                var taliyaId = measuringTypeRepo.GetEntitiesByQuery(m => m.Title == "Окр_талии").First().Id;
+                var taliyaId = measuringTypeRepo.GetEntitiesByQuery(m => m.Title == "Окружность талии").First().Id;
                 var taliya = personMeasuringFactory.Create(Guid.NewGuid(), taliyaId, personId, DateTime.Now, 0);
                 taliya.Value = Convert.ToDouble(TextBox_taliya.Text);
                 personMeasuringRepo.CreateOrUpdateEntity(taliya);
                 ////Сохранение Окр_бедер
-                var bedraId = measuringTypeRepo.GetEntitiesByQuery(m => m.Title == "Окр_бедер").First().Id;
+                var bedraId = measuringTypeRepo.GetEntitiesByQuery(m => m.Title == "Окружность бедер").First().Id;
                 var bedra = personMeasuringFactory.Create(Guid.NewGuid(), bedraId, personId, DateTime.Now, 0);
                 bedra.Value = Convert.ToDouble(TextBox_bedra.Text);
                 personMeasuringRepo.CreateOrUpdateEntity(bedra);
