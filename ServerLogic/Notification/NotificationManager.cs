@@ -1,7 +1,6 @@
 ﻿namespace ServerLogic.Notification
 {
-    using System;
-    using System.Collections.Generic;
+    using System;    
     using System.Linq;
     using System.Runtime.InteropServices;
     using System.Threading;
@@ -45,10 +44,10 @@
 
         private readonly int PeriodOfModemCheckConnectionInSeconds;
 
-        public NotificationManager(IAssignedMedicamentRepository assignedMedicamentRepository, ILogger logger, 
-            INotificationRepository notificationRepository, int startDayFromHour, int endDayFromHour, int reservHoursForAnsver,
-            IPersonContactRepository personContactRepository, bool sendAndReceiveSms, IModem modem,
-            int delayStartForModemCheckConnectionInSeconds, int periodOfModemCheckConnectionInSeconds)
+        public NotificationManager(IAssignedMedicamentRepository assignedMedicamentRepository, ILogger logger,
+            INotificationRepository notificationRepository, IPersonContactRepository personContactRepository,
+            IModem modem, int startDayFromHour, int endDayFromHour, int reservHoursForAnsver, 
+            bool sendAndReceiveSms, int delayStartForModemCheckConnectionInSeconds, int periodOfModemCheckConnectionInSeconds)
         {
             this.AssignedMedicamentRepository = assignedMedicamentRepository;
             this.NotificationRepository = notificationRepository;            

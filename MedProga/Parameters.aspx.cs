@@ -9,78 +9,81 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+using DataLayer.Persistence.Measuring;
+using DataLayer.Persistence.Person;
+
 namespace MedProga
 {
+    using Ninject;
+
     public partial class Parameters : System.Web.UI.Page
     {
-        public string sql;
-        public DataTable dataTable;
-        public DataRow row;
-        public SqlDataAdapter dataAdapter;
-
         protected void Page_Load(object sender, EventArgs e)
         {
             DateTime dt = new DateTime();
             dt = DateTime.Now;
-            TextBox_date.Text = dt.Day.ToString() +"/"+dt.Month.ToString() +"/"+dt.Year.ToString();
+            //TextBox_date.Text = dt.Day.ToString() + "/" + dt.Month.ToString() + "/" + dt.Year.ToString();
+            TextBox_date.Text=dt.ToString();
+            var measuringTypeRepo = Binder.NinjectKernel.Get<IMeasuringTypeRepository>();
         }
+
+       //public void saving(string personSurname, string parName, TextBox tb)
+        //{
+        //    var personsRepo = Binder.NinjectKernel.Get<IPersonRepository>();
+        //    var measuringTypeRepo = Binder.NinjectKernel.Get<IMeasuringTypeRepository>();
+        //    var personMeasuringRepo = Binder.NinjectKernel.Get<IPersonMeasuringRepository>();
+        //    var personMeasuringFactory = new PersonMeasuringFactory();
+        //    var personId = personsRepo.GetEntitiesByQuery(p => p.LastName == personSurname).First().Id;
+        //    var parId = measuringTypeRepo.GetEntitiesByQuery(m => m.Title == parName).First().Id;
+        //    var parameter = personMeasuringFactory.Create(Guid.NewGuid(), parId, personId, DateTime.Now, 0);
+        //    parameter.Value = Convert.ToDouble(tb.Text);
+        //    personMeasuringRepo.CreateOrUpdateEntity(sad);
+        //}
         
-        public void zapros(string sql)
-        {
-            try
-            {
-                StreamReader strrd = new StreamReader("S:/ВГТУ/5 курс/9 семестр/Диплом/Диплом1/MedProga/conn1.txt");
-                string cs = strrd.ReadLine();
-                SqlConnection conn = new SqlConnection(cs);
-                conn.Open();
-                SqlCommand command = new SqlCommand(sql, conn);
-                dataAdapter = new SqlDataAdapter(command);
-                SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dataAdapter);
-                dataTable = new DataTable();
-                dataAdapter.Fill(dataTable);
-                conn.Close();
-            }
-            catch
-            {
-            }
-
-        }
-
         public void Button_parameters_Click(object sender, EventArgs e)
         {
-            if ((TextBox_date.Text != "") && (TextBox_sad.Text != "") && (TextBox_dad.Text != "") && (TextBox_chss.Text != "") && (TextBox_weight.Text != "") && (TextBox_bedra.Text != "") && (TextBox_taliya.Text != ""))
+            if ((TextBox_date.Text != "") && (TextBox_sad.Text != "") && (TextBox_dad.Text != "")
+                && (TextBox_chss.Text != "") && (TextBox_weight.Text != "") && (TextBox_bedra.Text != "")
+                && (TextBox_taliya.Text != ""))
             {
-                sql = "Select * FROM Parameters WHERE Дата LIKE'" + TextBox_date.Text + "' AND Время_суток LIKE'" + DropDownList1.SelectedValue + "'";
-                zapros(sql);
-                if (dataTable.Rows.Count == 0)
-                {
-                    row = dataTable.NewRow();
-                    row["Дата"] = TextBox_date.Text;
-                    row["Время_суток"] = DropDownList1.Text;
-                    row["САД"] = TextBox_sad.Text;
-                    row["ДАД"] = TextBox_dad.Text;
-                    row["ЧСС"] = TextBox_chss.Text;
-                    row["Вес"] = TextBox_weight.Text;
-                    row["Окр_бедер"] = TextBox_bedra.Text;
-                    row["Окр_талии"] = TextBox_taliya.Text;
-                    row["id_пац"] = 1;
-                    try
-                    {
-                        dataTable.Rows.Add(row);
-                        dataAdapter.Update(dataTable);
-                    }
-                    catch
-                    {
-
-                    }
-
-                }
+                var measuringTypeRepo = Binder.NinjectKernel.Get<IMeasuringTypeRepository>();
+                var personsRepo = Binder.NinjectKernel.Get<IPersonRepository>();
+                var personMeasuringRepo = Binder.NinjectKernel.Get<IPersonMeasuringRepository>();
+                var personMeasuringFactory = new PersonMeasuringFactory();
+                var personId = personsRepo.GetEntitiesByQuery(p => p.LastName == "Smith").First().Id;
+                ////Сохранение САД
+                var sadId = measuringTypeRepo.GetEntitiesByQuery(m => m.Title == "САД").First().Id;
+                var sad = personMeasuringFactory.Create(Guid.NewGuid(), sadId, personId, DateTime.Now, 0);
+                sad.Value = Convert.ToDouble(TextBox_sad.Text);
+                personMeasuringRepo.CreateOrUpdateEntity(sad);
+                ////Сохранение ДАД
+                var dadId = measuringTypeRepo.GetEntitiesByQuery(m => m.Title == "ДАД").First().Id;
+                var dad = personMeasuringFactory.Create(Guid.NewGuid(), dadId, personId, DateTime.Now, 0);
+                dad.Value = Convert.ToDouble(TextBox_dad.Text);
+                personMeasuringRepo.CreateOrUpdateEntity(dad);
+                ////Сохранение ЧСС
+                var chssId = measuringTypeRepo.GetEntitiesByQuery(m => m.Title == "ЧСС").First().Id;
+                var chss = personMeasuringFactory.Create(Guid.NewGuid(), chssId, personId, DateTime.Now, 0);
+                chss.Value = Convert.ToDouble(TextBox_chss.Text);
+                personMeasuringRepo.CreateOrUpdateEntity(chss);
+                ////Сохранение Вес
+                var weightId = measuringTypeRepo.GetEntitiesByQuery(m => m.Title == "Вес").First().Id;
+                var weight = personMeasuringFactory.Create(Guid.NewGuid(), weightId, personId, DateTime.Now, 0);
+                weight.Value = Convert.ToDouble(TextBox_weight.Text);
+                personMeasuringRepo.CreateOrUpdateEntity(weight);
+                ////Сохранение Окр_талии
+                var taliyaId = measuringTypeRepo.GetEntitiesByQuery(m => m.Title == "Окр_талии").First().Id;
+                var taliya = personMeasuringFactory.Create(Guid.NewGuid(), taliyaId, personId, DateTime.Now, 0);
+                taliya.Value = Convert.ToDouble(TextBox_taliya.Text);
+                personMeasuringRepo.CreateOrUpdateEntity(taliya);
+                ////Сохранение Окр_бедер
+                var bedraId = measuringTypeRepo.GetEntitiesByQuery(m => m.Title == "Окр_бедер").First().Id;
+                var bedra = personMeasuringFactory.Create(Guid.NewGuid(), bedraId, personId, DateTime.Now, 0);
+                bedra.Value = Convert.ToDouble(TextBox_bedra.Text);
+                personMeasuringRepo.CreateOrUpdateEntity(bedra);
             }
-            else
-            {
-            }
+
+
         }
-
-                
     }
 }

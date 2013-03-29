@@ -1,55 +1,68 @@
 ﻿namespace TestConsole
 {
     using System;
-    using System.Linq;
+    using System.Linq;    
 
-    using DataLayer.Persistence.Group;
     using DataLayer.Persistence.Medicament;
+    using DataLayer.Persistence.Message;
     using DataLayer.Persistence.Person;
-    using DataLayer.Persistence.Symptom;
-    using DataLayer.Persistence.Measuring;
 
     using Ninject;
+
+    using ServerLogic.Notification;    
 
     class Program
     {
         static void Main(string[] args)
         {
-            var personRepo = Binder.NinjectKernel.Get<IPersonRepository>();
-            var person = personRepo.GetAll().ToList().Last();
-            var medicamentRepo = Binder.NinjectKernel.Get<IMedicamentRepository>();
-            var medicament = medicamentRepo.GetAll().ToList().First();
-            var assignedMedicamentRepo = Binder.NinjectKernel.Get<IAssignedMedicamentRepository>();
-            var asignedMedicamentFactory = new AssignedMedicamentFactory();
-            var assignedMedicament = asignedMedicamentFactory.Create(person.Id, medicament.Id, 1, "доза", 0.33);
-            assignedMedicamentRepo.CreateOrUpdateEntity(assignedMedicament);
-            var foundMedicament = assignedMedicamentRepo.GetEntitiesByQuery(v => v.PersonId == person.Id && v.MedicamentId == medicament.Id);
-//            var personFactory = new PersonFactory();
-//            var person = personFactory.Create(Guid.NewGuid());
-//            person.FirstName = "FirstName";
-//            person.LastName = "LastName";
-//            person.MiddleName = "MiddleName";
-//            personRepo.CreateOrUpdateEntity(person);
-//            var groupRepo = Binder.NinjectKernel.Get<IGroupRepository>();
-//            var groupFactory = new GroupFactory();
-//            var group = groupFactory.Create(Guid.NewGuid());
-//            group.Name = "Admins";
-//            groupRepo.CreateOrUpdateEntity(group);
-//            var foundGroup = groupRepo.GetEntitiesByQuery(v => v.Name == "Admins").ToList();
-//            var symptomRepo = Binder.NinjectKernel.Get<ISymptomRepository>();
-//            var symptomFactory = new SymptomFactory();
-//            var symptom = symptomFactory.Create(Guid.NewGuid());
-//            symptom.Name = "Silnaya Bol";
-//            symptomRepo.CreateOrUpdateEntity(symptom);
-//            var foundSymptoms = symptomRepo.GetAll().ToList();
-            Console.ReadKey();
-//            var measuringTypeRep = Binder.NinjectKernel.Get<IMeasuringTypeRepository>();
-//            var measuringType = measuringTypeRep.GetEntitiesByQuery(m => m.Title == "САД").FirstOrDefault();
-//            var personMeasuringRep = Binder.NinjectKernel.Get<IPersonMeasuringRepository>();
-//            var personMeasuringFactory = new PersonMeasuringFactory();
-//            var personMeasuring = personMeasuringFactory.Create(Guid.NewGuid(),measuringType.Id,Guid.NewGuid(),DateTime.Now,120);
-//            personMeasuringRep.CreateOrUpdateEntity(personMeasuring);
+            var personRepository = Binder.NinjectKernel.Get<IPersonRepository>();
+            var personFactory = new PersonFactory();
+            var person = personFactory.Create(Guid.NewGuid(), "TestPerson", "TestPerson", "TestPerson");
+            personRepository.CreateOrUpdateEntity(person);
+            Console.WriteLine("Person was created");
 
+            var medicamentRepository = Binder.NinjectKernel.Get<IMedicamentRepository>();
+            var medicamentFactory = new MedicamentFactory();
+            var medicament = medicamentFactory.Create(Guid.NewGuid(), "TestMedicament", "TestMedicamentCode");
+            medicamentRepository.CreateOrUpdateEntity(medicament);
+            Console.WriteLine("Medicament was created");
+
+            var assignedMedicamentRepository = Binder.NinjectKernel.Get<IAssignedMedicamentRepository>();
+            var assignedMedicamentFactory = new AssignedMedicamentFactory();
+            var assignedMedicament = assignedMedicamentFactory.Create(person.Id, medicament.Id, 1, "TestDosa", 0.33);
+            assignedMedicamentRepository.CreateOrUpdateEntity(assignedMedicament);
+            Console.WriteLine("Medicament was assigned");
+
+            var notificationRepository = Binder.NinjectKernel.Get<INotificationRepository>();
+            var notificationFactory = new NotificationFactory();
+            var notification = notificationFactory.Create(Guid.NewGuid(), person.Id, medicament.Id, DateTime.Now, "TestNotificationMessage");
+            notificationRepository.CreateOrUpdateEntity(notification);
+            Console.WriteLine("Notification was created");
+
+            var contactTypeRepository = Binder.NinjectKernel.Get<IContactTypeRepository>();
+            var contactType = contactTypeRepository.GetEntitiesByQuery(v => v.Title == "Mobile").First();
+
+            var personContactRepository = Binder.NinjectKernel.Get<IPersonContactRepository>();
+            var personContactFactory = new PersonContactFactory();
+            var personContact = personContactFactory.Create(Guid.NewGuid(), person.Id, contactType.Id, "89042114372");
+            personContactRepository.CreateOrUpdateEntity(personContact);
+            Console.WriteLine("Person mobile contact was created");
+            
+            var notificationManager = Binder.NinjectKernel.Get<INotificationManager>();            
+            try
+            {
+                notificationManager.SendAllActiveNotifications();
+                Console.WriteLine("Notification was sended");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Modem error");
+                Console.WriteLine(ex.Message);                
+            }
+            finally
+            {
+                Console.ReadKey();
+            }            
         }
     }
 }

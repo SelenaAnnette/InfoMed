@@ -1,25 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO.Ports;
-using System.ComponentModel;
-using System.Threading;
-
-namespace SmsModule
+﻿namespace SmsModule
 {
+    using System;    
+    using System.IO.Ports;    
+    using System.Text;    
+
     public class Modem : IModem
     {
-        SerialPort serialPort;
+        private SerialPort serialPort;
         private string error_message = ""; //if error / catch
         private string log = "";
         private const int PortTimeOut = 100; //пока без таймаута вручную , устанавливается автоматический таймаут при инициализации.
         private const int SmsTimeOut = 100;
 
+        public Modem()
+        {
+            this.serialPort = new SerialPort();   
+        }
+
 
         public bool Initialize() //если модем найден и инициализирован, то вернет true, иначе false
-        {
-            serialPort = new SerialPort();
+        {            
             //выбираем первый компорт, который смог ответить на команду АТ (может быть и несколько портов которые ответят)
             foreach (string s in SerialPort.GetPortNames())///Get COMPort Name
             {

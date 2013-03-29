@@ -55,17 +55,17 @@
             NinjectKernel.Bind<INotificationManager>().To<NotificationManager>()
                 .WithConstructorArgument("startDayFromHour", Properties.Settings.Default.StartDayFromHour)
                 .WithConstructorArgument("endDayFromHour", Properties.Settings.Default.EndDayFromHour)
-                .WithConstructorArgument("reservHoursForAnsver", Properties.Settings.Default.ReservHoursForAnsver)
-                .WithConstructorArgument("reservHoursForAnsver", Properties.Settings.Default.ReservHoursForAnsver);
+                .WithConstructorArgument("reservHoursForAnsver", Properties.Settings.Default.ReservHoursForAnsver)                
+                .WithConstructorArgument("sendAndReceiveSms", Properties.Settings.Default.SendAndReceiveSms)
+                .WithConstructorArgument("delayStartForModemCheckConnectionInSeconds", Properties.Settings.Default.DelayStartForModemCheckConnectionInSeconds)
+                .WithConstructorArgument("periodOfModemCheckConnectionInSeconds", Properties.Settings.Default.PeriodOfModemCheckConnectionInSeconds);
             NinjectKernel.Bind<INotificationService>().To<NotificationService>()
                 .WithConstructorArgument("notificationCreationFrequencyInMinutes", Properties.Settings.Default.NotificationCreationFrequencyInMinutes)
                 .WithConstructorArgument("notificationSendingFrequencyInMinutes", Properties.Settings.Default.NotificationSendingFrequencyInMinutes)
                 .WithConstructorArgument("delayStartForNotificationCreatorInSeconds", Properties.Settings.Default.DelayStartForNotificationCreatorInSeconds)
-                .WithConstructorArgument("sendAndReceiveSms", Properties.Settings.Default.SendAndReceiveSms);
+                .WithConstructorArgument("delayStartForNotificationSenderInSeconds", Properties.Settings.Default.DelayStartForNotificationSenderInSeconds);
 
-            NinjectKernel.Bind<IModem>().To<Modem>()
-                .WithConstructorArgument("delayStartForModemCheckConnectionInSeconds", Properties.Settings.Default.DelayStartForModemCheckConnectionInSeconds)
-                .WithConstructorArgument("periodOfModemCheckConnectionInSeconds", Properties.Settings.Default.PeriodOfModemCheckConnectionInSeconds);
+            NinjectKernel.Bind<IModem>().To<Modem>();
         }
     }
 }

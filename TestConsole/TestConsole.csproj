@@ -81,6 +81,14 @@
       <Project>{F1E8D055-B00E-4539-8EDE-244313442F27}</Project>
       <Name>Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ServerLogic\ServerLogic.csproj">
+      <Project>{67F41138-85E9-449C-A51E-3B64B2242FC8}</Project>
+      <Name>ServerLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SmsModule\SmsModule.csproj">
+      <Project>{D10101B7-79CB-47EE-A432-E0E486A5053C}</Project>
+      <Name>SmsModule</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
