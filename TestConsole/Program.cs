@@ -16,12 +16,14 @@
         static void Main(string[] args)
         {
             var personRepo = Binder.NinjectKernel.Get<IPersonRepository>();
-            var foundPerson = personRepo.GetAll().ToList();
-//            var medicamentRepo = Binder.NinjectKernel.Get<IMedicamentRepository>();
-//            var assignedMedicamentRepo = Binder.NinjectKernel.Get<IAssignedMedicamentRepository>();
-//            var asignedMedicamentFactory = new AssignedMedicamentFactory();            
-//            var assignedMedicament = asignedMedicamentFactory.Create(Guid.NewGuid(), Guid.NewGuid(), 2, )
-//            var medicaments = medicamentRepo.GetAll().ToList();
+            var person = personRepo.GetAll().ToList().Last();
+            var medicamentRepo = Binder.NinjectKernel.Get<IMedicamentRepository>();
+            var medicament = medicamentRepo.GetAll().ToList().First();
+            var assignedMedicamentRepo = Binder.NinjectKernel.Get<IAssignedMedicamentRepository>();
+            var asignedMedicamentFactory = new AssignedMedicamentFactory();
+            var assignedMedicament = asignedMedicamentFactory.Create(person.Id, medicament.Id, 1, "доза", 0.33);
+            assignedMedicamentRepo.CreateOrUpdateEntity(assignedMedicament);
+            var foundMedicament = assignedMedicamentRepo.GetEntitiesByQuery(v => v.PersonId == person.Id && v.MedicamentId == medicament.Id);
 //            var personFactory = new PersonFactory();
 //            var person = personFactory.Create(Guid.NewGuid());
 //            person.FirstName = "FirstName";

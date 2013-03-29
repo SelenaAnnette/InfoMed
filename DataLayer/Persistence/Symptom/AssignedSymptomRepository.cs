@@ -49,7 +49,7 @@
 
             using (var context = new DomainContext(this.ConnectionString))
             {                                
-                if (this.GetEntitiesByQuery(v => v.PersonId == entity.PersonId && v.SymptomId == entity.SymptomId) == null)
+                if (!this.GetEntitiesByQuery(v => v.PersonId == entity.PersonId && v.SymptomId == entity.SymptomId).Any())
                 {
                     context.AssignedSymptoms.Add(entity);
                 }
