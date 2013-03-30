@@ -50,14 +50,21 @@
             personContactRepository.CreateOrUpdateEntity(personContact);
             Console.WriteLine("Person mobile contact was created");
             
-            var notificationManager = Binder.NinjectKernel.Get<INotificationManager>();            
+//            var notificationManager = Binder.NinjectKernel.Get<INotificationManager>();            
             try
             {
-                notificationManager.SendAllActiveNotifications();
-                Console.WriteLine("Notification was sended");
+//                notificationManager.SendAllActiveNotifications();
+//                Console.WriteLine("Notification was sended");
                 var modem = Binder.NinjectKernel.Get<IModem>();
                 modem.Initialize();
-                modem.SendSms("89042114372", "Test sms");
+                if (modem.SendSms("89042114372", "Test sms"))
+                {
+                    Console.WriteLine("Message is sent");
+                }
+                else
+                {
+                    Console.WriteLine("Message is not sent");
+                }
             }
             catch (Exception ex)
             {
