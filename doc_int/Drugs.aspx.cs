@@ -14,16 +14,28 @@ using DataLayer.Persistence.Symptom;
 using DataLayer.Persistence.Measuring;
 using Ninject;
 using DataLayer.Persistence.Medicament;
+using System.ComponentModel;
 
 namespace doc_int
 {
     public partial class About : System.Web.UI.Page
     {
+
+        public class GuidConverter : TypeConverter
+        {
+
+        }
+
         public int interval;
-        public string id_patient;
-        public Guid id_drugs;
         public Guid patient_guid;
         public Guid drug_guid;
+        public string indpat;
+        public Guid Guid_pat = new Guid("11111111-1111-1111-1111-111111111111");
+        public Guid Guid_drug = new Guid("11111111-1111-1111-1111-111111111111");
+        public string ggg;
+
+        public DataTable dt;
+        public IDataAdapter da;
 
         public int times_in_day_num;
         public int pills_count_num;
@@ -49,36 +61,51 @@ namespace doc_int
 
 
 
+            //personsRepo.GetEntitiesByQuery(p => p.LastName == "Smith").First().Id;
+
+
 
         }
 
-        protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
+        public void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "Select")
             {
                 Int16 num = Convert.ToInt16(e.CommandArgument);
                 TextBox1.Text = GridView1.Rows[num].Cells[3].Text;
-                patient_surname = GridView1.Rows[num].Cells[3].Text;
-                id_patient=GridView1.Rows[num].Cells[4].Text;
-                Guid patient_guid = new Guid(id_patient);
-            }         
+                TextBox3.Text = GridView1.Rows[num].Cells[4].Text;
+          
+               // patient_surname = GridView1.Rows[num].Cells[3].Text;
+                //string indpat = GridView1.Rows[num].Cells[3].Text;
+                //string id_patient=GridView1.Rows[num].Cells[4].Text;
+                //Guid patient_guid = new Guid(TextBox3.Text);                      
+            }
+
+             
+
         }
 
-        protected void GridView2_RowCommand(object sender, GridViewCommandEventArgs e)
+        public void GridView2_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "Select")
             {
                 Int16 num2 = Convert.ToInt16(e.CommandArgument);
                 TextBox2.Text = GridView2.Rows[num2].Cells[2].Text;
-                id_drugs=Guid.Parse(GridView2.Rows[num2].Cells[4].Text);
-                //Guid drug_guid = new Guid(id_drugs);
+                //string id_drugs=GridView2.Rows[num2].Cells[4].Text;
+                TextBox4.Text = GridView2.Rows[num2].Cells[4].Text;
+                //string idd = TextBox4.Text;
+               // Guid drug_guid = Guid.Parse(idd);
             }
+            
         }
 
-        protected void Button1_Click(object sender, EventArgs e)
+        public void Button1_Click(object sender, EventArgs e)
         {
 
-            var AssignedMedicament = AssignedMedicamentFactory.Create(patient_guid, drug_guid, Convert.ToDouble(pill_count.Text), "unit", Convert.ToDouble(times_in_day.Text));            
+            Guid_pat = new Guid(TextBox3.Text);
+            Guid_drug = new Guid(TextBox4.Text);
+
+            var AssignedMedicament = AssignedMedicamentFactory.Create(Guid_pat, Guid_drug, Convert.ToDouble(pill_count.Text), "unit", Convert.ToDouble(times_in_day.Text));            
             AssignedMedicamentRepo.CreateOrUpdateEntity(AssignedMedicament);
         }
 
