@@ -105,7 +105,9 @@
                 </asp:Calendar>
             </td>
             <td width="30%">
-                &nbsp;</td>
+                <asp:TextBox ID="TextBox3" runat="server" ReadOnly="True"></asp:TextBox>
+                <asp:TextBox ID="TextBox4" runat="server" ReadOnly="True"></asp:TextBox>
+            </td>
             <td>
             </td>
         </tr>
