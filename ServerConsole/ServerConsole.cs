@@ -9,15 +9,15 @@
 
     public class ServerConsole
     {
-        private static ILogger Logger;
+        private static ILogger logger;
 
         private static INotificationService NotificationService;
 
-        private static bool areServicesRun;        
+        private static bool areServicesRun;          
 
         private static void InitializeFields()
-        {
-            Logger = Binder.NinjectKernel.Get<ILogger>();
+        {            
+            logger = Binder.NinjectKernel.Get<ILogger>();
             NotificationService = Binder.NinjectKernel.Get<INotificationService>();
             areServicesRun = false;
         }
@@ -77,14 +77,16 @@
         {
             areServicesRun = true;
             NotificationService.StartService();
-            Logger.LogMessage("Server started OK");
+            Console.WriteLine("Server started OK");
+            logger.LogMessage("Server started OK");
         }
 
         private static void StopWork()
         {
             areServicesRun = false;
             NotificationService.StopService();
-            Logger.LogMessage("Server stopped OK");
+            Console.WriteLine("Server stopped OK");
+            logger.LogMessage("Server stopped OK");
         }
     }
 }
