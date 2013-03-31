@@ -1,13 +1,18 @@
 ﻿namespace ServerLogic.Notification
 {
     using System;
+    using System.Collections.Generic;
+
+    using Domain.Message;
 
     public interface INotificationManager
     {
         void CreateNewNotifications();
 
-        void SendAllActiveNotifications();
+        IEnumerable<Notification> GetNotificationsForSending();
 
-        void CloseNatificationById(Guid notificationId);
+        void CloseNotificationById(Guid notificationId);
+
+        void CloseNonAnsweredNotifications();
     }
 }
