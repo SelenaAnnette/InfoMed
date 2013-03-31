@@ -90,15 +90,6 @@ namespace ServerConsole.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("30")]
-        public int DelayStartForNotificationCreatorInSeconds {
-            get {
-                return ((int)(this["DelayStartForNotificationCreatorInSeconds"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool SendAndReceiveSms {
             get {
@@ -108,19 +99,10 @@ namespace ServerConsole.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("60")]
-        public int DelayStartForNotificationSenderInSeconds {
-            get {
-                return ((int)(this["DelayStartForNotificationSenderInSeconds"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("30")]
-        public int DelayStartForModemCheckConnectionInSeconds {
+        public int DelayStartForNotificationTimersInSeconds {
             get {
-                return ((int)(this["DelayStartForModemCheckConnectionInSeconds"]));
+                return ((int)(this["DelayStartForNotificationTimersInSeconds"]));
             }
         }
         
@@ -130,6 +112,15 @@ namespace ServerConsole.Properties {
         public int PeriodOfModemCheckConnectionInSeconds {
             get {
                 return ((int)(this["PeriodOfModemCheckConnectionInSeconds"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("90")]
+        public int MinutesCountForNotificationAnswer {
+            get {
+                return ((int)(this["MinutesCountForNotificationAnswer"]));
             }
         }
     }

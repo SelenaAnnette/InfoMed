@@ -91,27 +91,9 @@ namespace TestConsole.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("30")]
-        public int DelayStartForNotificationCreatorInSeconds {
+        public int DelayStartForNotificationTimersInSeconds {
             get {
-                return ((int)(this["DelayStartForNotificationCreatorInSeconds"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("60")]
-        public int DelayStartForNotificationSenderInSeconds {
-            get {
-                return ((int)(this["DelayStartForNotificationSenderInSeconds"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("30")]
-        public int DelayStartForModemCheckConnectionInSeconds {
-            get {
-                return ((int)(this["DelayStartForModemCheckConnectionInSeconds"]));
+                return ((int)(this["DelayStartForNotificationTimersInSeconds"]));
             }
         }
         
@@ -130,6 +112,15 @@ namespace TestConsole.Properties {
         public bool SendAndReceiveSms {
             get {
                 return ((bool)(this["SendAndReceiveSms"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("90")]
+        public int MinutesCountForNotificationAnswer {
+            get {
+                return ((int)(this["MinutesCountForNotificationAnswer"]));
             }
         }
     }
