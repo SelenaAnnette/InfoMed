@@ -2,7 +2,8 @@
 {
     using System;    
     using System.IO.Ports;    
-    using System.Text;    
+    using System.Text;
+    using System.Threading;
 
     public class Modem : IModem
     {
@@ -10,11 +11,14 @@
         private string error_message = ""; //if error / catch
         private string log = "";
         private const int PortTimeOut = 100; //пока без таймаута вручную , устанавливается автоматический таймаут при инициализации.
-        private const int SmsTimeOut = 100;        
+        private const int SmsTimeOut = 100;
+
+        private object lockObject;
 
         public Modem()
         {
-            this.serialPort = new SerialPort();   
+            this.serialPort = new SerialPort();
+            this.lockObject = new object();            
         }
 
         ~Modem()
@@ -22,60 +26,39 @@
             this.serialPort.Dispose();
         }
 
-
         public bool Initialize() //если модем найден и инициализирован, то вернет true, иначе false
-        {            
-            //выбираем первый компорт, который смог ответить на команду АТ (может быть и несколько портов которые ответят)
-            foreach (string s in SerialPort.GetPortNames())///Get COMPort Name
-            {
-                serialPort.PortName = s;
-                serialPort.Open();
-                if (serialPort.IsOpen)
-                {
-                    try
-                    {
-                        serialPort.WriteTimeout = PortTimeOut;//100 default
-                        serialPort.WriteLine("AT \r\n");
-                    }
-                    catch (TimeoutException ee)
-                    {
-                        error_message = ee.Message;
-                    }
-                    System.Threading.Thread.Sleep(100);
-                    string Port_readed_line = serialPort.ReadExisting();
-                    if (Port_readed_line.Length > 0)
-                    {
-                        //автоматический таймаут
-                        serialPort.WriteTimeout = PortTimeOut;
-                        serialPort.ReadTimeout = PortTimeOut;
-                        break;
-                    }
-                    serialPort.Close();
-                }
-            }
-            if (serialPort.PortName != "")
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-
-        }
-
-
-        public bool CheckConnection()
         {
-            if (serialPort.PortName != "")
+            lock (this.lockObject)
             {
-                //2 раза шлю АТ, на второй раз должен ответить ОК, на первый возможно и error, если старая команда не завершена. 
-                //True возвращается только если ответит ОК и ничто иное
-                SendCommandToModem("AT");
-                ReadRespondFromModem();
-                SendCommandToModem("AT");
-                string Port_readed_line = ReadRespondFromModem();
-                if (Port_readed_line.IndexOf("OK") >= 0)
+                //выбираем первый компорт, который смог ответить на команду АТ (может быть и несколько портов которые ответят)
+                foreach (string s in SerialPort.GetPortNames()) ///Get COMPort Name
+                {
+                    serialPort.PortName = s;
+                    serialPort.Open();
+                    if (serialPort.IsOpen)
+                    {
+                        try
+                        {
+                            serialPort.WriteTimeout = PortTimeOut; //100 default
+                            serialPort.WriteLine("AT \r\n");
+                        }
+                        catch (TimeoutException ee)
+                        {
+                            error_message = ee.Message;
+                        }
+                        System.Threading.Thread.Sleep(100);
+                        string Port_readed_line = serialPort.ReadExisting();
+                        if (Port_readed_line.Length > 0)
+                        {
+                            //автоматический таймаут
+                            serialPort.WriteTimeout = PortTimeOut;
+                            serialPort.ReadTimeout = PortTimeOut;
+                            break;
+                        }
+                        serialPort.Close();
+                    }
+                }
+                if (serialPort.PortName != "")
                 {
                     return true;
                 }
@@ -84,64 +67,93 @@
                     return false;
                 }
             }
-            return false;
-        } ///если модем ответил как положено, то вернет true, иначе false
+        }
 
+        public bool CheckConnection()
+        {            
+            if (serialPort.PortName != "")
+            {
+                lock (this.lockObject)
+                {
+                    //2 раза шлю АТ, на второй раз должен ответить ОК, на первый возможно и error, если старая команда не завершена. 
+                    //True возвращается только если ответит ОК и ничто иное
+                    SendCommandToModem("AT");
+                    var Port_readed_line = ReadRespondFromModem();
+                    if (Port_readed_line.IndexOf("OK") >= 0)
+                    {
+                        return true;
+                    }
+                    
+                    Thread.Sleep(500);
+                    SendCommandToModem("AT");
+                    Port_readed_line = ReadRespondFromModem();
+                    if (Port_readed_line.IndexOf("OK") >= 0)
+                    {
+                        return true;
+                    }
+
+                    return false;                            
+                }
+            }
+
+            return false;            
+        } ///если модем ответил как положено, то вернет true, иначе false
 
         public bool SendSms(string phone_number, string message)
         {
-            string Final_Respond = "";
-            if (serialPort.IsOpen)
+            lock (this.lockObject)
             {
+                string Final_Respond = "";
+                if (serialPort.IsOpen)
+                {
 
-                SendCommandToModem("AT");
-                log += ReadRespondFromModem();
+                    SendCommandToModem("AT");
+                    log += ReadRespondFromModem();
 
-                //проверяем возможность отправки SMS при помощи данного устройства
-                SendCommandToModem("AT+CSMS=0");
-                log += ReadRespondFromModem();
+                    //проверяем возможность отправки SMS при помощи данного устройства
+                    SendCommandToModem("AT+CSMS=0");
+                    log += ReadRespondFromModem();
 
-                //выбираем режим работы модема - text mode
-                SendCommandToModem("AT+CMGF=1");
-                log += ReadRespondFromModem();
+                    //выбираем режим работы модема - text mode
+                    SendCommandToModem("AT+CMGF=1");
+                    log += ReadRespondFromModem();
 
-                // параметры модема для отправки SMS на русском языке
-                SendCommandToModem("AT+CSMP=17,167,0,25");
-                log += ReadRespondFromModem();
+                    // параметры модема для отправки SMS на русском языке
+                    SendCommandToModem("AT+CSMP=17,167,0,25");
+                    log += ReadRespondFromModem();
 
-                //определяем кодировку сообщений в UCS2/Unicode
-                SendCommandToModem("AT+CSCS=\"UCS2\"");
-                log += ReadRespondFromModem();
+                    //определяем кодировку сообщений в UCS2/Unicode
+                    SendCommandToModem("AT+CSCS=\"UCS2\"");
+                    log += ReadRespondFromModem();
 
-                phone_number = ConvertToUCS2(phone_number);
+                    phone_number = ConvertToUCS2(phone_number);
 
-                //отправили номер телефона-адресата
-                SendCommandToModem("AT+CMGS=\"" + phone_number + "\"");
-                log += ReadRespondFromModem();
+                    //отправили номер телефона-адресата
+                    SendCommandToModem("AT+CMGS=\"" + phone_number + "\"");
+                    log += ReadRespondFromModem();
 
 
-                message = ConvertToUCS2(message); //txtInUCS2;
+                    message = ConvertToUCS2(message); //txtInUCS2;
 
-                //+ Ctrl+Z (^Z) или 0x1Ah 
-                SendCommandToModem(message + "\x1A");
-                //дополнительная пауза нужна после отправки сообщения перед получением ответа от модема
-                System.Threading.Thread.Sleep(SmsTimeOut);//2000
+                    //+ Ctrl+Z (^Z) или 0x1Ah 
+                    SendCommandToModem(message + "\x1A");
+                    //дополнительная пауза нужна после отправки сообщения перед получением ответа от модема
+                    System.Threading.Thread.Sleep(SmsTimeOut); //2000
 
-                Final_Respond = ReadRespondFromModem();
-                log += Final_Respond;
-            }
+                    Final_Respond = ReadRespondFromModem();
+                    log += Final_Respond;
+                }
 
-            if (Final_Respond.IndexOf("OK") != -1)//если в конце вернул ОК, значит прошло успешно и ждем смску
-            {
-                return true;
-            }
-            else
-            {
-                return false;
+                if (Final_Respond.IndexOf("OK") != -1) //если в конце вернул ОК, значит прошло успешно и ждем смску
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }  //если последняя вернется ОК, то вернет true, иначе false
-
-
 
         private void SendCommandToModem(string comm)
         {
@@ -150,15 +162,12 @@
             
         }  //отправить команду
 
-
-
         private string ReadRespondFromModem()
         {
           //  System.Threading.Thread.Sleep(PortTimeOut);
             string DataFromPort = "";
             DataFromPort = serialPort.ReadExisting();
             return DataFromPort;
-
         }
 
         private string ConvertToUCS2(string txtInRus) //надо переделать на автомат
@@ -196,12 +205,5 @@
 
             return UCS.ToString();
         }
-
-       
     }
 }
-
-    
-
-
-
