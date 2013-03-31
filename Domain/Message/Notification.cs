@@ -8,6 +8,9 @@
     public class Notification : DomainBase
     {
         [Required]
+        public Guid AssignedMedicamentId { get; set; }
+
+        [Required]
         public Guid MedicamentId { get; set; }
 
         [Required]

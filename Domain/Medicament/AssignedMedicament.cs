@@ -6,12 +6,10 @@
     using Domain.Person;
 
     [Table("AssignedMedicament")]
-    public class AssignedMedicament
+    public class AssignedMedicament : DomainBase
     {        
-        [Key, Column(Order = 1)]
         public Guid PersonId { get; set; }
-        
-        [Key, Column(Order = 2)]
+
         public Guid MedicamentId { get; set; }
 
         [Required]
@@ -24,7 +22,10 @@
         public double Frequency { get; set; }
 
         [Required]
-        public bool IsActual { get; set; }
+        public DateTime StartDate { get; set; }
+
+        [Required]
+        public DateTime FinishDate { get; set; }
 
         [InverseProperty("AssignedMedicaments")]
         public virtual Person Person { get; set; }
