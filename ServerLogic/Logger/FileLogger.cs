@@ -31,12 +31,14 @@ namespace ServerLogic.Logger
                     Directory.CreateDirectory(this.directoryPath);
                 }
 
-                using (var fileStream = File.Open(this.infoFilePath, FileMode.OpenOrCreate, FileAccess.Write))
+                if (!File.Exists(this.infoFilePath))
                 {
-                    using (var streamWriter = new StreamWriter(fileStream))
-                    {
-                        streamWriter.WriteLine("{0}  INFO  {1}", DateTime.Now, message);
-                    }
+                    File.Create(this.infoFilePath);
+                }
+
+                using (var streamWriter = new StreamWriter(this.infoFilePath, true))
+                {
+                    streamWriter.WriteLine("{0}  INFO  {1}", DateTime.Now, message);
                 }
             }
         }
@@ -50,13 +52,15 @@ namespace ServerLogic.Logger
                     Directory.CreateDirectory(this.directoryPath);
                 }
 
-                using (var fileStream = File.Open(this.errorFilePath, FileMode.OpenOrCreate, FileAccess.Write))
+                if (!File.Exists(this.errorFilePath))
                 {
-                    using (var streamWriter = new StreamWriter(fileStream))
-                    {
-                        streamWriter.WriteLine("{0}  ERROR  {1}", DateTime.Now, error);
-                    }
+                    File.Create(this.errorFilePath);
                 }
+
+                using (var streamWriter = new StreamWriter(this.errorFilePath, true))
+                {
+                    streamWriter.WriteLine("{0}  ERROR  {1}", DateTime.Now, error);
+                }                                               
             }
         }
     }
