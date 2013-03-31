@@ -5,20 +5,23 @@
 
     using DataLayer.Persistence.Medicament;
     using DataLayer.Persistence.Message;
-    using DataLayer.Persistence.Person;
+    using DataLayer.Persistence.Person;    
 
-    using Ninject;    
+    using Ninject;
+
+    using ServerLogic.Logger;
 
     using SmsModule;
 
     class Program
     {
+        private static readonly ILogger Logger  = Binder.NinjectKernel.Get<ILogger>();
         static void Main(string[] args)
         {            
-            MainTest();
-
+            MainTest();            
             Console.WriteLine("Tests are completed");
             Console.WriteLine("Press any key...");
+            Console.ReadKey();
         }    
     
         private static void MainTest()

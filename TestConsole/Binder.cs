@@ -51,7 +51,8 @@
             NinjectKernel.Bind<IPersonRiskFactorRepository>().To<PersonRiskFactorRepository>().WithConstructorArgument("connectionString", trashDataBaseConnectionString);
             NinjectKernel.Bind<IPersonSymptomRepository>().To<PersonSymptomRepository>().WithConstructorArgument("connectionString", trashDataBaseConnectionString);
 
-            NinjectKernel.Bind<ILogger>().To<ConsoleLogger>();
+//            NinjectKernel.Bind<ILogger>().To<ConsoleLogger>();
+            NinjectKernel.Bind<ILogger>().To<FileLogger>();
             NinjectKernel.Bind<INotificationManager>().To<NotificationManager>()
                 .WithConstructorArgument("startDayFromHour", Properties.Settings.Default.StartDayFromHour)
                 .WithConstructorArgument("endDayFromHour", Properties.Settings.Default.EndDayFromHour)
