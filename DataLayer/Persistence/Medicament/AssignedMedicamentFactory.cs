@@ -9,8 +9,9 @@
         public AssignedMedicament Create(Guid id, Guid personId, Guid medicamentId, double dosage, string measure, DateTime startDate, int dayCount, int timesAtDay, int eachDays)
         {
             this.Validate(dayCount, timesAtDay, eachDays);
-            var finishDate = startDate.AddDays(dayCount);
-            var frequency = Math.Round((double)(eachDays / timesAtDay), 3);
+            var tempStartDate = startDate.Date;
+            var finishDate = tempStartDate.AddDays(dayCount);
+            var frequency = Math.Round((double)(eachDays / timesAtDay), 3);            
             return new AssignedMedicament { Id = id, MedicamentId = medicamentId, PersonId = personId, Dosage = dosage, Measure = measure, StartDate = startDate, FinishDate = finishDate, Frequency = frequency };
         }
 
