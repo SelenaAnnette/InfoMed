@@ -25,7 +25,7 @@
         static void Main(string[] args)
         {            
             InitializeFields();            
-            ShowConrolKeys();
+            ShowInfo();
             var runCicle = true;
             while (runCicle)
             {
@@ -52,6 +52,16 @@
                             break;
                         }
 
+                    case ConsoleKey.R:
+                        {
+                            if (areServicesRun)
+                            {
+                                RestartWork();
+                            }
+
+                            break;
+                        }
+
                     case ConsoleKey.Enter:
                         {
                             if (areServicesRun)
@@ -66,11 +76,18 @@
             }
         }
 
+        private static void ShowInfo()
+        {
+            ShowConrolKeys();
+            Console.WriteLine("Send and receive sms = {0}", Properties.Settings.Default.SendAndReceiveSms);
+        }
+
         private static void ShowConrolKeys()
         {
             Console.WriteLine("Press ENTER to terminate server console");
             Console.WriteLine("Press Q to stop services");
             Console.WriteLine("Press S to start services");
+            Console.WriteLine("Press R to restart services");
         }
 
         private static void StartWork()
@@ -87,6 +104,12 @@
             NotificationService.StopService();
             Console.WriteLine("Server stopped OK");
             logger.LogMessage("Server stopped OK");
+        }
+
+        private static void RestartWork()
+        {
+            StopWork();
+            StartWork();
         }
     }
 }
