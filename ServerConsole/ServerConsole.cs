@@ -17,7 +17,7 @@
 
         private static void InitializeFields()
         {            
-            logger = Binder.NinjectKernel.Get<ILogger>();
+            logger = Binder.NinjectKernel.Get<ILogger>();            
             NotificationService = Binder.NinjectKernel.Get<INotificationService>();
             areServicesRun = false;
         }

@@ -58,12 +58,6 @@
             this.delayStartForNotificationTimersInSeconds = delayStartForNotificationTimersInSeconds;
         }
 
-
-        ~NotificationService()
-        {
-            this.StopService();
-        }
-
         public void StartService()
         {
             this.creationTimer = new Timer(this.CreateNotifications, this, TimeSpan.FromSeconds(this.delayStartForNotificationTimersInSeconds),
