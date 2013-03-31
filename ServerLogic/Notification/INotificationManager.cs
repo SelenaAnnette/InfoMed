@@ -11,6 +11,8 @@
 
         IEnumerable<Notification> GetNotificationsForSending();
 
+        IEnumerable<Notification> GetNotificationsForPerson(Guid personId);
+
         void CloseNotificationById(Guid notificationId);
 
         void CloseNonAnsweredNotifications();

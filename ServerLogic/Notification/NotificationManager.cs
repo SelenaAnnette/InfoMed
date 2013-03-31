@@ -59,6 +59,11 @@
             return this.notificationRepository.GetEntitiesByQuery(v => v.IsActive && v.SendingDate <= DateTime.Now);
         }
 
+        public IEnumerable<Notification> GetNotificationsForPerson(Guid personId)
+        {
+            return this.notificationRepository.GetEntitiesByQuery(v => v.IsActive && v.SendingDate <= DateTime.Now && v.PersonId == personId);
+        }
+
         public void CloseNonAnsweredNotifications()
         {
             var nonAnweredNotifications = this.notificationRepository.GetEntitiesByQuery(
