@@ -10,11 +10,16 @@
         private string error_message = ""; //if error / catch
         private string log = "";
         private const int PortTimeOut = 100; //пока без таймаута вручную , устанавливается автоматический таймаут при инициализации.
-        private const int SmsTimeOut = 100;
+        private const int SmsTimeOut = 100;        
 
         public Modem()
         {
             this.serialPort = new SerialPort();   
+        }
+
+        ~Modem()
+        {
+            this.serialPort.Dispose();
         }
 
 
