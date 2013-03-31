@@ -8,7 +8,9 @@
     using DataLayer.Persistence.Message;    
 
     using Domain.Medicament;    
-    using Domain.Message;        
+    using Domain.Message;
+
+    using ServerLogic.Logger;
 
     public class NotificationManager : INotificationManager
     {
@@ -26,10 +28,13 @@
 
         private readonly int minutesCountForNotificationAnswer;
 
+        private readonly ILogger logger;
+
         public NotificationManager(IAssignedMedicamentRepository assignedMedicamentRepository, INotificationRepository notificationRepository,
-            int startDayFromHour, int endDayFromHour, int reservHoursForAnsver, int minutesCountForNotificationAnswer)
+            int startDayFromHour, int endDayFromHour, int reservHoursForAnsver, int minutesCountForNotificationAnswer, ILogger logger)
         {
             this.assignedMedicamentRepository = assignedMedicamentRepository;
+            this.logger = logger;
             this.notificationRepository = notificationRepository;                        
             this.notificationFactory = new NotificationFactory();
             this.startDayFromHour = startDayFromHour;
@@ -66,13 +71,14 @@
 
         public void CloseNonAnsweredNotifications()
         {
-            var nonAnweredNotifications = this.notificationRepository.GetEntitiesByQuery(
-                v => v.IsActive && (v.SendingDate - DateTime.Now).TotalMinutes >= this.minutesCountForNotificationAnswer);
-            nonAnweredNotifications.AsParallel().ForAll(
-                nonAnweredNotification =>
+            var nonAnsweredNotifications = this.notificationRepository.GetEntitiesByQuery(
+                v => v.IsActive && (DateTime.Now - v.SendingDate).TotalMinutes >= this.minutesCountForNotificationAnswer);
+            nonAnsweredNotifications.AsParallel().ForAll(
+                nonAnsweredNotification =>
                     {
-                        nonAnweredNotification.IsActive = false;
-                        this.notificationRepository.CreateOrUpdateEntity(nonAnweredNotification);
+                        nonAnsweredNotification.IsActive = false;
+                        this.notificationRepository.CreateOrUpdateEntity(nonAnsweredNotification);
+                        this.logger.LogMessage(string.Format("Notification {0} was closed", nonAnsweredNotification.Id));
                     });
         }
 
@@ -82,6 +88,7 @@
             notification.IsActive = false;
             notification.ExecutedDate = DateTime.Now;
             this.notificationRepository.CreateOrUpdateEntity(notification);
+            this.logger.LogMessage(string.Format("Notification {0} was closed", notification.Id));
         }
 
         private void CreateNewNotification(AssignedMedicament assignedMedicament)
@@ -126,6 +133,7 @@
                         sendingDate,
                         this.GetNotificationMessage(assignedMedicament));
             this.notificationRepository.CreateOrUpdateEntity(newNotification);
+            this.logger.LogMessage(string.Format("Notification {0} was created", newNotification.Id));
         }
 
         private Notification GetLastAnsweredNotification(AssignedMedicament assignedMedicament)
@@ -172,6 +180,11 @@
         private DateTime GetSendingDate(DateTime lastDate, int periodInMinutes)
         {
             var sendingDate = lastDate.AddMinutes(periodInMinutes);
+            if (sendingDate < DateTime.Now)
+            {
+                sendingDate = DateTime.Now;
+            }
+
             if (sendingDate.Hour < this.startDayFromHour)
             {
                 return new DateTime(sendingDate.Year, sendingDate.Month, sendingDate.Day, this.startDayFromHour, 0, 0);

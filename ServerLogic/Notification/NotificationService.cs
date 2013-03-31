@@ -6,6 +6,8 @@
 
     using DataLayer.Persistence.Person;
 
+    using ServerLogic.Logger;
+
     using SmsModule;
 
     public class NotificationService : INotificationService
@@ -38,11 +40,14 @@
 
         private bool IsModemConnected;
 
+        private readonly ILogger logger;
+
         public NotificationService(INotificationManager notificationManager, int notificationCreationFrequencyInMinutes, int notificationSendingFrequencyInMinutes,
             IModem modem, bool sendAndReceiveSms, int notificationClosingFrequencyInMinutes, int periodOfModemCheckConnectionInSeconds, IPersonContactRepository personContactRepository,
-            int delayStartForNotificationTimersInSeconds)
+            int delayStartForNotificationTimersInSeconds, ILogger logger)
         {            
             this.notificationManager = notificationManager;
+            this.logger = logger;
             this.notificationCreationFrequencyInMinutes = notificationCreationFrequencyInMinutes;
             this.notificationSendingFrequencyInMinutes = notificationSendingFrequencyInMinutes;
             this.notificationClosingFrequencyInMinutes = notificationClosingFrequencyInMinutes;                        
@@ -118,7 +123,13 @@
 
                     foreach (var personContact in personContacts)
                     {
-                        this.modem.SendSms(personContact.Value, notification.Text);
+                        if (this.modem.SendSms(personContact.Value, notification.Text))
+                        {
+                            this.logger.LogMessage(string.Format("Message \"{0}\" was sended to mobile {1}", notification.Text, personContact.Value));
+                            continue;
+                        }
+
+                        this.logger.LogMessage(string.Format("Message \"{0}\" was not sended to mobile {1}", notification.Text, personContact.Value));
                     }                        
                 }
 
@@ -129,6 +140,13 @@
         private void InitializeModem()
         {
             this.IsModemConnected = this.modem.Initialize();
+            if (!this.IsModemConnected)
+            {
+                this.logger.LogMessage("Modem was not initialized");
+                return;
+            }
+
+            this.logger.LogMessage("Modem was initialized");
         }
 
         private void CheckModemConnection(object state)
