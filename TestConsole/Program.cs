@@ -7,15 +7,21 @@
     using DataLayer.Persistence.Message;
     using DataLayer.Persistence.Person;
 
-    using Ninject;
-
-    using ServerLogic.Notification;
+    using Ninject;    
 
     using SmsModule;
 
     class Program
     {
         static void Main(string[] args)
+        {            
+            MainTest();
+
+            Console.WriteLine("Tests are completed");
+            Console.WriteLine("Press any key...");
+        }    
+    
+        private static void MainTest()
         {
             var personRepository = Binder.NinjectKernel.Get<IPersonRepository>();
             var personFactory = new PersonFactory();
@@ -31,13 +37,13 @@
 
             var assignedMedicamentRepository = Binder.NinjectKernel.Get<IAssignedMedicamentRepository>();
             var assignedMedicamentFactory = new AssignedMedicamentFactory();
-            var assignedMedicament = assignedMedicamentFactory.Create(person.Id, medicament.Id, 1, "TestDosa", 0.33);
+            var assignedMedicament = assignedMedicamentFactory.Create(Guid.NewGuid(), person.Id, medicament.Id, 1, "Test dosa", DateTime.Now, 3, 5, 1);
             assignedMedicamentRepository.CreateOrUpdateEntity(assignedMedicament);
             Console.WriteLine("Medicament was assigned");
 
             var notificationRepository = Binder.NinjectKernel.Get<INotificationRepository>();
             var notificationFactory = new NotificationFactory();
-            var notification = notificationFactory.Create(Guid.NewGuid(), person.Id, medicament.Id, DateTime.Now, "TestNotificationMessage");
+            var notification = notificationFactory.Create(Guid.NewGuid(), assignedMedicament.Id, person.Id, medicament.Id, DateTime.Now, "Test Notification Message");
             notificationRepository.CreateOrUpdateEntity(notification);
             Console.WriteLine("Notification was created");
 
@@ -49,30 +55,49 @@
             var personContact = personContactFactory.Create(Guid.NewGuid(), person.Id, contactType.Id, "89042114372");
             personContactRepository.CreateOrUpdateEntity(personContact);
             Console.WriteLine("Person mobile contact was created");
-            
-//            var notificationManager = Binder.NinjectKernel.Get<INotificationManager>();            
+
             try
             {
-//                notificationManager.SendAllActiveNotifications();
-//                Console.WriteLine("Notification was sended");
                 var modem = Binder.NinjectKernel.Get<IModem>();
-                modem.Initialize();
-                if (modem.SendSms("89042114372", "Test sms"))
+                if (modem.Initialize())
                 {
-                    Console.WriteLine("Message is sent");
+                    if (modem.SendSms(personContact.Value, notification.Text))
+                    {
+                        Console.WriteLine("Message is sent");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Message is not sent");
+                    }
                 }
                 else
                 {
-                    Console.WriteLine("Message is not sent");
+                    Console.WriteLine("Modem was not initialized");
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Modem error");
-                Console.WriteLine(ex.Message);                
+                Console.WriteLine(ex.Message);
             }
             finally
             {
+                personContactRepository.DeleteEntity(personContact.Id);
+                Console.WriteLine("Person mobile contact wad deleted");
+
+                notificationRepository.DeleteEntity(notification.Id);
+                Console.WriteLine("Notification wad deleted");
+
+                assignedMedicamentRepository.DeleteEntity(assignedMedicament.Id);
+                Console.WriteLine("Assigned medicament wad deleted");
+
+                medicamentRepository.DeleteEntity(medicament.Id);
+                Console.WriteLine("Medicament wad deleted");
+
+                personRepository.DeleteEntity(person.Id);
+                Console.WriteLine("Person wad deleted");
+
+                Console.WriteLine("Press any key...");
                 Console.ReadKey();
             }            
         }
