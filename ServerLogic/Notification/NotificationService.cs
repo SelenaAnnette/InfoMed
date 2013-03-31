@@ -36,6 +36,8 @@
 
         private readonly int notificationClosingFrequencyInMinutes;
 
+        private bool IsModemConnected;
+
         public NotificationService(INotificationManager notificationManager, int notificationCreationFrequencyInMinutes, int notificationSendingFrequencyInMinutes,
             IModem modem, bool sendAndReceiveSms, int notificationClosingFrequencyInMinutes, int periodOfModemCheckConnectionInSeconds, IPersonContactRepository personContactRepository,
             int delayStartForNotificationTimersInSeconds)
@@ -59,7 +61,7 @@
 
         public void StartService()
         {
-            this.creationTimer = new Timer(this.CreateNotifications, this, TimeSpan.FromSeconds(this.delayStartForNotificationTimersInSeconds), 
+            this.creationTimer = new Timer(this.CreateNotifications, this, TimeSpan.FromSeconds(this.delayStartForNotificationTimersInSeconds),
                 TimeSpan.FromMinutes(this.notificationCreationFrequencyInMinutes));
             this.closingTimer = new Timer(this.CloseNotifications, this, TimeSpan.FromSeconds(this.delayStartForNotificationTimersInSeconds),
                 TimeSpan.FromMinutes(this.notificationClosingFrequencyInMinutes));
@@ -71,7 +73,7 @@
 
             this.InitializeModem();
             this.sendingTimer = new Timer(this.SendNotifications, this, TimeSpan.FromSeconds(this.delayStartForNotificationTimersInSeconds),
-            TimeSpan.FromMinutes(this.notificationSendingFrequencyInMinutes));
+                TimeSpan.FromMinutes(this.notificationSendingFrequencyInMinutes));
             this.modemTimer = new Timer(this.CheckModemConnection, this, TimeSpan.FromSeconds(this.delayStartForNotificationTimersInSeconds), TimeSpan.FromSeconds(this.periodOfModemCheckConnectionInSeconds));
         }        
 
@@ -102,7 +104,7 @@
         {
             while (true)
             {
-                if (!this.modem.CheckConnection())
+                if (!this.IsModemConnected)
                 {
                     Thread.Sleep(10000);                    
                     continue;
@@ -126,11 +128,11 @@
 
         private void InitializeModem()
         {
-            this.modem.Initialize();
+            this.IsModemConnected = this.modem.Initialize();
         }
 
         private void CheckModemConnection(object state)
-        {
+        {            
             if (!this.modem.CheckConnection())
             {
                 this.InitializeModem();

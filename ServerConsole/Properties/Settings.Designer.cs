@@ -90,7 +90,7 @@ namespace ServerConsole.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool SendAndReceiveSms {
             get {
                 return ((bool)(this["SendAndReceiveSms"]));
@@ -99,7 +99,7 @@ namespace ServerConsole.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("30")]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
         public int DelayStartForNotificationTimersInSeconds {
             get {
                 return ((int)(this["DelayStartForNotificationTimersInSeconds"]));
@@ -121,6 +121,15 @@ namespace ServerConsole.Properties {
         public int MinutesCountForNotificationAnswer {
             get {
                 return ((int)(this["MinutesCountForNotificationAnswer"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public int NotificationClosingFrequencyInMinutes {
+            get {
+                return ((int)(this["NotificationClosingFrequencyInMinutes"]));
             }
         }
     }

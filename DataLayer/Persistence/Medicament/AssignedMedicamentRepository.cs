@@ -51,7 +51,7 @@
             }
 
             using (var context = new DomainContext(this.ConnectionString))
-            {                
+            {
                 if (!this.GetEntitiesByQuery(v => v.PersonId == entity.PersonId && v.MedicamentId == entity.MedicamentId).Any())
                 {
                     context.AssignedMedicaments.Add(entity);

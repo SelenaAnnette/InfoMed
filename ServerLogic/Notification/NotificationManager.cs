@@ -39,8 +39,8 @@
         }
 
         public void CreateNewNotifications()
-        {
-            var assignedMedicaments = this.assignedMedicamentRepository.GetEntitiesByQuery(v => v.StartDate.Date >= DateTime.Now.Date && v.FinishDate.Date <= DateTime.Now.Date);
+        {            
+            var assignedMedicaments = this.assignedMedicamentRepository.GetEntitiesByQuery(v => v.StartDate.Date <= DateTime.Now.Date && v.FinishDate.Date >= DateTime.Now.Date);
             assignedMedicaments.AsParallel().ForAll(assignedMedicament =>
             {
                 var notification = this.notificationRepository.GetEntitiesByQuery(
@@ -67,7 +67,7 @@
         public void CloseNonAnsweredNotifications()
         {
             var nonAnweredNotifications = this.notificationRepository.GetEntitiesByQuery(
-                v => v.IsActive && (v.SendingDate - DateTime.Now).TotalMinutes < this.minutesCountForNotificationAnswer);
+                v => v.IsActive && (v.SendingDate - DateTime.Now).TotalMinutes >= this.minutesCountForNotificationAnswer);
             nonAnweredNotifications.AsParallel().ForAll(
                 nonAnweredNotification =>
                     {
