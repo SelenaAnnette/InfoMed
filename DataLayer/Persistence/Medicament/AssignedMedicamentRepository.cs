@@ -24,7 +24,10 @@
 
         public AssignedMedicament GetEntityById(Guid id)
         {
-            throw new NotImplementedException("this method is not implemented");
+            using (var context = new DomainContext(this.ConnectionString))
+            {
+                return context.AssignedMedicaments.Include("Person").Include("Medicament").FirstOrDefault(v => v.Id == id);
+            }
         }
 
         public IEnumerable<AssignedMedicament> GetEntitiesByQuery(Func<AssignedMedicament, bool> query)
@@ -66,7 +69,17 @@
 
         public void DeleteEntity(Guid id)
         {
-            throw new NotImplementedException("this method is not implemented");
+            using (var context = new DomainContext(this.ConnectionString))
+            {
+                var assignedMedicament = context.AssignedMedicaments.FirstOrDefault(v => v.Id == id);
+                if (assignedMedicament == null)
+                {
+                    return;
+                }
+
+                context.AssignedMedicaments.Remove(assignedMedicament);
+                context.SaveChanges();
+            }
         }
     }
 }
