@@ -53,13 +53,18 @@
                 <br />
                 Принимать препарат
                 по
-                <asp:TextBox ID="pill_count" runat="server" TextMode="Number" Width="30px">1</asp:TextBox>
+                <asp:TextBox ID="dosage" runat="server" TextMode="Number" Width="30px">1</asp:TextBox>
 &nbsp; единице(ы)
-                <asp:TextBox ID="times_in_day" runat="server" Width="25px" TextMode="Number">2</asp:TextBox>
-                &nbsp;раза в день.<br />
+                <asp:TextBox ID="timesAtDay" runat="server" Width="25px" TextMode="Number">2</asp:TextBox>
+                &nbsp;раза в день каждый(ые)
+                <asp:TextBox ID="eachDay" runat="server" TextMode="Number" Width="35px">1</asp:TextBox>
+                &nbsp;дня/дней на продолжении
+                <asp:TextBox ID="dayCount" runat="server" TextMode="Number" Width="35px">14</asp:TextBox>
+                &nbsp;дня/дней.<br />
                 <asp:Button ID="Button1" runat="server" Text="Выписать" 
                     onclick="Button1_Click" />
-            </td>
+                <br />
+&nbsp;</td>
             <td style="text-align: center" width="30%">
                 &nbsp;<br />
                 &nbsp;<br />
