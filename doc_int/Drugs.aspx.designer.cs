@@ -40,22 +40,40 @@ namespace doc_int {
         protected global::System.Web.UI.WebControls.TextBox TextBox2;
         
         /// <summary>
-        /// pill_count элемент управления.
+        /// dosage элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox pill_count;
+        protected global::System.Web.UI.WebControls.TextBox dosage;
         
         /// <summary>
-        /// times_in_day элемент управления.
+        /// timesAtDay элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox times_in_day;
+        protected global::System.Web.UI.WebControls.TextBox timesAtDay;
+        
+        /// <summary>
+        /// eachDay элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox eachDay;
+        
+        /// <summary>
+        /// dayCount элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox dayCount;
         
         /// <summary>
         /// Button1 элемент управления.
