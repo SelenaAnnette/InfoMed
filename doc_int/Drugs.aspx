@@ -117,8 +117,9 @@
                 <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
             </td>
             <td width="30%">
-                <asp:TextBox ID="TextBox3" runat="server" ReadOnly="True"></asp:TextBox>
-                <asp:TextBox ID="TextBox4" runat="server" ReadOnly="True"></asp:TextBox>
+                ID 1<asp:TextBox ID="TextBox3" runat="server" ReadOnly="True"></asp:TextBox>
+                <br />
+                ID 2<asp:TextBox ID="TextBox4" runat="server" ReadOnly="True"></asp:TextBox>
             </td>
             <td>
             </td>
