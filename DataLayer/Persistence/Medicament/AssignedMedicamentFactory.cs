@@ -12,8 +12,8 @@
             var tempStartDate = startDate.Date;
             var finishDate = tempStartDate.AddDays(dayCount);
             var frequency = Math.Round((double)eachDays / timesAtDay, 3);
-            
-            return new AssignedMedicament { Id = id, MedicamentId = medicamentId, PersonId = personId, Dosage = dosage, Measure = measure, StartDate = startDate, FinishDate = finishDate, Frequency = frequency };
+
+            return new AssignedMedicament { Id = id, MedicamentId = medicamentId, PersonId = personId, Dosage = dosage, Measure = measure, StartDate = tempStartDate, FinishDate = finishDate, Frequency = frequency };
         }
 
         private void Validate(int dayCount, int timesAtDay, int eachDays)
