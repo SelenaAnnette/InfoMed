@@ -1,23 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
-using System.Data.SqlClient;
-using System.Configuration;
 
-using DataLayer.Persistence.Group;
 using DataLayer.Persistence.Person;
-using DataLayer.Persistence.Symptom;
-using DataLayer.Persistence.Measuring;
 using Ninject;
 using DataLayer.Persistence.Medicament;
 using System.ComponentModel;
 
 namespace doc_int
 {
+    using System.Drawing;
+
     public partial class About : System.Web.UI.Page
     {
 
@@ -88,6 +81,18 @@ namespace doc_int
 
             var AssignedMedicament = AssignedMedicamentFactory.Create(Guid.NewGuid(), Guid_pat, Guid_drug, Convert.ToDouble(dosage.Text), "unit", DateTime.Now, Convert.ToInt16(dayCount.Text), Convert.ToInt16(timesAtDay.Text), Convert.ToInt16(eachDay.Text));
             AssignedMedicamentRepo.CreateOrUpdateEntity(AssignedMedicament);
+        }
+
+        protected void Calendar1_DayRender(object sender, DayRenderEventArgs e)
+        {
+            // Select all dates in the past
+            if (e.Day.Date < System.DateTime.Today)
+            {
+                // Disable date
+                e.Day.IsSelectable = false;                
+                // Change color of disabled date
+                e.Cell.ForeColor = Color.Gray;                
+            } 
         }
     }
 }
