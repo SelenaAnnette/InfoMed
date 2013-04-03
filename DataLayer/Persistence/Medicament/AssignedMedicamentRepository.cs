@@ -52,7 +52,7 @@
 
             using (var context = new DomainContext(this.ConnectionString))
             {
-                if (!this.GetEntitiesByQuery(v => v.PersonId == entity.PersonId && v.MedicamentId == entity.MedicamentId).Any())
+                if (this.GetEntityById(entity.Id) == null)
                 {
                     context.AssignedMedicaments.Add(entity);
                 }
