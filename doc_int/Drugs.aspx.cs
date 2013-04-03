@@ -10,12 +10,17 @@ using System.ComponentModel;
 namespace doc_int
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     using System.Drawing;
 
     using Domain.Medicament;
 
 >>>>>>> 78d8078923953fe31862b01a6a4a3b07f5549873
+=======
+    using System.Drawing;
+
+>>>>>>> 60a36ce61c1ed14fe1f38ebc6d0bc465dec96062
     public partial class About : System.Web.UI.Page
     {
 
@@ -119,6 +124,7 @@ namespace doc_int
                     //var tomorrowNewTime = newTime.AddDays(1);
 
 
+<<<<<<< HEAD
 
 <<<<<<< HEAD
                     //var AssignedMedicament = AssignedMedicamentFactory.Create(Guid.NewGuid(), Guid_pat, Guid_drug, Convert.ToDouble(dosage.Text), "единиц", convertedDate, Convert.ToInt16(dayCount.Text), timesAtDay, eachDay);
@@ -127,6 +133,10 @@ namespace doc_int
                    
                     var AssignedMedicament = AssignedMedicamentFactory.Create(Guid.NewGuid(), Guid_pat, Guid_drug, Convert.ToDouble(dosage.Text), "единиц", convertedDate, Convert.ToInt16(dayCount.Text), timesAtDay, eachDay);                     
 >>>>>>> 78d8078923953fe31862b01a6a4a3b07f5549873
+=======
+                    //var AssignedMedicament = AssignedMedicamentFactory.Create(Guid.NewGuid(), Guid_pat, Guid_drug, Convert.ToDouble(dosage.Text), "единиц", convertedDate, Convert.ToInt16(dayCount.Text), timesAtDay, eachDay);
+                    var AssignedMedicament = AssignedMedicamentFactory.Create(Guid.NewGuid(), Guid_pat, Guid_drug, Convert.ToDouble(dosage.Text), "единиц", convertedDate, Convert.ToInt16(dayCount.Text), timesAtDay, eachDay);
+>>>>>>> 60a36ce61c1ed14fe1f38ebc6d0bc465dec96062
                     AssignedMedicamentRepo.CreateOrUpdateEntity(AssignedMedicament);
 
                     Label2.Text = "Отправка данных прошла успешно.";
@@ -168,16 +178,23 @@ namespace doc_int
             }
             catch { }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> 60a36ce61c1ed14fe1f38ebc6d0bc465dec96062
             TextBox5.Text = dosage.Text;
             TextBox7.Text = dayCount.Text;
             TextBox8.Text = Convert.ToString(timesAtDay);
             TextBox9.Text = Convert.ToString(eachDay);
+<<<<<<< HEAD
 =======
                 TextBox5.Text = dosage.Text;                
                 TextBox7.Text = dayCount.Text;
                 TextBox8.Text = Convert.ToString(timesAtDay);
                 TextBox9.Text = Convert.ToString(eachDay);
 >>>>>>> 78d8078923953fe31862b01a6a4a3b07f5549873
+=======
+>>>>>>> 60a36ce61c1ed14fe1f38ebc6d0bc465dec96062
         }
 
         protected void Calendar1_DayRender(object sender, DayRenderEventArgs e)
@@ -188,9 +205,12 @@ namespace doc_int
             }
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> 78d8078923953fe31862b01a6a4a3b07f5549873
+=======
+>>>>>>> 60a36ce61c1ed14fe1f38ebc6d0bc465dec96062
     }
 }
 
