@@ -18,7 +18,9 @@
     <table class="style1">
         <tr>
             <td width="30%">
-                &nbsp;</td>
+                <asp:Label ID="Label2" runat="server" 
+                    Text="Укажите необходимые данные для ввыписки препарата."></asp:Label>
+            </td>
             <td width="40%">
                 &nbsp;</td>
             <td width="30%">
@@ -46,7 +48,7 @@
                 </asp:GridView>
             </td>
             <td class="style2" width="40%">
-                Пациент<asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+                Пациент<asp:TextBox ID="TextBox1" runat="server" Height="21px"></asp:TextBox>
                 <br />
                 Препарат<asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
                 <br />
@@ -121,6 +123,19 @@
                 ID 1<asp:TextBox ID="TextBox3" runat="server" ReadOnly="True"></asp:TextBox>
                 <br />
                 ID 2<asp:TextBox ID="TextBox4" runat="server" ReadOnly="True"></asp:TextBox>
+                <br />
+                Доза<asp:TextBox ID="TextBox5" runat="server"></asp:TextBox>
+                <br />
+                Начало<asp:TextBox ID="TextBox6" runat="server"></asp:TextBox>
+                <br />
+                Кол-во дней<asp:TextBox ID="TextBox7" runat="server"></asp:TextBox>
+                <br />
+                Сколько в день<asp:TextBox ID="TextBox8" runat="server"></asp:TextBox>
+                <br />
+                Через сколько дней<asp:TextBox ID="TextBox9" runat="server"></asp:TextBox>
+                <br />
+                <asp:Button ID="Button2" runat="server" onclick="Button2_Click" 
+                    Text="Проверка" />
             </td>
             <td>
             </td>
