@@ -56,13 +56,18 @@ namespace doc_int
             var getMedicament = medicamentRepo.GetAll().ToList();
             GridView2.DataSource = getMedicament;
             GridView2.DataBind();
-
-            if (Convert.ToInt32(choose_num.Text) < 0)
+            try
             {
-                int zero = 0;
-                choose_num.Text = Convert.ToString(zero);
+                if (Convert.ToInt32(choose_num.Text) < 0)
+                {
+                    int zero = 0;
+                    choose_num.Text = Convert.ToString(zero);
+                }
             }
-
+            catch (Exception o)
+            {
+                Label2.Text = o.Message;
+            }
         }
 
         public void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -92,11 +97,59 @@ namespace doc_int
 
         public void Button1_Click(object sender, EventArgs e)
         {
+            try
+            {
+                if ((TextBox1.Text != "") && (TextBox2.Text != "") && (dosage.Text != "") && (choose_num.Text != "") && (dayCount.Text != "") && (Label1.Text != "") && (Convert.ToInt16(dosage.Text) > 0) && (Convert.ToInt16(choose_num.Text) > 0) && (Convert.ToInt16(dayCount.Text) > 0))
+                {
 
-            Guid_pat = new Guid(TextBox3.Text);
-            Guid_drug = new Guid(TextBox4.Text);
 
-            if (RadioButton1.Checked == true)
+                    Guid_pat = new Guid(TextBox3.Text);
+                    Guid_drug = new Guid(TextBox4.Text);
+
+                    if (RadioButton1.Checked == true)
+                    {
+                        timesAtDay = Convert.ToInt16(choose_num.Text);
+                        eachDay = 1;
+                    }
+
+                    if (RadioButton2.Checked == true)
+                    {
+                        timesAtDay = 1;
+                        eachDay = Convert.ToInt16(choose_num.Text); ;
+                    }
+
+                    DateTime convertedDate = DateTime.Parse(Label1.Text);
+                    DateTime end = convertedDate.AddDays(Convert.ToInt32(dayCount.Text));
+                        //var tomorrowNewTime = newTime.AddDays(1);
+
+
+                   
+                    //var AssignedMedicament = AssignedMedicamentFactory.Create(Guid.NewGuid(), Guid_pat, Guid_drug, Convert.ToDouble(dosage.Text), "единиц", convertedDate, Convert.ToInt16(dayCount.Text), timesAtDay, eachDay);
+                     //var AssignedMedicament = AssignedMedicamentFactory.Create(Guid.NewGuid(), Guid_pat, Guid_drug, Convert.ToDouble(dosage.Text), "единиц", convertedDate,
+                    AssignedMedicamentRepo.CreateOrUpdateEntity(AssignedMedicament);
+
+                    Label2.Text = "Отправка данных прошла успешно.";
+                }
+                else
+                {
+                    Label2.Text = "Внимание. Была допущена ошибка при формировании выписки препарата. Проверьте все данные и повторите попытку.";
+                }
+            }
+            catch (Exception u) {Label2.Text = u.Message; }
+            
+
+        }
+
+        protected void Calendar1_SelectionChanged(object sender, EventArgs e)
+        {
+            Label1.Text = Calendar1.SelectedDate.ToShortDateString();
+        }
+
+      
+        
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+             if (RadioButton1.Checked == true)
             {
                 timesAtDay = Convert.ToInt16(choose_num.Text);
                 eachDay = 1;
@@ -107,17 +160,18 @@ namespace doc_int
                 timesAtDay = 1;
                 eachDay = Convert.ToInt16(choose_num.Text); ;
             }
+            try
+            {
+                DateTime convertedDate = DateTime.Parse(Label1.Text);
+                TextBox6.Text = Convert.ToString(convertedDate);
+            }
+            catch { }
+                TextBox5.Text = dosage.Text;                
+                TextBox7.Text = dayCount.Text;
+                TextBox8.Text = Convert.ToString(timesAtDay);
+                TextBox9.Text = Convert.ToString(eachDay);
+         }
 
-            Label1.Text = Convert.ToString(eachDay) ;
-
-            var AssignedMedicament = AssignedMedicamentFactory.Create(Guid.NewGuid(), Guid_pat, Guid_drug, Convert.ToDouble(dosage.Text), "единиц", DateTime.Now, Convert.ToInt16(dayCount.Text), timesAtDay, eachDay);
-            AssignedMedicamentRepo.CreateOrUpdateEntity(AssignedMedicament);
-        }
-
-        protected void Calendar1_SelectionChanged(object sender, EventArgs e)
-        {
-            Label1.Text = Calendar1.SelectedDate.ToShortDateString();
-        }
     }
 }
 
