@@ -9,6 +9,13 @@ using System.ComponentModel;
 
 namespace doc_int
 {
+<<<<<<< HEAD
+=======
+    using System.Drawing;
+
+    using Domain.Medicament;
+
+>>>>>>> 78d8078923953fe31862b01a6a4a3b07f5549873
     public partial class About : System.Web.UI.Page
     {
 
@@ -113,8 +120,13 @@ namespace doc_int
 
 
 
+<<<<<<< HEAD
                     //var AssignedMedicament = AssignedMedicamentFactory.Create(Guid.NewGuid(), Guid_pat, Guid_drug, Convert.ToDouble(dosage.Text), "единиц", convertedDate, Convert.ToInt16(dayCount.Text), timesAtDay, eachDay);
                     var AssignedMedicament = AssignedMedicamentFactory.Create(Guid.NewGuid(), Guid_pat, Guid_drug, Convert.ToDouble(dosage.Text), "единиц", convertedDate, Convert.ToInt16(dayCount.Text), timesAtDay, eachDay);
+=======
+                   
+                    var AssignedMedicament = AssignedMedicamentFactory.Create(Guid.NewGuid(), Guid_pat, Guid_drug, Convert.ToDouble(dosage.Text), "единиц", convertedDate, Convert.ToInt16(dayCount.Text), timesAtDay, eachDay);                     
+>>>>>>> 78d8078923953fe31862b01a6a4a3b07f5549873
                     AssignedMedicamentRepo.CreateOrUpdateEntity(AssignedMedicament);
 
                     Label2.Text = "Отправка данных прошла успешно.";
@@ -155,10 +167,17 @@ namespace doc_int
                 TextBox6.Text = Convert.ToString(convertedDate);
             }
             catch { }
+<<<<<<< HEAD
             TextBox5.Text = dosage.Text;
             TextBox7.Text = dayCount.Text;
             TextBox8.Text = Convert.ToString(timesAtDay);
             TextBox9.Text = Convert.ToString(eachDay);
+=======
+                TextBox5.Text = dosage.Text;                
+                TextBox7.Text = dayCount.Text;
+                TextBox8.Text = Convert.ToString(timesAtDay);
+                TextBox9.Text = Convert.ToString(eachDay);
+>>>>>>> 78d8078923953fe31862b01a6a4a3b07f5549873
         }
 
         protected void Calendar1_DayRender(object sender, DayRenderEventArgs e)
@@ -168,7 +187,10 @@ namespace doc_int
                 e.Day.IsSelectable = false;
             }
         }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 78d8078923953fe31862b01a6a4a3b07f5549873
     }
 }
 
