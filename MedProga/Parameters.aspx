@@ -18,19 +18,6 @@
             </td>
         </tr>
          <tr> 
-            <td> 
-                <asp:Label ID="Label_time" runat="server" Text="Время суток"></asp:Label>
-             </td>
-            <td style="padding-left:3px;"> 
-                <asp:DropDownList ID="DropDownList1" runat="server" Height="20px" Width="153px">
-                    <asp:ListItem>Утро</asp:ListItem>
-                    <asp:ListItem>День</asp:ListItem>
-                    <asp:ListItem>Вечер</asp:ListItem>
-                    <asp:ListItem>Ночь</asp:ListItem>
-                </asp:DropDownList>
-             </td>
-        </tr>
-         <tr> 
             <td class="style1"> 
                 Систолическое&nbsp;&nbsp;&nbsp;&nbsp;
                 <br />

@@ -31,24 +31,6 @@ namespace MedProga {
         protected global::System.Web.UI.WebControls.TextBox TextBox_date;
         
         /// <summary>
-        /// Label_time элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label_time;
-        
-        /// <summary>
-        /// DropDownList1 элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
-        
-        /// <summary>
         /// TextBox_sad элемент управления.
         /// </summary>
         /// <remarks>
