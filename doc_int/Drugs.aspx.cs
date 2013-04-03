@@ -11,8 +11,6 @@ namespace doc_int
 {
     using System.Drawing;
 
-    using Domain.Medicament;
-
     public partial class About : System.Web.UI.Page
     {
 
@@ -24,10 +22,8 @@ namespace doc_int
         public int interval;
         public Guid patient_guid;
         public Guid drug_guid;
-        public string indpat;
         public Guid Guid_pat = new Guid("11111111-1111-1111-1111-111111111111");
         public Guid Guid_drug = new Guid("11111111-1111-1111-1111-111111111111");
-        public string ggg;
         public DateTime start;
         public int timesAtDay;
         public int eachDay;
@@ -41,13 +37,13 @@ namespace doc_int
         protected void Page_Load(object sender, EventArgs e)
         {
             var today = DateTime.Today;
-            
-            
+
+
             var foundPerson = personRepo.GetAll().ToList();
             GridView1.DataSource = foundPerson;
             GridView1.DataBind();
 
-            
+
             var getMedicament = medicamentRepo.GetAll().ToList();
             GridView2.DataSource = getMedicament;
             GridView2.DataBind();
@@ -71,10 +67,10 @@ namespace doc_int
             {
                 Int16 num = Convert.ToInt16(e.CommandArgument);
                 TextBox1.Text = GridView1.Rows[num].Cells[3].Text;
-                TextBox3.Text = GridView1.Rows[num].Cells[4].Text;              
+                TextBox3.Text = GridView1.Rows[num].Cells[4].Text;
             }
 
-             
+
 
         }
 
@@ -87,7 +83,7 @@ namespace doc_int
                 TextBox4.Text = GridView2.Rows[num2].Cells[4].Text;
 
             }
-            
+
         }
 
         public void Button1_Click(object sender, EventArgs e)
@@ -115,11 +111,11 @@ namespace doc_int
 
                     DateTime convertedDate = DateTime.Parse(Label1.Text);
                     DateTime end = convertedDate.AddDays(Convert.ToInt32(dayCount.Text));
-                        //var tomorrowNewTime = newTime.AddDays(1);
+                    //var tomorrowNewTime = newTime.AddDays(1);
 
 
-                   
-                    var AssignedMedicament = AssignedMedicamentFactory.Create(Guid.NewGuid(), Guid_pat, Guid_drug, Convert.ToDouble(dosage.Text), "единиц", convertedDate, Convert.ToInt16(dayCount.Text), timesAtDay, eachDay);                     
+                    //var AssignedMedicament = AssignedMedicamentFactory.Create(Guid.NewGuid(), Guid_pat, Guid_drug, Convert.ToDouble(dosage.Text), "единиц", convertedDate, Convert.ToInt16(dayCount.Text), timesAtDay, eachDay);
+                    var AssignedMedicament = AssignedMedicamentFactory.Create(Guid.NewGuid(), Guid_pat, Guid_drug, Convert.ToDouble(dosage.Text), "единиц", convertedDate, Convert.ToInt16(dayCount.Text), timesAtDay, eachDay);
                     AssignedMedicamentRepo.CreateOrUpdateEntity(AssignedMedicament);
 
                     Label2.Text = "Отправка данных прошла успешно.";
@@ -129,8 +125,8 @@ namespace doc_int
                     Label2.Text = "Внимание. Была допущена ошибка при формировании выписки препарата. Проверьте все данные и повторите попытку.";
                 }
             }
-            catch (Exception u) {Label2.Text = u.Message; }
-            
+            catch (Exception u) { Label2.Text = u.Message; }
+
 
         }
 
@@ -139,11 +135,11 @@ namespace doc_int
             Label1.Text = Calendar1.SelectedDate.ToShortDateString();
         }
 
-      
-        
+
+
         protected void Button2_Click(object sender, EventArgs e)
         {
-             if (RadioButton1.Checked == true)
+            if (RadioButton1.Checked == true)
             {
                 timesAtDay = Convert.ToInt16(choose_num.Text);
                 eachDay = 1;
@@ -160,23 +156,21 @@ namespace doc_int
                 TextBox6.Text = Convert.ToString(convertedDate);
             }
             catch { }
-                TextBox5.Text = dosage.Text;                
-                TextBox7.Text = dayCount.Text;
-                TextBox8.Text = Convert.ToString(timesAtDay);
-                TextBox9.Text = Convert.ToString(eachDay);
+
+            TextBox5.Text = dosage.Text;
+            TextBox7.Text = dayCount.Text;
+            TextBox8.Text = Convert.ToString(timesAtDay);
+            TextBox9.Text = Convert.ToString(eachDay);
         }
 
         protected void Calendar1_DayRender(object sender, DayRenderEventArgs e)
         {
-            // Select all dates in the past
             if (e.Day.Date < System.DateTime.Today)
             {
-                // Disable date
                 e.Day.IsSelectable = false;
-                // Change color of disabled date
-                e.Cell.ForeColor = Color.Gray;
             }
         }
     }
 }
+
 

@@ -117,22 +117,23 @@
                     <TodayDayStyle BackColor="#99CCCC" ForeColor="White" />
                     <WeekendDayStyle BackColor="#CCCCFF" />
                 </asp:Calendar>
-                <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+                <asp:Label ID="Label1" runat="server" 
+                    Text="Выберите дату начала приёма препарата"></asp:Label>
             </td>
             <td width="30%">
                 ID 1<asp:TextBox ID="TextBox3" runat="server" ReadOnly="True"></asp:TextBox>
                 <br />
                 ID 2<asp:TextBox ID="TextBox4" runat="server" ReadOnly="True"></asp:TextBox>
                 <br />
-                Доза<asp:TextBox ID="TextBox5" runat="server"></asp:TextBox>
+                Доза<asp:TextBox ID="TextBox5" runat="server" ReadOnly="True"></asp:TextBox>
                 <br />
-                Начало<asp:TextBox ID="TextBox6" runat="server"></asp:TextBox>
+                Начало<asp:TextBox ID="TextBox6" runat="server" ReadOnly="True"></asp:TextBox>
                 <br />
-                Кол-во дней<asp:TextBox ID="TextBox7" runat="server"></asp:TextBox>
+                Кол-во дней<asp:TextBox ID="TextBox7" runat="server" ReadOnly="True"></asp:TextBox>
                 <br />
-                Сколько в день<asp:TextBox ID="TextBox8" runat="server"></asp:TextBox>
+                Сколько в день<asp:TextBox ID="TextBox8" runat="server" ReadOnly="True"></asp:TextBox>
                 <br />
-                Через сколько дней<asp:TextBox ID="TextBox9" runat="server"></asp:TextBox>
+                Через сколько дней<asp:TextBox ID="TextBox9" runat="server" ReadOnly="True"></asp:TextBox>
                 <br />
                 <asp:Button ID="Button2" runat="server" onclick="Button2_Click" 
                     Text="Проверка" />
