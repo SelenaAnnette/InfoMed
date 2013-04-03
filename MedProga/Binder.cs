@@ -10,6 +10,9 @@
 
     using Ninject;
 
+    using ServerLogic.Logger;
+    using ServerLogic.Notification;
+
     public static class Binder
     {
         public static readonly IKernel NinjectKernel = new StandardKernel();
@@ -25,6 +28,7 @@
             var trashDataBaseConnectionString = Properties.Settings.Default.TrashDBConnectionString;
 
             NinjectKernel.Bind<IPersonRepository>().To<PersonRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
+            NinjectKernel.Bind<IPersonContactRepository>().To<PersonContactRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
             NinjectKernel.Bind<IGroupRepository>().To<GroupRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
             NinjectKernel.Bind<ISymptomRepository>().To<SymptomRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
             NinjectKernel.Bind<IRiskFactorRepository>().To<RiskFactorRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
@@ -44,6 +48,14 @@
             NinjectKernel.Bind<IPersonMedicamentRepository>().To<PersonMedicamentRepository>().WithConstructorArgument("connectionString", trashDataBaseConnectionString);
             NinjectKernel.Bind<IPersonRiskFactorRepository>().To<PersonRiskFactorRepository>().WithConstructorArgument("connectionString", trashDataBaseConnectionString);
             NinjectKernel.Bind<IPersonSymptomRepository>().To<PersonSymptomRepository>().WithConstructorArgument("connectionString", trashDataBaseConnectionString);
+
+            NinjectKernel.Bind<ILogger>().To<FileLogger>();
+
+            NinjectKernel.Bind<INotificationManager>().To<NotificationManager>()
+                .WithConstructorArgument("startDayFromHour", 0)
+                .WithConstructorArgument("endDayFromHour", 0)
+                .WithConstructorArgument("reservHoursForAnsver", 0)
+                .WithConstructorArgument("minutesCountForNotificationAnswer", 0);
         }
     }
 }

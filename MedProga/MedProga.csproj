@@ -206,6 +206,10 @@
       <Project>{F1E8D055-B00E-4539-8EDE-244313442F27}</Project>
       <Name>Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ServerLogic\ServerLogic.csproj">
+      <Project>{67F41138-85E9-449C-A51E-3B64B2242FC8}</Project>
+      <Name>ServerLogic</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

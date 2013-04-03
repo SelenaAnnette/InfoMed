@@ -24,16 +24,19 @@
       <Value Profile="(Default)">5</Value>
     </Setting>
     <Setting Name="SendAndReceiveSms" Type="System.Boolean" Scope="Application">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="DelayStartForNotificationTimersInSeconds" Type="System.Int32" Scope="Application">
-      <Value Profile="(Default)">30</Value>
+      <Value Profile="(Default)">10</Value>
     </Setting>
     <Setting Name="PeriodOfModemCheckConnectionInSeconds" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">30</Value>
     </Setting>
     <Setting Name="MinutesCountForNotificationAnswer" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">90</Value>
+    </Setting>
+    <Setting Name="NotificationClosingFrequencyInMinutes" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">5</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -51,7 +51,8 @@
             NinjectKernel.Bind<IPersonRiskFactorRepository>().To<PersonRiskFactorRepository>().WithConstructorArgument("connectionString", trashDataBaseConnectionString);
             NinjectKernel.Bind<IPersonSymptomRepository>().To<PersonSymptomRepository>().WithConstructorArgument("connectionString", trashDataBaseConnectionString);
 
-            NinjectKernel.Bind<ILogger>().To<ConsoleLogger>();
+            NinjectKernel.Bind<ILogger>().To<FileLogger>();                     
+
             NinjectKernel.Bind<INotificationManager>().To<NotificationManager>()
                 .WithConstructorArgument("startDayFromHour", Properties.Settings.Default.StartDayFromHour)
                 .WithConstructorArgument("endDayFromHour", Properties.Settings.Default.EndDayFromHour)
@@ -60,11 +61,12 @@
             NinjectKernel.Bind<INotificationService>().To<NotificationService>()
                 .WithConstructorArgument("notificationCreationFrequencyInMinutes", Properties.Settings.Default.NotificationCreationFrequencyInMinutes)
                 .WithConstructorArgument("notificationSendingFrequencyInMinutes", Properties.Settings.Default.NotificationSendingFrequencyInMinutes)
+                .WithConstructorArgument("notificationClosingFrequencyInMinutes", Properties.Settings.Default.NotificationClosingFrequencyInMinutes)
                 .WithConstructorArgument("delayStartForNotificationTimersInSeconds", Properties.Settings.Default.DelayStartForNotificationTimersInSeconds)                
                 .WithConstructorArgument("sendAndReceiveSms", Properties.Settings.Default.SendAndReceiveSms)                
                 .WithConstructorArgument("periodOfModemCheckConnectionInSeconds", Properties.Settings.Default.PeriodOfModemCheckConnectionInSeconds);
 
-            NinjectKernel.Bind<IModem>().To<Modem>();
+            NinjectKernel.Bind<IModem>().To<Modem>().InSingletonScope();
         }
     }
 }

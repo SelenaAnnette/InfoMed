@@ -1,23 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
-using System.Data.SqlClient;
-using System.Configuration;
 
-using DataLayer.Persistence.Group;
 using DataLayer.Persistence.Person;
-using DataLayer.Persistence.Symptom;
-using DataLayer.Persistence.Measuring;
 using Ninject;
 using DataLayer.Persistence.Medicament;
 using System.ComponentModel;
 
 namespace doc_int
 {
+    using System.Drawing;
+
     public partial class About : System.Web.UI.Page
     {
 
@@ -172,6 +165,31 @@ namespace doc_int
                 TextBox9.Text = Convert.ToString(eachDay);
          }
 
+<<<<<<< HEAD
+=======
+            Label1.Text = Convert.ToString(eachDay) ;
+            
+            var AssignedMedicament = AssignedMedicamentFactory.Create(Guid.NewGuid(), Guid_pat, Guid_drug, Convert.ToDouble(dosage.Text), "единиц", DateTime.Now, Convert.ToInt16(dayCount.Text), timesAtDay, eachDay);
+            AssignedMedicamentRepo.CreateOrUpdateEntity(AssignedMedicament);
+        }
+
+        protected void Calendar1_DayRender(object sender, DayRenderEventArgs e)
+        {
+            // Select all dates in the past
+            if (e.Day.Date < System.DateTime.Today)
+            {
+                // Disable date
+                e.Day.IsSelectable = false;
+                // Change color of disabled date
+                e.Cell.ForeColor = Color.Gray;
+            }
+        }
+    
+        protected void Calendar1_SelectionChanged(object sender, EventArgs e)
+        {
+            Label1.Text = Calendar1.SelectedDate.ToShortDateString();
+        }
+>>>>>>> 69595c654d5223c0eb22f56a5a51911e154dcc20
     }
 }
 

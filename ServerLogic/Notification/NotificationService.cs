@@ -6,6 +6,8 @@
 
     using DataLayer.Persistence.Person;
 
+    using ServerLogic.Logger;
+
     using SmsModule;
 
     public class NotificationService : INotificationService
@@ -36,11 +38,16 @@
 
         private readonly int notificationClosingFrequencyInMinutes;
 
+        private bool IsModemConnected;
+
+        private readonly ILogger logger;
+
         public NotificationService(INotificationManager notificationManager, int notificationCreationFrequencyInMinutes, int notificationSendingFrequencyInMinutes,
             IModem modem, bool sendAndReceiveSms, int notificationClosingFrequencyInMinutes, int periodOfModemCheckConnectionInSeconds, IPersonContactRepository personContactRepository,
-            int delayStartForNotificationTimersInSeconds)
+            int delayStartForNotificationTimersInSeconds, ILogger logger)
         {            
             this.notificationManager = notificationManager;
+            this.logger = logger;
             this.notificationCreationFrequencyInMinutes = notificationCreationFrequencyInMinutes;
             this.notificationSendingFrequencyInMinutes = notificationSendingFrequencyInMinutes;
             this.notificationClosingFrequencyInMinutes = notificationClosingFrequencyInMinutes;                        
@@ -51,15 +58,9 @@
             this.delayStartForNotificationTimersInSeconds = delayStartForNotificationTimersInSeconds;
         }
 
-
-        ~NotificationService()
-        {
-            this.StopService();
-        }
-
         public void StartService()
         {
-            this.creationTimer = new Timer(this.CreateNotifications, this, TimeSpan.FromSeconds(this.delayStartForNotificationTimersInSeconds), 
+            this.creationTimer = new Timer(this.CreateNotifications, this, TimeSpan.FromSeconds(this.delayStartForNotificationTimersInSeconds),
                 TimeSpan.FromMinutes(this.notificationCreationFrequencyInMinutes));
             this.closingTimer = new Timer(this.CloseNotifications, this, TimeSpan.FromSeconds(this.delayStartForNotificationTimersInSeconds),
                 TimeSpan.FromMinutes(this.notificationClosingFrequencyInMinutes));
@@ -71,7 +72,7 @@
 
             this.InitializeModem();
             this.sendingTimer = new Timer(this.SendNotifications, this, TimeSpan.FromSeconds(this.delayStartForNotificationTimersInSeconds),
-            TimeSpan.FromMinutes(this.notificationSendingFrequencyInMinutes));
+                TimeSpan.FromMinutes(this.notificationSendingFrequencyInMinutes));
             this.modemTimer = new Timer(this.CheckModemConnection, this, TimeSpan.FromSeconds(this.delayStartForNotificationTimersInSeconds), TimeSpan.FromSeconds(this.periodOfModemCheckConnectionInSeconds));
         }        
 
@@ -102,7 +103,7 @@
         {
             while (true)
             {
-                if (!this.modem.CheckConnection())
+                if (!this.IsModemConnected)
                 {
                     Thread.Sleep(10000);                    
                     continue;
@@ -116,7 +117,13 @@
 
                     foreach (var personContact in personContacts)
                     {
-                        this.modem.SendSms(personContact.Value, notification.Text);
+                        if (this.modem.SendSms(personContact.Value, notification.Text))
+                        {
+                            this.logger.LogMessage(string.Format("Message \"{0}\" was sended to mobile {1}", notification.Text, personContact.Value));
+                            continue;
+                        }
+
+                        this.logger.LogMessage(string.Format("Message \"{0}\" was not sended to mobile {1}", notification.Text, personContact.Value));
                     }                        
                 }
 
@@ -126,11 +133,18 @@
 
         private void InitializeModem()
         {
-            this.modem.Initialize();
+            this.IsModemConnected = this.modem.Initialize();
+            if (!this.IsModemConnected)
+            {
+                this.logger.LogMessage("Modem was not initialized");
+                return;
+            }
+
+            this.logger.LogMessage("Modem was initialized");
         }
 
         private void CheckModemConnection(object state)
-        {
+        {            
             if (!this.modem.CheckConnection())
             {
                 this.InitializeModem();

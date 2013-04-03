@@ -105,6 +105,7 @@
                     BorderColor="#3366CC" BorderWidth="1px" CellPadding="1" 
                     DayNameFormat="Shortest" Font-Names="Verdana" Font-Size="8pt" 
                     ForeColor="#003399" Height="200px" Width="220px" 
+                    ondayrender="Calendar1_DayRender"
                     onselectionchanged="Calendar1_SelectionChanged">
                     <DayHeaderStyle BackColor="#99CCCC" ForeColor="#336666" Height="1px" />
                     <NextPrevStyle Font-Size="8pt" ForeColor="#CCCCFF" />
