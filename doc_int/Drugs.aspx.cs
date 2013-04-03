@@ -26,6 +26,10 @@ namespace doc_int
         public Guid Guid_pat = new Guid("11111111-1111-1111-1111-111111111111");
         public Guid Guid_drug = new Guid("11111111-1111-1111-1111-111111111111");
         public string ggg;
+        public DateTime start;
+        public int timesAtDay;
+        public int eachDay;
+
 
         public IPersonRepository personRepo = Binder.NinjectKernel.Get<IPersonRepository>();
         public IMedicamentRepository medicamentRepo = Binder.NinjectKernel.Get<IMedicamentRepository>();
@@ -45,6 +49,13 @@ namespace doc_int
             var getMedicament = medicamentRepo.GetAll().ToList();
             GridView2.DataSource = getMedicament;
             GridView2.DataBind();
+
+            if (Convert.ToInt32(choose_num.Text) < 0)
+            {
+                int zero = 0;
+                choose_num.Text = Convert.ToString(zero);
+            }
+
         }
 
         public void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -78,8 +89,21 @@ namespace doc_int
             Guid_pat = new Guid(TextBox3.Text);
             Guid_drug = new Guid(TextBox4.Text);
 
+            if (RadioButton1.Checked == true)
+            {
+                timesAtDay = Convert.ToInt16(choose_num.Text);
+                eachDay = 1;
+            }
 
-            var AssignedMedicament = AssignedMedicamentFactory.Create(Guid.NewGuid(), Guid_pat, Guid_drug, Convert.ToDouble(dosage.Text), "unit", DateTime.Now, Convert.ToInt16(dayCount.Text), Convert.ToInt16(timesAtDay.Text), Convert.ToInt16(eachDay.Text));
+            if (RadioButton2.Checked == true)
+            {
+                timesAtDay = 1;
+                eachDay = Convert.ToInt16(choose_num.Text); ;
+            }
+
+            Label1.Text = Convert.ToString(eachDay) ;
+            
+            var AssignedMedicament = AssignedMedicamentFactory.Create(Guid.NewGuid(), Guid_pat, Guid_drug, Convert.ToDouble(dosage.Text), "единиц", DateTime.Now, Convert.ToInt16(dayCount.Text), timesAtDay, eachDay);
             AssignedMedicamentRepo.CreateOrUpdateEntity(AssignedMedicament);
         }
 
@@ -89,10 +113,15 @@ namespace doc_int
             if (e.Day.Date < System.DateTime.Today)
             {
                 // Disable date
-                e.Day.IsSelectable = false;                
+                e.Day.IsSelectable = false;
                 // Change color of disabled date
-                e.Cell.ForeColor = Color.Gray;                
-            } 
+                e.Cell.ForeColor = Color.Gray;
+            }
+        }
+    
+        protected void Calendar1_SelectionChanged(object sender, EventArgs e)
+        {
+            Label1.Text = Calendar1.SelectedDate.ToShortDateString();
         }
     }
 }

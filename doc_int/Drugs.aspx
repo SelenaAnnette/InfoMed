@@ -55,16 +55,21 @@
                 по
                 <asp:TextBox ID="dosage" runat="server" TextMode="Number" Width="30px">1</asp:TextBox>
 &nbsp; единице(ы)
-                <asp:TextBox ID="timesAtDay" runat="server" Width="25px" TextMode="Number">2</asp:TextBox>
-                &nbsp;раза в день каждый(ые)
-                <asp:TextBox ID="eachDay" runat="server" TextMode="Number" Width="35px">1</asp:TextBox>
-                &nbsp;дня/дней на продолжении
+                <br />
+                <asp:RadioButton ID="RadioButton1" runat="server" Checked="True" 
+                    GroupName="choose" Text="N раз в день" />
+                <asp:RadioButton ID="RadioButton2" runat="server" GroupName="choose" 
+                    Text="Раз в N дней" />
+                <br />
+                <asp:TextBox ID="choose_num" runat="server" Width="25px" TextMode="Number">2</asp:TextBox>
+                <br />
+&nbsp;на продолжении
                 <asp:TextBox ID="dayCount" runat="server" TextMode="Number" Width="35px">14</asp:TextBox>
                 &nbsp;дня/дней.<br />
                 <asp:Button ID="Button1" runat="server" Text="Выписать" 
                     onclick="Button1_Click" />
                 <br />
-&nbsp;</td>
+            </td>
             <td style="text-align: center" width="30%">
                 &nbsp;<br />
                 &nbsp;<br />
@@ -98,7 +103,8 @@
                     BorderColor="#3366CC" BorderWidth="1px" CellPadding="1" 
                     DayNameFormat="Shortest" Font-Names="Verdana" Font-Size="8pt" 
                     ForeColor="#003399" Height="200px" Width="220px" 
-                    ondayrender="Calendar1_DayRender">
+                    ondayrender="Calendar1_DayRender"
+                    onselectionchanged="Calendar1_SelectionChanged">
                     <DayHeaderStyle BackColor="#99CCCC" ForeColor="#336666" Height="1px" />
                     <NextPrevStyle Font-Size="8pt" ForeColor="#CCCCFF" />
                     <OtherMonthDayStyle ForeColor="#999999" />
@@ -109,10 +115,12 @@
                     <TodayDayStyle BackColor="#99CCCC" ForeColor="White" />
                     <WeekendDayStyle BackColor="#CCCCFF" />
                 </asp:Calendar>
+                <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
             </td>
             <td width="30%">
-                <asp:TextBox ID="TextBox3" runat="server" ReadOnly="True"></asp:TextBox>
-                <asp:TextBox ID="TextBox4" runat="server" ReadOnly="True"></asp:TextBox>
+                ID 1<asp:TextBox ID="TextBox3" runat="server" ReadOnly="True"></asp:TextBox>
+                <br />
+                ID 2<asp:TextBox ID="TextBox4" runat="server" ReadOnly="True"></asp:TextBox>
             </td>
             <td>
             </td>
