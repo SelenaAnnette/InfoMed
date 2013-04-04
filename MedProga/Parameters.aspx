@@ -14,7 +14,7 @@
                 <asp:Label ID="Label_date" runat="server" Text="Дата"></asp:Label>
             </td>
             <td> 
-                <asp:TextBox ID="TextBox_date" runat="server" MaxLength="10"></asp:TextBox>
+                <asp:TextBox ID="TextBox_DateTime" runat="server" MaxLength="10"></asp:TextBox>
             </td>
         </tr>
          <tr> 
@@ -57,7 +57,7 @@
                 <asp:Label ID="Label_bedra" runat="server" Text="Окружность бедер (см)"></asp:Label>
              </td>
             <td> 
-                <asp:TextBox ID="TextBox_bedra" runat="server" MaxLength="3"></asp:TextBox>
+                <asp:TextBox ID="TextBox_okr_beder" runat="server" MaxLength="3"></asp:TextBox>
              </td>
         </tr>
          <tr> 
@@ -65,7 +65,7 @@
                 <asp:Label ID="Label_taliya" runat="server" Text="Окружность талии (см)"></asp:Label>
              </td>
             <td> 
-                <asp:TextBox ID="TextBox_taliya" runat="server" MaxLength="3"></asp:TextBox>
+                <asp:TextBox ID="TextBox_okr_talii" runat="server" MaxLength="3"></asp:TextBox>
              </td>
         </tr>
     </table>

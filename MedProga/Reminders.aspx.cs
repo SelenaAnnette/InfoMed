@@ -14,38 +14,14 @@ using ServerLogic.Notification;
 
 namespace MedProga
 {
-
+    using DataLayer.Persistence.Medicament;
+    using DataLayer.Persistence.Message;
 
     public partial class Reminders : System.Web.UI.Page
     {
-        //public string sql;
-        //public DataTable dataTable;
-        //public DataRow row;
-        //public SqlDataAdapter dataAdapter;
-
-        //public void zapros(string sql)
-        //{
-        //    try
-        //    {
-        //        StreamReader strrd = new StreamReader("S:/ВГТУ/5 курс/9 семестр/Диплом/Диплом1/MedProga/conn1.txt");
-        //        string cs = strrd.ReadLine();
-        //        SqlConnection conn = new SqlConnection(cs);
-        //        conn.Open();
-        //        SqlCommand command = new SqlCommand(sql, conn);
-        //        dataAdapter = new SqlDataAdapter(command);
-        //        SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dataAdapter);
-        //        dataTable = new DataTable();
-        //        dataAdapter.Fill(dataTable);
-        //        conn.Close();
-        //    }
-        //    catch
-        //    {
-
-        //    }
-        //}
-
         protected void Page_Load(object sender, EventArgs e)
         {
+            CheckBoxList1.Items.Clear();
             var actualNotificationsRepo = Binder.NinjectKernel.Get<INotificationManager>();
             var personsRepo = Binder.NinjectKernel.Get<IPersonRepository>();
             var personId = personsRepo.GetEntitiesByQuery(p => p.LastName == "Glazunov").First().Id;
@@ -53,6 +29,37 @@ namespace MedProga
             for (int i = 0; i < nots.Length; i++)
             {
                 CheckBoxList1.Items.Add(nots[i].Text);
+            }
+        }
+
+        protected void Button_save_Click(object sender, EventArgs e)
+        {
+            for (int i=0; i < CheckBoxList1.Items.Count; i++)
+            {
+                if (CheckBoxList1.Items[i].Selected)
+                {
+                    var nots = Binder.NinjectKernel.Get<INotificationRepository>();
+                    var medId = nots.GetEntitiesByQuery(n => n.Text == CheckBoxList1.Items[i].Text).First().MedicamentId;
+                    var personId = nots.GetEntitiesByQuery(n => n.Text == CheckBoxList1.Items[i].Text).First().PersonId;
+                    var personMedsRepo = Binder.NinjectKernel.Get<IPersonMedicamentRepository>();
+                    var personMedsFac = new PersonMedicamentFactory();
+                    var perMed = personMedsFac.Create(Guid.NewGuid(), medId, personId, DateTime.Now);
+                    personMedsRepo.CreateOrUpdateEntity(perMed);
+                }
+            }
+        }
+
+        protected void Button_close_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < CheckBoxList1.Items.Count; i++)
+            {
+                if (CheckBoxList1.Items[i].Selected)
+                {
+                    var nots = Binder.NinjectKernel.Get<INotificationRepository>();
+                    var notId = nots.GetEntitiesByQuery(n => n.Text == CheckBoxList1.SelectedItem.Text).First().Id;
+                    var closeNots = Binder.NinjectKernel.Get<INotificationManager>();
+                    closeNots.CloseNotificationById(notId);
+                }
             }
         }
 
