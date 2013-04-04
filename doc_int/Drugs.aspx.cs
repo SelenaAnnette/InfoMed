@@ -113,7 +113,6 @@ namespace doc_int
                     DateTime end = convertedDate.AddDays(Convert.ToInt32(dayCount.Text));
                     //var tomorrowNewTime = newTime.AddDays(1);
 
-
                     //var AssignedMedicament = AssignedMedicamentFactory.Create(Guid.NewGuid(), Guid_pat, Guid_drug, Convert.ToDouble(dosage.Text), "единиц", convertedDate, Convert.ToInt16(dayCount.Text), timesAtDay, eachDay);
                     var AssignedMedicament = AssignedMedicamentFactory.Create(Guid.NewGuid(), Guid_pat, Guid_drug, Convert.ToDouble(dosage.Text), "единиц", convertedDate, Convert.ToInt16(dayCount.Text), timesAtDay, eachDay);
                     AssignedMedicamentRepo.CreateOrUpdateEntity(AssignedMedicament);
