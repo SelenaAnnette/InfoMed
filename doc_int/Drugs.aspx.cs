@@ -7,6 +7,10 @@ using Ninject;
 using DataLayer.Persistence.Medicament;
 using System.ComponentModel;
 
+using System.Web;
+using System.Web.SessionState;
+
+
 namespace doc_int
 {
 
@@ -40,8 +44,24 @@ namespace doc_int
         public IAssignedMedicamentRepository AssignedMedicamentRepo = Binder.NinjectKernel.Get<IAssignedMedicamentRepository>();
         public AssignedMedicamentFactory AssignedMedicamentFactory = new AssignedMedicamentFactory();
 
+
+
+        protected void Page_PreRender(object sender, EventArgs e)
+
+            {
+                ViewState["Update"] = Session["Update"];
+            }
+
         protected void Page_Load(object sender, EventArgs e)
         {
+
+
+            if (!IsPostBack)
+            {
+                Session["Update"] = Server.UrlEncode(System.DateTime.Now.ToString());
+            }
+
+
             var today = DateTime.Today;
 
 
@@ -94,6 +114,11 @@ namespace doc_int
 
         public void Button1_Click(object sender, EventArgs e)
         {
+
+            if (Session["Update"].ToString() == ViewState["Update"].ToString())
+
+            {
+
             try
             {
                 if ((TextBox1.Text != "") && (TextBox2.Text != "") && (dosage.Text != "") && (choose_num.Text != "") && (dayCount.Text != "") && (Label1.Text != "") && (Convert.ToInt16(dosage.Text) > 0) && (Convert.ToInt16(choose_num.Text) > 0) && (Convert.ToInt16(dayCount.Text) > 0))
@@ -118,7 +143,6 @@ namespace doc_int
                     DateTime convertedDate = DateTime.Parse(Label1.Text);
                     DateTime end = convertedDate.AddDays(Convert.ToInt32(dayCount.Text));
 
-                    //var AssignedMedicament = AssignedMedicamentFactory.Create(Guid.NewGuid(), Guid_pat, Guid_drug, Convert.ToDouble(dosage.Text), "единиц", convertedDate, Convert.ToInt16(dayCount.Text), timesAtDay, eachDay);
                     var AssignedMedicament = AssignedMedicamentFactory.Create(Guid.NewGuid(), Guid_pat, Guid_drug, Convert.ToDouble(dosage.Text), "единиц", convertedDate, Convert.ToInt16(dayCount.Text), timesAtDay, eachDay);
 
                     AssignedMedicamentRepo.CreateOrUpdateEntity(AssignedMedicament);
@@ -133,7 +157,9 @@ namespace doc_int
             }
             catch (Exception u) { Label2.Text = u.Message; }
 
+                Session["Update"] = Server.UrlEncode(System.DateTime.Now.ToString());
 
+            }
         }
 
         protected void Calendar1_SelectionChanged(object sender, EventArgs e)
@@ -182,6 +208,9 @@ namespace doc_int
                 e.Day.IsSelectable = false;
             }
         }
+
+
+
 
     }
 }
