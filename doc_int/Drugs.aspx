@@ -55,7 +55,7 @@
                 <br />
                 Принимать препарат
                 по
-                <asp:TextBox ID="dosage" runat="server" TextMode="Number" Width="30px">1</asp:TextBox>
+                <asp:TextBox ID="dosage" runat="server" Type="Number" Width="30px">1</asp:TextBox>
 &nbsp; единице(ы)
                 <br />
                 <asp:RadioButton ID="RadioButton1" runat="server" Checked="True" 
@@ -63,10 +63,10 @@
                 <asp:RadioButton ID="RadioButton2" runat="server" GroupName="choose" 
                     Text="Раз в N дней" />
                 <br />
-                <asp:TextBox ID="choose_num" runat="server" Width="25px" TextMode="Number">2</asp:TextBox>
+                <asp:TextBox ID="choose_num" runat="server" Width="25px" Type="Number">2</asp:TextBox>
                 <br />
 &nbsp;на продолжении
-                <asp:TextBox ID="dayCount" runat="server" TextMode="Number" Width="35px">14</asp:TextBox>
+                <asp:TextBox ID="dayCount" runat="server" Type="Number" Width="35px">14</asp:TextBox>
                 &nbsp;дня/дней.<br />
                 <asp:Button ID="Button1" runat="server" Text="Выписать" 
                     onclick="Button1_Click" />
