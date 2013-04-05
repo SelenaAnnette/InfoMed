@@ -21,26 +21,26 @@ namespace MedProga
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            CheckBoxList1.Items.Clear();
+            this.CheckBoxList1.Items.Clear();
             var actualNotificationsRepo = Binder.NinjectKernel.Get<INotificationManager>();
             var personsRepo = Binder.NinjectKernel.Get<IPersonRepository>();
             var personId = personsRepo.GetEntitiesByQuery(p => p.LastName == "Glazunov").First().Id;
             var nots = actualNotificationsRepo.GetNotificationsForPerson(personId).ToArray();
             for (int i = 0; i < nots.Length; i++)
             {
-                CheckBoxList1.Items.Add(nots[i].Text);
+                this.CheckBoxList1.Items.Add(nots[i].Text);
             }
         }
 
         protected void Button_save_Click(object sender, EventArgs e)
         {
-            for (int i=0; i < CheckBoxList1.Items.Count; i++)
+            for (int i=0; i < this.CheckBoxList1.Items.Count; i++)
             {
-                if (CheckBoxList1.Items[i].Selected)
+                if (this.CheckBoxList1.Items[i].Selected)
                 {
                     var nots = Binder.NinjectKernel.Get<INotificationRepository>();
-                    var medId = nots.GetEntitiesByQuery(n => n.Text == CheckBoxList1.Items[i].Text).First().MedicamentId;
-                    var personId = nots.GetEntitiesByQuery(n => n.Text == CheckBoxList1.Items[i].Text).First().PersonId;
+                    var medId = nots.GetEntitiesByQuery(n => n.Text == this.CheckBoxList1.Items[i].Text).First().MedicamentId;
+                    var personId = nots.GetEntitiesByQuery(n => n.Text == this.CheckBoxList1.Items[i].Text).First().PersonId;
                     var personMedsRepo = Binder.NinjectKernel.Get<IPersonMedicamentRepository>();
                     var personMedsFac = new PersonMedicamentFactory();
                     var perMed = personMedsFac.Create(Guid.NewGuid(), medId, personId, DateTime.Now);
@@ -51,12 +51,12 @@ namespace MedProga
 
         protected void Button_close_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < CheckBoxList1.Items.Count; i++)
+            for (int i = 0; i < this.CheckBoxList1.Items.Count; i++)
             {
-                if (CheckBoxList1.Items[i].Selected)
+                if (this.CheckBoxList1.Items[i].Selected)
                 {
                     var nots = Binder.NinjectKernel.Get<INotificationRepository>();
-                    var notId = nots.GetEntitiesByQuery(n => n.Text == CheckBoxList1.SelectedItem.Text).First().Id;
+                    var notId = nots.GetEntitiesByQuery(n => n.Text == this.CheckBoxList1.Items[i].Text).First().Id;
                     var closeNots = Binder.NinjectKernel.Get<INotificationManager>();
                     closeNots.CloseNotificationById(notId);
                 }
