@@ -2,16 +2,21 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-<table>
+    <table>
     <tr>
         <td> 
-            <asp:CheckBoxList ID="CheckBoxList1" runat="server">
+            <asp:CheckBoxList ID="CheckBoxList_nots" runat="server">
             </asp:CheckBoxList>
         </td>
+        <td>
+             
+            &nbsp;</td>
     </tr>
     <tr>
         <td> 
-            &nbsp;</td>
+            <asp:Button ID="Button_save" runat="server" onclick="Button_save_Click" 
+                Text="Сохранить" Width="105px" />
+        </td>
     </tr>
 </table>
 </asp:Content>
