@@ -13,13 +13,13 @@ namespace MedProga {
     public partial class Reminders {
         
         /// <summary>
-        /// CheckBoxList1 элемент управления.
+        /// CheckBoxList_nots элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList CheckBoxList1;
+        protected global::System.Web.UI.WebControls.CheckBoxList CheckBoxList_nots;
         
         /// <summary>
         /// Button_save элемент управления.
@@ -29,14 +29,5 @@ namespace MedProga {
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button_save;
-        
-        /// <summary>
-        /// Button_close элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button_close;
     }
 }

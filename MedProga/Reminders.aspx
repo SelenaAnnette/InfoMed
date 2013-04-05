@@ -5,20 +5,17 @@
     <table>
     <tr>
         <td> 
-            <asp:CheckBoxList ID="CheckBoxList1" runat="server">
+            <asp:CheckBoxList ID="CheckBoxList_nots" runat="server">
             </asp:CheckBoxList>
         </td>
+        <td>
+             
+            &nbsp;</td>
     </tr>
     <tr>
         <td> 
             <asp:Button ID="Button_save" runat="server" onclick="Button_save_Click" 
-                Text="Сохранить" />
-        </td>
-    </tr>
-    <tr>
-        <td> 
-            <asp:Button ID="Button_close" runat="server" onclick="Button_close_Click" 
-                Text="Закрыть" />
+                Text="Сохранить" Width="105px" />
         </td>
     </tr>
 </table>

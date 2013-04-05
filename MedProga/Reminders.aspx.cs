@@ -21,49 +21,44 @@ namespace MedProga
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            this.CheckBoxList1.Items.Clear();
             var actualNotificationsRepo = Binder.NinjectKernel.Get<INotificationManager>();
             var personsRepo = Binder.NinjectKernel.Get<IPersonRepository>();
-            var personId = personsRepo.GetEntitiesByQuery(p => p.LastName == "Glazunov").First().Id;
-            var nots = actualNotificationsRepo.GetNotificationsForPerson(personId).ToArray();
+            var perId = personsRepo.GetEntitiesByQuery(p => p.LastName == "Glazunov").First().Id;
+            var nots = actualNotificationsRepo.GetNotificationsForPerson(perId).ToArray();
             for (int i = 0; i < nots.Length; i++)
             {
-                this.CheckBoxList1.Items.Add(nots[i].Text);
+                    CheckBoxList_nots.Items.Add(nots[i].Text);
             }
         }
+
 
         protected void Button_save_Click(object sender, EventArgs e)
         {
-            for (int i=0; i < this.CheckBoxList1.Items.Count; i++)
+            var actualNotificationsRepo = Binder.NinjectKernel.Get<INotificationManager>();
+            var personsRepo = Binder.NinjectKernel.Get<IPersonRepository>();
+            var perId = personsRepo.GetEntitiesByQuery(p => p.LastName == "Glazunov").First().Id;
+            var nots = actualNotificationsRepo.GetNotificationsForPerson(perId).ToArray();
+            var personMedsRepo = Binder.NinjectKernel.Get<IPersonMedicamentRepository>();
+            var personMedsFac = new PersonMedicamentFactory();
+            for (int i = 0; i < this.CheckBoxList_nots.Items.Count; i++)
             {
-                if (this.CheckBoxList1.Items[i].Selected)
+                
+                if (this.CheckBoxList_nots.Items[i].Selected)
                 {
-                    var nots = Binder.NinjectKernel.Get<INotificationRepository>();
-                    var medId = nots.GetEntitiesByQuery(n => n.Text == this.CheckBoxList1.Items[i].Text).First().MedicamentId;
-                    var personId = nots.GetEntitiesByQuery(n => n.Text == this.CheckBoxList1.Items[i].Text).First().PersonId;
-                    var personMedsRepo = Binder.NinjectKernel.Get<IPersonMedicamentRepository>();
-                    var personMedsFac = new PersonMedicamentFactory();
-                    var perMed = personMedsFac.Create(Guid.NewGuid(), medId, personId, DateTime.Now);
-                    personMedsRepo.CreateOrUpdateEntity(perMed);
+                    var medId = nots[i].MedicamentId;
+                    var notId = nots[i].Id;
+                    var personMed = personMedsFac.Create(Guid.NewGuid(), medId, perId, DateTime.Now);
+                    personMedsRepo.CreateOrUpdateEntity(personMed);
+                    actualNotificationsRepo.CloseNotificationById(notId);
+                    //CheckBoxList_nots.Items.Clear();
+                    //this.Page_Load(sender, e);
                 }
-            }
-        }
 
-        protected void Button_close_Click(object sender, EventArgs e)
-        {
-            for (int i = 0; i < this.CheckBoxList1.Items.Count; i++)
-            {
-                if (this.CheckBoxList1.Items[i].Selected)
-                {
-                    var nots = Binder.NinjectKernel.Get<INotificationRepository>();
-                    var notId = nots.GetEntitiesByQuery(n => n.Text == this.CheckBoxList1.Items[i].Text).First().Id;
-                    var closeNots = Binder.NinjectKernel.Get<INotificationManager>();
-                    closeNots.CloseNotificationById(notId);
-                }
-            }
-        }
+           }
+            CheckBoxList_nots.Items.Clear();
+            this.Page_Load(sender, e);
+       }
 
-        
     }
 }
 
