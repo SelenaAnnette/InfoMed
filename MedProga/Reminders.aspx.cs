@@ -15,7 +15,6 @@ using ServerLogic.Notification;
 namespace MedProga
 {
     using DataLayer.Persistence.Medicament;
-    using DataLayer.Persistence.Message;
 
     public partial class Reminders : System.Web.UI.Page
     {
@@ -30,8 +29,7 @@ namespace MedProga
                     CheckBoxList_nots.Items.Add(nots[i].Text);
             }
         }
-
-
+        
         protected void Button_save_Click(object sender, EventArgs e)
         {
             var actualNotificationsRepo = Binder.NinjectKernel.Get<INotificationManager>();
@@ -42,7 +40,6 @@ namespace MedProga
             var personMedsFac = new PersonMedicamentFactory();
             for (int i = 0; i < this.CheckBoxList_nots.Items.Count; i++)
             {
-                
                 if (this.CheckBoxList_nots.Items[i].Selected)
                 {
                     var medId = nots[i].MedicamentId;
@@ -50,8 +47,6 @@ namespace MedProga
                     var personMed = personMedsFac.Create(Guid.NewGuid(), medId, perId, DateTime.Now);
                     personMedsRepo.CreateOrUpdateEntity(personMed);
                     actualNotificationsRepo.CloseNotificationById(notId);
-                    //CheckBoxList_nots.Items.Clear();
-                    //this.Page_Load(sender, e);
                 }
 
            }

@@ -11,7 +11,7 @@
     <table> 
         <tr> 
             <td> 
-                <asp:Label ID="Label_date" runat="server" Text="Дата"></asp:Label>
+                <asp:Label ID="Label_date" runat="server" Text="Дата и время"></asp:Label>
             </td>
             <td> 
                 <asp:TextBox ID="TextBox_DateTime" runat="server" MaxLength="10"></asp:TextBox>

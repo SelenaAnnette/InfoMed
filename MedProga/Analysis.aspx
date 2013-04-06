@@ -11,27 +11,8 @@
     <table>
         <tr> 
             <td class="style1"> 
-                <asp:GridView ID="GridView_analysis" runat="server" AutoGenerateColumns="False" 
-                    DataKeyNames="Id" DataSourceID="SqlDataSource1">
-                    <Columns>
-                    <asp:BoundField DataField="Id" HeaderText="Id" SortExpression="Id" 
-                            ReadOnly="True" />
-                        <asp:BoundField DataField="PersonId" HeaderText="PersonId" 
-                            SortExpression="PersonId" />
-                        <asp:BoundField DataField="MeasuringTypeId" HeaderText="MeasuringTypeId" 
-                            SortExpression="MeasuringTypeId" />
-                        <asp:BoundField DataField="Value" HeaderText="Value" 
-                            SortExpression="Value" />
-                        <asp:BoundField DataField="MeasuringDate" HeaderText="MeasuringDate" 
-                            SortExpression="MeasuringDate" />
-                        
-                    </Columns>
+                <asp:GridView ID="GridView_analysis" runat="server">
                 </asp:GridView>
-                <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
-                    ConnectionString="<%$ ConnectionStrings:InfoMedTrashDBConnectionString2_remote %>" 
-                    
-                    
-                    SelectCommand="SELECT * FROM [PersonMeasuring]"></asp:SqlDataSource>
             </td>
         </tr>
     </table>

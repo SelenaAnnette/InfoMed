@@ -22,31 +22,13 @@ namespace MedProga {
         protected global::System.Web.UI.WebControls.Label Label_date;
         
         /// <summary>
-        /// TextBox_date элемент управления.
+        /// TextBox_date_time элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox_date;
-        
-        /// <summary>
-        /// Label_time элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label_time;
-        
-        /// <summary>
-        /// TextBox_time элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox_time;
+        protected global::System.Web.UI.WebControls.TextBox TextBox_date_time;
         
         /// <summary>
         /// Label_symptoms элемент управления.
@@ -58,15 +40,6 @@ namespace MedProga {
         protected global::System.Web.UI.WebControls.Label Label_symptoms;
         
         /// <summary>
-        /// TextBox_complaints элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox_complaints;
-        
-        /// <summary>
         /// CheckBoxList_symptoms элемент управления.
         /// </summary>
         /// <remarks>
@@ -74,15 +47,6 @@ namespace MedProga {
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBoxList CheckBoxList_symptoms;
-        
-        /// <summary>
-        /// SqlDataSource1 элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
         
         /// <summary>
         /// Button_complaints элемент управления.
