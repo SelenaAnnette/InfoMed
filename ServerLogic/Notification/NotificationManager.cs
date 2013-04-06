@@ -78,7 +78,7 @@
                     {
                         nonAnsweredNotification.IsActive = false;
                         this.notificationRepository.CreateOrUpdateEntity(nonAnsweredNotification);
-                        this.logger.LogMessage(string.Format("Notification {0} was closed", nonAnsweredNotification.Id));
+                        this.logger.LogMessage(string.Format("Notification {0} was closed as non-answered", nonAnsweredNotification.Id));
                     });
         }
 
