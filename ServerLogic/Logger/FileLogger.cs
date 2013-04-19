@@ -36,9 +36,16 @@ namespace ServerLogic.Logger
                     File.Create(this.infoFilePath);
                 }
 
-                using (var streamWriter = new StreamWriter(this.infoFilePath, true))
+                try
                 {
-                    streamWriter.WriteLine("{0}  INFO  {1}", DateTime.Now, message);
+                    using (var streamWriter = new StreamWriter(this.infoFilePath, true))
+                    {
+                        streamWriter.WriteLine("{0}  INFO  {1}", DateTime.Now, message);
+                    }
+                }
+                catch (IOException)
+                {
+                    
                 }
             }
         }
@@ -57,10 +64,17 @@ namespace ServerLogic.Logger
                     File.Create(this.errorFilePath);
                 }
 
-                using (var streamWriter = new StreamWriter(this.errorFilePath, true))
+                try
                 {
-                    streamWriter.WriteLine("{0}  ERROR  {1}", DateTime.Now, error);
-                }                                               
+                    using (var streamWriter = new StreamWriter(this.errorFilePath, true))
+                    {
+                        streamWriter.WriteLine("{0}  ERROR  {1}", DateTime.Now, error);
+                    }
+                }
+                catch (IOException)
+                {
+
+                }                        
             }
         }
     }
