@@ -13,6 +13,9 @@
         [Required]
         public Guid ReceiverPersonId { get; set; }
 
+        [Required]
+        public DateTime SendingDate { get; set; }
+
         [DataType(DataType.MultilineText)]
         public string Text { get; set; }
 
