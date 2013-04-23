@@ -26,7 +26,7 @@ namespace MedProga
             var contactFac = new MessageFactory();
             if (this.TextBox_contact.Text != string.Empty)
             {
-                var contactMes = contactFac.Create(Guid.NewGuid(), perId, Guid.NewGuid(), this.TextBox_contact.Text);
+                var contactMes = contactFac.Create(Guid.NewGuid(), perId, Guid.NewGuid(), this.TextBox_contact.Text,dt);
                 contactRep.CreateOrUpdateEntity(contactMes);
             }
         }
