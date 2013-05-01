@@ -22,31 +22,13 @@ namespace MedProga {
         protected global::System.Web.UI.WebControls.Label Label_date;
         
         /// <summary>
-        /// TextBox_date элемент управления.
+        /// TextBox_DateTime элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox_date;
-        
-        /// <summary>
-        /// Label_time элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label_time;
-        
-        /// <summary>
-        /// DropDownList1 элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
+        protected global::System.Web.UI.WebControls.TextBox TextBox_DateTime;
         
         /// <summary>
         /// TextBox_sad элемент управления.
@@ -103,13 +85,13 @@ namespace MedProga {
         protected global::System.Web.UI.WebControls.Label Label_bedra;
         
         /// <summary>
-        /// TextBox_bedra элемент управления.
+        /// TextBox_okr_beder элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox_bedra;
+        protected global::System.Web.UI.WebControls.TextBox TextBox_okr_beder;
         
         /// <summary>
         /// Label_taliya элемент управления.
@@ -121,13 +103,13 @@ namespace MedProga {
         protected global::System.Web.UI.WebControls.Label Label_taliya;
         
         /// <summary>
-        /// TextBox_taliya элемент управления.
+        /// TextBox_okr_talii элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox_taliya;
+        protected global::System.Web.UI.WebControls.TextBox TextBox_okr_talii;
         
         /// <summary>
         /// Button_parameters элемент управления.

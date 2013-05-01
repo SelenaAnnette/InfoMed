@@ -11,24 +11,11 @@
     <table> 
         <tr> 
             <td> 
-                <asp:Label ID="Label_date" runat="server" Text="Дата"></asp:Label>
+                <asp:Label ID="Label_date" runat="server" Text="Дата и время"></asp:Label>
             </td>
             <td> 
-                <asp:TextBox ID="TextBox_date" runat="server" MaxLength="10"></asp:TextBox>
+                <asp:TextBox ID="TextBox_DateTime" runat="server" MaxLength="10"></asp:TextBox>
             </td>
-        </tr>
-         <tr> 
-            <td> 
-                <asp:Label ID="Label_time" runat="server" Text="Время суток"></asp:Label>
-             </td>
-            <td style="padding-left:3px;"> 
-                <asp:DropDownList ID="DropDownList1" runat="server" Height="20px" Width="153px">
-                    <asp:ListItem>Утро</asp:ListItem>
-                    <asp:ListItem>День</asp:ListItem>
-                    <asp:ListItem>Вечер</asp:ListItem>
-                    <asp:ListItem>Ночь</asp:ListItem>
-                </asp:DropDownList>
-             </td>
         </tr>
          <tr> 
             <td class="style1"> 
@@ -70,7 +57,7 @@
                 <asp:Label ID="Label_bedra" runat="server" Text="Окружность бедер (см)"></asp:Label>
              </td>
             <td> 
-                <asp:TextBox ID="TextBox_bedra" runat="server" MaxLength="3"></asp:TextBox>
+                <asp:TextBox ID="TextBox_okr_beder" runat="server" MaxLength="3"></asp:TextBox>
              </td>
         </tr>
          <tr> 
@@ -78,7 +65,7 @@
                 <asp:Label ID="Label_taliya" runat="server" Text="Окружность талии (см)"></asp:Label>
              </td>
             <td> 
-                <asp:TextBox ID="TextBox_taliya" runat="server" MaxLength="3"></asp:TextBox>
+                <asp:TextBox ID="TextBox_okr_talii" runat="server" MaxLength="3"></asp:TextBox>
              </td>
         </tr>
     </table>

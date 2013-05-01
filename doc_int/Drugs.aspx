@@ -18,7 +18,9 @@
     <table class="style1">
         <tr>
             <td width="30%">
-                &nbsp;</td>
+                <asp:Label ID="Label2" runat="server" 
+                    Text="Укажите необходимые данные для ввыписки препарата."></asp:Label>
+            </td>
             <td width="40%">
                 &nbsp;</td>
             <td width="30%">
@@ -46,25 +48,30 @@
                 </asp:GridView>
             </td>
             <td class="style2" width="40%">
-                Пациент<asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+                Пациент<asp:TextBox ID="TextBox1" runat="server" Height="21px"></asp:TextBox>
                 <br />
                 Препарат<asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
                 <br />
                 <br />
                 Принимать препарат
                 по
-                <asp:TextBox ID="dosage" runat="server" TextMode="Number" Width="30px">1</asp:TextBox>
+                <asp:TextBox ID="dosage" runat="server" Type="Number" Width="30px">1</asp:TextBox>
 &nbsp; единице(ы)
-                <asp:TextBox ID="timesAtDay" runat="server" Width="25px" TextMode="Number">2</asp:TextBox>
-                &nbsp;раза в день каждый(ые)
-                <asp:TextBox ID="eachDay" runat="server" TextMode="Number" Width="35px">1</asp:TextBox>
-                &nbsp;дня/дней на продолжении
-                <asp:TextBox ID="dayCount" runat="server" TextMode="Number" Width="35px">14</asp:TextBox>
+                <br />
+                <asp:RadioButton ID="RadioButton1" runat="server" Checked="True" 
+                    GroupName="choose" Text="N раз в день" />
+                <asp:RadioButton ID="RadioButton2" runat="server" GroupName="choose" 
+                    Text="Раз в N дней" />
+                <br />
+                <asp:TextBox ID="choose_num" runat="server" Width="25px" Type="Number">2</asp:TextBox>
+                <br />
+&nbsp;на продолжении
+                <asp:TextBox ID="dayCount" runat="server" Type="Number" Width="35px">14</asp:TextBox>
                 &nbsp;дня/дней.<br />
                 <asp:Button ID="Button1" runat="server" Text="Выписать" 
                     onclick="Button1_Click" />
                 <br />
-&nbsp;</td>
+            </td>
             <td style="text-align: center" width="30%">
                 &nbsp;<br />
                 &nbsp;<br />
@@ -97,7 +104,9 @@
                 <asp:Calendar ID="Calendar1" runat="server" BackColor="White" 
                     BorderColor="#3366CC" BorderWidth="1px" CellPadding="1" 
                     DayNameFormat="Shortest" Font-Names="Verdana" Font-Size="8pt" 
-                    ForeColor="#003399" Height="200px" Width="220px">
+                    ForeColor="#003399" Height="200px" Width="220px" 
+                    ondayrender="Calendar1_DayRender"
+                    onselectionchanged="Calendar1_SelectionChanged">
                     <DayHeaderStyle BackColor="#99CCCC" ForeColor="#336666" Height="1px" />
                     <NextPrevStyle Font-Size="8pt" ForeColor="#CCCCFF" />
                     <OtherMonthDayStyle ForeColor="#999999" />
@@ -108,10 +117,26 @@
                     <TodayDayStyle BackColor="#99CCCC" ForeColor="White" />
                     <WeekendDayStyle BackColor="#CCCCFF" />
                 </asp:Calendar>
+                <asp:Label ID="Label1" runat="server" 
+                    Text="Выберите дату начала приёма препарата"></asp:Label>
             </td>
             <td width="30%">
-                <asp:TextBox ID="TextBox3" runat="server" ReadOnly="True"></asp:TextBox>
-                <asp:TextBox ID="TextBox4" runat="server" ReadOnly="True"></asp:TextBox>
+                ID 1<asp:TextBox ID="TextBox3" runat="server" ReadOnly="True"></asp:TextBox>
+                <br />
+                ID 2<asp:TextBox ID="TextBox4" runat="server" ReadOnly="True"></asp:TextBox>
+                <br />
+                Доза<asp:TextBox ID="TextBox5" runat="server" ReadOnly="True"></asp:TextBox>
+                <br />
+                Начало<asp:TextBox ID="TextBox6" runat="server" ReadOnly="True"></asp:TextBox>
+                <br />
+                Кол-во дней<asp:TextBox ID="TextBox7" runat="server" ReadOnly="True"></asp:TextBox>
+                <br />
+                Сколько в день<asp:TextBox ID="TextBox8" runat="server" ReadOnly="True"></asp:TextBox>
+                <br />
+                Через сколько дней<asp:TextBox ID="TextBox9" runat="server" ReadOnly="True"></asp:TextBox>
+                <br />
+                <asp:Button ID="Button2" runat="server" onclick="Button2_Click" 
+                    Text="Проверка" />
             </td>
             <td>
             </td>

@@ -7,13 +7,14 @@ using System.Web.SessionState;
 
 namespace doc_int
 {
+    using System.Web.Routing;
+
     public class Global : System.Web.HttpApplication
     {
 
         void Application_Start(object sender, EventArgs e)
         {
-            // Код, выполняемый при запуске приложения
-
+            RegisterRoutes(RouteTable.Routes);
         }
 
         void Application_End(object sender, EventArgs e)
@@ -41,6 +42,11 @@ namespace doc_int
             // задано значение InProc в файле Web.config. Если для режима сеанса задано значение StateServer 
             // или SQLServer, событие не порождается.
 
+        }
+
+        public static void RegisterRoutes(RouteCollection routes)
+        {
+            routes.MapPageRoute("", "", "~/Drugs.aspx");
         }
 
     }
