@@ -52,6 +52,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Persistence\AllergicReaction\AllergicReactionFactory.cs" />
+    <Compile Include="Persistence\AllergicReaction\AllergicReactionRepository.cs" />
+    <Compile Include="Persistence\AllergicReaction\IAllergicReactionRepository.cs" />
+    <Compile Include="Persistence\AllergicReaction\IPersonAllergicReactionRepository.cs" />
+    <Compile Include="Persistence\AllergicReaction\PersonAllergicReactionFactory.cs" />
+    <Compile Include="Persistence\AllergicReaction\PersonAllergicReactionRepository.cs" />
+    <Compile Include="Persistence\Disease\PersonDiseaseFactory.cs" />
+    <Compile Include="Persistence\Disease\PersonDiseaseRepository.cs" />
+    <Compile Include="Persistence\Disease\IPersonDiseaseRepository.cs" />
+    <Compile Include="Persistence\Disease\IDiseaseRepository.cs" />
+    <Compile Include="Persistence\Disease\DiseaseFactory.cs" />
+    <Compile Include="Persistence\Disease\DiseaseRepository.cs" />
     <Compile Include="Persistence\Measuring\IPersonMeasuringRepository.cs" />
     <Compile Include="Persistence\Measuring\PersonMeasuringFactory.cs" />
     <Compile Include="Persistence\Measuring\PersonMeasuringRepository.cs" />
@@ -64,6 +76,12 @@
     <Compile Include="Persistence\Message\IMessageRepository.cs" />
     <Compile Include="Persistence\Message\MessageFactory.cs" />
     <Compile Include="Persistence\Message\MessageRepository.cs" />
+    <Compile Include="Persistence\Operation\OperationFactory.cs" />
+    <Compile Include="Persistence\Operation\OperationRepository.cs" />
+    <Compile Include="Persistence\Operation\IOperationRepository.cs" />
+    <Compile Include="Persistence\Operation\IPersonOperationRepository.cs" />
+    <Compile Include="Persistence\Operation\PersonOperationFactory.cs" />
+    <Compile Include="Persistence\Operation\PersonOperationRepository.cs" />
     <Compile Include="Persistence\RiskFactor\IPersonRiskFactorRepository.cs" />
     <Compile Include="Persistence\RiskFactor\PersonRiskFactorFactory.cs" />
     <Compile Include="Persistence\RiskFactor\PersonRiskFactorRepository.cs" />
