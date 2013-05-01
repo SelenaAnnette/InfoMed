@@ -52,6 +52,8 @@
   <ItemGroup>
     <Compile Include="AllergicReaction\AllergicReaction.cs" />
     <Compile Include="AllergicReaction\PersonAllergicReaction.cs" />
+    <Compile Include="Consultation\ConsultationType.cs" />
+    <Compile Include="Consultation\PersonConsultation.cs" />
     <Compile Include="Disease\Disease.cs" />
     <Compile Include="Disease\PersonDisease.cs" />
     <Compile Include="DomainBase.cs" />

@@ -20,7 +20,8 @@
         {
             var context = new DomainContext(this.ConnectionString);
             return context.Persons.Include("AssignedSymptoms").Include("FirstPersonPersons").Include("SecondPersonPersons").Include("PersonContacts").Include("AssignedRiskFactors")
-                .Include("AssignedMedicaments").Include("Credentials").Include("PersonGroups").Include("PersonOperations").Include("PersonDiseases").Include("PersonAllergicReactions");
+                .Include("AssignedMedicaments").Include("Credentials").Include("PersonGroups").Include("PersonOperations").Include("PersonDiseases").Include("PersonAllergicReactions")
+                .Include("DoctorPersons").Include("PatientPersons");
         }
 
         public Person GetEntityById(Guid id)
@@ -29,6 +30,7 @@
             {
                 return context.Persons.Include("AssignedSymptoms").Include("FirstPersonPersons").Include("SecondPersonPersons").Include("PersonContacts").Include("AssignedRiskFactors")
                     .Include("AssignedMedicaments").Include("Credentials").Include("PersonGroups").Include("PersonOperations").Include("PersonDiseases").Include("PersonAllergicReactions")
+                    .Include("DoctorPersons").Include("PatientPersons")
                     .FirstOrDefault(v => v.Id == id);
             }
         }
@@ -44,6 +46,7 @@
             {
                 return context.Persons.Include("AssignedSymptoms").Include("FirstPersonPersons").Include("SecondPersonPersons").Include("PersonContacts").Include("AssignedRiskFactors")
                     .Include("AssignedMedicaments").Include("Credentials").Include("PersonGroups").Include("PersonOperations").Include("PersonDiseases").Include("PersonAllergicReactions")
+                    .Include("DoctorPersons").Include("PatientPersons")
                     .Where(query).ToList();
             }                                    
         }

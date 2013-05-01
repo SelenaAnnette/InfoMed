@@ -58,6 +58,12 @@
     <Compile Include="Persistence\AllergicReaction\IPersonAllergicReactionRepository.cs" />
     <Compile Include="Persistence\AllergicReaction\PersonAllergicReactionFactory.cs" />
     <Compile Include="Persistence\AllergicReaction\PersonAllergicReactionRepository.cs" />
+    <Compile Include="Persistence\Consultation\ConsultationTypeFactory.cs" />
+    <Compile Include="Persistence\Consultation\ConsultationTypeRepository.cs" />
+    <Compile Include="Persistence\Consultation\IConsultationTypeRepository.cs" />
+    <Compile Include="Persistence\Consultation\IPersonConsultationRepository.cs" />
+    <Compile Include="Persistence\Consultation\PersonConsultationTypeFactory.cs" />
+    <Compile Include="Persistence\Consultation\PersonConsultationRepository.cs" />
     <Compile Include="Persistence\Disease\PersonDiseaseFactory.cs" />
     <Compile Include="Persistence\Disease\PersonDiseaseRepository.cs" />
     <Compile Include="Persistence\Disease\IPersonDiseaseRepository.cs" />

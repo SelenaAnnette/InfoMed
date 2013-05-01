@@ -62,5 +62,11 @@
 
         [InverseProperty("Person")]
         public virtual ICollection<PersonAllergicReaction> PersonAllergicReactions { get; set; }
+
+        [InverseProperty("Doctor")]
+        public virtual ICollection<PersonPerson> DoctorPersons { get; set; }
+
+        [InverseProperty("Patient")]
+        public virtual ICollection<PersonPerson> PatientPersons { get; set; }
     }    
 }

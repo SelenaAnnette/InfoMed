@@ -3,6 +3,7 @@
     using System.Data.Entity;
 
     using Domain.AllergicReaction;
+    using Domain.Consultation;
     using Domain.Disease;
     using Domain.Group;
     using Domain.Measuring;
@@ -61,5 +62,9 @@
         public DbSet<PersonOperation> PersonOperations { get; set; }
 
         public DbSet<PersonAllergicReaction> PersonAllergicReactions { get; set; }
+
+        public DbSet<ConsultationType> ConsultationTypes { get; set; }
+
+        public DbSet<PersonConsultation> PersonConsultations { get; set; }
     }
 }
