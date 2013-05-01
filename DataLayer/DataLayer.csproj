@@ -70,6 +70,15 @@
     <Compile Include="Persistence\Disease\IDiseaseRepository.cs" />
     <Compile Include="Persistence\Disease\DiseaseFactory.cs" />
     <Compile Include="Persistence\Disease\DiseaseRepository.cs" />
+    <Compile Include="Persistence\Hospital\PersonHospitalizationFactory.cs" />
+    <Compile Include="Persistence\Hospital\PersonHospitalizationRepository.cs" />
+    <Compile Include="Persistence\Hospital\IPersonHospitalizationRepository.cs" />
+    <Compile Include="Persistence\Hospital\HospitalDepartmentFactory.cs" />
+    <Compile Include="Persistence\Hospital\HospitalDepartmentRepository.cs" />
+    <Compile Include="Persistence\Hospital\IHospitalDepartmentRepository.cs" />
+    <Compile Include="Persistence\Hospital\IHospitalRepository.cs" />
+    <Compile Include="Persistence\Hospital\HospitalFactory.cs" />
+    <Compile Include="Persistence\Hospital\HospitalRepository.cs" />
     <Compile Include="Persistence\Measuring\IPersonMeasuringRepository.cs" />
     <Compile Include="Persistence\Measuring\PersonMeasuringFactory.cs" />
     <Compile Include="Persistence\Measuring\PersonMeasuringRepository.cs" />

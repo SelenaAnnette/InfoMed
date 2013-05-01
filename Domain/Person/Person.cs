@@ -7,6 +7,7 @@
 
     using Domain.AllergicReaction;
     using Domain.Disease;
+    using Domain.Hospital;
     using Domain.Medicament;
     using Domain.Operation;
     using Domain.RiskFactor;
@@ -68,5 +69,8 @@
 
         [InverseProperty("Patient")]
         public virtual ICollection<PersonPerson> PatientPersons { get; set; }
+
+        [InverseProperty("Person")]
+        public virtual ICollection<PersonHospitalization> PersonHospitalizations { get; set; }
     }    
 }

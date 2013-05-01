@@ -57,6 +57,9 @@
     <Compile Include="Disease\Disease.cs" />
     <Compile Include="Disease\PersonDisease.cs" />
     <Compile Include="DomainBase.cs" />
+    <Compile Include="Hospital\PersonHospitalization.cs" />
+    <Compile Include="Hospital\HospitalDepartment.cs" />
+    <Compile Include="Hospital\Hospital.cs" />
     <Compile Include="Measuring\MeasuringType.cs" />
     <Compile Include="Measuring\PersonMeasuring.cs" />
     <Compile Include="Medicament\PersonMedicament.cs" />
