@@ -50,6 +50,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AllergicReaction\AllergicReaction.cs" />
+    <Compile Include="AllergicReaction\PersonAllergicReaction.cs" />
+    <Compile Include="Disease\Disease.cs" />
+    <Compile Include="Disease\PersonDisease.cs" />
     <Compile Include="DomainBase.cs" />
     <Compile Include="Measuring\MeasuringType.cs" />
     <Compile Include="Measuring\PersonMeasuring.cs" />
@@ -58,6 +62,8 @@
     <Compile Include="Medicament\AssignedMedicament.cs" />
     <Compile Include="Message\Notification.cs" />
     <Compile Include="Message\Message.cs" />
+    <Compile Include="Operation\Operation.cs" />
+    <Compile Include="Operation\PersonOperation.cs" />
     <Compile Include="Person\PersonContact.cs" />
     <Compile Include="Person\ContactType.cs" />
     <Compile Include="Person\Credentials.cs" />

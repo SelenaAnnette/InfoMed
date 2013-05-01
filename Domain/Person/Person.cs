@@ -1,10 +1,14 @@
 ﻿namespace Domain.Person
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
+    using Domain.AllergicReaction;
+    using Domain.Disease;
     using Domain.Medicament;
+    using Domain.Operation;
     using Domain.RiskFactor;
     using Domain.Symptom;
     using Domain.Group;
@@ -20,6 +24,12 @@
 
         [Required]
         public string LastName { get; set; }
+
+        [Required]
+        public DateTime Birthday { get; set; }
+
+        [Required]
+        public string Sex { get; set; }
 
         [InverseProperty("Person")]
         public virtual ICollection<AssignedSymptom> AssignedSymptoms { get; set; }
@@ -43,5 +53,14 @@
 
         [InverseProperty("Person")]
         public virtual ICollection<PersonGroup> PersonGroups { get; set; }
+
+        [InverseProperty("Person")]
+        public virtual ICollection<PersonOperation> PersonOperations { get; set; }
+
+        [InverseProperty("Person")]
+        public virtual ICollection<PersonDisease> PersonDiseases { get; set; }
+
+        [InverseProperty("Person")]
+        public virtual ICollection<PersonAllergicReaction> PersonAllergicReactions { get; set; }
     }    
 }
