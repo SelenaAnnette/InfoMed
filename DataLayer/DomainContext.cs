@@ -2,9 +2,12 @@
 {
     using System.Data.Entity;
 
+    using Domain.AllergicReaction;
+    using Domain.Disease;
     using Domain.Group;
     using Domain.Measuring;
     using Domain.Medicament;
+    using Domain.Operation;
     using Domain.Person;
     using Domain.RiskFactor;
     using Domain.Symptom;
@@ -46,5 +49,17 @@
         public DbSet<AssignedSymptom> AssignedSymptoms { get; set; }
 
         public DbSet<PersonPerson> PersonPersons { get; set; }
+
+        public DbSet<Disease> Diseases { get; set; }
+
+        public DbSet<Operation> Operations { get; set; }
+
+        public DbSet<AllergicReaction> AllergicReactions { get; set; }
+
+        public DbSet<PersonDisease> PersonDiseases { get; set; }
+
+        public DbSet<PersonOperation> PersonOperations { get; set; }
+
+        public DbSet<PersonAllergicReaction> PersonAllergicReactions { get; set; }
     }
 }
