@@ -21,7 +21,7 @@
             var context = new DomainContext(this.ConnectionString);
             return context.PersonConsultations.Include("Doctor").Include("Patient").Include("ConsultationType").Include("PersonConsultationResearches")
                 .Include("PersonConsultationLabAnalyzes").Include("PersonConsultationSymptoms").Include("PersonConsultationComplaints")
-                .Include("PersonConsultationMeasurings");
+                .Include("PersonConsultationMeasurings").Include("PersonConsultationDiagnosises");
         }
 
         public PersonConsultation GetEntityById(Guid id)
@@ -30,7 +30,7 @@
             {
                 return context.PersonConsultations.Include("Doctor").Include("Patient").Include("ConsultationType").Include("PersonConsultationResearches")
                     .Include("PersonConsultationLabAnalyzes").Include("PersonConsultationSymptoms").Include("PersonConsultationComplaints")
-                    .Include("PersonConsultationMeasurings")
+                    .Include("PersonConsultationMeasurings").Include("PersonConsultationDiagnosises")
                     .FirstOrDefault(v => v.Id == id);
             }
         }
@@ -46,7 +46,7 @@
             {
                 return context.PersonConsultations.Include("Doctor").Include("Patient").Include("ConsultationType").Include("PersonConsultationResearches")
                     .Include("PersonConsultationLabAnalyzes").Include("PersonConsultationSymptoms").Include("PersonConsultationComplaints")
-                    .Include("PersonConsultationMeasurings")
+                    .Include("PersonConsultationMeasurings").Include("PersonConsultationDiagnosises")
                     .Where(query).ToList();
             }                                    
         }

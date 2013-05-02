@@ -6,6 +6,7 @@
     using System.ComponentModel.DataAnnotations.Schema;
 
     using Domain.Complaint;
+    using Domain.Diagnosis;
     using Domain.LabAnalyze;
     using Domain.Measuring;
     using Domain.Person;
@@ -50,5 +51,8 @@
 
         [InverseProperty("PersonConsultation")]
         public virtual ICollection<PersonConsultationMeasuring> PersonConsultationMeasurings { get; set; }
+
+        [InverseProperty("PersonConsultation")]
+        public virtual ICollection<PersonConsultationDiagnosis> PersonConsultationDiagnosises { get; set; }
     }
 }

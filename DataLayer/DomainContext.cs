@@ -5,6 +5,7 @@
     using Domain.AllergicReaction;
     using Domain.Complaint;
     using Domain.Consultation;
+    using Domain.Diagnosis;
     using Domain.Disease;
     using Domain.Group;
     using Domain.Hospital;
@@ -90,5 +91,11 @@
         public DbSet<PersonConsultationSymptom> PersonConsultationSymptoms { get; set; }
 
         public DbSet<PersonConsultationMeasuring> PersonConsultationMeasurings { get; set; }
+
+        public DbSet<Diagnosis> Diagnosises { get; set; }
+
+        public DbSet<DiagnosisType> DiagnosisTypes { get; set; }
+
+        public DbSet<PersonConsultationDiagnosis> PersonConsultationDiagnosises { get; set; }
     }
 }

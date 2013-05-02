@@ -3,6 +3,7 @@
     using DataLayer.Persistence.AllergicReaction;
     using DataLayer.Persistence.Complaint;
     using DataLayer.Persistence.Consultation;
+    using DataLayer.Persistence.Diagnosis;
     using DataLayer.Persistence.Disease;
     using DataLayer.Persistence.Group;
     using DataLayer.Persistence.Hospital;
@@ -71,6 +72,10 @@
             NinjectKernel.Bind<IPersonConsultationLabAnalyzeRepository>().To<PersonConsultationLabAnalyzeRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
             NinjectKernel.Bind<IResearchRepository>().To<ResearchRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
             NinjectKernel.Bind<IPersonConsultationResearchRepository>().To<PersonConsultationResearchRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
+
+            NinjectKernel.Bind<IDiagnosisRepository>().To<DiagnosisRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
+            NinjectKernel.Bind<IDiagnosisTypeRepository>().To<DiagnosisTypeRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
+            NinjectKernel.Bind<IPersonConsultationDiagnosisRepository>().To<PersonConsultationDiagnosisRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
 
             NinjectKernel.Bind<IMessageRepository>().To<MessageRepository>().WithConstructorArgument("connectionString", trashDataBaseConnectionString);
             NinjectKernel.Bind<INotificationRepository>().To<NotificationRepository>().WithConstructorArgument("connectionString", trashDataBaseConnectionString);

@@ -67,6 +67,15 @@
     <Compile Include="Persistence\Consultation\IPersonConsultationRepository.cs" />
     <Compile Include="Persistence\Consultation\PersonConsultationTypeFactory.cs" />
     <Compile Include="Persistence\Consultation\PersonConsultationRepository.cs" />
+    <Compile Include="Persistence\Diagnosis\PersonConsultationDiagnosisFactory.cs" />
+    <Compile Include="Persistence\Diagnosis\PersonConsultationDiagnosisRepository.cs" />
+    <Compile Include="Persistence\Diagnosis\IPersonConsultationDiagnosisRepository.cs" />
+    <Compile Include="Persistence\Diagnosis\DiagnosisTypeFactory.cs" />
+    <Compile Include="Persistence\Diagnosis\DiagnosisTypeRepository.cs" />
+    <Compile Include="Persistence\Diagnosis\IDiagnosisTypeRepository.cs" />
+    <Compile Include="Persistence\Diagnosis\IDiagnosisRepository.cs" />
+    <Compile Include="Persistence\Diagnosis\DiagnosisFactory.cs" />
+    <Compile Include="Persistence\Diagnosis\DiagnosisRepository.cs" />
     <Compile Include="Persistence\Disease\PersonDiseaseFactory.cs" />
     <Compile Include="Persistence\Disease\PersonDiseaseRepository.cs" />
     <Compile Include="Persistence\Disease\IPersonDiseaseRepository.cs" />

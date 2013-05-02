@@ -1,19 +1,22 @@
-﻿namespace Domain.Operation
+﻿namespace Domain.Diagnosis
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    [Table("Operations")]
-    public class Operation : DomainBase
+    [Table("Diagnosises")]
+    public class Diagnosis : DomainBase
     {
         [Required]
         public string Name { get; set; }
 
+        [Required]
+        public string Mkb10Code { get; set; }
+
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
-        [InverseProperty("Operation")]
-        public virtual ICollection<PersonOperation> PersonOperations { get; set; }
+        [InverseProperty("Diagnosis")]
+        public virtual ICollection<PersonConsultationDiagnosis> PersonConsultationDiagnosises { get; set; }
     }
 }
