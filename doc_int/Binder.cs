@@ -71,6 +71,10 @@
             NinjectKernel.Bind<IDiagnosisTypeRepository>().To<DiagnosisTypeRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
             NinjectKernel.Bind<IPersonConsultationDiagnosisRepository>().To<PersonConsultationDiagnosisRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
 
+            NinjectKernel.Bind<IAssignedMedicamentMeasuringRepository>().To<AssignedMedicamentMeasuringRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
+            NinjectKernel.Bind<IMedicamentApplicationWayRepository>().To<MedicamentApplicationWayRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
+            NinjectKernel.Bind<IMedicamentFormRepository>().To<MedicamentFormRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
+
             NinjectKernel.Bind<IMessageRepository>().To<MessageRepository>().WithConstructorArgument("connectionString", trashDataBaseConnectionString);
             NinjectKernel.Bind<INotificationRepository>().To<NotificationRepository>().WithConstructorArgument("connectionString", trashDataBaseConnectionString);
             NinjectKernel.Bind<IPersonMeasuringRepository>().To<PersonMeasuringRepository>().WithConstructorArgument("connectionString", trashDataBaseConnectionString);

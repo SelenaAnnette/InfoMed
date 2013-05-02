@@ -97,5 +97,11 @@
         public DbSet<DiagnosisType> DiagnosisTypes { get; set; }
 
         public DbSet<PersonConsultationDiagnosis> PersonConsultationDiagnosises { get; set; }
+
+        public DbSet<AssignedMedicamentMeasuring> AssignedMedicamentMeasurings { get; set; }
+
+        public DbSet<MedicamentForm> MedicamentForms { get; set; }
+
+        public DbSet<MedicamentApplicationWay> MedicamentApplicationWays { get; set; }
     }
 }

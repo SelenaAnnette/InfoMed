@@ -1,8 +1,9 @@
 ﻿namespace TestConsole
 {
     using System;
-    using System.Linq;    
+    using System.Linq;
 
+    using DataLayer.Persistence.Consultation;
     using DataLayer.Persistence.Medicament;
     using DataLayer.Persistence.Message;
     using DataLayer.Persistence.Person;    
@@ -32,15 +33,39 @@
             personRepository.CreateOrUpdateEntity(person);
             Console.WriteLine("Person was created");
 
+            var medicamentFormRepository = Binder.NinjectKernel.Get<IMedicamentFormRepository>();
+            var medicamentFormFactory = new MedicamentFormFactory();
+            var medicamentForm = medicamentFormFactory.Create(Guid.NewGuid(), "TestMedicamentForm", "TestMedicamentFormMeasuring");
+            medicamentFormRepository.CreateOrUpdateEntity(medicamentForm);
+            Console.WriteLine("MedicamentForm was created");
+
             var medicamentRepository = Binder.NinjectKernel.Get<IMedicamentRepository>();
             var medicamentFactory = new MedicamentFactory();
-            var medicament = medicamentFactory.Create(Guid.NewGuid(), "TestMedicament", "TestMedicamentCode");
+            var medicament = medicamentFactory.Create(Guid.NewGuid(), "TestMedicament", "TestMedicamentCode", medicamentForm.Id);
             medicamentRepository.CreateOrUpdateEntity(medicament);
             Console.WriteLine("Medicament was created");
 
+            var consultationTypeRepository = Binder.NinjectKernel.Get<IConsultationTypeRepository>();
+            var consultationTypeFactory = new ConsultationTypeFactory();
+            var consultationType = consultationTypeFactory.Create(Guid.NewGuid(), "Test consultation type");
+            consultationTypeRepository.CreateOrUpdateEntity(consultationType);
+            Console.WriteLine("Consultation type was created");
+
+            var personConsultationRepository = Binder.NinjectKernel.Get<IPersonConsultationRepository>();
+            var personConsultationFactory = new PersonConsultationFactory();
+            var personConsultation = personConsultationFactory.Create(Guid.NewGuid(), person.Id, person.Id, consultationType.Id, DateTime.Now);
+            personConsultationRepository.CreateOrUpdateEntity(personConsultation);
+            Console.WriteLine("Consultation was created");
+
+            var medicamentApplicationWayRepository = Binder.NinjectKernel.Get<IMedicamentApplicationWayRepository>();
+            var medicamentApplicationWayFactory = new MedicamentApplicationWayFactory();
+            var medicamentApplicationWay = medicamentApplicationWayFactory.Create(Guid.NewGuid(), "Test medicamentApplicationWay");
+            medicamentApplicationWayRepository.CreateOrUpdateEntity(medicamentApplicationWay);
+            Console.WriteLine("MedicamentApplicationWay was created");
+
             var assignedMedicamentRepository = Binder.NinjectKernel.Get<IAssignedMedicamentRepository>();
             var assignedMedicamentFactory = new AssignedMedicamentFactory();
-            var assignedMedicament = assignedMedicamentFactory.Create(Guid.NewGuid(), person.Id, medicament.Id, 1, "Test dosa", DateTime.Now, 3, 5, 1);
+            var assignedMedicament = assignedMedicamentFactory.Create(Guid.NewGuid(), personConsultation.Id, medicament.Id, medicamentApplicationWay.Id, 1, DateTime.Now, 3, 5, 1);
             assignedMedicamentRepository.CreateOrUpdateEntity(assignedMedicament);
             Console.WriteLine("Medicament was assigned");
 

@@ -1,37 +1,37 @@
-﻿namespace DataLayer.Persistence.Measuring
+﻿namespace DataLayer.Persistence.Medicament
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Data;
 
-    using Domain.Measuring;
+    using Domain.Medicament;
 
-    public class MeasuringTypeRepository : IMeasuringTypeRepository
+    public class MedicamentFormRepository : IMedicamentFormRepository
     {
         private readonly string ConnectionString;
 
-        public MeasuringTypeRepository(string connectionString)
+        public MedicamentFormRepository(string connectionString)
         {
             this.ConnectionString = connectionString;
         }
 
-        public IEnumerable<MeasuringType> GetAll()
+        public IEnumerable<MedicamentForm> GetAll()
         {
             var context = new DomainContext(this.ConnectionString);
-            return context.MeasuringTypes.Include("PersonConsultationMeasurings").Include("AssignedMedicamentMeasurings");
+            return context.MedicamentForms.Include("Medicaments");
         }
 
-        public MeasuringType GetEntityById(Guid id)
+        public MedicamentForm GetEntityById(Guid id)
         {
             using (var context = new DomainContext(this.ConnectionString))
             {
-                return context.MeasuringTypes.Include("PersonConsultationMeasurings").Include("AssignedMedicamentMeasurings")
+                return context.MedicamentForms.Include("Medicaments")
                     .FirstOrDefault(v => v.Id == id);
             }
         }
 
-        public IEnumerable<MeasuringType> GetEntitiesByQuery(Func<MeasuringType, bool> query)
+        public IEnumerable<MedicamentForm> GetEntitiesByQuery(Func<MedicamentForm, bool> query)
         {
             if (query == null)
             {
@@ -40,12 +40,12 @@
 
             using (var context = new DomainContext(this.ConnectionString))
             {
-                return context.MeasuringTypes.Include("PersonConsultationMeasurings").Include("AssignedMedicamentMeasurings")
+                return context.MedicamentForms.Include("Medicaments")
                     .Where(query).ToList();
             }                                    
         }
 
-        public MeasuringType CreateOrUpdateEntity(MeasuringType entity)
+        public MedicamentForm CreateOrUpdateEntity(MedicamentForm entity)
         {
             if (entity == null)
             {
@@ -56,7 +56,7 @@
             {                                
                 if (this.GetEntityById(entity.Id) == null)
                 {
-                    context.MeasuringTypes.Add(entity);
+                    context.MedicamentForms.Add(entity);
                 }
                 else
                 {
@@ -73,13 +73,13 @@
         {
             using (var context = new DomainContext(this.ConnectionString))
             {
-                var measuringType = context.MeasuringTypes.FirstOrDefault(v => v.Id == id);
-                if (measuringType == null)
+                var medicamentForm = context.MedicamentForms.FirstOrDefault(v => v.Id == id);
+                if (medicamentForm == null)
                 {
                     return;
                 }
 
-                context.MeasuringTypes.Remove(measuringType);
+                context.MedicamentForms.Remove(medicamentForm);
                 context.SaveChanges();
             }
         }

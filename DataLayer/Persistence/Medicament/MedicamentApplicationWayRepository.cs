@@ -1,37 +1,37 @@
-﻿namespace DataLayer.Persistence.Measuring
+﻿namespace DataLayer.Persistence.Medicament
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Data;
 
-    using Domain.Measuring;
+    using Domain.Medicament;
 
-    public class MeasuringTypeRepository : IMeasuringTypeRepository
+    public class MedicamentApplicationWayRepository : IMedicamentApplicationWayRepository
     {
         private readonly string ConnectionString;
 
-        public MeasuringTypeRepository(string connectionString)
+        public MedicamentApplicationWayRepository(string connectionString)
         {
             this.ConnectionString = connectionString;
         }
 
-        public IEnumerable<MeasuringType> GetAll()
+        public IEnumerable<MedicamentApplicationWay> GetAll()
         {
             var context = new DomainContext(this.ConnectionString);
-            return context.MeasuringTypes.Include("PersonConsultationMeasurings").Include("AssignedMedicamentMeasurings");
+            return context.MedicamentApplicationWays.Include("AssignedMedicaments");
         }
 
-        public MeasuringType GetEntityById(Guid id)
+        public MedicamentApplicationWay GetEntityById(Guid id)
         {
             using (var context = new DomainContext(this.ConnectionString))
             {
-                return context.MeasuringTypes.Include("PersonConsultationMeasurings").Include("AssignedMedicamentMeasurings")
+                return context.MedicamentApplicationWays.Include("AssignedMedicaments")
                     .FirstOrDefault(v => v.Id == id);
             }
         }
 
-        public IEnumerable<MeasuringType> GetEntitiesByQuery(Func<MeasuringType, bool> query)
+        public IEnumerable<MedicamentApplicationWay> GetEntitiesByQuery(Func<MedicamentApplicationWay, bool> query)
         {
             if (query == null)
             {
@@ -40,12 +40,12 @@
 
             using (var context = new DomainContext(this.ConnectionString))
             {
-                return context.MeasuringTypes.Include("PersonConsultationMeasurings").Include("AssignedMedicamentMeasurings")
+                return context.MedicamentApplicationWays.Include("AssignedMedicaments")
                     .Where(query).ToList();
             }                                    
         }
 
-        public MeasuringType CreateOrUpdateEntity(MeasuringType entity)
+        public MedicamentApplicationWay CreateOrUpdateEntity(MedicamentApplicationWay entity)
         {
             if (entity == null)
             {
@@ -56,7 +56,7 @@
             {                                
                 if (this.GetEntityById(entity.Id) == null)
                 {
-                    context.MeasuringTypes.Add(entity);
+                    context.MedicamentApplicationWays.Add(entity);
                 }
                 else
                 {
@@ -73,13 +73,13 @@
         {
             using (var context = new DomainContext(this.ConnectionString))
             {
-                var measuringType = context.MeasuringTypes.FirstOrDefault(v => v.Id == id);
-                if (measuringType == null)
+                var medicamentApplicationWay = context.MedicamentApplicationWays.FirstOrDefault(v => v.Id == id);
+                if (medicamentApplicationWay == null)
                 {
                     return;
                 }
 
-                context.MeasuringTypes.Remove(measuringType);
+                context.MedicamentApplicationWays.Remove(medicamentApplicationWay);
                 context.SaveChanges();
             }
         }

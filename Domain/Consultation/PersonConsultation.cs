@@ -9,6 +9,7 @@
     using Domain.Diagnosis;
     using Domain.LabAnalyze;
     using Domain.Measuring;
+    using Domain.Medicament;
     using Domain.Person;
     using Domain.Research;
     using Domain.Symptom;
@@ -54,5 +55,8 @@
 
         [InverseProperty("PersonConsultation")]
         public virtual ICollection<PersonConsultationDiagnosis> PersonConsultationDiagnosises { get; set; }
+
+        [InverseProperty("PersonConsultation")]
+        public virtual ICollection<AssignedMedicament> AssignedMedicaments { get; set; }
     }
 }

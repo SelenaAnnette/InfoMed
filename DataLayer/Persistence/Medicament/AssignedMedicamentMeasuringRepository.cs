@@ -1,37 +1,37 @@
-﻿namespace DataLayer.Persistence.Measuring
+﻿namespace DataLayer.Persistence.Medicament
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
+    using System.Collections.Generic;    
     using System.Data;
+    using System.Linq;
 
-    using Domain.Measuring;
+    using Domain.Medicament;
 
-    public class MeasuringTypeRepository : IMeasuringTypeRepository
+    public class AssignedMedicamentMeasuringRepository : IAssignedMedicamentMeasuringRepository
     {
         private readonly string ConnectionString;
 
-        public MeasuringTypeRepository(string connectionString)
+        public AssignedMedicamentMeasuringRepository(string connectionString)
         {
             this.ConnectionString = connectionString;
         }
 
-        public IEnumerable<MeasuringType> GetAll()
+        public IEnumerable<AssignedMedicamentMeasuring> GetAll()
         {
             var context = new DomainContext(this.ConnectionString);
-            return context.MeasuringTypes.Include("PersonConsultationMeasurings").Include("AssignedMedicamentMeasurings");
+            return context.AssignedMedicamentMeasurings.Include("AssignedMedicament").Include("MeasuringType");
         }
 
-        public MeasuringType GetEntityById(Guid id)
+        public AssignedMedicamentMeasuring GetEntityById(Guid id)
         {
             using (var context = new DomainContext(this.ConnectionString))
             {
-                return context.MeasuringTypes.Include("PersonConsultationMeasurings").Include("AssignedMedicamentMeasurings")
+                return context.AssignedMedicamentMeasurings.Include("AssignedMedicament").Include("MeasuringType")
                     .FirstOrDefault(v => v.Id == id);
             }
         }
 
-        public IEnumerable<MeasuringType> GetEntitiesByQuery(Func<MeasuringType, bool> query)
+        public IEnumerable<AssignedMedicamentMeasuring> GetEntitiesByQuery(Func<AssignedMedicamentMeasuring, bool> query)
         {
             if (query == null)
             {
@@ -40,12 +40,12 @@
 
             using (var context = new DomainContext(this.ConnectionString))
             {
-                return context.MeasuringTypes.Include("PersonConsultationMeasurings").Include("AssignedMedicamentMeasurings")
+                return context.AssignedMedicamentMeasurings.Include("AssignedMedicament").Include("MeasuringType")
                     .Where(query).ToList();
             }                                    
         }
 
-        public MeasuringType CreateOrUpdateEntity(MeasuringType entity)
+        public AssignedMedicamentMeasuring CreateOrUpdateEntity(AssignedMedicamentMeasuring entity)
         {
             if (entity == null)
             {
@@ -53,10 +53,10 @@
             }
 
             using (var context = new DomainContext(this.ConnectionString))
-            {                                
+            {
                 if (this.GetEntityById(entity.Id) == null)
                 {
-                    context.MeasuringTypes.Add(entity);
+                    context.AssignedMedicamentMeasurings.Add(entity);
                 }
                 else
                 {
@@ -73,13 +73,13 @@
         {
             using (var context = new DomainContext(this.ConnectionString))
             {
-                var measuringType = context.MeasuringTypes.FirstOrDefault(v => v.Id == id);
-                if (measuringType == null)
+                var assignedMedicamentMeasuring = context.AssignedMedicamentMeasurings.FirstOrDefault(v => v.Id == id);
+                if (assignedMedicamentMeasuring == null)
                 {
                     return;
                 }
 
-                context.MeasuringTypes.Remove(measuringType);
+                context.AssignedMedicamentMeasurings.Remove(assignedMedicamentMeasuring);
                 context.SaveChanges();
             }
         }

@@ -69,6 +69,9 @@
     <Compile Include="Measuring\PersonConsultationMeasuring.cs" />
     <Compile Include="Measuring\MeasuringType.cs" />
     <Compile Include="Measuring\PersonMeasuring.cs" />
+    <Compile Include="Medicament\AssignedMedicamentMeasuring.cs" />
+    <Compile Include="Medicament\MedicamentApplicationWay.cs" />
+    <Compile Include="Medicament\MedicamentForm.cs" />
     <Compile Include="Medicament\PersonMedicament.cs" />
     <Compile Include="Medicament\Medicament.cs" />
     <Compile Include="Medicament\AssignedMedicament.cs" />

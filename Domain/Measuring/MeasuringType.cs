@@ -4,6 +4,8 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
+    using Domain.Medicament;
+
     [Table("MeasuringTypes")]
     public class MeasuringType : DomainBase
     {
@@ -18,5 +20,8 @@
 
         [InverseProperty("MeasuringType")]
         public virtual ICollection<PersonConsultationMeasuring> PersonConsultationMeasurings { get; set; }
+
+        [InverseProperty("MeasuringType")]
+        public virtual ICollection<AssignedMedicamentMeasuring> AssignedMedicamentMeasurings { get; set; }
     }
 }

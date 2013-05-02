@@ -103,6 +103,15 @@
     <Compile Include="Persistence\Measuring\PersonConsultationMeasuringRepository.cs" />
     <Compile Include="Persistence\Measuring\PersonMeasuringFactory.cs" />
     <Compile Include="Persistence\Measuring\PersonMeasuringRepository.cs" />
+    <Compile Include="Persistence\Medicament\AssignedMedicamentMeasuringFactory.cs" />
+    <Compile Include="Persistence\Medicament\AssignedMedicamentMeasuringRepository.cs" />
+    <Compile Include="Persistence\Medicament\IMedicamentApplicationWayRepository.cs" />
+    <Compile Include="Persistence\Medicament\MedicamentApplicationWayFactory.cs" />
+    <Compile Include="Persistence\Medicament\MedicamentApplicationWayRepository.cs" />
+    <Compile Include="Persistence\Medicament\IMedicamentFormRepository.cs" />
+    <Compile Include="Persistence\Medicament\MedicamentFormFactory.cs" />
+    <Compile Include="Persistence\Medicament\MedicamentFormRepository.cs" />
+    <Compile Include="Persistence\Medicament\IAssignedMedicamentMeasuringRepository.cs" />
     <Compile Include="Persistence\Medicament\IPersonMedicamentRepository.cs" />
     <Compile Include="Persistence\Medicament\PersonMedicamentFactory.cs" />
     <Compile Include="Persistence\Medicament\PersonMedicamentRepository.cs" />
