@@ -20,7 +20,7 @@
         {
             var context = new DomainContext(this.ConnectionString);
             return context.Persons.Include("AssignedSymptoms").Include("FirstPersonPersons").Include("SecondPersonPersons").Include("PersonContacts").Include("AssignedRiskFactors")
-                .Include("AssignedMedicaments").Include("Credentials").Include("PersonGroups").Include("PersonOperations").Include("PersonDiseases").Include("PersonAllergicReactions")
+                .Include("Credentials").Include("PersonGroups").Include("PersonOperations").Include("PersonDiseases").Include("PersonAllergicReactions")
                 .Include("DoctorPersons").Include("PatientPersons").Include("PersonHospitalizations");
         }
 
@@ -29,7 +29,7 @@
             using (var context = new DomainContext(this.ConnectionString))
             {
                 return context.Persons.Include("AssignedSymptoms").Include("FirstPersonPersons").Include("SecondPersonPersons").Include("PersonContacts").Include("AssignedRiskFactors")
-                    .Include("AssignedMedicaments").Include("Credentials").Include("PersonGroups").Include("PersonOperations").Include("PersonDiseases").Include("PersonAllergicReactions")
+                    .Include("Credentials").Include("PersonGroups").Include("PersonOperations").Include("PersonDiseases").Include("PersonAllergicReactions")
                     .Include("DoctorPersons").Include("PatientPersons").Include("PersonHospitalizations")
                     .FirstOrDefault(v => v.Id == id);
             }
@@ -45,7 +45,7 @@
             using (var context = new DomainContext(this.ConnectionString))
             {
                 return context.Persons.Include("AssignedSymptoms").Include("FirstPersonPersons").Include("SecondPersonPersons").Include("PersonContacts").Include("AssignedRiskFactors")
-                    .Include("AssignedMedicaments").Include("Credentials").Include("PersonGroups").Include("PersonOperations").Include("PersonDiseases").Include("PersonAllergicReactions")
+                    .Include("Credentials").Include("PersonGroups").Include("PersonOperations").Include("PersonDiseases").Include("PersonAllergicReactions")
                     .Include("DoctorPersons").Include("PatientPersons").Include("PersonHospitalizations")
                     .Where(query).ToList();
             }                                    

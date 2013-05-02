@@ -6,14 +6,24 @@
 
     public class AssignedMedicamentFactory
     {
-        public AssignedMedicament Create(Guid id, Guid personId, Guid medicamentId, double dosage, string measure, DateTime startDate, int dayCount, int timesAtDay, int eachDays)
+        public AssignedMedicament Create(Guid id, Guid consultationId, Guid medicamentId, Guid medicamentApplicationWayId, double dosage, DateTime startDate, int dayCount, int timesAtDay, int eachDays)
         {
             this.Validate(dayCount, timesAtDay, eachDays, dosage);
             var tempStartDate = startDate.Date;
             var finishDate = tempStartDate.AddDays(dayCount);
             var frequency = Math.Round((double)eachDays / timesAtDay, 3);
 
-            return new AssignedMedicament { Id = id, MedicamentId = medicamentId, PersonId = personId, Dosage = dosage, Measure = measure, StartDate = tempStartDate, FinishDate = finishDate, Frequency = frequency };
+            return new AssignedMedicament
+                       {
+                           Id = id,
+                           MedicamentId = medicamentId,
+                           ConsultationId = consultationId,
+                           Dosage = dosage,
+                           StartDate = tempStartDate,
+                           FinishDate = finishDate,
+                           Frequency = frequency,
+                           MedicamentApplicationWayId = medicamentApplicationWayId
+                       };
         }
 
         private void Validate(int dayCount, int timesAtDay, int eachDays, double dosage)
