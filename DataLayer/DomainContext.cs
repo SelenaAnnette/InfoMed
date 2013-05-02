@@ -3,14 +3,17 @@
     using System.Data.Entity;
 
     using Domain.AllergicReaction;
+    using Domain.Complaint;
     using Domain.Consultation;
     using Domain.Disease;
     using Domain.Group;
     using Domain.Hospital;
+    using Domain.LabAnalyze;
     using Domain.Measuring;
     using Domain.Medicament;
     using Domain.Operation;
     using Domain.Person;
+    using Domain.Research;
     using Domain.RiskFactor;
     using Domain.Symptom;
 
@@ -73,5 +76,19 @@
         public DbSet<HospitalDepartment> HospitalDepartments { get; set; }
 
         public DbSet<PersonHospitalization> PersonHospitalizations { get; set; }
+
+        public DbSet<LabAnalyzeType> LabAnalyzeTypes { get; set; }
+
+        public DbSet<PersonConsultationLabAnalyze> PersonConsultationLabAnalyzes { get; set; }
+
+        public DbSet<Research> Researches { get; set; }
+
+        public DbSet<PersonConsultationResearch> PersonConsultationResearches { get; set; }
+
+        public DbSet<PersonConsultationComplaint> PersonConsultationComplaints { get; set; }
+
+        public DbSet<PersonConsultationSymptom> PersonConsultationSymptoms { get; set; }
+
+        public DbSet<PersonConsultationMeasuring> PersonConsultationMeasurings { get; set; }
     }
 }

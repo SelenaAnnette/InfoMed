@@ -19,14 +19,19 @@
         public IEnumerable<PersonConsultation> GetAll()
         {
             var context = new DomainContext(this.ConnectionString);
-            return context.PersonConsultations.Include("Doctor").Include("Patient").Include("PersonConsultations");
+            return context.PersonConsultations.Include("Doctor").Include("Patient").Include("ConsultationType").Include("PersonConsultationResearches")
+                .Include("PersonConsultationLabAnalyzes").Include("PersonConsultationSymptoms").Include("PersonConsultationComplaints")
+                .Include("PersonConsultationMeasurings");
         }
 
         public PersonConsultation GetEntityById(Guid id)
         {
             using (var context = new DomainContext(this.ConnectionString))
             {
-                return context.PersonConsultations.Include("Doctor").Include("Patient").Include("PersonConsultations").FirstOrDefault(v => v.Id == id);
+                return context.PersonConsultations.Include("Doctor").Include("Patient").Include("ConsultationType").Include("PersonConsultationResearches")
+                    .Include("PersonConsultationLabAnalyzes").Include("PersonConsultationSymptoms").Include("PersonConsultationComplaints")
+                    .Include("PersonConsultationMeasurings")
+                    .FirstOrDefault(v => v.Id == id);
             }
         }
 
@@ -39,7 +44,10 @@
 
             using (var context = new DomainContext(this.ConnectionString))
             {
-                return context.PersonConsultations.Include("Doctor").Include("Patient").Include("PersonConsultations").Where(query).ToList();
+                return context.PersonConsultations.Include("Doctor").Include("Patient").Include("ConsultationType").Include("PersonConsultationResearches")
+                    .Include("PersonConsultationLabAnalyzes").Include("PersonConsultationSymptoms").Include("PersonConsultationComplaints")
+                    .Include("PersonConsultationMeasurings")
+                    .Where(query).ToList();
             }                                    
         }
 

@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="AllergicReaction\AllergicReaction.cs" />
     <Compile Include="AllergicReaction\PersonAllergicReaction.cs" />
+    <Compile Include="Complaint\PersonConsultationComplaint.cs" />
     <Compile Include="Consultation\ConsultationType.cs" />
     <Compile Include="Consultation\PersonConsultation.cs" />
     <Compile Include="Disease\Disease.cs" />
@@ -60,6 +61,9 @@
     <Compile Include="Hospital\PersonHospitalization.cs" />
     <Compile Include="Hospital\HospitalDepartment.cs" />
     <Compile Include="Hospital\Hospital.cs" />
+    <Compile Include="LabAnalyze\PersonConsultationLabAnalyze.cs" />
+    <Compile Include="LabAnalyze\LabAnalyzeType.cs" />
+    <Compile Include="Measuring\PersonConsultationMeasuring.cs" />
     <Compile Include="Measuring\MeasuringType.cs" />
     <Compile Include="Measuring\PersonMeasuring.cs" />
     <Compile Include="Medicament\PersonMedicament.cs" />
@@ -76,10 +80,13 @@
     <Compile Include="Person\Person.cs" />
     <Compile Include="Group\PersonGroup.cs" />
     <Compile Include="Person\PersonPerson.cs" />
+    <Compile Include="Research\PersonConsultationResearch.cs" />
+    <Compile Include="Research\Research.cs" />
     <Compile Include="RiskFactor\AssignedRiskFactor.cs" />
     <Compile Include="RiskFactor\PersonRiskFactor.cs" />
     <Compile Include="Symptom\AssignedSymptom.cs" />
     <Compile Include="RiskFactor\RiskFactor.cs" />
+    <Compile Include="Symptom\PersonConsultationSymptom.cs" />
     <Compile Include="Symptom\PersonSymptom.cs" />
     <Compile Include="Symptom\Symptom.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,5 +1,6 @@
 ﻿namespace Domain.Measuring
 {
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
@@ -14,5 +15,8 @@
 
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
+
+        [InverseProperty("MeasuringType")]
+        public virtual ICollection<PersonConsultationMeasuring> PersonConsultationMeasurings { get; set; }
     }
 }

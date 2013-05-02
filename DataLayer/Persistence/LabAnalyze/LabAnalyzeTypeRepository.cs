@@ -1,39 +1,36 @@
-﻿namespace DataLayer.Persistence.Symptom
+﻿namespace DataLayer.Persistence.LabAnalyze
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Data;
 
-    using DataLayer.Persistence.Person;
+    using Domain.LabAnalyze;
 
-    using Domain.Symptom;
-
-    public class SymptomRepository : ISymptomRepository
+    public class LabAnalyzeTypeRepository : ILabAnalyzeTypeRepository
     {
         private readonly string ConnectionString;
 
-        public SymptomRepository(string connectionString)
+        public LabAnalyzeTypeRepository(string connectionString)
         {
             this.ConnectionString = connectionString;
         }
 
-        public IEnumerable<Symptom> GetAll()
+        public IEnumerable<LabAnalyzeType> GetAll()
         {
             var context = new DomainContext(this.ConnectionString);
-            return context.Symptoms.Include("AssignedSymptoms").Include("PersonConsultationSymptoms");
+            return context.LabAnalyzeTypes.Include("PersonConsultationLabAnalyzes");
         }
 
-        public Symptom GetEntityById(Guid id)
+        public LabAnalyzeType GetEntityById(Guid id)
         {
             using (var context = new DomainContext(this.ConnectionString))
             {
-                return context.Symptoms.Include("AssignedSymptoms").Include("PersonConsultationSymptoms")
-                    .FirstOrDefault(v => v.Id == id);
+                return context.LabAnalyzeTypes.Include("PersonConsultationLabAnalyzes").FirstOrDefault(v => v.Id == id);
             }
         }
 
-        public IEnumerable<Symptom> GetEntitiesByQuery(Func<Symptom, bool> query)
+        public IEnumerable<LabAnalyzeType> GetEntitiesByQuery(Func<LabAnalyzeType, bool> query)
         {
             if (query == null)
             {
@@ -42,12 +39,11 @@
 
             using (var context = new DomainContext(this.ConnectionString))
             {
-                return context.Symptoms.Include("AssignedSymptoms").Include("PersonConsultationSymptoms")
-                    .Where(query).ToList();
+                return context.LabAnalyzeTypes.Include("PersonConsultationLabAnalyzes").Where(query).ToList();
             }                                    
         }
 
-        public Symptom CreateOrUpdateEntity(Symptom entity)
+        public LabAnalyzeType CreateOrUpdateEntity(LabAnalyzeType entity)
         {
             if (entity == null)
             {
@@ -58,7 +54,7 @@
             {                                
                 if (this.GetEntityById(entity.Id) == null)
                 {
-                    context.Symptoms.Add(entity);
+                    context.LabAnalyzeTypes.Add(entity);
                 }
                 else
                 {
@@ -75,13 +71,13 @@
         {
             using (var context = new DomainContext(this.ConnectionString))
             {
-                var symptom = context.Symptoms.FirstOrDefault(v => v.Id == id);
-                if (symptom == null)
+                var labAnalyzeType = context.LabAnalyzeTypes.FirstOrDefault(v => v.Id == id);
+                if (labAnalyzeType == null)
                 {
                     return;
                 }
 
-                context.Symptoms.Remove(symptom);
+                context.LabAnalyzeTypes.Remove(labAnalyzeType);
                 context.SaveChanges();
             }
         }

@@ -1,39 +1,37 @@
-﻿namespace DataLayer.Persistence.Symptom
+﻿namespace DataLayer.Persistence.Complaint
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Data;
 
-    using DataLayer.Persistence.Person;
+    using Domain.Complaint;
 
-    using Domain.Symptom;
-
-    public class SymptomRepository : ISymptomRepository
+    public class PersonConsultationComplaintRepository : IPersonConsultationComplaintRepository
     {
         private readonly string ConnectionString;
 
-        public SymptomRepository(string connectionString)
+        public PersonConsultationComplaintRepository(string connectionString)
         {
             this.ConnectionString = connectionString;
         }
 
-        public IEnumerable<Symptom> GetAll()
+        public IEnumerable<PersonConsultationComplaint> GetAll()
         {
             var context = new DomainContext(this.ConnectionString);
-            return context.Symptoms.Include("AssignedSymptoms").Include("PersonConsultationSymptoms");
+            return context.PersonConsultationComplaints.Include("PersonConsultation");
         }
 
-        public Symptom GetEntityById(Guid id)
+        public PersonConsultationComplaint GetEntityById(Guid id)
         {
             using (var context = new DomainContext(this.ConnectionString))
             {
-                return context.Symptoms.Include("AssignedSymptoms").Include("PersonConsultationSymptoms")
+                return context.PersonConsultationComplaints.Include("PersonConsultation")
                     .FirstOrDefault(v => v.Id == id);
             }
         }
 
-        public IEnumerable<Symptom> GetEntitiesByQuery(Func<Symptom, bool> query)
+        public IEnumerable<PersonConsultationComplaint> GetEntitiesByQuery(Func<PersonConsultationComplaint, bool> query)
         {
             if (query == null)
             {
@@ -42,12 +40,12 @@
 
             using (var context = new DomainContext(this.ConnectionString))
             {
-                return context.Symptoms.Include("AssignedSymptoms").Include("PersonConsultationSymptoms")
+                return context.PersonConsultationComplaints.Include("PersonConsultation")
                     .Where(query).ToList();
             }                                    
         }
 
-        public Symptom CreateOrUpdateEntity(Symptom entity)
+        public PersonConsultationComplaint CreateOrUpdateEntity(PersonConsultationComplaint entity)
         {
             if (entity == null)
             {
@@ -58,7 +56,7 @@
             {                                
                 if (this.GetEntityById(entity.Id) == null)
                 {
-                    context.Symptoms.Add(entity);
+                    context.PersonConsultationComplaints.Add(entity);
                 }
                 else
                 {
@@ -75,13 +73,13 @@
         {
             using (var context = new DomainContext(this.ConnectionString))
             {
-                var symptom = context.Symptoms.FirstOrDefault(v => v.Id == id);
-                if (symptom == null)
+                var personConsultationComplaint = context.PersonConsultationComplaints.FirstOrDefault(v => v.Id == id);
+                if (personConsultationComplaint == null)
                 {
                     return;
                 }
 
-                context.Symptoms.Remove(symptom);
+                context.PersonConsultationComplaints.Remove(personConsultationComplaint);
                 context.SaveChanges();
             }
         }

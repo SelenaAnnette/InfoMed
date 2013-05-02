@@ -15,5 +15,8 @@
 
         [InverseProperty("Symptom")]
         public virtual ICollection<AssignedSymptom> AssignedSymptoms { get; set; }
+
+        [InverseProperty("Symptom")]
+        public virtual ICollection<PersonConsultationSymptom> PersonConsultationSymptoms { get; set; }
     }
 }
