@@ -16,6 +16,8 @@
     {
         private readonly IAssignedMedicamentRepository assignedMedicamentRepository;
 
+        private readonly IMedicamentFormRepository medicamentFormRepository;
+
         private readonly INotificationRepository notificationRepository;
 
         private readonly NotificationFactory notificationFactory;
@@ -31,9 +33,11 @@
         private readonly ILogger logger;
 
         public NotificationManager(IAssignedMedicamentRepository assignedMedicamentRepository, INotificationRepository notificationRepository,
+            IMedicamentFormRepository medicamentFormRepository,
             int startDayFromHour, int endDayFromHour, int reservHoursForAnsver, int minutesCountForNotificationAnswer, ILogger logger)
         {
             this.assignedMedicamentRepository = assignedMedicamentRepository;
+            this.medicamentFormRepository = medicamentFormRepository;
             this.logger = logger;
             this.notificationRepository = notificationRepository;                        
             this.notificationFactory = new NotificationFactory();
@@ -128,7 +132,7 @@
             var newNotification = this.notificationFactory.Create(
                         Guid.NewGuid(),
                         assignedMedicament.Id,
-                        assignedMedicament.PersonId,
+                        assignedMedicament.PersonConsultation.PatientId,
                         assignedMedicament.MedicamentId,
                         sendingDate,
                         this.GetNotificationMessage(assignedMedicament));
@@ -200,11 +204,12 @@
 
         private string GetNotificationMessage(AssignedMedicament assignedMedicament)
         {
+            var medicamentForm = this.medicamentFormRepository.GetEntityById(assignedMedicament.Medicament.Id);
             return string.Format(
-                "Примите {0} {1} лекарства {2} с кодом {3}",
-                assignedMedicament.Dosage,
-                assignedMedicament.Measure,
+                "Примите {0} {1} {2} с кодом {3}",
                 assignedMedicament.Medicament.Name,
+                assignedMedicament.Dosage,
+                medicamentForm.Name,
                 assignedMedicament.Medicament.Code);
         }
     }

@@ -19,14 +19,15 @@
         public IEnumerable<MeasuringType> GetAll()
         {
             var context = new DomainContext(this.ConnectionString);
-            return context.MeasuringTypes;
+            return context.MeasuringTypes.Include("PersonConsultationMeasurings").Include("AssignedMedicamentMeasurings");
         }
 
         public MeasuringType GetEntityById(Guid id)
         {
             using (var context = new DomainContext(this.ConnectionString))
             {
-                return context.MeasuringTypes.FirstOrDefault(v => v.Id == id);
+                return context.MeasuringTypes.Include("PersonConsultationMeasurings").Include("AssignedMedicamentMeasurings")
+                    .FirstOrDefault(v => v.Id == id);
             }
         }
 
@@ -39,7 +40,8 @@
 
             using (var context = new DomainContext(this.ConnectionString))
             {
-                return context.MeasuringTypes.Where(query).ToList();
+                return context.MeasuringTypes.Include("PersonConsultationMeasurings").Include("AssignedMedicamentMeasurings")
+                    .Where(query).ToList();
             }                                    
         }
 

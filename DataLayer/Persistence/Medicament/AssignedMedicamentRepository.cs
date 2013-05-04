@@ -19,14 +19,15 @@
         public IEnumerable<AssignedMedicament> GetAll()
         {
             var context = new DomainContext(this.ConnectionString);
-            return context.AssignedMedicaments.Include("Person").Include("Medicament");
+            return context.AssignedMedicaments.Include("Medicament").Include("AssignedMedicamentMeasurings").Include("MedicamentApplicationWay").Include("PersonConsultation");
         }
 
         public AssignedMedicament GetEntityById(Guid id)
         {
             using (var context = new DomainContext(this.ConnectionString))
             {
-                return context.AssignedMedicaments.Include("Person").Include("Medicament").FirstOrDefault(v => v.Id == id);
+                return context.AssignedMedicaments.Include("Medicament").Include("AssignedMedicamentMeasurings").Include("MedicamentApplicationWay").Include("PersonConsultation")
+                    .FirstOrDefault(v => v.Id == id);
             }
         }
 
@@ -39,7 +40,8 @@
 
             using (var context = new DomainContext(this.ConnectionString))
             {
-                return context.AssignedMedicaments.Include("Person").Include("Medicament").Where(query).ToList();
+                return context.AssignedMedicaments.Include("Medicament").Include("AssignedMedicamentMeasurings").Include("MedicamentApplicationWay").Include("PersonConsultation")
+                    .Where(query).ToList();
             }                                    
         }
 

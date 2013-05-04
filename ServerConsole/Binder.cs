@@ -1,10 +1,19 @@
 ﻿namespace ServerConsole
 {
+    using DataLayer.Persistence.AllergicReaction;
+    using DataLayer.Persistence.Complaint;
+    using DataLayer.Persistence.Consultation;
+    using DataLayer.Persistence.Diagnosis;
+    using DataLayer.Persistence.Disease;
     using DataLayer.Persistence.Group;
+    using DataLayer.Persistence.Hospital;
+    using DataLayer.Persistence.LabAnalyze;
     using DataLayer.Persistence.Measuring;
     using DataLayer.Persistence.Medicament;
     using DataLayer.Persistence.Message;
+    using DataLayer.Persistence.Operation;
     using DataLayer.Persistence.Person;
+    using DataLayer.Persistence.Research;
     using DataLayer.Persistence.RiskFactor;
     using DataLayer.Persistence.Symptom;
 
@@ -43,6 +52,34 @@
             NinjectKernel.Bind<IAssignedMedicamentRepository>().To<AssignedMedicamentRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
             NinjectKernel.Bind<IPersonPersonRepository>().To<PersonPersonRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
             NinjectKernel.Bind<IPersonGroupRepository>().To<PersonGroupRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
+
+            NinjectKernel.Bind<IAllergicReactionRepository>().To<AllergicReactionRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
+            NinjectKernel.Bind<IPersonAllergicReactionRepository>().To<PersonAllergicReactionRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
+            NinjectKernel.Bind<IDiseaseRepository>().To<DiseaseRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
+            NinjectKernel.Bind<IPersonDiseaseRepository>().To<PersonDiseaseRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
+            NinjectKernel.Bind<IConsultationTypeRepository>().To<ConsultationTypeRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
+            NinjectKernel.Bind<IPersonConsultationRepository>().To<PersonConsultationRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
+            NinjectKernel.Bind<IHospitalDepartmentRepository>().To<HospitalDepartmentRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
+            NinjectKernel.Bind<IHospitalRepository>().To<HospitalRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
+            NinjectKernel.Bind<IPersonHospitalizationRepository>().To<PersonHospitalizationRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
+            NinjectKernel.Bind<IOperationRepository>().To<OperationRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
+            NinjectKernel.Bind<IPersonOperationRepository>().To<PersonOperationRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
+
+            NinjectKernel.Bind<IPersonConsultationComplaintRepository>().To<PersonConsultationComplaintRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
+            NinjectKernel.Bind<IPersonConsultationSymptomRepository>().To<PersonConsultationSymptomRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
+            NinjectKernel.Bind<IPersonConsultationMeasuringRepository>().To<PersonConsultationMeasuringRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
+            NinjectKernel.Bind<ILabAnalyzeTypeRepository>().To<LabAnalyzeTypeRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
+            NinjectKernel.Bind<IPersonConsultationLabAnalyzeRepository>().To<PersonConsultationLabAnalyzeRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
+            NinjectKernel.Bind<IResearchRepository>().To<ResearchRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
+            NinjectKernel.Bind<IPersonConsultationResearchRepository>().To<PersonConsultationResearchRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
+
+            NinjectKernel.Bind<IDiagnosisRepository>().To<DiagnosisRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
+            NinjectKernel.Bind<IDiagnosisTypeRepository>().To<DiagnosisTypeRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
+            NinjectKernel.Bind<IPersonConsultationDiagnosisRepository>().To<PersonConsultationDiagnosisRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
+
+            NinjectKernel.Bind<IAssignedMedicamentMeasuringRepository>().To<AssignedMedicamentMeasuringRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
+            NinjectKernel.Bind<IMedicamentApplicationWayRepository>().To<MedicamentApplicationWayRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
+            NinjectKernel.Bind<IMedicamentFormRepository>().To<MedicamentFormRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
 
             NinjectKernel.Bind<IMessageRepository>().To<MessageRepository>().WithConstructorArgument("connectionString", trashDataBaseConnectionString);
             NinjectKernel.Bind<INotificationRepository>().To<NotificationRepository>().WithConstructorArgument("connectionString", trashDataBaseConnectionString);

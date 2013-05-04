@@ -21,14 +21,15 @@
         public IEnumerable<Symptom> GetAll()
         {
             var context = new DomainContext(this.ConnectionString);
-            return context.Symptoms.Include("AssignedSymptoms");
+            return context.Symptoms.Include("AssignedSymptoms").Include("PersonConsultationSymptoms");
         }
 
         public Symptom GetEntityById(Guid id)
         {
             using (var context = new DomainContext(this.ConnectionString))
             {
-                return context.Symptoms.Include("AssignedSymptoms").FirstOrDefault(v => v.Id == id);
+                return context.Symptoms.Include("AssignedSymptoms").Include("PersonConsultationSymptoms")
+                    .FirstOrDefault(v => v.Id == id);
             }
         }
 
@@ -41,7 +42,8 @@
 
             using (var context = new DomainContext(this.ConnectionString))
             {
-                return context.Symptoms.Include("AssignedSymptoms").Where(query).ToList();
+                return context.Symptoms.Include("AssignedSymptoms").Include("PersonConsultationSymptoms")
+                    .Where(query).ToList();
             }                                    
         }
 

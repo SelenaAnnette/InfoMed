@@ -1,22 +1,26 @@
 ﻿namespace Domain.Medicament
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using Domain.Person;
+
+    using Domain.Consultation;
 
     [Table("AssignedMedicament")]
     public class AssignedMedicament : DomainBase
     {        
-        public Guid PersonId { get; set; }
-
+        [Required]
         public Guid MedicamentId { get; set; }
 
         [Required]
-        public double Dosage { get; set; }
+        public Guid ConsultationId { get; set; }
 
         [Required]
-        public string Measure { get; set; }
+        public Guid MedicamentApplicationWayId { get; set; }
+
+        [Required]
+        public double Dosage { get; set; }
 
         [Required]
         public double Frequency { get; set; }
@@ -28,9 +32,15 @@
         public DateTime FinishDate { get; set; }
 
         [InverseProperty("AssignedMedicaments")]
-        public virtual Person Person { get; set; }
+        public virtual Medicament Medicament { get; set; }
 
         [InverseProperty("AssignedMedicaments")]
-        public virtual Medicament Medicament { get; set; }
+        public virtual PersonConsultation PersonConsultation { get; set; }
+
+        [InverseProperty("AssignedMedicaments")]
+        public virtual MedicamentApplicationWay MedicamentApplicationWay { get; set; }
+
+        [InverseProperty("AssignedMedicament")]
+        public virtual ICollection<AssignedMedicamentMeasuring> AssignedMedicamentMeasurings { get; set; }
     }
 }

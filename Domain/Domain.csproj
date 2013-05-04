@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
+    <Reference Include="EntityFramework, Version=4.4.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Ninject">
@@ -50,14 +50,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AllergicReaction\AllergicReaction.cs" />
+    <Compile Include="AllergicReaction\PersonAllergicReaction.cs" />
+    <Compile Include="Complaint\PersonConsultationComplaint.cs" />
+    <Compile Include="Consultation\ConsultationType.cs" />
+    <Compile Include="Consultation\PersonConsultation.cs" />
+    <Compile Include="Diagnosis\PersonConsultationDiagnosis.cs" />
+    <Compile Include="Diagnosis\DiagnosisType.cs" />
+    <Compile Include="Diagnosis\Diagnosis.cs" />
+    <Compile Include="Disease\Disease.cs" />
+    <Compile Include="Disease\PersonDisease.cs" />
     <Compile Include="DomainBase.cs" />
+    <Compile Include="Hospital\PersonHospitalization.cs" />
+    <Compile Include="Hospital\HospitalDepartment.cs" />
+    <Compile Include="Hospital\Hospital.cs" />
+    <Compile Include="LabAnalyze\PersonConsultationLabAnalyze.cs" />
+    <Compile Include="LabAnalyze\LabAnalyzeType.cs" />
+    <Compile Include="Measuring\PersonConsultationMeasuring.cs" />
     <Compile Include="Measuring\MeasuringType.cs" />
     <Compile Include="Measuring\PersonMeasuring.cs" />
+    <Compile Include="Medicament\AssignedMedicamentMeasuring.cs" />
+    <Compile Include="Medicament\MedicamentApplicationWay.cs" />
+    <Compile Include="Medicament\MedicamentForm.cs" />
     <Compile Include="Medicament\PersonMedicament.cs" />
     <Compile Include="Medicament\Medicament.cs" />
     <Compile Include="Medicament\AssignedMedicament.cs" />
     <Compile Include="Message\Notification.cs" />
     <Compile Include="Message\Message.cs" />
+    <Compile Include="Operation\Operation.cs" />
+    <Compile Include="Operation\PersonOperation.cs" />
     <Compile Include="Person\PersonContact.cs" />
     <Compile Include="Person\ContactType.cs" />
     <Compile Include="Person\Credentials.cs" />
@@ -65,10 +86,13 @@
     <Compile Include="Person\Person.cs" />
     <Compile Include="Group\PersonGroup.cs" />
     <Compile Include="Person\PersonPerson.cs" />
+    <Compile Include="Research\PersonConsultationResearch.cs" />
+    <Compile Include="Research\Research.cs" />
     <Compile Include="RiskFactor\AssignedRiskFactor.cs" />
     <Compile Include="RiskFactor\PersonRiskFactor.cs" />
     <Compile Include="Symptom\AssignedSymptom.cs" />
     <Compile Include="RiskFactor\RiskFactor.cs" />
+    <Compile Include="Symptom\PersonConsultationSymptom.cs" />
     <Compile Include="Symptom\PersonSymptom.cs" />
     <Compile Include="Symptom\Symptom.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -77,6 +101,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
