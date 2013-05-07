@@ -16,7 +16,7 @@
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
-        [InverseProperty("Medicament")]
+        [InverseProperty("MedicamentForm")]
         public virtual ICollection<Medicament> Medicaments { get; set; }
     }
 }
