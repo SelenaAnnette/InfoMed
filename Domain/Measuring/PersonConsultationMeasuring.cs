@@ -10,7 +10,7 @@
     public class PersonConsultationMeasuring : DomainBase
     {
         [Required]
-        public Guid ConsultationId { get; set; }
+        public Guid PersonConsultationId { get; set; }
 
         [Required]
         public Guid MeasuringTypeId { get; set; }

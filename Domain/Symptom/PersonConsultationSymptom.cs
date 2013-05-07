@@ -9,8 +9,8 @@
     [Table("PersonConsultationSymptom")]
     public class PersonConsultationSymptom : DomainBase
     {                 
-        [Required]       
-        public Guid ConsultationId { get; set; }
+        [Required]
+        public Guid PersonConsultationId { get; set; }
 
         [Required]
         public Guid SymptomId { get; set; }

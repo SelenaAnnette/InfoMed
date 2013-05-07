@@ -6,14 +6,14 @@
 
     public class PersonConsultationDiagnosisFactory
     {
-        public PersonConsultationDiagnosis Create(Guid id, Guid consultationId, Guid diagnosisId, Guid diagnosisTypeId)
+        public PersonConsultationDiagnosis Create(Guid id, Guid personConsultationId, Guid diagnosisId, Guid diagnosisTypeId)
         {
-            return new PersonConsultationDiagnosis { Id = id, ConsultationId = consultationId, DiagnosisId = diagnosisId, DiagnosisTypeId = diagnosisTypeId };
+            return new PersonConsultationDiagnosis { Id = id, PersonConsultationId = personConsultationId, DiagnosisId = diagnosisId, DiagnosisTypeId = diagnosisTypeId };
         }
 
-        public PersonConsultationDiagnosis Create(Guid id, Guid consultationId, Guid diagnosisId, Guid diagnosisTypeId, Guid parentPersonConsultationDiagnosisId)
+        public PersonConsultationDiagnosis Create(Guid id, Guid personConsultationId, Guid diagnosisId, Guid diagnosisTypeId, Guid parentPersonConsultationDiagnosisId)
         {
-            return new PersonConsultationDiagnosis { Id = id, ConsultationId = consultationId, DiagnosisId = diagnosisId, DiagnosisTypeId = diagnosisTypeId, ParentPersonConsultationDiagnosisId = parentPersonConsultationDiagnosisId };
+            return new PersonConsultationDiagnosis { Id = id, PersonConsultationId = personConsultationId, DiagnosisId = diagnosisId, DiagnosisTypeId = diagnosisTypeId, ParentPersonConsultationDiagnosisId = parentPersonConsultationDiagnosisId };
         }
     }
 }

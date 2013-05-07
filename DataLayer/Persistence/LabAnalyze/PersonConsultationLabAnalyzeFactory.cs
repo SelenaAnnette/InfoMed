@@ -6,9 +6,9 @@
 
     public class PersonConsultationLabAnalyzeFactory
     {
-        public PersonConsultationLabAnalyze Create(Guid id, Guid consultationId, Guid labAnalyzeId, double value)
+        public PersonConsultationLabAnalyze Create(Guid id, Guid personConsultationId, Guid labAnalyzeId, double value)
         {
-            return new PersonConsultationLabAnalyze { Id = id, ConsultationId = consultationId, LabAnalyzeId = labAnalyzeId, Value = value };
+            return new PersonConsultationLabAnalyze { Id = id, PersonConsultationId = personConsultationId, LabAnalyzeId = labAnalyzeId, Value = value };
         }
     }
 }

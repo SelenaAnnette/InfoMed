@@ -6,9 +6,9 @@
 
     public class PersonConsultationSymptomFactory
     {
-        public PersonConsultationSymptom Create(Guid id, Guid consultationId, Guid symptomId)
+        public PersonConsultationSymptom Create(Guid id, Guid personConsultationId, Guid symptomId)
         {
-            return new PersonConsultationSymptom { Id = id, ConsultationId = consultationId, SymptomId = symptomId };
+            return new PersonConsultationSymptom { Id = id, PersonConsultationId = personConsultationId, SymptomId = symptomId };
         }
     }
 }
