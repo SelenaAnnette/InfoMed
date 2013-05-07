@@ -1,4 +1,4 @@
-﻿<%@ Page Title="О нас" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
+﻿<%@ Page Title="Выписать препарат" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
     CodeBehind="Drugs.aspx.cs" Inherits="doc_int.About" %>
 
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">

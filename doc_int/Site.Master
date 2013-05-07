@@ -35,6 +35,8 @@
                         <asp:MenuItem NavigateUrl="~/Patients.aspx" Text="Пациенты"/>
                         <asp:MenuItem NavigateUrl="~/Drugs.aspx" Text="Выписать препарат"/>
                         <asp:MenuItem NavigateUrl="~/Messages.aspx" Text="Сообщения"/>
+                         <asp:MenuItem NavigateUrl="~/Patients_information.aspx" Text="Информация о пациенте"/>
+                          <asp:MenuItem NavigateUrl="~/patient_info_input.aspx" Text="Информация о пациенте"/>
                     </Items>
                 </asp:Menu>
             </div>

@@ -143,9 +143,17 @@ namespace doc_int
                     DateTime convertedDate = DateTime.Parse(Label1.Text);
                     DateTime end = convertedDate.AddDays(Convert.ToInt32(dayCount.Text));
 
-                    var AssignedMedicament = AssignedMedicamentFactory.Create(Guid.NewGuid(), Guid_pat, Guid_drug, Convert.ToDouble(dosage.Text), "единиц", convertedDate, Convert.ToInt16(dayCount.Text), timesAtDay, eachDay);
+                    //var AssignedMedicament = AssignedMedicamentFactory.Create(Guid.NewGuid(), Guid_pat, Guid_drug, Convert.ToDouble(dosage.Text), "единиц", convertedDate, Convert.ToInt16(dayCount.Text), timesAtDay, eachDay);
 
-                    AssignedMedicamentRepo.CreateOrUpdateEntity(AssignedMedicament);
+                   // var AssignedMedicament = AssignedMedicamentFactory.Create(
+
+
+
+                   // AssignedMedicamentRepo.CreateOrUpdateEntity(AssignedMedicament);
+
+
+
+
 
                     Label2.Text = "Отправка данных прошла успешно.";
                     Label2.ForeColor = Color.Green;
