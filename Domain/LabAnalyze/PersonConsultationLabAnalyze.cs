@@ -13,7 +13,7 @@
         public Guid LabAnalyzeId { get; set; }
 
         [Required]
-        public Guid ConsultationId { get; set; }
+        public Guid PersonConsultationId { get; set; }
 
         [Required]
         public double Value { get; set; }

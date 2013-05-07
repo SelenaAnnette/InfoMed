@@ -6,7 +6,7 @@
 
     public class AssignedMedicamentFactory
     {
-        public AssignedMedicament Create(Guid id, Guid consultationId, Guid medicamentId, Guid medicamentApplicationWayId, double dosage, DateTime startDate, int dayCount, int timesAtDay, int eachDays)
+        public AssignedMedicament Create(Guid id, Guid personConsultationId, Guid medicamentId, Guid medicamentApplicationWayId, double dosage, DateTime startDate, int dayCount, int timesAtDay, int eachDays)
         {
             this.Validate(dayCount, timesAtDay, eachDays, dosage);
             var tempStartDate = startDate.Date;
@@ -17,7 +17,7 @@
                        {
                            Id = id,
                            MedicamentId = medicamentId,
-                           ConsultationId = consultationId,
+                           PersonConsultationId = personConsultationId,
                            Dosage = dosage,
                            StartDate = tempStartDate,
                            FinishDate = finishDate,

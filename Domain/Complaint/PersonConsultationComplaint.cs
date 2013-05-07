@@ -10,7 +10,7 @@
     public class PersonConsultationComplaint : DomainBase
     {
         [Required]
-        public Guid ConsultationId { get; set; }
+        public Guid PersonConsultationId { get; set; }
 
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
