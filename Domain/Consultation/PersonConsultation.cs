@@ -29,10 +29,10 @@
         [Required]
         public DateTime ConsultationDate { get; set; }
 
-        [InverseProperty("DoctorPersons")]
+        [InverseProperty("ConsultationsAsDoctor")]
         public virtual Person Doctor { get; set; }
 
-        [InverseProperty("PatientPersons")]
+        [InverseProperty("ConsultationsAsPatient")]
         public virtual Person Patient { get; set; }
 
         [InverseProperty("PersonConsultations")]
