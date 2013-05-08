@@ -6,6 +6,7 @@
     using System.ComponentModel.DataAnnotations.Schema;
 
     using Domain.AllergicReaction;
+    using Domain.Consultation;
     using Domain.Disease;
     using Domain.Hospital;
     using Domain.Medicament;
@@ -62,10 +63,10 @@
         public virtual ICollection<PersonAllergicReaction> PersonAllergicReactions { get; set; }
 
         [InverseProperty("Doctor")]
-        public virtual ICollection<PersonPerson> DoctorPersons { get; set; }
+        public virtual ICollection<PersonConsultation> ConsultationsAsDoctor { get; set; }
 
         [InverseProperty("Patient")]
-        public virtual ICollection<PersonPerson> PatientPersons { get; set; }
+        public virtual ICollection<PersonConsultation> ConsultationsAsPatient { get; set; }
 
         [InverseProperty("Person")]
         public virtual ICollection<PersonHospitalization> PersonHospitalizations { get; set; }

@@ -6,9 +6,9 @@
 
     public class PersonConsultationResearchFactory
     {
-        public PersonConsultationResearch Create(Guid id, Guid consultationId, Guid researchId, string conclusion)
+        public PersonConsultationResearch Create(Guid id, Guid personConsultationId, Guid researchId, string conclusion)
         {
-            return new PersonConsultationResearch { Id = id, ConsultationId = consultationId, ResearchId = researchId, Conclusion = conclusion };
+            return new PersonConsultationResearch { Id = id, PersonConsultationId = personConsultationId, ResearchId = researchId, Conclusion = conclusion };
         }
     }
 }

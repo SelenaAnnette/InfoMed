@@ -10,7 +10,7 @@
         [Required]
         public string Name { get; set; }
 
-        [InverseProperty("ContactType")]
+        [InverseProperty("ConsultationType")]
         public virtual ICollection<PersonConsultation> PersonConsultations { get; set; }
     }
 }

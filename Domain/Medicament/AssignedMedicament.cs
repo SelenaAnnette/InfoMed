@@ -14,7 +14,7 @@
         public Guid MedicamentId { get; set; }
 
         [Required]
-        public Guid ConsultationId { get; set; }
+        public Guid PersonConsultationId { get; set; }
 
         [Required]
         public Guid MedicamentApplicationWayId { get; set; }

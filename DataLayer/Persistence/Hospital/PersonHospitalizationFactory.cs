@@ -6,16 +6,16 @@
 
     public class PersonHospitalizationFactory
     {
-        public PersonHospitalization Create(Guid id, Guid hospitalDepartmentId, Guid personId, DateTime hospitalizationDate, string hospitalizationReason)
+        public PersonHospitalization Create(Guid id, Guid hospitalDepartmentId, Guid personId, DateTime hospitalizationDate, string hospitalizationsReason)
         {
             return new PersonHospitalization { Id = id, HospitalDepartmentId = hospitalDepartmentId, PersonId = personId, HospitalizationDate = hospitalizationDate,
-                HospitalizationReason = hospitalizationReason };
+                HospitalizationsReason = hospitalizationsReason };
         }
 
-        public PersonHospitalization Create(Guid id, Guid hospitalDepartmentId, Guid personId, DateTime hospitalizationDate, DateTime dischargeDate, string hospitalizationReason)
+        public PersonHospitalization Create(Guid id, Guid hospitalDepartmentId, Guid personId, DateTime hospitalizationDate, DateTime dischargeDate, string hospitalizationsReason)
         {
             return new PersonHospitalization { Id = id, HospitalDepartmentId = hospitalDepartmentId, PersonId = personId, HospitalizationDate = hospitalizationDate,
-                DischargeDate = dischargeDate, HospitalizationReason = hospitalizationReason };
+                DischargeDate = dischargeDate, HospitalizationsReason = hospitalizationsReason };
         }
     }
 }
