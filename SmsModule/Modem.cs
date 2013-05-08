@@ -30,9 +30,12 @@
         {
             serialPort = new SerialPort();
 
+
             foreach (string s in SerialPort.GetPortNames())///Get COMPort Name
             {
                 serialPort.PortName = s;
+                if (serialPort.IsOpen)
+                { serialPort.Close(); }
                 serialPort.Open();
                 if (serialPort.IsOpen)
                 {
@@ -131,6 +134,7 @@
 
                 Final_Respond = ReadRespondFromModem();
                 log += Final_Respond;
+               
             }
 
             if (Final_Respond.IndexOf("OK") != -1)//если в конце вернул ОК, значит прошло успешно и ждем смску
@@ -214,42 +218,11 @@
 
         }
 
-        private string ConvertToUCS2(string txtInRus) //нужно переделать на автомат.кодирование встроенными функциями
+        private string ConvertToUCS2(string txt) //нужно переделать на автомат.кодирование встроенными функциями
         {
-            //строка с алфавитом
-            String strAlphabet = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюяABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'-* :;)(.,!=_";
-
-            String[] ArrayUCSCode = new String[141]{            
-            "0410","0411","0412","0413","0414","0415","00A8","0416","0417",
-            "0418","0419","041A","041B","041C","041D","041E","041F","0420",
-            "0421","0422","0423","0424","0425","0426","0427","0428","0429",
-            "042A","042B","042C","042D","042E","042F","0430","0431","0432","0433",
-            "0434","0435","00B8","0436","0437","0438","0439","043A","043B",
-            "043C","043D","043E","043F","0440","0441","0442","0443","0444",
-            "0445","0446","0447","0448","0449","044A","044B", "044C","044D","044E","044F","0041",
-            "0042","0043","0044","0045","0046","0047","0048","0049","004A",
-            "004B","004C","004D","004E","004F","0050","0051","0052","0053",
-            "0054","0055","0056","0057","0058","0059","005A","0061","0062",
-            "0063","0064","0065","0066","0067","0068","0069","006A","006B",
-            "006C","006D","006E","006F","0070","0071","0072","0073","0074",
-            "0075","0076","0077","0078","0079","007A","0030","0031","0032",
-            "0033","0034","0035","0036","0037","0038","0039","0027","002D",
-            "002A","0020","003A","003B","0029","0028","002E","002C","0021",
-            "003D","005F"};
-            StringBuilder UCS = new StringBuilder(txtInRus.Length);
-            Int32 intLetterIndex = 0;
-            for (int i = 0; i < txtInRus.Length; i++)
-            {
-                intLetterIndex = strAlphabet.IndexOf(txtInRus[i]);
-                if (intLetterIndex != -1)
-                {
-                    UCS.Append(ArrayUCSCode[intLetterIndex]);
-                }
-            }
-
-            return UCS.ToString();
+            byte[] byte_array = Encoding.BigEndianUnicode.GetBytes(txt);
+            return BitConverter.ToString(byte_array).Replace("-", string.Empty);
         }
-
 
         private Sms parse_sms(string code)
         {
@@ -308,7 +281,7 @@
             //заполнить понятные поля из служебных
 
             NewSms.From = get_sender(NewSms.TP_OA);
-            NewSms.Text = get_text_sms(NewSms.TP_UD, NewSms.TP_DCS, NewSms.TP_MTICO);
+            NewSms.Text = get_text_sms(NewSms.TP_UD, NewSms.TP_DCS);
             NewSms.DTime = Convert.ToDateTime("20" +
                           NewSms.TP_SCTS[1].ToString() + NewSms.TP_SCTS[0].ToString() + "-" +
                           NewSms.TP_SCTS[3].ToString() + NewSms.TP_SCTS[2].ToString() + "-" +
@@ -329,11 +302,8 @@
 
         private string HexToBinary(string hex)
         {
-            string binaryval = Convert.ToString(Convert.ToInt32(hex, 16), 2);
-            while (binaryval.Length % 4 != 0)
-            {
-                binaryval = "0" + binaryval;
-            }
+            string binaryval = Convert.ToString(Convert.ToInt32("8" + hex, 16), 2);//8ка дает старший бит=1, чтобы не обрезал старшие нули. Нужно обрезать первые 4 символа в бинаре
+            binaryval = binaryval.Substring(4);
             return binaryval;
         }
 
@@ -345,27 +315,27 @@
 
         }
 
-        private string get_sender(string TP_OA)
+        private string get_sender(string str)
         {
             string number = "";
-            int len = HexToInt(TP_OA.Substring(0, 2)); //длина номера
-            /*  if (len % 2 != 0) //учитываем четный символ F
+            int len = HexToInt(str.Substring(0, 2)); //длина номера
+            /*  if (len % 2 != 0) //четный символ F
               {
                   len += 1;
               }*/
-            if (TP_OA.Substring(2, 2) == "91")
+            if (str.Substring(3, 1) == "1")//любой но не буквенно-цифровой // !!в т.ч. тип *000*
             {
                 for (int i = 4; i < len + 4; i++)
                 {
-                    number += rotate(TP_OA.Substring(i, 2));
-
+                    number += rotate(str.Substring(i, 2));
                     i++;
                 }
-                if (number.Length == 12)
-                {
-                    number = number.Substring(0, 11);
-                }
+                number = number.Substring(0, len); //на случай если в конце символ четности F, надо обрезать
 
+            }
+            else if (str.Substring(3, 1) == "0")//буквенно цифровой
+            {
+                number = ConvertFrom7bit(str.Substring(4, len));
             }
             else
             {
@@ -374,18 +344,18 @@
             return number;
         }
 
-        private string get_text_sms(string TP_UD, string TP_DCS, string TP_MTICO)
+        private string get_text_sms(string TP_UD, string TP_DCS)
         {
 
             if (TP_DCS == "00")//7bit
             {
-                return "7bit_not_decoded";
+                return ConvertFrom7bit(TP_UD);
             }
             else
             {
                 if ((TP_DCS == "08") || (TP_DCS == "18") || (TP_DCS == "08"))//UCS-2
                 {
-                    return ConvertFromUCS2(TP_UD, TP_MTICO);
+                    return ConvertFromUCS2(TP_UD);
                 }
 
             }
@@ -393,7 +363,7 @@
             return "ok";
         }
 
-        private string ConvertFromUCS2(string TP_UD, string TP_MTICO)
+        private string ConvertFromUCS2(string TP_UD)
         {
 
             StringBuilder UCS = new StringBuilder(TP_UD.Length);
@@ -408,14 +378,39 @@
                 i += 1;
 
             }
-
             UCS.Append(Encoding.BigEndianUnicode.GetChars(b));
-
-
             return UCS.ToString();
         }
 
+        private string ConvertFrom7bit(string txt)
+        {
+            byte[] b = new byte[180];//asi.GetBytes(txt);//
+            int k, b_counter = 0;
+            string buf = "";
+            for (k = 0; k < txt.Length; k++)
+            {
+                string ss = HexToBinary(txt.Substring(k, 2));//байт в бинарном виде
+                ss += buf; //прибавить справа 
+                buf = ss.Substring(0, b_counter + 1); //скопировать первые i+1 бит
+                ss = ss.Substring(b_counter + 1);//обрезать на i+1
+                ss = "0" + ss;
+                b[b_counter] = Convert.ToByte(ss, 2);
+                b_counter += 1;
+                if (buf.Length == 7)
+                {
+                    ss = "0" + buf;
+                    b[b_counter] = Convert.ToByte(ss, 2);
+                    b_counter += 1;
+                    buf = "";
+                }
+                k += 1;//step=2
+            }
 
+            return Encoding.ASCII.GetString(b);
+
+
+        }
+        //
         }
    
     public class Sms
