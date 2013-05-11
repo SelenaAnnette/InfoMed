@@ -13,7 +13,7 @@
         public Guid ResearchId { get; set; }
 
         [Required]
-        public Guid ConsultationId { get; set; }
+        public Guid PersonConsultationId { get; set; }
 
         [Required]
         public string Conclusion { get; set; }

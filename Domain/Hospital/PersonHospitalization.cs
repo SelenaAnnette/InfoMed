@@ -21,7 +21,7 @@
         public DateTime? DischargeDate { get; set; }
 
         [Required]
-        public string HospitalizationReason { get; set; }
+        public string HospitalizationsReason { get; set; }
 
         [InverseProperty("PersonHospitalizations")]
         public virtual HospitalDepartment HospitalDepartment { get; set; }

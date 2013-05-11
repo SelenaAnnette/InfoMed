@@ -6,9 +6,9 @@
 
     public class PersonConsultationMeasuringFactory
     {
-        public PersonConsultationMeasuring Create(Guid id, Guid consultationId, Guid measuringTypeId, double value)
+        public PersonConsultationMeasuring Create(Guid id, Guid personConsultationId, Guid measuringTypeId, double value)
         {
-            return new PersonConsultationMeasuring { Id = id, ConsultationId = consultationId, MeasuringTypeId = measuringTypeId, Value = value};
+            return new PersonConsultationMeasuring { Id = id, PersonConsultationId = personConsultationId, MeasuringTypeId = measuringTypeId, Value = value };
         }
     }
 }

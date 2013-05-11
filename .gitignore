@@ -21,3 +21,6 @@
 /ServerConsole/obj
 /SmsModule/bin
 /SmsModule/obj
+/MobileWebApi/Bin
+/MobileWebApi/obj
+/MobileWebApi/MobileWebApi.csproj.user
