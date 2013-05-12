@@ -25,7 +25,7 @@ namespace MedProga
             var assignedMedRep = Binder.NinjectKernel.Get<IAssignedMedicamentRepository>();
             var personsRep = Binder.NinjectKernel.Get<IPersonRepository>();
             var perId = personsRep.GetEntitiesByQuery(p => p.LastName == "Glazunov").First().Id;
-            var assignedMed = assignedMedRep.GetEntitiesByQuery(p => p.PersonId == perId);
+            var assignedMed = assignedMedRep.GetEntitiesByQuery(p => p.PersonConsultation.PatientId == perId);
             this.GridView_drugs.DataSource = assignedMed;
             this.GridView_drugs.DataBind();
         }

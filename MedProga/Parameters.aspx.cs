@@ -68,18 +68,6 @@ namespace MedProga
                 ////Saving Окр_бедер
                 this.Saving("Glazunov", "Окружность бедер", this.TextBox_okr_beder);
             }
-            else
-            {
-                //TextBox_bedra.BackColor = Color.FromArgb(255, 255, 183);
-                //TextBox_chss.BackColor = Color.FromArgb(255, 255, 183);
-                //TextBox_dad.BackColor = Color.FromArgb(255, 255, 183);
-                //TextBox_date.BackColor = Color.FromArgb(255, 255, 183);
-                //TextBox_sad.BackColor = Color.FromArgb(255, 255, 183);
-                //TextBox_taliya.BackColor = Color.FromArgb(255, 255, 183);
-                //TextBox_weight.BackColor = Color.FromArgb(255, 255, 183);
-            }
-
-
         }
     }
 }
