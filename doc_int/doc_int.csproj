@@ -48,6 +48,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Web.DataVisualization" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
@@ -67,7 +68,6 @@
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Register.aspx" />
     <Content Include="Messages.aspx" />
-    <Content Include="Patients_information.aspx" />
     <Content Include="patient_info_input.aspx" />
     <Content Include="Styles\Site.css" />
     <Content Include="Patients.aspx" />
@@ -138,13 +138,6 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Patients_information.aspx.cs">
-      <DependentUpon>Patients_information.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Patients_information.aspx.designer.cs">
-      <DependentUpon>Patients_information.aspx</DependentUpon>
     </Compile>
     <Compile Include="patient_info_input.aspx.cs">
       <DependentUpon>patient_info_input.aspx</DependentUpon>
