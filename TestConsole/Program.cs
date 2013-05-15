@@ -6,7 +6,9 @@
     using DataLayer.Persistence.Consultation;
     using DataLayer.Persistence.Medicament;
     using DataLayer.Persistence.Message;
-    using DataLayer.Persistence.Person;    
+    using DataLayer.Persistence.Person;
+
+    using Domain.Person;
 
     using Ninject;
 
@@ -19,17 +21,37 @@
         private static readonly ILogger Logger  = Binder.NinjectKernel.Get<ILogger>();
         static void Main(string[] args)
         {            
-            MainTest();            
+            //MainTest();
+            TempTest();
             Console.WriteLine("Tests are completed");
             Console.WriteLine("Press any key...");
             Console.ReadKey();
-        }    
+        }
+    
+        private static void TempTest()
+        {
+            var personRepository = Binder.NinjectKernel.Get<IPersonRepository>();
+            var personFactory = new PersonFactory();
+            var person = personFactory.Create(Guid.NewGuid(), "TestPerson", "TestPerson", "TestPerson", DateTime.Now, Sex.Man);
+            personRepository.CreateOrUpdateEntity(person);
+            Console.WriteLine("Person was created");
+
+            person.FirstName = "Test1Person";
+            personRepository.CreateOrUpdateEntity(person);
+            Console.WriteLine("Person was updated");
+
+            person = personRepository.GetEntityById(person.Id);
+            Console.WriteLine(person.FirstName);
+
+            personRepository.DeleteEntity(person.Id);
+            Console.WriteLine("Person was deleted");
+        }
     
         private static void MainTest()
         {
             var personRepository = Binder.NinjectKernel.Get<IPersonRepository>();
             var personFactory = new PersonFactory();
-            var person = personFactory.Create(Guid.NewGuid(), "TestPerson", "TestPerson", "TestPerson");
+            var person = personFactory.Create(Guid.NewGuid(), "TestPerson", "TestPerson", "TestPerson", DateTime.Now, Sex.Man);
             personRepository.CreateOrUpdateEntity(person);
             Console.WriteLine("Person was created");
 

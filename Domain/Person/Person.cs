@@ -8,12 +8,11 @@
     using Domain.AllergicReaction;
     using Domain.Consultation;
     using Domain.Disease;
+    using Domain.Group;
     using Domain.Hospital;
-    using Domain.Medicament;
     using Domain.Operation;
     using Domain.RiskFactor;
     using Domain.Symptom;
-    using Domain.Group;
 
     [Table("Persons")]
     public class Person : DomainBase
@@ -70,5 +69,13 @@
 
         [InverseProperty("Person")]
         public virtual ICollection<PersonHospitalization> PersonHospitalizations { get; set; }
-    }    
+    }
+
+    public enum Sex
+    {
+        [StringValue("Man")]
+        Man,
+        [StringValue("Woman")]
+        Women
+    }
 }
