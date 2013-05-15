@@ -22,13 +22,14 @@
         static void Main(string[] args)
         {            
             //MainTest();
-            TempTest();
+            //PersonTest();
+            PersonContactTest();
             Console.WriteLine("Tests are completed");
             Console.WriteLine("Press any key...");
             Console.ReadKey();
         }
     
-        private static void TempTest()
+        private static void PersonTest()
         {
             var personRepository = Binder.NinjectKernel.Get<IPersonRepository>();
             var personFactory = new PersonFactory();
@@ -43,6 +44,41 @@
             person = personRepository.GetEntityById(person.Id);
             Console.WriteLine(person.FirstName);
 
+            personRepository.DeleteEntity(person.Id);
+            Console.WriteLine("Person was deleted");
+        }
+
+        private static void PersonContactTest()
+        {
+            var personRepository = Binder.NinjectKernel.Get<IPersonRepository>();
+            var personFactory = new PersonFactory();
+            var person = personFactory.Create(Guid.NewGuid(), "TestPerson", "TestPerson", "TestPerson", DateTime.Now, Sex.Man);
+            personRepository.CreateOrUpdateEntity(person);
+            Console.WriteLine("Person was created");
+
+            var contactTypeRepository = Binder.NinjectKernel.Get<IContactTypeRepository>();
+            var contactTypeFactory = new ContactTypeFactory();
+            var contactType = contactTypeFactory.Create(Guid.NewGuid(), "TestContactType");
+            contactTypeRepository.CreateOrUpdateEntity(contactType);
+            Console.WriteLine("ContactType was created");
+
+            var personContactRepository = Binder.NinjectKernel.Get<IPersonContactRepository>();
+            var personContactFactory = new PersonContactFactory();
+            var personContact = personContactFactory.Create(Guid.NewGuid(), person.Id, contactType.Id, "TestValue");
+            personContactRepository.CreateOrUpdateEntity(personContact);
+            Console.WriteLine("PersonContact was created");
+
+            personContact.Value = "Test1Value";
+            personContactRepository.CreateOrUpdateEntity(personContact);
+            Console.WriteLine("PersonContact was updated");
+
+            personContact = personContactRepository.GetEntityById(personContact.Id);
+            Console.WriteLine(personContact.Value);
+
+            personContactRepository.DeleteEntity(personContact.Id);
+            Console.WriteLine("PersonContact was deleted");
+            contactTypeRepository.DeleteEntity(contactType.Id);
+            Console.WriteLine("ContactType was deleted");
             personRepository.DeleteEntity(person.Id);
             Console.WriteLine("Person was deleted");
         }
