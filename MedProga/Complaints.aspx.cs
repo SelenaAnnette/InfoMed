@@ -32,8 +32,15 @@ namespace MedProga
             var sympSortedList = sympList.OrderBy(s => s);
             for (int i = 0; i < sympSortedList.Count(); i++)
             {
-                CheckBoxList_symptoms.Items.Add(sympSortedList.ElementAt(i));
+                this.CheckBoxList_symptoms.Items.Add(sympSortedList.ElementAt(i));
             }
+            ////var symptoms = symptomsRepo.GetAll();
+            ////symptoms = symptoms.OrderBy(s => s.Name);
+            ////var symptomsArray = symptoms.ToArray();
+            ////for (int i = 0; i < symptoms.Count(); i++)
+            ////{
+            ////    this.CheckBoxList_symptoms.Items.Add(symptomsArray[i].Name);
+            ////}
         }
 
        protected void Button_complaints_Click(object sender, EventArgs e)

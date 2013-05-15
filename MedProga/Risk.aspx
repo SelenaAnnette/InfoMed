@@ -36,7 +36,7 @@
                     Text="Крепость принятого алкоголя (%)"></asp:Label>
             </td>
             <td> 
-                <asp:TextBox ID="TextBox_alc_rate" runat="server" MaxLength="3"></asp:TextBox>
+                <asp:TextBox ID="TextBox_alc_rate" runat="server" MaxLength="2"></asp:TextBox>
             </td>
         </tr>
          <tr> 
@@ -48,7 +48,15 @@
                 <asp:TextBox ID="TextBox_smoking" runat="server" MaxLength="3"></asp:TextBox>
              </td>
         </tr>
-    </table>
+        <tr>
+            <td>
     <asp:Button ID="Button_risk" runat="server" Text="Сохранить" 
-        onclick="Button_risk_Click" />
-</asp:Content>
+        onclick="Button_risk_Click" Height="25px" Width="100px" />
+            </td>
+            <td>
+                <asp:Button ID="Button_clear_risk" runat="server" Height="25px" 
+                    onclick="Button_clear_risk_Click" Text="Очистить" Width="100px" />
+            </td>
+        </tr>
+    </table>
+    </asp:Content>

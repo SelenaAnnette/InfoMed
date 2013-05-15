@@ -26,7 +26,7 @@ namespace MedProga
             var nots = actualNotificationsRepo.GetNotificationsForPerson(perId).ToArray();
             for (int i = 0; i < nots.Length; i++)
             {
-                    CheckBoxList_nots.Items.Add(nots[i].Text);
+                    this.CheckBoxList_nots.Items.Add(nots[i].Text);
             }
         }
         

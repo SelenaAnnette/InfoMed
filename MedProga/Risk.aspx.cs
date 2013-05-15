@@ -61,5 +61,19 @@ namespace MedProga
            ////Saving Количество выкуренных сигарет (шт в день)
            this.Saving("Glazunov", "Количество выкуренных сигарет за день", this.TextBox_smoking);
        }
+
+       protected void Button_clear_risk_Click(object sender, EventArgs e)
+       {
+           this.TextBox_distance.Text = string.Empty;
+           this.TextBox_distance.BackColor = Color.FromArgb(255, 255, 255);
+           this.TextBox_alcohol.Text = string.Empty;
+           this.TextBox_alcohol.BackColor = Color.FromArgb(255, 255, 255);
+           this.TextBox_alc_rate.Text = string.Empty;
+           this.TextBox_alc_rate.BackColor = Color.FromArgb(255, 255, 255);
+           this.TextBox_kkal.Text = string.Empty;
+           this.TextBox_kkal.BackColor = Color.FromArgb(255, 255, 255);
+           this.TextBox_smoking.Text = string.Empty;
+           this.TextBox_smoking.BackColor = Color.FromArgb(255, 255, 255);
+       }
     }
 }
