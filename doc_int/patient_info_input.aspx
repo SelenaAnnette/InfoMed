@@ -27,47 +27,70 @@
             <td width="350">
                 Информация о пациенте</td>
             <td>
+                <asp:Label ID="Label1" runat="server"></asp:Label>
+            </td>
+            <td>
                 &nbsp;</td>
         </tr>
         <tr>
             <td width="350">
                 Фамилия, Имя, Отчество</td>
             <td>
-                <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
-                <asp:TextBox ID="TextBox16" runat="server"></asp:TextBox>
-                <asp:TextBox ID="TextBox17" runat="server"></asp:TextBox>
+                <asp:TextBox ID="LastNameBox" runat="server" ReadOnly="True"></asp:TextBox>
+                <br />
+                <asp:TextBox ID="FirstNameBox" runat="server" ReadOnly="True"></asp:TextBox>
+                <br />
+                <asp:TextBox ID="MiddleNameBox" runat="server" ReadOnly="True"></asp:TextBox>
+            </td>
+            <td>
+                <br />
+                <br />
             </td>
         </tr>
         <tr>
             <td width="350">
                 Телефон</td>
             <td>
-                <asp:TextBox ID="TextBox19" runat="server"></asp:TextBox>
+                <asp:TextBox ID="PhoneBox" runat="server" ReadOnly="True"></asp:TextBox>
+            </td>
+            <td>
+                <asp:TextBox ID="PhoneBox0" runat="server" Visible="False"></asp:TextBox>
             </td>
         </tr>
         <tr>
             <td width="350">
                 Мобильный телефон</td>
             <td>
-                <asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
+                <asp:TextBox ID="MobileBox" runat="server" ReadOnly="True"></asp:TextBox>
+            </td>
+            <td>
+                <asp:TextBox ID="MobileBox0" runat="server" Visible="False"></asp:TextBox>
             </td>
         </tr>
         <tr>
             <td width="350">
                 E-mail</td>
             <td>
-                <asp:TextBox ID="TextBox4" runat="server"></asp:TextBox>
+                <asp:TextBox ID="EmailBox" runat="server" ReadOnly="True"></asp:TextBox>
+            </td>
+            <td>
+                <asp:TextBox ID="EmailBox0" runat="server" Visible="False"></asp:TextBox>
             </td>
         </tr>
         <tr>
             <td width="350">
                 Домашний адрес</td>
             <td>
-                <asp:TextBox ID="TextBox5" runat="server"></asp:TextBox>
+                <asp:TextBox ID="AddressBox" runat="server" ReadOnly="True"></asp:TextBox>
+            </td>
+            <td>
+                <asp:TextBox ID="AddressBox0" runat="server" Visible="False"></asp:TextBox>
             </td>
         </tr>
         <tr>
             <td width="350">
+                &nbsp;</td>
+            <td>
                 &nbsp;</td>
             <td>
                 &nbsp;</td>
@@ -76,14 +99,20 @@
             <td width="350">
                 Номер карточки пациента</td>
             <td>
-                <asp:TextBox ID="TextBox20" runat="server"></asp:TextBox>
+                <asp:TextBox ID="PatientCardNumBox" runat="server" ReadOnly="True"></asp:TextBox>
+            </td>
+            <td>
+                <asp:TextBox ID="PatientCardNumBox0" runat="server" Visible="False"></asp:TextBox>
             </td>
         </tr>
         <tr>
             <td width="350">
                 Номер полиса медицинского страхования</td>
             <td>
-                <asp:TextBox ID="TextBox21" runat="server"></asp:TextBox>
+                <asp:TextBox ID="InsuranceBox" runat="server" ReadOnly="True"></asp:TextBox>
+            </td>
+            <td>
+                <asp:TextBox ID="InsuranceBox0" runat="server" Visible="False"></asp:TextBox>
             </td>
         </tr>
         <tr>
@@ -93,6 +122,8 @@
                 <asp:GridView ID="GridView2" runat="server">
                 </asp:GridView>
             </td>
+            <td>
+                &nbsp;</td>
         </tr>
         <tr>
             <td width="350">
@@ -101,6 +132,8 @@
                 <asp:GridView ID="GridView3" runat="server">
                 </asp:GridView>
             </td>
+            <td>
+                &nbsp;</td>
         </tr>
         <tr>
             <td width="350">
@@ -109,10 +142,18 @@
                 <asp:GridView ID="GridView4" runat="server">
                 </asp:GridView>
             </td>
+            <td>
+                &nbsp;</td>
         </tr>
         <tr>
             <td width="350">
                 &nbsp;</td>
+            <td>
+                <asp:Button ID="Button1" runat="server" Enabled="False" onclick="Button1_Click" 
+                    Text="Изменить данные" />
+                <asp:Button ID="Button2" runat="server" Enabled="False" onclick="Button2_Click" 
+                    Text="Сохранить" />
+            </td>
             <td>
                 &nbsp;</td>
         </tr>
