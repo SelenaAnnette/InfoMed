@@ -192,20 +192,7 @@ namespace doc_int
             Button1.Enabled = false;
             Button2.Enabled = true;
             GridView1.Enabled = false;
-
-            FirstNameBox.Enabled = false; 
-            MiddleNameBox.Enabled = false; 
-            PhoneBox.Enabled = false; ;
-            PatientCardNumBox.Enabled = false; 
-            InsuranceBox.Enabled = false; 
-            LastNameBox.Enabled = false; 
-            MobileBox.Enabled = false; 
-            EmailBox.Enabled = false; 
-            AddressBox.Enabled = false; 
-
-
-
-            
+           
             PhoneBox0.Visible = true;
             PatientCardNumBox0.Visible = true;
             InsuranceBox0.Visible = true;
@@ -257,17 +244,31 @@ namespace doc_int
             {
                 if (MobileBox.Text == "" || MobileBox.Text == " ")
                 {
-                     Guid_person_mobile_id = Guid.NewGuid();
-                     var mobileChange = PersonContactFactory.Create(Guid_person_mobile_id, Guid_pat, Guid_mobile, MobileBox.Text);
-                     PersonContactRepo.CreateOrUpdateEntity(mobileChange);
+                    try
+                    {
+                        Guid_person_mobile_id = Guid.NewGuid();
+                        var mobileChange = PersonContactFactory.Create(Guid_person_mobile_id, Guid_pat, Guid_mobile, MobileBox.Text);
+                        PersonContactRepo.CreateOrUpdateEntity(mobileChange);
+                    }
+                    catch (Exception l)
+                    {
+                        Label1.Text = l.Message;
+                    }
                 }
 
 
                 else
                 {
+                    try
+                    {
                      Guid_person_mobile_id = PersonContactRepo.GetEntitiesByQuery(mi => mi.ContactTypeId == Guid_mobile && mi.PersonId == Guid_pat).First().Id;
                      var mobileChange = PersonContactFactory.Create(Guid_person_mobile_id, Guid_pat, Guid_mobile, MobileBox0.Text);
                      PersonContactRepo.CreateOrUpdateEntity(mobileChange);
+                    }
+                    catch (Exception l)
+                    {
+                        Label1.Text = l.Message;
+                    }
                 }                    
             }
             
@@ -277,15 +278,32 @@ namespace doc_int
             {
                 if (PhoneBox.Text == "" || PhoneBox.Text == " ")
                 {
+                    try
+                    {
                     Guid_person_phone_id = Guid.NewGuid();
                     var PhoneChange = PersonContactFactory.Create(Guid_person_phone_id, Guid_pat, Guid_phone, PhoneBox0.Text);
                     PersonContactRepo.CreateOrUpdateEntity(PhoneChange);
+
+                     }
+                    catch (Exception l)
+                    {
+                        Label1.Text = l.Message;
+                    }
                 }
                 else
                 {
+
+                    try
+                    {
                     Guid_person_phone_id = PersonContactRepo.GetEntitiesByQuery(mi => mi.ContactTypeId == Guid_phone && mi.PersonId == Guid_pat).First().Id;
                     var PhoneChange = PersonContactFactory.Create(Guid_person_phone_id, Guid_pat, Guid_phone, PhoneBox.Text);
                     PersonContactRepo.CreateOrUpdateEntity(PhoneChange);
+
+                     }
+                    catch (Exception l)
+                    {
+                        Label1.Text = l.Message;
+                    }
                 }
             }
 
@@ -296,15 +314,30 @@ namespace doc_int
             {
                 if (AddressBox.Text == "" || AddressBox.Text == " ")
                 {
+
+                    try
+                    {
                     Guid_person_address_id = Guid.NewGuid();
                     var AddressChange = PersonContactFactory.Create(Guid_person_address_id, Guid_pat, Guid_address, AddressBox0.Text);
                     PersonContactRepo.CreateOrUpdateEntity(AddressChange);
+                    }
+                    catch (Exception l)
+                    {
+                        Label1.Text = l.Message;
+                    }
                 }
                 else
                 {
+                    try
+                    {
                     Guid_person_address_id = PersonContactRepo.GetEntitiesByQuery(mi => mi.ContactTypeId == Guid_address && mi.PersonId == Guid_pat).First().Id;
                     var AddressChange = PersonContactFactory.Create(Guid_person_address_id, Guid_pat, Guid_address, AddressBox0.Text);
                     PersonContactRepo.CreateOrUpdateEntity(AddressChange);
+                    }
+                    catch (Exception l)
+                    {
+                        Label1.Text = l.Message;
+                    }
                 }
             }
 
@@ -313,15 +346,29 @@ namespace doc_int
             {
                 if (PatientCardNumBox.Text == "" || PatientCardNumBox.Text == " ")
                 {
-                    Guid_person_pcard_id = Guid.NewGuid();
-                    var pCardChange = PersonContactFactory.Create(Guid_person_pcard_id, Guid_pat, Guid_pcard, PatientCardNumBox0.Text);
-                    PersonContactRepo.CreateOrUpdateEntity(pCardChange);
+                    try
+                    {
+                        Guid_person_pcard_id = Guid.NewGuid();
+                        var pCardChange = PersonContactFactory.Create(Guid_person_pcard_id, Guid_pat, Guid_pcard, PatientCardNumBox0.Text);
+                        PersonContactRepo.CreateOrUpdateEntity(pCardChange);
+                    }
+                    catch (Exception l)
+                    {
+                        Label1.Text = l.Message;
+                    }
                 }
                 else
                 {
+                    try
+                    {
                     Guid_person_pcard_id = PersonContactRepo.GetEntitiesByQuery(mi => mi.ContactTypeId == Guid_pcard && mi.PersonId == Guid_pat).First().Id;
                     var pCardChange = PersonContactFactory.Create(Guid_person_pcard_id, Guid_pat, Guid_pcard, PatientCardNumBox0.Text);
                     PersonContactRepo.CreateOrUpdateEntity(pCardChange);
+                    }
+                    catch (Exception l)
+                    {
+                        Label1.Text = l.Message;
+                    }
                 }
             }
 
@@ -331,15 +378,29 @@ namespace doc_int
             {
                 if (InsuranceBox.Text == "" || InsuranceBox.Text == " ")
                 {
+                    try
+                    {
                     Guid_person_mpnum_id = Guid.NewGuid();
                     var mpnumChange = PersonContactFactory.Create(Guid_person_mpnum_id, Guid_pat, Guid_mpnum, InsuranceBox0.Text);
                     PersonContactRepo.CreateOrUpdateEntity(mpnumChange);
+                    }
+                    catch (Exception l)
+                    {
+                        Label1.Text = l.Message;
+                    }
                 }
                 else
                 {
+                    try
+                    {
                     Guid_person_mpnum_id = PersonContactRepo.GetEntitiesByQuery(mi => mi.ContactTypeId == Guid_mpnum && mi.PersonId == Guid_pat).First().Id;
                     var mpnumChange = PersonContactFactory.Create(Guid_person_mpnum_id, Guid_pat, Guid_mpnum, InsuranceBox0.Text);
                     PersonContactRepo.CreateOrUpdateEntity(mpnumChange);
+                    }
+                    catch (Exception l)
+                    {
+                        Label1.Text = l.Message;
+                    }
                 }
             }
 
@@ -348,15 +409,29 @@ namespace doc_int
             {
                 if (EmailBox.Text == "" || EmailBox.Text == " ")
                 {
+                    try
+                    {
                     Guid_person_email_id = Guid.NewGuid();
                     var emailChange = PersonContactFactory.Create(Guid_person_email_id, Guid_pat, Guid_email, EmailBox0.Text);
                     PersonContactRepo.CreateOrUpdateEntity(emailChange);
+                    }
+                    catch (Exception l)
+                    {
+                        Label1.Text = l.Message;
+                    }
                 }
                 else
                 {
+                    try
+                    {
                     Guid_person_email_id = PersonContactRepo.GetEntitiesByQuery(mi => mi.ContactTypeId == Guid_email && mi.PersonId == Guid_pat).First().Id;
                     var emailChange = PersonContactFactory.Create(Guid_person_email_id, Guid_pat, Guid_email, EmailBox0.Text);
                     PersonContactRepo.CreateOrUpdateEntity(emailChange);
+                    }
+                    catch (Exception l)
+                    {
+                        Label1.Text = l.Message;
+                    }
                 }
             }
 
@@ -373,23 +448,15 @@ namespace doc_int
             }*/
 
 
-            PatientCardNumBox.Enabled = true;
-            InsuranceBox.Enabled = true;
-            LastNameBox.Enabled = true;
-            MobileBox.Enabled = true;
-            EmailBox.Enabled = true;
-            AddressBox.Enabled = true;
+            
 
            
             PhoneBox0.Visible = false;
             PatientCardNumBox0.Visible = false;
-            InsuranceBox0.Visible = false;
-            
+            InsuranceBox0.Visible = false;           
             MobileBox0.Visible = false;
             EmailBox0.Visible = false;
             AddressBox0.Visible = false;
-
-            Label1.Text = "Отправка данных прошла успешно!";
 
         }
 
