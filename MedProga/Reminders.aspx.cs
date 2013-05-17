@@ -53,7 +53,6 @@ namespace MedProga
             this.CheckBoxList_nots.Items.Clear();
             this.Page_Load(sender, e);
        }
-
     }
 }
 

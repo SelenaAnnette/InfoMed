@@ -20,20 +20,27 @@ namespace MedProga
 
     public partial class Analysis : System.Web.UI.Page
     {
-       protected void Page_Load(object sender, EventArgs e)
+        List<PersonMeasuring> personMeasuring = new List<PersonMeasuring>();
+
+        protected void Page_Load(object sender, EventArgs e)
         {
-            this.CheckBoxList_Parameters.Items.Add("Систолическое АД");
-            this.CheckBoxList_Parameters.Items.Add("Диастолическое АД");
-            this.CheckBoxList_Parameters.Items.Add("Частота сердечных сокращений");
-            this.CheckBoxList_Parameters.Items.Add("Вес");
-            this.CheckBoxList_Parameters.Items.Add("Окружность талии");
-            this.CheckBoxList_Parameters.Items.Add("Окружность бедер");
+            
+            var measuringTypeRepo = Binder.NinjectKernel.Get<IMeasuringTypeRepository>();
+            var parameters = measuringTypeRepo.GetAll();
+            parameters = parameters.OrderBy(p => p.Title);
+            var parametersArray = parameters.ToArray();
+            for (int i = 0; i < parametersArray.Length; i++)
+            {
+                this.CheckBoxList_Parameters.Items.Add(parametersArray[i].Title);
+            }
         }
 
         public void ShowData(string parName, string view)
         {
             DateTime dateFrom;
             DateTime dateTo;
+            dateFrom = DateTime.MinValue;
+            dateTo = DateTime.MaxValue;
             if (this.TextBox_from.Text != string.Empty)
             {
                 try
@@ -43,16 +50,8 @@ namespace MedProga
                 }
                 catch (Exception)
                 {
-                    dateFrom = DateTime.MinValue;
-                    dateTo = DateTime.MaxValue;
-                    this.TextBox_from.Text = string.Empty;
-                    this.TextBox_to.Text = string.Empty;
+
                 }
-            }
-            else
-            {
-                dateFrom = DateTime.MinValue;
-                dateTo = DateTime.MaxValue;
             }
             var personMeasuringRepo = Binder.NinjectKernel.Get<IPersonMeasuringRepository>();
             var personsRepo = Binder.NinjectKernel.Get<IPersonRepository>();
@@ -61,31 +60,21 @@ namespace MedProga
             var measId = measuringTypeRepo.GetEntitiesByQuery(m => m.Title == parName).First().Id;
             if (view == "table")
             {
-                List <PersonMeasuring> personMeasuring = new List<PersonMeasuring>();
-                for (int i = 0; i < this.CheckBoxList_Parameters.Items.Count; i++)
-                {
-                    if (this.CheckBoxList_Parameters.Items[i].Selected)
-                    {
-                        measId =
-                            measuringTypeRepo.GetEntitiesByQuery(
-                                m => m.Title == this.CheckBoxList_Parameters.Items[i].Text).First().Id;
-                        var partOfPersonMeasuring =
-                            personMeasuringRepo.GetEntitiesByQuery(
-                                m =>
-                                m.PersonId == perId && m.MeasuringDate >= dateFrom && m.MeasuringDate <= dateTo
-                                && m.MeasuringTypeId == measId);
-                        partOfPersonMeasuring = partOfPersonMeasuring.OrderBy(p => p.MeasuringDate);
-                        personMeasuring.AddRange(partOfPersonMeasuring);
-                    }
-                }
-                //var meas = measuringTypeRepo.GetAll();
-                //var table = personMeasuring.Join(meas, m => m.MeasuringTypeId, t => t.Id, (measuring, type) => Equals(measuring,type));
-                this.GridView_analysis.DataSource = personMeasuring;
-                this.GridView_analysis.DataBind();
+                var partOfPersonMeasuring =
+                    personMeasuringRepo.GetEntitiesByQuery(
+                        m =>
+                        m.PersonId == perId && m.MeasuringDate >= dateFrom && m.MeasuringDate <= dateTo
+                        && m.MeasuringTypeId == measId);
+                partOfPersonMeasuring = partOfPersonMeasuring.OrderBy(m => m.MeasuringDate);
+                personMeasuring.AddRange(partOfPersonMeasuring);
             }
             if (view == "chart")
             {
-                var analysis = personMeasuringRepo.GetEntitiesByQuery(m => m.PersonId == perId && m.MeasuringDate >= dateFrom && m.MeasuringDate <= dateTo && m.MeasuringTypeId == measId);
+                var analysis =
+                    personMeasuringRepo.GetEntitiesByQuery(
+                        m =>
+                        m.PersonId == perId && m.MeasuringDate >= dateFrom && m.MeasuringDate <= dateTo
+                        && m.MeasuringTypeId == measId);
                 analysis = analysis.OrderBy(a => a.MeasuringDate);
                 var chartArray = analysis.ToArray();
                 Series series = new Series(parName);
@@ -93,8 +82,6 @@ namespace MedProga
                 series.MarkerStyle = MarkerStyle.Circle;
                 series.IsValueShownAsLabel = true;
                 series.BorderWidth = 1;
-                Legend parLegend = new Legend(parName);
-                this.Chart_analysis.Legends.Add(parLegend);
                 for (int i = 0; i < chartArray.Length; i++)
                 {
                     if (chartArray[i].MeasuringTypeId == measId)
@@ -102,31 +89,36 @@ namespace MedProga
                         series.Points.AddXY(chartArray[i].MeasuringDate, chartArray[i].Value);
                     }
                 }
-                this.Chart_analysis.Series.Add(series);
-                ////Group values and calculate average value for every day
-                this.Chart_analysis.DataManipulator.Group("AVE", 1, IntervalType.Days, parName, parName);
+                if (series.Points.Count > 0)
+                {
+                    Chart_analysis.Series.Add(series);
+                    ////Group values and calculate average value for every day
+                    Chart_analysis.DataManipulator.Group("AVE", 1, IntervalType.Days, parName, parName);
+                    //Add Legend
+                    Legend legend = new Legend();
+                    Chart_analysis.Legends.Add(legend);
+                }
             }
         }
 
-        protected void Button_show_table_Click(object sender, EventArgs e)
-        {
-            this.ShowData("Вес", "table");
-            this.CheckBoxList_Parameters.Items.Clear();
-            this.Page_Load(sender, e);
-        }
 
-       protected void Button_create_chart_Click(object sender, EventArgs e)
+        protected void Button_analysis_Click(object sender, EventArgs e)
         {
-            for (int i=0; i < this.CheckBoxList_Parameters.Items.Count; i++)
+            for (int i = 0; i < this.CheckBoxList_Parameters.Items.Count; i++)
             {
                 if (this.CheckBoxList_Parameters.Items[i].Selected)
                 {
+                    this.ShowData(this.CheckBoxList_Parameters.Items[i].Text, "table");
                     this.ShowData(this.CheckBoxList_Parameters.Items[i].Text, "chart");
                 }
             }
+            //var pM1 = from pM in personMeasuring select pM.MeasuringDate;
+            //var pM2 = from pM in personMeasuring select pM.MeasuringTypeId;
+            //var pM3 = from pM in personMeasuring select pM.Value;
+            GridView_analysis.DataSource = personMeasuring.Select(pm => new {pm.MeasuringDate, pm.MeasuringTypeId, pm.Value} );
+            GridView_analysis.DataBind();
             this.CheckBoxList_Parameters.Items.Clear();
             this.Page_Load(sender, e);
         }
-
     }
 }

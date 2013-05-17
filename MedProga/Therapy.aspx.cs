@@ -30,5 +30,4 @@ namespace MedProga
             this.GridView_drugs.DataBind();
         }
     }
-
 }

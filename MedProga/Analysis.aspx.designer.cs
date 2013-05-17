@@ -58,22 +58,13 @@ namespace MedProga {
         protected global::System.Web.UI.WebControls.CheckBoxList CheckBoxList_Parameters;
         
         /// <summary>
-        /// Button_show_table элемент управления.
+        /// Button_analysis элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button_show_table;
-        
-        /// <summary>
-        /// Button_create_chart элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button_create_chart;
+        protected global::System.Web.UI.WebControls.Button Button_analysis;
         
         /// <summary>
         /// GridView_analysis элемент управления.
