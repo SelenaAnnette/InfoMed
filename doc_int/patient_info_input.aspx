@@ -36,11 +36,11 @@
             <td width="350">
                 Фамилия, Имя, Отчество</td>
             <td>
-                <asp:TextBox ID="LastNameBox" runat="server" ReadOnly="True"></asp:TextBox>
+                <asp:TextBox ID="LastNameBox" runat="server" ReadOnly="True" Enabled="False"></asp:TextBox>
                 <br />
-                <asp:TextBox ID="FirstNameBox" runat="server" ReadOnly="True"></asp:TextBox>
+                <asp:TextBox ID="FirstNameBox" runat="server" ReadOnly="True" Enabled="False"></asp:TextBox>
                 <br />
-                <asp:TextBox ID="MiddleNameBox" runat="server" ReadOnly="True"></asp:TextBox>
+                <asp:TextBox ID="MiddleNameBox" runat="server" ReadOnly="True" Enabled="False"></asp:TextBox>
             </td>
             <td>
                 <br />
@@ -51,7 +51,7 @@
             <td width="350">
                 Телефон</td>
             <td>
-                <asp:TextBox ID="PhoneBox" runat="server" ReadOnly="True"></asp:TextBox>
+                <asp:TextBox ID="PhoneBox" runat="server" ReadOnly="True" Enabled="False"></asp:TextBox>
             </td>
             <td>
                 <asp:TextBox ID="PhoneBox0" runat="server" Visible="False"></asp:TextBox>
@@ -61,7 +61,7 @@
             <td width="350">
                 Мобильный телефон</td>
             <td>
-                <asp:TextBox ID="MobileBox" runat="server" ReadOnly="True"></asp:TextBox>
+                <asp:TextBox ID="MobileBox" runat="server" ReadOnly="True" Enabled="False"></asp:TextBox>
             </td>
             <td>
                 <asp:TextBox ID="MobileBox0" runat="server" Visible="False"></asp:TextBox>
@@ -71,7 +71,7 @@
             <td width="350">
                 E-mail</td>
             <td>
-                <asp:TextBox ID="EmailBox" runat="server" ReadOnly="True"></asp:TextBox>
+                <asp:TextBox ID="EmailBox" runat="server" ReadOnly="True" Enabled="False"></asp:TextBox>
             </td>
             <td>
                 <asp:TextBox ID="EmailBox0" runat="server" Visible="False"></asp:TextBox>
@@ -81,7 +81,7 @@
             <td width="350">
                 Домашний адрес</td>
             <td>
-                <asp:TextBox ID="AddressBox" runat="server" ReadOnly="True"></asp:TextBox>
+                <asp:TextBox ID="AddressBox" runat="server" ReadOnly="True" Enabled="False"></asp:TextBox>
             </td>
             <td>
                 <asp:TextBox ID="AddressBox0" runat="server" Visible="False"></asp:TextBox>
@@ -99,7 +99,8 @@
             <td width="350">
                 Номер карточки пациента</td>
             <td>
-                <asp:TextBox ID="PatientCardNumBox" runat="server" ReadOnly="True"></asp:TextBox>
+                <asp:TextBox ID="PatientCardNumBox" runat="server" ReadOnly="True" 
+                    Enabled="False"></asp:TextBox>
             </td>
             <td>
                 <asp:TextBox ID="PatientCardNumBox0" runat="server" Visible="False"></asp:TextBox>
@@ -109,7 +110,7 @@
             <td width="350">
                 Номер полиса медицинского страхования</td>
             <td>
-                <asp:TextBox ID="InsuranceBox" runat="server" ReadOnly="True"></asp:TextBox>
+                <asp:TextBox ID="InsuranceBox" runat="server" ReadOnly="True" Enabled="False"></asp:TextBox>
             </td>
             <td>
                 <asp:TextBox ID="InsuranceBox0" runat="server" Visible="False"></asp:TextBox>
