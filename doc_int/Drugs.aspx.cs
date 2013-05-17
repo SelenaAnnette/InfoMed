@@ -20,8 +20,6 @@ namespace doc_int
     using Domain.Medicament;
 
 
-    using System.Drawing;
-
     public partial class About : System.Web.UI.Page
     {
 

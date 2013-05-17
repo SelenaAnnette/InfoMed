@@ -46,6 +46,7 @@
             NinjectKernel.Bind<IAssignedMedicamentRepository>().To<AssignedMedicamentRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
             NinjectKernel.Bind<IPersonPersonRepository>().To<PersonPersonRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
             NinjectKernel.Bind<IPersonGroupRepository>().To<PersonGroupRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
+            NinjectKernel.Bind<IPersonContactRepository>().To<PersonContactRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
 
             NinjectKernel.Bind<IAllergicReactionRepository>().To<AllergicReactionRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
             NinjectKernel.Bind<IPersonAllergicReactionRepository>().To<PersonAllergicReactionRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);

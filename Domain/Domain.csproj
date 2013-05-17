@@ -61,6 +61,7 @@
     <Compile Include="Disease\Disease.cs" />
     <Compile Include="Disease\PersonDisease.cs" />
     <Compile Include="DomainBase.cs" />
+    <Compile Include="ExtensionMethods.cs" />
     <Compile Include="Hospital\PersonHospitalization.cs" />
     <Compile Include="Hospital\HospitalDepartment.cs" />
     <Compile Include="Hospital\Hospital.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="Research\Research.cs" />
     <Compile Include="RiskFactor\AssignedRiskFactor.cs" />
     <Compile Include="RiskFactor\PersonRiskFactor.cs" />
+    <Compile Include="StringValueAttribute.cs" />
     <Compile Include="Symptom\AssignedSymptom.cs" />
     <Compile Include="RiskFactor\RiskFactor.cs" />
     <Compile Include="Symptom\PersonConsultationSymptom.cs" />

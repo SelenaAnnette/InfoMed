@@ -143,7 +143,7 @@
                                 <br />
                                 Способ приёма препарата:<br />
                                 <asp:RadioButton ID="RadioButton7" runat="server" GroupName="way" 
-                                    Text="Энтернальный (ингаляционный)" />
+                                    Text="Энтернальный (ингаляционный)" Checked="True" />
                                 &nbsp;<asp:RadioButton ID="RadioButton8" runat="server" GroupName="way" 
                                     Text="Парентальный" />
                                 <br />
