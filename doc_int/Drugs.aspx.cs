@@ -177,8 +177,7 @@ namespace doc_int
                         DateTime end = convertedDate.AddDays(Convert.ToInt32(dayCount.Text));
 
                         var AssignedMedicament = AssignedMedicamentFactory.Create(Guid.NewGuid(), Guid_const, Guid_drug, wayType, Convert.ToDouble(dosage.Text), convertedDate, Convert.ToInt16(dayCount.Text), timesAtDay, eachDay);
-
-                        // AssignedMedicamentRepo.CreateOrUpdateEntity(AssignedMedicament);
+                         AssignedMedicamentRepo.CreateOrUpdateEntity(AssignedMedicament);
 
 
 
@@ -197,6 +196,7 @@ namespace doc_int
 
                 }
                 catch (Exception u) { Label2.Text = u.Message; }
+
                 {
                     Session["Update"] = Server.UrlEncode(System.DateTime.Now.ToString());
                 }
@@ -263,7 +263,7 @@ namespace doc_int
             var PersonConsultation = PersonConsultationFactory.Create(conid, Guid_pat, doc_id, conType, DateTime.Now);
             Button3.Enabled = false;
 
-            //consultationRepo.CreateOrUpdateEntity(PersonConsultation);
+            consultationRepo.CreateOrUpdateEntity(PersonConsultation);
 
 
 
