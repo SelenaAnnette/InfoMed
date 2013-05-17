@@ -26,17 +26,17 @@ namespace MedProga
             var nots = actualNotificationsRepo.GetNotificationsForPerson(perId).ToArray();
             for (int i = 0; i < nots.Length; i++)
             {
-                    CheckBoxList_nots.Items.Add(nots[i].Text);
+                    this.CheckBoxList_nots.Items.Add(nots[i].Text);
             }
         }
         
         protected void Button_save_Click(object sender, EventArgs e)
         {
-            var actualNotificationsRepo = Binder.NinjectKernel.Get<INotificationManager>();
-            var personsRepo = Binder.NinjectKernel.Get<IPersonRepository>();
-            var perId = personsRepo.GetEntitiesByQuery(p => p.LastName == "Glazunov").First().Id;
-            var nots = actualNotificationsRepo.GetNotificationsForPerson(perId).ToArray();
-            var personMedsRepo = Binder.NinjectKernel.Get<IPersonMedicamentRepository>();
+            var actualNotificationsRep = Binder.NinjectKernel.Get<INotificationManager>();
+            var personsRep = Binder.NinjectKernel.Get<IPersonRepository>();
+            var perId = personsRep.GetEntitiesByQuery(p => p.LastName == "Glazunov").First().Id;
+            var nots = actualNotificationsRep.GetNotificationsForPerson(perId).ToArray();
+            var personMedsRep = Binder.NinjectKernel.Get<IPersonMedicamentRepository>();
             var personMedsFac = new PersonMedicamentFactory();
             for (int i = 0; i < this.CheckBoxList_nots.Items.Count; i++)
             {
@@ -45,15 +45,14 @@ namespace MedProga
                     var medId = nots[i].MedicamentId;
                     var notId = nots[i].Id;
                     var personMed = personMedsFac.Create(Guid.NewGuid(), medId, perId, DateTime.Now);
-                    personMedsRepo.CreateOrUpdateEntity(personMed);
-                    actualNotificationsRepo.CloseNotificationById(notId);
+                    personMedsRep.CreateOrUpdateEntity(personMed);
+                    actualNotificationsRep.CloseNotificationById(notId);
                 }
 
            }
-            CheckBoxList_nots.Items.Clear();
+            this.CheckBoxList_nots.Items.Clear();
             this.Page_Load(sender, e);
        }
-
     }
 }
 
