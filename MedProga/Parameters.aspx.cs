@@ -19,67 +19,105 @@ namespace MedProga
 
     public partial class Parameters : System.Web.UI.Page
     {
+        private int quantity = 0;
+        private Label label;
+        private TextBox tb;
+
         public void Page_Load(object sender, EventArgs e)
         {
-            DateTime dt = new DateTime();
-            dt = DateTime.Now;
-            this.TextBox_DateTime.Text = dt.ToString();         
+            try
+            {
+                DateTime dt = new DateTime();
+                dt = DateTime.Now;
+                var measuringTypeRepo = Binder.NinjectKernel.Get<IMeasuringTypeRepository>();
+                var parameters = measuringTypeRepo.GetAll();
+                parameters = parameters.OrderBy(p => p.Title);
+                var parametersArray = parameters.ToArray();
+                this.label = new Label();
+                this.tb = new TextBox();
+                if (parametersArray.Count() != 0)
+                {
+                    this.label.ID = "Label_date_time";
+                    this.label.Text = "Дата и время";
+                    this.tb.ID = "TextBox_date_time";
+                    this.tb.MaxLength = 19;
+                    this.PlaceHolder_parameters.Controls.Add(this.label);
+                    this.PlaceHolder_parameters.Controls.Add(this.tb);
+                }
+                for (int i = 0; i < parametersArray.Count(); i++)
+                {
+                    this.label = new Label();
+                    this.label.ID = "Label" + i;
+                    this.label.Text = parametersArray[i].Title;
+                    this.tb = new TextBox();
+                    this.tb.ID = "TextBox" + i;
+                    this.tb.MaxLength = 3;
+                    this.quantity += 1;
+                    this.PlaceHolder_parameters.Controls.Add(new LiteralControl("<br />"));
+                    this.PlaceHolder_parameters.Controls.Add(this.label);
+                    this.PlaceHolder_parameters.Controls.Add(this.tb);
+                }
+            }
+            catch (Exception)
+            {
+                this.label.ID = "Label_default";
+                this.label.Text = "Соединение с базой данных установить не удалось";
+                this.PlaceHolder_parameters.Controls.Add(this.label);
+            }
         }
 
-        public void Saving(string personSurname, string parName, TextBox tb)
+        public void Button_parameters_Click(object sender, EventArgs e)
         {
+            DateTime dt = new DateTime();
+            string personSurname = "Glazunov";
             var measuringTypeRepo = Binder.NinjectKernel.Get<IMeasuringTypeRepository>();
             var personsRepo = Binder.NinjectKernel.Get<IPersonRepository>();
             var personMeasuringRepo = Binder.NinjectKernel.Get<IPersonMeasuringRepository>();
             var personMeasuringFactory = new PersonMeasuringFactory();
             var personId = personsRepo.GetEntitiesByQuery(p => p.LastName == personSurname).First().Id;
-            if (tb.Text != string.Empty)
+            try
             {
-                try
+                this.tb = ((TextBox)PlaceHolder_parameters.FindControl("TextBox_date_time"));
+                dt = Convert.ToDateTime(this.tb.Text);
+            }
+            catch (Exception)
+            {
+                this.tb.Text = string.Empty;
+                dt = DateTime.Now;
+            }
+            for (int i = 0; i < this.quantity; i++)
+            {
+                //Search textBox by ID
+                this.tb = (TextBox)PlaceHolder_parameters.FindControl("TextBox" + i);
+                //Search label by ID
+                this.label = (Label)PlaceHolder_parameters.FindControl("Label" + i);
+                if (this.tb.Text != string.Empty)
                 {
-                    var parId = measuringTypeRepo.GetEntitiesByQuery(m => m.Title == parName).First().Id;
-                    double parValue = Convert.ToDouble(tb.Text);
-                    DateTime dt = Convert.ToDateTime(this.TextBox_DateTime.Text);
-                    var par = personMeasuringFactory.Create(Guid.NewGuid(), parId, personId, dt, parValue);
-                    personMeasuringRepo.CreateOrUpdateEntity(par);
-                }
-                catch (Exception)
-                {
-                    tb.BackColor = Color.FromArgb(255, 255, 183);
-                    tb.Text = string.Empty;
+                    try
+                    {
+                        string parName = this.label.Text;
+                        var parId = measuringTypeRepo.GetEntitiesByQuery(m => m.Title == parName).First().Id;
+                        double parValue = Convert.ToDouble(this.tb.Text);
+                        var par = personMeasuringFactory.Create(Guid.NewGuid(), parId, personId, dt, parValue);
+                        personMeasuringRepo.CreateOrUpdateEntity(par);
+                    }
+                    catch (Exception)
+                    {
+                        this.tb.BackColor = Color.FromArgb(255, 255, 183);
+                        this.tb.Text = string.Empty;
+                    }
                 }
             }
         }
-        
-        public void Button_parameters_Click(object sender, EventArgs e)
+
+        public void Button_clear_parameters_Click(object sender, EventArgs e)
         {
-            if (this.TextBox_DateTime.Text != string.Empty)
+            for (int i = 0; i < this.quantity; i++)
             {
-                ////Saving САД
-                this.Saving("Glazunov", "Систолическое АД", this.TextBox_sad);
-                ////Saving ДАД
-                this.Saving("Glazunov", "Диастолическое АД", this.TextBox_dad);
-                ////Saving ЧСС
-                this.Saving("Glazunov", "Частота сердечных сокращений", this.TextBox_chss);
-                ////Saving Вес
-                this.Saving("Glazunov", "Вес", this.TextBox_weight);
-                ////Saving Окр_талии
-                this.Saving("Glazunov", "Окружность талии", this.TextBox_okr_talii);
-                ////Saving Окр_бедер
-                this.Saving("Glazunov", "Окружность бедер", this.TextBox_okr_beder);
+                this.tb = (TextBox)PlaceHolder_parameters.FindControl("TextBox" + i);
+                this.tb.BackColor = Color.FromArgb(255, 255, 255);
+                this.tb.Text = string.Empty;
             }
-            else
-            {
-                //TextBox_bedra.BackColor = Color.FromArgb(255, 255, 183);
-                //TextBox_chss.BackColor = Color.FromArgb(255, 255, 183);
-                //TextBox_dad.BackColor = Color.FromArgb(255, 255, 183);
-                //TextBox_date.BackColor = Color.FromArgb(255, 255, 183);
-                //TextBox_sad.BackColor = Color.FromArgb(255, 255, 183);
-                //TextBox_taliya.BackColor = Color.FromArgb(255, 255, 183);
-                //TextBox_weight.BackColor = Color.FromArgb(255, 255, 183);
-            }
-
-
         }
     }
 }
