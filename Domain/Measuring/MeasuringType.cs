@@ -23,5 +23,8 @@
 
         [InverseProperty("MeasuringType")]
         public virtual ICollection<AssignedMedicamentMeasuring> AssignedMedicamentMeasurings { get; set; }
+
+        [InverseProperty("MeasuringType")]
+        public virtual ICollection<AssignedMeasuring> AssignedMeasurings { get; set; }
     }
 }

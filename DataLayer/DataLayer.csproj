@@ -97,6 +97,9 @@
     <Compile Include="Persistence\LabAnalyze\IPersonConsultationLabAnalyzeRepository.cs" />
     <Compile Include="Persistence\LabAnalyze\PersonConsultationLabAnalyzeFactory.cs" />
     <Compile Include="Persistence\LabAnalyze\PersonConsultationLabAnalyzeRepository.cs" />
+    <Compile Include="Persistence\Measuring\AssignedMeasuringFactory.cs" />
+    <Compile Include="Persistence\Measuring\AssignedMeasuringRepository.cs" />
+    <Compile Include="Persistence\Measuring\IAssignedMeasuringRepository.cs" />
     <Compile Include="Persistence\Measuring\IPersonConsultationMeasuringRepository.cs" />
     <Compile Include="Persistence\Measuring\IPersonMeasuringRepository.cs" />
     <Compile Include="Persistence\Measuring\PersonConsultationMeasuringFactory.cs" />

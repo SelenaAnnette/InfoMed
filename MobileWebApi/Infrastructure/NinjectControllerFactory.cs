@@ -110,6 +110,7 @@
             this.ninjectKernel.Bind<IAssignedMedicamentMeasuringRepository>().To<AssignedMedicamentMeasuringRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
             this.ninjectKernel.Bind<IMedicamentApplicationWayRepository>().To<MedicamentApplicationWayRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
             this.ninjectKernel.Bind<IMedicamentFormRepository>().To<MedicamentFormRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
+            this.ninjectKernel.Bind<IAssignedMeasuringRepository>().To<AssignedMeasuringRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
 
             this.ninjectKernel.Bind<IMessageRepository>().To<MessageRepository>().WithConstructorArgument("connectionString", trashDataBaseConnectionString);
             this.ninjectKernel.Bind<INotificationRepository>().To<NotificationRepository>().WithConstructorArgument("connectionString", trashDataBaseConnectionString);

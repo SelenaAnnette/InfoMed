@@ -67,6 +67,7 @@
     <Compile Include="Hospital\Hospital.cs" />
     <Compile Include="LabAnalyze\PersonConsultationLabAnalyze.cs" />
     <Compile Include="LabAnalyze\LabAnalyzeType.cs" />
+    <Compile Include="Measuring\AssignedMeasuring.cs" />
     <Compile Include="Measuring\PersonConsultationMeasuring.cs" />
     <Compile Include="Measuring\MeasuringType.cs" />
     <Compile Include="Measuring\PersonMeasuring.cs" />
