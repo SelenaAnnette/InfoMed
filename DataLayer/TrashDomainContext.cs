@@ -22,6 +22,8 @@
 
         public DbSet<Notification> Notifications { get; set; }
 
+        public DbSet<MeasuringNotification> MeasuringNotifications { get; set; }
+
         public DbSet<PersonMeasuring> PersonMeasurings { get; set; }
 
         public DbSet<PersonMedicament> PersonMedicaments { get; set; }

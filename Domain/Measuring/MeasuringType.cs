@@ -15,6 +15,9 @@
         [Required]
         public string Measuring { get; set; }
 
+        [Required]
+        public string Code { get; set; }
+
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 

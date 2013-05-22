@@ -118,6 +118,7 @@
             this.ninjectKernel.Bind<IPersonMedicamentRepository>().To<PersonMedicamentRepository>().WithConstructorArgument("connectionString", trashDataBaseConnectionString);
             this.ninjectKernel.Bind<IPersonRiskFactorRepository>().To<PersonRiskFactorRepository>().WithConstructorArgument("connectionString", trashDataBaseConnectionString);
             this.ninjectKernel.Bind<IPersonSymptomRepository>().To<PersonSymptomRepository>().WithConstructorArgument("connectionString", trashDataBaseConnectionString);
+            this.ninjectKernel.Bind<IMeasuringNotificationRepository>().To<MeasuringNotificationRepository>().WithConstructorArgument("connectionString", trashDataBaseConnectionString);
         }
     }
 }
