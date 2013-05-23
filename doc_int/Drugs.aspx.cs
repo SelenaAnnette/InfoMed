@@ -38,7 +38,7 @@ namespace doc_int
         public int eachDay;
         public Guid conType;
         public Guid wayType;
-        public Guid doc_id = new Guid("E69188D9-ADC1-4757-AA4B-B5E97A518212");
+        public Guid doc_id = new Guid("F8F6EED5-8FF9-40EE-95A6-A4C1A83BD76B");
         public Guid Guid_const;
 
         public IPersonConsultationRepository consultationRepo = Binder.NinjectKernel.Get<IPersonConsultationRepository>();
