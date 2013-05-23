@@ -7,9 +7,9 @@
         <tr>
             <td>
                 <asp:Label ID="Label_from" runat="server" Text="C"></asp:Label>
-                <asp:TextBox ID="TextBox_from" runat="server"></asp:TextBox>
+                <asp:TextBox ID="TextBox_from" runat="server" MaxLength="19"></asp:TextBox>
                 <asp:Label ID="Label_to" runat="server" Text="По"></asp:Label>
-                <asp:TextBox ID="TextBox_to" runat="server"></asp:TextBox>
+                <asp:TextBox ID="TextBox_to" runat="server" MaxLength="19"></asp:TextBox>
             </td> 
         </tr>
         <tr>
@@ -28,7 +28,8 @@
             <td class="style1"> 
                 <asp:GridView ID="GridView_analysis" runat="server" Height="200px">
                 </asp:GridView>
-                <asp:Chart ID="Chart_analysis" runat="server" Height="200" Width="616px">
+                <asp:Chart ID="Chart_analysis" runat="server" Height="200" Width="616px" 
+                    Visible="False">
                     <chartareas>
                         <asp:ChartArea Name="ChartArea1">
                         </asp:ChartArea>
