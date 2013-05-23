@@ -26,8 +26,12 @@
         </tr>
         <tr> 
             <td class="style1"> 
-                <asp:GridView ID="GridView_analysis" runat="server" Height="200px">
+                <asp:GridView ID="GridView_analysis" runat="server">
                 </asp:GridView>
+            </td>
+        </tr>
+        <tr>
+            <td>
                 <asp:Chart ID="Chart_analysis" runat="server" Height="200" Width="616px" 
                     Visible="False">
                     <chartareas>
