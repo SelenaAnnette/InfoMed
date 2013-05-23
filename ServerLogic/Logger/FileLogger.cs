@@ -24,58 +24,58 @@ namespace ServerLogic.Logger
 
         public void LogMessage(string message)
         {
-//            lock (this.lockObject)
-//            {
-//                if (!Directory.Exists(this.directoryPath))
-//                {
-//                    Directory.CreateDirectory(this.directoryPath);
-//                }
-//
-//                if (!File.Exists(this.infoFilePath))
-//                {
-//                    File.Create(this.infoFilePath);
-//                }
-//
-//                try
-//                {
-//                    using (var streamWriter = new StreamWriter(this.infoFilePath, true))
-//                    {
-//                        streamWriter.WriteLine("{0}  INFO  {1}", DateTime.Now, message);
-//                    }
-//                }
-//                catch (IOException)
-//                {
-//                    
-//                }
-//            }
+            lock (this.lockObject)
+            {
+                if (!Directory.Exists(this.directoryPath))
+                {
+                    Directory.CreateDirectory(this.directoryPath);
+                }
+
+                if (!File.Exists(this.infoFilePath))
+                {
+                    File.Create(this.infoFilePath);
+                }
+
+                try
+                {
+                    using (var streamWriter = new StreamWriter(this.infoFilePath, true))
+                    {
+                        streamWriter.WriteLine("{0}  INFO  {1}", DateTime.Now, message);
+                    }
+                }
+                catch (IOException)
+                {
+                    
+                }
+            }
         }
 
         public void LogError(string error)
         {
-//            lock (this.lockObject)
-//            {
-//                if (!Directory.Exists(this.directoryPath))
-//                {
-//                    Directory.CreateDirectory(this.directoryPath);
-//                }
-//
-//                if (!File.Exists(this.errorFilePath))
-//                {
-//                    File.Create(this.errorFilePath);
-//                }
-//
-//                try
-//                {
-//                    using (var streamWriter = new StreamWriter(this.errorFilePath, true))
-//                    {
-//                        streamWriter.WriteLine("{0}  ERROR  {1}", DateTime.Now, error);
-//                    }
-//                }
-//                catch (IOException)
-//                {
-//
-//                }                        
-//            }
+            lock (this.lockObject)
+            {
+                if (!Directory.Exists(this.directoryPath))
+                {
+                    Directory.CreateDirectory(this.directoryPath);
+                }
+
+                if (!File.Exists(this.errorFilePath))
+                {
+                    File.Create(this.errorFilePath);
+                }
+
+                try
+                {
+                    using (var streamWriter = new StreamWriter(this.errorFilePath, true))
+                    {
+                        streamWriter.WriteLine("{0}  ERROR  {1}", DateTime.Now, error);
+                    }
+                }
+                catch (IOException)
+                {
+
+                }                        
+            }
         }
     }
 }

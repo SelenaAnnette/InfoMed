@@ -78,7 +78,6 @@
             NinjectKernel.Bind<IAssignedMedicamentMeasuringRepository>().To<AssignedMedicamentMeasuringRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
             NinjectKernel.Bind<IMedicamentApplicationWayRepository>().To<MedicamentApplicationWayRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
             NinjectKernel.Bind<IMedicamentFormRepository>().To<MedicamentFormRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
-            NinjectKernel.Bind<IAssignedMeasuringRepository>().To<AssignedMeasuringRepository>().WithConstructorArgument("connectionString", mainDataBaseConnectionString);
 
             NinjectKernel.Bind<IMessageRepository>().To<MessageRepository>().WithConstructorArgument("connectionString", trashDataBaseConnectionString);
             NinjectKernel.Bind<INotificationRepository>().To<NotificationRepository>().WithConstructorArgument("connectionString", trashDataBaseConnectionString);
@@ -86,7 +85,6 @@
             NinjectKernel.Bind<IPersonMedicamentRepository>().To<PersonMedicamentRepository>().WithConstructorArgument("connectionString", trashDataBaseConnectionString);
             NinjectKernel.Bind<IPersonRiskFactorRepository>().To<PersonRiskFactorRepository>().WithConstructorArgument("connectionString", trashDataBaseConnectionString);
             NinjectKernel.Bind<IPersonSymptomRepository>().To<PersonSymptomRepository>().WithConstructorArgument("connectionString", trashDataBaseConnectionString);
-            NinjectKernel.Bind<IMeasuringNotificationRepository>().To<MeasuringNotificationRepository>().WithConstructorArgument("connectionString", trashDataBaseConnectionString);
 
             NinjectKernel.Bind<ILogger>().To<FileLogger>();
 

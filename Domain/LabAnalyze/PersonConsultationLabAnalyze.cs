@@ -10,10 +10,10 @@
     public class PersonConsultationLabAnalyze : DomainBase
     {
         [Required]
-        public Guid PersonConsultationId { get; set; }
+        public Guid LabAnalyzeId { get; set; }
 
         [Required]
-        public Guid LabAnalyzeTypeId { get; set; }
+        public Guid PersonConsultationId { get; set; }
 
         [Required]
         public double Value { get; set; }

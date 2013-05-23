@@ -67,7 +67,6 @@
     <Compile Include="Hospital\Hospital.cs" />
     <Compile Include="LabAnalyze\PersonConsultationLabAnalyze.cs" />
     <Compile Include="LabAnalyze\LabAnalyzeType.cs" />
-    <Compile Include="Measuring\AssignedMeasuring.cs" />
     <Compile Include="Measuring\PersonConsultationMeasuring.cs" />
     <Compile Include="Measuring\MeasuringType.cs" />
     <Compile Include="Measuring\PersonMeasuring.cs" />
@@ -77,7 +76,6 @@
     <Compile Include="Medicament\PersonMedicament.cs" />
     <Compile Include="Medicament\Medicament.cs" />
     <Compile Include="Medicament\AssignedMedicament.cs" />
-    <Compile Include="Message\MeasuringNotification.cs" />
     <Compile Include="Message\Notification.cs" />
     <Compile Include="Message\Message.cs" />
     <Compile Include="Operation\Operation.cs" />

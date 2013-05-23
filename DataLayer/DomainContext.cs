@@ -103,7 +103,5 @@
         public DbSet<MedicamentForm> MedicamentForms { get; set; }
 
         public DbSet<MedicamentApplicationWay> MedicamentApplicationWays { get; set; }
-
-        public DbSet<AssignedMeasuring> AssignedMeasurings { get; set; }
     }
 }

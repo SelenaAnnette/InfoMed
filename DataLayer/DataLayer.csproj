@@ -97,9 +97,6 @@
     <Compile Include="Persistence\LabAnalyze\IPersonConsultationLabAnalyzeRepository.cs" />
     <Compile Include="Persistence\LabAnalyze\PersonConsultationLabAnalyzeFactory.cs" />
     <Compile Include="Persistence\LabAnalyze\PersonConsultationLabAnalyzeRepository.cs" />
-    <Compile Include="Persistence\Measuring\AssignedMeasuringFactory.cs" />
-    <Compile Include="Persistence\Measuring\AssignedMeasuringRepository.cs" />
-    <Compile Include="Persistence\Measuring\IAssignedMeasuringRepository.cs" />
     <Compile Include="Persistence\Measuring\IPersonConsultationMeasuringRepository.cs" />
     <Compile Include="Persistence\Measuring\IPersonMeasuringRepository.cs" />
     <Compile Include="Persistence\Measuring\PersonConsultationMeasuringFactory.cs" />
@@ -118,9 +115,6 @@
     <Compile Include="Persistence\Medicament\IPersonMedicamentRepository.cs" />
     <Compile Include="Persistence\Medicament\PersonMedicamentFactory.cs" />
     <Compile Include="Persistence\Medicament\PersonMedicamentRepository.cs" />
-    <Compile Include="Persistence\Message\IMeasuringNotificationRepository.cs" />
-    <Compile Include="Persistence\Message\MeasuringNotificationFactory.cs" />
-    <Compile Include="Persistence\Message\MeasuringNotificationRepository.cs" />
     <Compile Include="Persistence\Message\INotificationRepository.cs" />
     <Compile Include="Persistence\Message\NotificationFactory.cs" />
     <Compile Include="Persistence\Message\NotificationRepository.cs" />

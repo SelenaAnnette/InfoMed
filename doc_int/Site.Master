@@ -32,7 +32,9 @@
             <div class="clear hideSkiplink">
                 <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
                     <Items>
+                        <asp:MenuItem NavigateUrl="~/Patients.aspx" Text="Пациенты"/>
                         <asp:MenuItem NavigateUrl="~/Drugs.aspx" Text="Выписать препарат"/>
+                        <asp:MenuItem NavigateUrl="~/Messages.aspx" Text="Сообщения"/>
                         <asp:MenuItem NavigateUrl="~/patient_info_input.aspx" Text="Информация о пациенте"/>
                     </Items>
                 </asp:Menu>
