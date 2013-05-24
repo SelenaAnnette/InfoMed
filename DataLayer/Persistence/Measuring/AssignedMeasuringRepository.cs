@@ -2,36 +2,38 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Data;
+    using System.Linq;
+
+    using DataLayer.Persistence.Measuring;
 
     using Domain.Measuring;
 
-    public class MeasuringTypeRepository : IMeasuringTypeRepository
+    public class AssignedMeasuringRepository : IAssignedMeasuringRepository
     {
         private readonly string ConnectionString;
 
-        public MeasuringTypeRepository(string connectionString)
+        public AssignedMeasuringRepository(string connectionString)
         {
             this.ConnectionString = connectionString;
         }
 
-        public IEnumerable<MeasuringType> GetAll()
+        public IEnumerable<AssignedMeasuring> GetAll()
         {
             var context = new DomainContext(this.ConnectionString);
-            return context.MeasuringTypes.Include("PersonConsultationMeasurings").Include("AssignedMedicamentMeasurings").Include("AssignedMeasurings");
+            return context.AssignedMeasurings.Include("PersonConsultation").Include("MeasuringType");
         }
 
-        public MeasuringType GetEntityById(Guid id)
+        public AssignedMeasuring GetEntityById(Guid id)
         {
             using (var context = new DomainContext(this.ConnectionString))
             {
-                return context.MeasuringTypes.Include("PersonConsultationMeasurings").Include("AssignedMedicamentMeasurings").Include("AssignedMeasurings")
+                return context.AssignedMeasurings.Include("PersonConsultation").Include("MeasuringType")
                     .FirstOrDefault(v => v.Id == id);
             }
         }
 
-        public IEnumerable<MeasuringType> GetEntitiesByQuery(Func<MeasuringType, bool> query)
+        public IEnumerable<AssignedMeasuring> GetEntitiesByQuery(Func<AssignedMeasuring, bool> query)
         {
             if (query == null)
             {
@@ -40,12 +42,12 @@
 
             using (var context = new DomainContext(this.ConnectionString))
             {
-                return context.MeasuringTypes.Include("PersonConsultationMeasurings").Include("AssignedMedicamentMeasurings").Include("AssignedMeasurings")
+                return context.AssignedMeasurings.Include("PersonConsultation").Include("MeasuringType")
                     .Where(query).ToList();
             }                                    
         }
 
-        public MeasuringType CreateOrUpdateEntity(MeasuringType entity)
+        public AssignedMeasuring CreateOrUpdateEntity(AssignedMeasuring entity)
         {
             if (entity == null)
             {
@@ -53,10 +55,10 @@
             }
 
             using (var context = new DomainContext(this.ConnectionString))
-            {                                
+            {
                 if (this.GetEntityById(entity.Id) == null)
                 {
-                    context.MeasuringTypes.Add(entity);
+                    context.AssignedMeasurings.Add(entity);
                 }
                 else
                 {
@@ -73,13 +75,13 @@
         {
             using (var context = new DomainContext(this.ConnectionString))
             {
-                var measuringType = context.MeasuringTypes.FirstOrDefault(v => v.Id == id);
-                if (measuringType == null)
+                var assignedMeasuring = context.AssignedMeasurings.FirstOrDefault(v => v.Id == id);
+                if (assignedMeasuring == null)
                 {
                     return;
                 }
 
-                context.MeasuringTypes.Remove(measuringType);
+                context.AssignedMeasurings.Remove(assignedMeasuring);
                 context.SaveChanges();
             }
         }

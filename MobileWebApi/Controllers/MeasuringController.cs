@@ -1,35 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-
-namespace MobileWebApi.Controllers.Measuring
+﻿namespace MobileWebApi.Controllers
 {
-    using System.Web.Script.Serialization;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Web.Mvc;
 
     using DataLayer.Persistence.Measuring;
 
+    using Domain.Measuring;
+
     public class MeasuringController : Controller
     {
-        public class JsonPersonMeasurings
-        {
-            public Guid MeasuringTypeId { get; set; }
-
-            public double Value { get; set; }
-        }
-
         private readonly IMeasuringTypeRepository measuringTypeRepository;
 
         private readonly IPersonMeasuringRepository personMeasuringRepository;
-
-        private readonly PersonMeasuringFactory personMeasuringFactory;
 
         public MeasuringController(IMeasuringTypeRepository measuringTypeRepository, IPersonMeasuringRepository personMeasuringRepository)
         {
             this.measuringTypeRepository = measuringTypeRepository;
             this.personMeasuringRepository = personMeasuringRepository;
-            this.personMeasuringFactory = new PersonMeasuringFactory();
         }
 
         // GET: /Measuring/GetMeasuringTypes
@@ -39,19 +28,15 @@ namespace MobileWebApi.Controllers.Measuring
             return this.Json(this.measuringTypeRepository.GetAll().ToList(), JsonRequestBehavior.AllowGet);
         }
 
+        // POST: /Measuring/AddPersonMeasuring
         [HttpPost]
-        public JsonResult AddPersonMeasurings(Guid personId, DateTime sendingDate, List<JsonPersonMeasurings> measurings)
+        public JsonResult AddPersonMeasuring(PersonMeasuring personMeasuring)
         {
             var isSuccessfully = true;
             var error = string.Empty;
 
-            foreach (var measuring in measurings)
-            {
                 try
                 {
-                    var personMeasuring = this.personMeasuringFactory.Create(
-                    Guid.NewGuid(), measuring.MeasuringTypeId, personId, sendingDate, measuring.Value);
-
                     this.personMeasuringRepository.CreateOrUpdateEntity(personMeasuring);
                 }
                 catch (Exception ex)
@@ -59,9 +44,32 @@ namespace MobileWebApi.Controllers.Measuring
                     isSuccessfully = false;
                     error = ex.Message;
                 }
+
+            return this.Json(new { IsSuccessfully = isSuccessfully, Error = error });
+        }
+
+        // POST: /Measuring/AddPersonMeasurings
+        [HttpPost]
+        public JsonResult AddPersonMeasurings(List<PersonMeasuring> personMeasurings)
+        {
+            var isSuccessfully = true;
+            var error = string.Empty;
+
+            foreach (var personMeasuring in personMeasurings)
+            {
+                try
+                {
+                    this.personMeasuringRepository.CreateOrUpdateEntity(personMeasuring);
+                }
+                catch (Exception ex)
+                {
+                    isSuccessfully = false;
+                    error = ex.Message;
+                    break;
+                }
             }
 
-            return this.Json(new { IsSuccessfully = isSuccessfully, Error = error }, JsonRequestBehavior.AllowGet);
+            return this.Json(new { IsSuccessfully = isSuccessfully, Error = error });
         }
     }
 }
