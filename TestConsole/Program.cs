@@ -22,8 +22,8 @@
         static void Main(string[] args)
         {            
             //MainTest();
-            //PersonTest();
-            PersonContactTest();
+            PersonTest();
+//            PersonContactTest();
             Console.WriteLine("Tests are completed");
             Console.WriteLine("Press any key...");
             Console.ReadKey();
