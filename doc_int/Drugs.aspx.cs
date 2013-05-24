@@ -212,8 +212,6 @@ namespace doc_int
             Label1.Text = Calendar1.SelectedDate.ToShortDateString();
         }
 
-
-
         protected void Button2_Click(object sender, EventArgs e)
         {
             if (RadioButton1.Checked == true)
@@ -264,9 +262,6 @@ namespace doc_int
             Button3.Enabled = false;
 
             consultationRepo.CreateOrUpdateEntity(PersonConsultation);
-
-
-
         }
 
         protected void Button4_Click(object sender, EventArgs e)
@@ -278,13 +273,7 @@ namespace doc_int
                 Button3.Visible = false;
                 Button3.Enabled = true;
                 TextBox10.Visible = false;
-
-
         }
-
-
-
-
     }
 }
 

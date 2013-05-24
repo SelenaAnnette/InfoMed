@@ -168,7 +168,9 @@
                         </tr>
                         <tr>
                             <td>
-                                &nbsp;</td>
+                                <asp:CheckBox ID="Measuring" runat="server" Text="Замеры" />
+                                <br />
+                            </td>
                             <td style="text-align: center">
                                 <asp:Button ID="Button1" runat="server" onclick="Button1_Click" 
                                     Text="Выписать" />
