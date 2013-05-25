@@ -48,6 +48,7 @@ namespace doc_int
         public IAssignedMedicamentRepository AssignedMedicamentRepo = Binder.NinjectKernel.Get<IAssignedMedicamentRepository>();
         public AssignedMedicamentFactory AssignedMedicamentFactory = new AssignedMedicamentFactory();
         public PersonConsultationFactory PersonConsultationFactory = new PersonConsultationFactory();
+       // public AssignedMedicamentMeasuringFactory AssignedMedicamentMeasuringFactory = new AssignedMedicamentMeasuringFactory();
 
 
 
@@ -176,11 +177,22 @@ namespace doc_int
                         DateTime convertedDate = DateTime.Parse(Label1.Text);
                         DateTime end = convertedDate.AddDays(Convert.ToInt32(dayCount.Text));
 
-                        var AssignedMedicament = AssignedMedicamentFactory.Create(Guid.NewGuid(), Guid_const, Guid_drug, wayType, Convert.ToDouble(dosage.Text), convertedDate, Convert.ToInt16(dayCount.Text), timesAtDay, eachDay);
-                         AssignedMedicamentRepo.CreateOrUpdateEntity(AssignedMedicament);
+                        Guid AssignedMedicamentId = Guid.NewGuid();
+
+
+                        if (Measuring.Checked == true)
+                        {
+                            Guid Type = new Guid(DropDownList1.SelectedValue);
+                            var interval = new DateTime(0, 0, 0, 0, Convert.ToInt32(timeInterval.Text), 0);
+                           // var AssignedMeasuringMedicament = AssignedMedicamentMeasuringFactory.Create(Guid.NewGuid(), Type, AssignedMedicamentId, interval);
+                        }
 
 
 
+                       // var AssignedMedicament = AssignedMedicamentFactory.Create(AssignedMedicamentId, Guid_const, Guid_drug, wayType, Convert.ToDouble(dosage.Text), convertedDate, Convert.ToInt16(dayCount.Text), timesAtDay, eachDay);
+                        //AssignedMedicamentRepo.CreateOrUpdateEntity(AssignedMedicament);
+
+                        
 
 
                         Label2.Text = "Отправка данных прошла успешно.";

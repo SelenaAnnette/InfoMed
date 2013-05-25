@@ -19,9 +19,9 @@
         public IEnumerable<Person> GetAll()
         {
             var context = new DomainContext(this.ConnectionString);
-            return context.Persons.Include("AssignedSymptoms").Include("FirstPersonPersons").Include("SecondPersonPersons").Include("PersonContacts").Include("AssignedRiskFactors")
+            return context.Persons.Include("AssignedSymptoms").Include("FirstPersonPersons");/*.Include("SecondPersonPersons").Include("PersonContacts").Include("AssignedRiskFactors")
                 .Include("Credentials").Include("PersonGroups").Include("PersonOperations").Include("PersonDiseases").Include("PersonAllergicReactions")
-                .Include("ConsultationsAsDoctor").Include("ConsultationsAsPatient").Include("PersonHospitalizations");
+                .Include("ConsultationsAsDoctor").Include("ConsultationsAsPatient").Include("PersonHospitalizations");*/
         }
 
         public Person GetEntityById(Guid id)
