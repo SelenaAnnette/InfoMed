@@ -60,6 +60,6 @@
         public virtual ICollection<AssignedMedicament> AssignedMedicaments { get; set; }
 
         [InverseProperty("PersonConsultation")]
-        public virtual ICollection<AssignedMedicament> AssignedMeasurings { get; set; }
+        public virtual ICollection<AssignedMeasuring> AssignedMeasurings { get; set; }
     }
 }
