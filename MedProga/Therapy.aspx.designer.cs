@@ -31,6 +31,15 @@ namespace MedProga {
         protected global::System.Web.UI.WebControls.TextBox TextBox_date_time;
         
         /// <summary>
+        /// Button_show_drugs элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button_show_drugs;
+        
+        /// <summary>
         /// Label_drugs элемент управления.
         /// </summary>
         /// <remarks>

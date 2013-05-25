@@ -41,16 +41,26 @@ namespace MedProga
             DateTime dateTo;
             dateFrom = DateTime.MinValue;
             dateTo = DateTime.MaxValue;
-            if (this.TextBox_from.Text != string.Empty)
+            if (this.TextBox_from.Text != string.Empty) 
             {
                 try
                 {
                     dateFrom = Convert.ToDateTime(this.TextBox_from.Text);
+                }
+                catch (Exception)
+                {
+                    this.TextBox_from.Text = string.Empty;
+                }
+            }
+            if (this.TextBox_to.Text != string.Empty)
+            {
+                try
+                {
                     dateTo = Convert.ToDateTime(this.TextBox_to.Text);
                 }
                 catch (Exception)
                 {
-
+                    this.TextBox_to.Text = string.Empty;
                 }
             }
             var personMeasuringRepo = Binder.NinjectKernel.Get<IPersonMeasuringRepository>();
@@ -104,6 +114,7 @@ namespace MedProga
 
         protected void Button_analysis_Click(object sender, EventArgs e)
         {
+            this.Chart_analysis.Visible = false;
             for (int i = 0; i < this.CheckBoxList_Parameters.Items.Count; i++)
             {
                 if (this.CheckBoxList_Parameters.Items[i].Selected)
@@ -112,11 +123,19 @@ namespace MedProga
                     this.ShowData(this.CheckBoxList_Parameters.Items[i].Text, "chart");
                 }
             }
-            //var pM1 = from pM in personMeasuring select pM.MeasuringDate;
-            //var pM2 = from pM in personMeasuring select pM.MeasuringTypeId;
-            //var pM3 = from pM in personMeasuring select pM.Value;
-            GridView_analysis.DataSource = personMeasuring.Select(pm => new {pm.MeasuringDate, pm.MeasuringTypeId, pm.Value} );
-            GridView_analysis.DataBind();
+            var measuringTypeRepo = Binder.NinjectKernel.Get<IMeasuringTypeRepository>();
+            var parameters = measuringTypeRepo.GetAll();
+            this.GridView_analysis.DataSource = from pm in this.personMeasuring
+                                                join par in parameters on pm.MeasuringTypeId equals par.Id
+                                                select
+                                                    new
+                                                        {
+                                                            ДатаИзмерения = pm.MeasuringDate,
+                                                            Параметр = par.Title,
+                                                            Значение = pm.Value
+                                                        };
+            this.GridView_analysis.DataBind();
+            if (this.Chart_analysis.Series.Count > 0) this.Chart_analysis.Visible = true;
             this.CheckBoxList_Parameters.Items.Clear();
             this.Page_Load(sender, e);
         }
