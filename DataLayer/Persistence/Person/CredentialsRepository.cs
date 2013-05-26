@@ -26,7 +26,7 @@
         {
             using (var context = new DomainContext(this.ConnectionString))
             {
-                return context.Credentials.Include("Person").FirstOrDefault(v => v.PersonId == id);
+                return context.Credentials.Include("Person").FirstOrDefault(v => v.Id == id);
             }
         }
 
@@ -52,7 +52,7 @@
 
             using (var context = new DomainContext(this.ConnectionString))
             {                                
-                if (this.GetEntityById(entity.PersonId) == null)
+                if (this.GetEntityById(entity.Id) == null)
                 {
                     context.Credentials.Add(entity);
                 }
@@ -71,7 +71,7 @@
         {
             using (var context = new DomainContext(this.ConnectionString))
             {
-                var credentials = context.Credentials.FirstOrDefault(v => v.PersonId == id);
+                var credentials = context.Credentials.FirstOrDefault(v => v.Id == id);
                 if (credentials == null)
                 {
                     return;

@@ -21,6 +21,8 @@
 
     using ServerLogic.Logger;
     using ServerLogic.Notification;
+    using ServerLogic.Security;
+    using ServerLogic.Sms;
 
     using SmsModule;
 
@@ -90,7 +92,9 @@
             NinjectKernel.Bind<IPersonSymptomRepository>().To<PersonSymptomRepository>().WithConstructorArgument("connectionString", trashDataBaseConnectionString);
             NinjectKernel.Bind<IMeasuringNotificationRepository>().To<MeasuringNotificationRepository>().WithConstructorArgument("connectionString", trashDataBaseConnectionString);
 
-            NinjectKernel.Bind<ILogger>().To<FileLogger>();                     
+            NinjectKernel.Bind<ILogger>().To<FileLogger>();
+            NinjectKernel.Bind<IAuthenticationProvider>().To<AuthenticationProvider>();
+            NinjectKernel.Bind<ISmsManager>().To<SmsManager>();
 
             NinjectKernel.Bind<INotificationManager>().To<NotificationManager>()
                 .WithConstructorArgument("startDayFromHour", Properties.Settings.Default.StartDayFromHour)

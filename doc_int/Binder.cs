@@ -19,6 +19,8 @@
 
     using Ninject;
 
+    using ServerLogic.Security;
+
     public static class Binder
     {
         public static readonly IKernel NinjectKernel = new StandardKernel();
@@ -84,6 +86,8 @@
             NinjectKernel.Bind<IPersonRiskFactorRepository>().To<PersonRiskFactorRepository>().WithConstructorArgument("connectionString", trashDataBaseConnectionString);
             NinjectKernel.Bind<IPersonSymptomRepository>().To<PersonSymptomRepository>().WithConstructorArgument("connectionString", trashDataBaseConnectionString);
             NinjectKernel.Bind<IMeasuringNotificationRepository>().To<MeasuringNotificationRepository>().WithConstructorArgument("connectionString", trashDataBaseConnectionString);
+
+            NinjectKernel.Bind<IAuthenticationProvider>().To<AuthenticationProvider>();
         }
     }
 }

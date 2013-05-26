@@ -21,6 +21,7 @@
 
     using ServerLogic.Logger;
     using ServerLogic.Notification;
+    using ServerLogic.Security;
 
     public static class Binder
     {
@@ -89,6 +90,7 @@
             NinjectKernel.Bind<IMeasuringNotificationRepository>().To<MeasuringNotificationRepository>().WithConstructorArgument("connectionString", trashDataBaseConnectionString);
 
             NinjectKernel.Bind<ILogger>().To<FileLogger>();
+            NinjectKernel.Bind<IAuthenticationProvider>().To<AuthenticationProvider>();
 
             NinjectKernel.Bind<INotificationManager>().To<NotificationManager>()
                 .WithConstructorArgument("startDayFromHour", 0)
