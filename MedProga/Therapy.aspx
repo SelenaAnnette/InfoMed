@@ -18,7 +18,7 @@
                 <asp:Button ID="Button_show_drugs" runat="server" Height="25px" 
                     onclick="Button_show_drugs_Click" Text="Показать" Width="100px" />
             </td>
-        </tr>
+       </tr>
        <tr>
             <td style="vertical-align: top"> 
                 <asp:Label ID="Label_drugs" runat="server" Text="Препараты" Visible="False"></asp:Label>

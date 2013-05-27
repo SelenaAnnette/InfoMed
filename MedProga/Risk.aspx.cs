@@ -60,6 +60,7 @@ namespace MedProga
             }
             catch (Exception)
             {
+                this.label = new Label();
                 this.label.ID = "Label_default";
                 this.label.Text = "Соединение с базой данных установить не удалось";
                 this.PlaceHolder_risk.Controls.Add(this.label);

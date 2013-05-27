@@ -12,7 +12,6 @@ using System.Web.UI.DataVisualization.Charting;
 
 namespace MedProga
 {
-    using System.Collections;
     using DataLayer.Persistence.Measuring;
     using DataLayer.Persistence.Person;
     using Domain.Measuring;
@@ -73,7 +72,9 @@ namespace MedProga
                 var partOfPersonMeasuring =
                     personMeasuringRepo.GetEntitiesByQuery(
                         m =>
-                        m.PersonId == perId && m.MeasuringDate >= dateFrom && m.MeasuringDate <= dateTo
+                        m.PersonId == perId 
+                        && dateFrom <= m.MeasuringDate 
+                        && m.MeasuringDate <= dateTo
                         && m.MeasuringTypeId == measId);
                 partOfPersonMeasuring = partOfPersonMeasuring.OrderBy(m => m.MeasuringDate);
                 personMeasuring.AddRange(partOfPersonMeasuring);
@@ -83,7 +84,9 @@ namespace MedProga
                 var analysis =
                     personMeasuringRepo.GetEntitiesByQuery(
                         m =>
-                        m.PersonId == perId && m.MeasuringDate >= dateFrom && m.MeasuringDate <= dateTo
+                        m.PersonId == perId 
+                        && m.MeasuringDate >= dateFrom 
+                        && m.MeasuringDate <= dateTo
                         && m.MeasuringTypeId == measId);
                 analysis = analysis.OrderBy(a => a.MeasuringDate);
                 var chartArray = analysis.ToArray();
@@ -136,6 +139,19 @@ namespace MedProga
                                                         };
             this.GridView_analysis.DataBind();
             if (this.Chart_analysis.Series.Count > 0) this.Chart_analysis.Visible = true;
+            this.CheckBoxList_Parameters.Items.Clear();
+            this.Page_Load(sender, e);
+        }
+       
+        protected void Button_clear_selection_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < this.CheckBoxList_Parameters.Items.Count; i++)
+            {
+                if (this.CheckBoxList_Parameters.Items[i].Selected)
+                {
+                    this.CheckBoxList_Parameters.Items[i].Selected = false;
+                }
+            }
             this.CheckBoxList_Parameters.Items.Clear();
             this.Page_Load(sender, e);
         }

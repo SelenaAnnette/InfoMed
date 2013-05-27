@@ -21,17 +21,16 @@
         <tr>
             <td> 
                 <asp:Button ID="Button_analysis" runat="server" Text="Проанализировать" 
-                    onclick="Button_analysis_Click" />
+                    onclick="Button_analysis_Click" Width="130px" Height="25px"/>
+                <asp:Button ID="Button_clear_selection" runat="server" 
+                    onclick="Button_clear_selection_Click" Text="Очистить выделение" 
+                    Width="130px" Height="25px"/>
             </td>
         </tr>
         <tr> 
             <td class="style1"> 
                 <asp:GridView ID="GridView_analysis" runat="server">
                 </asp:GridView>
-            </td>
-        </tr>
-        <tr>
-            <td>
                 <asp:Chart ID="Chart_analysis" runat="server" Height="200" Width="616px" 
                     Visible="False">
                     <chartareas>
@@ -40,10 +39,6 @@
                     </chartareas>
                 </asp:Chart>
             </td>
-        </tr>
-            <tr>
-            <td class="style1">
-                &nbsp;</td>
         </tr>
     </table>
 </asp:Content>

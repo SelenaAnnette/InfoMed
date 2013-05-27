@@ -17,11 +17,6 @@ namespace MedProga
 
     public partial class Therapy : System.Web.UI.Page
     {
-        protected void Page_Load(object sender, EventArgs e)
-        {
-
-        }
-
         protected void Button_show_drugs_Click(object sender, EventArgs e)
         {
             this.Label_drugs.Visible = false;

@@ -67,6 +67,15 @@ namespace MedProga {
         protected global::System.Web.UI.WebControls.Button Button_analysis;
         
         /// <summary>
+        /// Button_clear_selection элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button_clear_selection;
+        
+        /// <summary>
         /// GridView_analysis элемент управления.
         /// </summary>
         /// <remarks>
