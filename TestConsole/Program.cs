@@ -4,15 +4,18 @@
     using System.Linq;
 
     using DataLayer.Persistence.Consultation;
+    using DataLayer.Persistence.Group;
     using DataLayer.Persistence.Medicament;
     using DataLayer.Persistence.Message;
     using DataLayer.Persistence.Person;
 
+    using Domain.Group;
     using Domain.Person;
 
     using Ninject;
 
     using ServerLogic.Logger;
+    using ServerLogic.Security;
 
     using SmsModule;
 
@@ -22,8 +25,9 @@
         static void Main(string[] args)
         {            
             //MainTest();
-            PersonTest();
+//            PersonTest();
 //            PersonContactTest();
+            CredentialsTest();
             Console.WriteLine("Tests are completed");
             Console.WriteLine("Press any key...");
             Console.ReadKey();
@@ -43,6 +47,35 @@
 
             person = personRepository.GetEntityById(person.Id);
             Console.WriteLine(person.FirstName);
+
+            personRepository.DeleteEntity(person.Id);
+            Console.WriteLine("Person was deleted");
+        }
+
+        private static void CredentialsTest()
+        {
+            var personRepository = Binder.NinjectKernel.Get<IPersonRepository>();
+            var personFactory = new PersonFactory();
+            var person = personFactory.Create(Guid.NewGuid(), "TestPerson", "TestPerson", "TestPerson", DateTime.Now, Sex.Man);
+            personRepository.CreateOrUpdateEntity(person);
+            Console.WriteLine("Person was created");
+
+            var authenticationProvider = Binder.NinjectKernel.Get<IAuthenticationProvider>();
+            authenticationProvider.CreateUser(person.Id, "test", "password", Groups.Doctor);
+            Console.WriteLine("PersonCredentials were created");
+
+            var validatePerson = authenticationProvider.Validate("test", "password", Groups.Doctor);
+            Console.WriteLine(validatePerson == null ? "Person was not validated" : "Person was validated");
+
+            var credentialsRepository = Binder.NinjectKernel.Get<ICredentialsRepository>();
+            var credentials = credentialsRepository.GetEntitiesByQuery(v => v.PersonId == person.Id).First();
+            credentialsRepository.DeleteEntity(credentials.Id);
+            Console.WriteLine("PersonCredentials were deleted");
+
+            var personGroupRepository = Binder.NinjectKernel.Get<IPersonGroupRepository>();
+            var personGroup = personGroupRepository.GetEntitiesByQuery(v => v.PersonId == person.Id).First();
+            personGroupRepository.DeleteEntity(personGroup.Id);
+            Console.WriteLine("PersonGroup was deleted");
 
             personRepository.DeleteEntity(person.Id);
             Console.WriteLine("Person was deleted");

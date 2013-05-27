@@ -57,6 +57,10 @@
     <Compile Include="Notification\NotificationManager.cs" />
     <Compile Include="Notification\NotificationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\AuthenticationProvider.cs" />
+    <Compile Include="Security\IAuthenticationProvider.cs" />
+    <Compile Include="Sms\ISmsManager.cs" />
+    <Compile Include="Sms\SmsManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
