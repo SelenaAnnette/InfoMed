@@ -49,7 +49,7 @@ namespace doc_int
         public AssignedMedicamentFactory AssignedMedicamentFactory = new AssignedMedicamentFactory();
         public PersonConsultationFactory PersonConsultationFactory = new PersonConsultationFactory();
         public AssignedMedicamentMeasuringFactory AssignedMedicamentMeasuringFactory = new AssignedMedicamentMeasuringFactory();
-
+        public AssignedMedicamentMeasuringRepository AssignedMedicamentMeasuringRepository = new AssignedMedicamentMeasuringRepository();
 
 
         protected void Page_PreRender(object sender, EventArgs e)
@@ -179,21 +179,27 @@ namespace doc_int
 
                         Guid AssignedMedicamentId = Guid.NewGuid();
 
-              
+
 
 
                         if (Measuring.Checked == true)
                         {
                             Guid Type = new Guid(DropDownList1.SelectedValue);
-                            var interval = new DateTime(0, 0, 0, 0, 0,Convert.ToInt32(timeInterval_hour.Text)*3600 + Convert.ToInt32(timeInterval_min.Text)*60);
-                            var AssignedMeasuringMedicament = AssignedMedicamentMeasuringFactory.Create(Guid.NewGuid(), Type, AssignedMedicamentId, interval);
+                            var AssignedMeasuringMedicament = AssignedMedicamentMeasuringFactory.Create(Guid.NewGuid(), Type, AssignedMedicamentId, Convert.ToInt32(timeInterval_hour.Text) * 3600 + Convert.ToInt32(timeInterval_min.Text) * 60);
+                            AssignedMedicamentMeasuringRepository.CreateOrUpdateEntity(AssignedMeasuringMedicament);
+                            var AssignedMedicament = AssignedMedicamentFactory.Create(AssignedMedicamentId, Guid_const, Guid_drug, wayType, Convert.ToDouble(dosage.Text), convertedDate, Convert.ToInt16(dayCount.Text), timesAtDay, eachDay);
+                            AssignedMedicamentRepo.CreateOrUpdateEntity(AssignedMedicament);
+                        }
+                        else
+                        {
+                            var AssignedMedicament = AssignedMedicamentFactory.Create(AssignedMedicamentId, Guid_const, Guid_drug, wayType, Convert.ToDouble(dosage.Text), convertedDate, Convert.ToInt16(dayCount.Text), timesAtDay, eachDay);
+                            AssignedMedicamentRepo.CreateOrUpdateEntity(AssignedMedicament);
                         }
 
 
 
 
-                        var AssignedMedicament = AssignedMedicamentFactory.Create(AssignedMedicamentId, Guid_const, Guid_drug, wayType, Convert.ToDouble(dosage.Text), convertedDate, Convert.ToInt16(dayCount.Text), timesAtDay, eachDay);
-                        //AssignedMedicamentRepo.CreateOrUpdateEntity(AssignedMedicament);
+                        
 
 
 
