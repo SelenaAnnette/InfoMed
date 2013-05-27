@@ -15,7 +15,7 @@
 
         private readonly IPersonSymptomRepository personSymptomRepository;
 
-        public SymptomController(IPersonSymptomRepository personSymptomRepository)
+        public SymptomController(ISymptomRepository symptomRepository, IPersonSymptomRepository personSymptomRepository)
         {
             this.symptomRepository = symptomRepository;
             this.personSymptomRepository = personSymptomRepository;

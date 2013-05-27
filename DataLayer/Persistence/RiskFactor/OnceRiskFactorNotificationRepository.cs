@@ -1,36 +1,36 @@
-﻿namespace DataLayer.Persistence.Group
+﻿namespace DataLayer.Persistence.RiskFactor
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Data;
 
-    using Domain.Group;    
+    using Domain.RiskFactor;
 
-    public class PersonGroupRepository : IPersonGroupRepository
+    public class OnceRiskFactorNotificationRepository : IOnceRiskFactorNotificationRepository
     {
         private readonly string ConnectionString;
 
-        public PersonGroupRepository(string connectionString)
+        public OnceRiskFactorNotificationRepository(string connectionString)
         {
             this.ConnectionString = connectionString;
         }
 
-        public IEnumerable<PersonGroup> GetAll()
+        public IEnumerable<OnceRiskFactorNotification> GetAll()
         {
             var context = new DomainContext(this.ConnectionString);
-            return context.PersonGroups.Include("Person").Include("Group");
+            return context.OnceRiskFactorNotifications;
         }
 
-        public PersonGroup GetEntityById(Guid id)
+        public OnceRiskFactorNotification GetEntityById(Guid id)
         {
             using (var context = new DomainContext(this.ConnectionString))
             {
-                return context.PersonGroups.Include("Person").Include("Group").FirstOrDefault(v => v.Id == id);
+                return context.OnceRiskFactorNotifications.FirstOrDefault(v => v.Id == id);
             }
         }
 
-        public IEnumerable<PersonGroup> GetEntitiesByQuery(Func<PersonGroup, bool> query)
+        public IEnumerable<OnceRiskFactorNotification> GetEntitiesByQuery(Func<OnceRiskFactorNotification, bool> query)
         {
             if (query == null)
             {
@@ -39,11 +39,11 @@
 
             using (var context = new DomainContext(this.ConnectionString))
             {
-                return context.PersonGroups.Include("Person").Include("Group").Where(query).ToList();
-            }  
+                return context.OnceRiskFactorNotifications.Where(query).ToList();
+            }                                    
         }
 
-        public PersonGroup CreateOrUpdateEntity(PersonGroup entity)
+        public OnceRiskFactorNotification CreateOrUpdateEntity(OnceRiskFactorNotification entity)
         {
             if (entity == null)
             {
@@ -51,10 +51,10 @@
             }
 
             using (var context = new DomainContext(this.ConnectionString))
-            {
+            {                                
                 if (this.GetEntityById(entity.Id) == null)
                 {
-                    context.PersonGroups.Add(entity);
+                    context.OnceRiskFactorNotifications.Add(entity);
                 }
                 else
                 {
@@ -71,15 +71,15 @@
         {
             using (var context = new DomainContext(this.ConnectionString))
             {
-                var personGroups = context.PersonGroups.FirstOrDefault(v => v.Id == id);
-                if (personGroups == null)
+                var onceRiskFactorNotification = context.OnceRiskFactorNotifications.FirstOrDefault(v => v.Id == id);
+                if (onceRiskFactorNotification == null)
                 {
                     return;
                 }
 
-                context.PersonGroups.Remove(personGroups);
+                context.OnceRiskFactorNotifications.Remove(onceRiskFactorNotification);
                 context.SaveChanges();
             }
-        }        
+        }
     }
 }
