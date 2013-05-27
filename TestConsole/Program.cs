@@ -30,7 +30,7 @@
 //            PersonTest();
 //            PersonContactTest();
 //            CredentialsTest();
-            NotificationTest();
+//            NotificationTest();
             Console.WriteLine("Tests are completed");
             Console.WriteLine("Press any key...");
             Console.ReadKey();
@@ -73,11 +73,11 @@
             }
             Console.WriteLine("Notifications were deleted");
 
-            foreach (var riskFactor in riskFactors)
-            {
-                riskFactorsRepository.DeleteEntity(riskFactor.Id);
-            }
-            Console.WriteLine("RiskFactors were deleted");
+            riskFactorsRepository.DeleteEntity(riskFactor1.Id);
+            Console.WriteLine("RiskFactor1 were deleted");
+
+            riskFactorsRepository.DeleteEntity(riskFactor2.Id);
+            Console.WriteLine("RiskFactor2 were deleted");
 
             personRepository.DeleteEntity(person.Id);
             Console.WriteLine("Person was deleted");

@@ -28,61 +28,45 @@
         //public
         public bool Initialize() //если модем найден и инициализирован, то вернет true, иначе false
         {
-            serialPort = new SerialPort();
-
-
-            foreach (string s in SerialPort.GetPortNames())///Get COMPort Name
+            lock (this.lockObject)
             {
-                serialPort.PortName = s;
-                if (serialPort.IsOpen)
-                { serialPort.Close(); }
-                serialPort.Open();
-                if (serialPort.IsOpen)
-                {
-                    try
-                    {
-                        serialPort.WriteTimeout = PortTimeOut;//100 default
-                        serialPort.WriteLine("AT \r\n");
-                    }
-                    catch (TimeoutException ee)
-                    {
-                        error_message = ee.Message;
-                    }
-                    System.Threading.Thread.Sleep(100);
-                    string Port_readed_line = serialPort.ReadExisting();
-                    if (Port_readed_line.Length > 0)
-                    {
 
-                        serialPort.WriteTimeout = PortTimeOut;
-                        serialPort.ReadTimeout = PortTimeOut;
-                        break;
+                serialPort = new SerialPort();
+
+
+                foreach (string s in SerialPort.GetPortNames()) ///Get COMPort Name
+                {
+                    serialPort.PortName = s;
+                    if (serialPort.IsOpen)
+                    {
+                        serialPort.Close();
                     }
-                    serialPort.Close();
+                    serialPort.Open();
+                    if (serialPort.IsOpen)
+                    {
+                        try
+                        {
+                            serialPort.WriteTimeout = PortTimeOut; //100 default
+                            serialPort.WriteLine("AT \r\n");
+                        }
+                        catch (TimeoutException ee)
+                        {
+                            error_message = ee.Message;
+                        }
+                        System.Threading.Thread.Sleep(100);
+                        string Port_readed_line = serialPort.ReadExisting();
+                        if (Port_readed_line.Length > 0)
+                        {
+
+                            serialPort.WriteTimeout = PortTimeOut;
+                            serialPort.ReadTimeout = PortTimeOut;
+                            break;
+                        }
+                        serialPort.Close();
+                    }
                 }
-            }
-            if (serialPort.PortName != "")
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-
-        }
-
-        public bool CheckConnection()
-        {
-            if (serialPort.PortName != "")
-            {
-                SendCommandToModem("AT");
-                ReadRespondFromModem();
-                SendCommandToModem("AT");
-                string Port_readed_line = ReadRespondFromModem();
-                // MessageBox.Show(Port_readed_line);
-                if (Port_readed_line.IndexOf("OK") >= 0)
+                if (serialPort.PortName != "")
                 {
-                    // MessageBox.Show("AT => OK");
                     return true;
                 }
                 else
@@ -90,115 +74,150 @@
                     return false;
                 }
             }
+        }
+
+        public bool CheckConnection()
+        {
+            if (serialPort.PortName != "")
+            {
+                lock (this.lockObject)
+                {
+                    SendCommandToModem("AT");
+                    ReadRespondFromModem();
+                    SendCommandToModem("AT");
+                    string Port_readed_line = ReadRespondFromModem();
+                    // MessageBox.Show(Port_readed_line);
+                    if (Port_readed_line.IndexOf("OK") >= 0)
+                    {
+                        // MessageBox.Show("AT => OK");
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+
             return false;
         } //проверка соединения
 
         public bool SendSms(string phone_number, string message)
         {
-            string Final_Respond = "";
-            if (serialPort.IsOpen)
+            lock (this.lockObject)
             {
+                string Final_Respond = "";
+                if (serialPort.IsOpen)
+                {
 
-                SendCommandToModem("AT");
-                log += ReadRespondFromModem();
+                    SendCommandToModem("AT");
+                    log += ReadRespondFromModem();
 
-                //проверяем возможность отправки SMS при помощи данного устройства
-                SendCommandToModem("AT+CSMS=0");
-                log += ReadRespondFromModem();
+                    //проверяем возможность отправки SMS при помощи данного устройства
+                    SendCommandToModem("AT+CSMS=0");
+                    log += ReadRespondFromModem();
 
-                //выбираем режим работы модема - text mode
-                SendCommandToModem("AT+CMGF=1");
-                log += ReadRespondFromModem();
+                    //выбираем режим работы модема - text mode
+                    SendCommandToModem("AT+CMGF=1");
+                    log += ReadRespondFromModem();
 
-                // параметры модема для отправки SMS на русском языке
-                SendCommandToModem("AT+CSMP=17,167,0,25");
-                log += ReadRespondFromModem();
+                    // параметры модема для отправки SMS на русском языке
+                    SendCommandToModem("AT+CSMP=17,167,0,25");
+                    log += ReadRespondFromModem();
 
-                //определяем кодировку сообщений в UCS2/Unicode
-                SendCommandToModem("AT+CSCS=\"UCS2\"");
-                log += ReadRespondFromModem();
+                    //определяем кодировку сообщений в UCS2/Unicode
+                    SendCommandToModem("AT+CSCS=\"UCS2\"");
+                    log += ReadRespondFromModem();
 
-                phone_number = ConvertToUCS2(phone_number);
+                    phone_number = ConvertToUCS2(phone_number);
 
-                //отправили номер телефона-адресата
-                SendCommandToModem("AT+CMGS=\"" + phone_number + "\"");
-                log += ReadRespondFromModem();
+                    //отправили номер телефона-адресата
+                    SendCommandToModem("AT+CMGS=\"" + phone_number + "\"");
+                    log += ReadRespondFromModem();
 
 
-                message = ConvertToUCS2(message); //txtInUCS2;
+                    message = ConvertToUCS2(message); //txtInUCS2;
 
-                //+ Ctrl+Z (^Z) или 0x1Ah 
-                SendCommandToModem(message + "\x1A");
-                //дополнительная пауза нужна после отправки сообщения перед получением ответа от модема
-                System.Threading.Thread.Sleep(2000);
+                    //+ Ctrl+Z (^Z) или 0x1Ah 
+                    SendCommandToModem(message + "\x1A");
+                    //дополнительная пауза нужна после отправки сообщения перед получением ответа от модема
+                    System.Threading.Thread.Sleep(2000);
 
-                Final_Respond = ReadRespondFromModem();
-                log += Final_Respond;
-               
-            }
+                    Final_Respond = ReadRespondFromModem();
+                    log += Final_Respond;
 
-            if (Final_Respond.IndexOf("OK") != -1)//если в конце вернул ОК, значит прошло успешно и ждем смску
-            {
-                return true;
-            }
-            else
-            {
-                return false;
+                }
+
+                if (Final_Respond.IndexOf("OK") != -1) //если в конце вернул ОК, значит прошло успешно и ждем смску
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         } //Отправка
 
         public Sms[] GetAllSms() //возвращает все смс как массив объектов смс со всем расшифрованными данными
         {
-            Sms[] My_Sms__Array = new Sms[100];
-            string AllSms = "";
-
-            if (CheckConnection())
+            lock (this.lockObject)
             {
-                int index_sms = 0;
-                int index_text = 0;
-                int NewLineIndex = 0;
-                string Buffer = "";
-                SendCommandToModem("AT+CMGF=0");//PDU Mode
-                SendCommandToModem("AT+CMGL=4");//взять все сообщения
-                //SendCommandToModem("AT+CMGL=1");//взять все прочитанные сообщения
-                AllSms = ReadRespondFromModem();
+                Sms[] My_Sms__Array = new Sms[100];
+                string AllSms = "";
 
-                while (AllSms.LastIndexOf("+CMGL") != -1)
+                if (CheckConnection())
                 {
-                    //начинаем перебор с конца, в начале массива будут самые свежие смс
-                    index_text = AllSms.LastIndexOf("+CMGL");//индекс последней смс
-                    Buffer = AllSms.Substring(index_text, AllSms.Length - index_text - 1);//копируем последнюю смс
-                    if (Buffer[5] == '=') break; //если в буфере не смс а наш запрос то выходим нахер из цикла распарсивания
-                    AllSms = AllSms.Substring(0, index_text);//оставляем все кроме последней
-                    NewLineIndex = Buffer.IndexOf("\r\n");//индекс конца заголовка
-                    My_Sms__Array[index_sms] = parse_sms(Buffer);//объект смс заносим в массив
+                    int index_sms = 0;
+                    int index_text = 0;
+                    int NewLineIndex = 0;
+                    string Buffer = "";
+                    SendCommandToModem("AT+CMGF=0"); //PDU Mode
+                    SendCommandToModem("AT+CMGL=4"); //взять все сообщения
+                    //SendCommandToModem("AT+CMGL=1");//взять все прочитанные сообщения
+                    AllSms = ReadRespondFromModem();
 
-                    // MessageBox.Show("i= "+ index_sms.ToString() +" b "+Buffer);//показать что мы разобрали
-                    index_sms += 1;//переход к следующему
+                    while (AllSms.LastIndexOf("+CMGL") != -1)
+                    {
+                        //начинаем перебор с конца, в начале массива будут самые свежие смс
+                        index_text = AllSms.LastIndexOf("+CMGL"); //индекс последней смс
+                        Buffer = AllSms.Substring(index_text, AllSms.Length - index_text - 1); //копируем последнюю смс
+                        if (Buffer[5] == '=') break; //если в буфере не смс а наш запрос то выходим нахер из цикла распарсивания
+                        AllSms = AllSms.Substring(0, index_text); //оставляем все кроме последней
+                        NewLineIndex = Buffer.IndexOf("\r\n"); //индекс конца заголовка
+                        My_Sms__Array[index_sms] = parse_sms(Buffer); //объект смс заносим в массив
+
+                        // MessageBox.Show("i= "+ index_sms.ToString() +" b "+Buffer);//показать что мы разобрали
+                        index_sms += 1; //переход к следующему
+                    }
                 }
-            }
-            return My_Sms__Array;
 
+                return My_Sms__Array;
+            }
         }
 
         public bool DeleteByDate(DateTime dt)//дата время не включительно, относительно параметра
         {
-            Sms[] AllSms = new Sms[100];
-            int counter = 0; //счетчик удаленных СМС
-            AllSms = GetAllSms(); //все смс
-            foreach (Sms CurrentSms in AllSms)
+            lock (this.lockObject)
             {
-                if (CurrentSms != null)
+                Sms[] AllSms = new Sms[100];
+                int counter = 0; //счетчик удаленных СМС
+                AllSms = GetAllSms(); //все смс
+                foreach (Sms CurrentSms in AllSms)
                 {
-                    if (CurrentSms.DTime < dt)
+                    if (CurrentSms != null)
                     {
-                        SendCommandToModem("AT+CMGD=" + CurrentSms.Index);
-                        counter += 1;
-                        if (ReadRespondFromModem().IndexOf("OK") < 0) return false; //если ошибка и не вурнул ОК
+                        if (CurrentSms.DTime < dt)
+                        {
+                            SendCommandToModem("AT+CMGD=" + CurrentSms.Index);
+                            counter += 1;
+                            if (ReadRespondFromModem().IndexOf("OK") < 0) return false; //если ошибка и не вурнул ОК
+                        }
                     }
                 }
+
+                return true;
             }
-            return true;
         }
 
         //private:
