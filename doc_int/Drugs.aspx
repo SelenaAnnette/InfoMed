@@ -178,7 +178,9 @@
                                 </asp:DropDownList>
                                 <br />
                                 Сделать замер через<br />
-                                <asp:TextBox ID="timeInterval" runat="server" Type="Number"  Width="35px">5</asp:TextBox>
+                                <asp:TextBox ID="timeInterval_hour" runat="server" Width="35px">0</asp:TextBox>
+                                часов
+                                <asp:TextBox ID="timeInterval_min" runat="server" Type="Number"  Width="35px">5</asp:TextBox>
                                 &nbsp;минут после приёма препарата</td>
                             <td style="text-align: center">
                                 <asp:Button ID="Button1" runat="server" onclick="Button1_Click" 
