@@ -14,7 +14,7 @@
         public Guid AssignedMedicamentId { get; set; }
 
         [Required]
-        public DateTime TimeIntervar { get; set; }
+        public int TimeIntervalInSeconds { get; set; }
 
         [InverseProperty("AssignedMedicamentMeasurings")]
         public virtual AssignedMedicament AssignedMedicament { get; set; }
