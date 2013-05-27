@@ -19,6 +19,7 @@
 
     using Ninject;
 
+    using ServerLogic.Notification;
     using ServerLogic.Security;
 
     public static class Binder
@@ -86,8 +87,14 @@
             NinjectKernel.Bind<IPersonRiskFactorRepository>().To<PersonRiskFactorRepository>().WithConstructorArgument("connectionString", trashDataBaseConnectionString);
             NinjectKernel.Bind<IPersonSymptomRepository>().To<PersonSymptomRepository>().WithConstructorArgument("connectionString", trashDataBaseConnectionString);
             NinjectKernel.Bind<IMeasuringNotificationRepository>().To<MeasuringNotificationRepository>().WithConstructorArgument("connectionString", trashDataBaseConnectionString);
+            NinjectKernel.Bind<IOnceRiskFactorNotificationRepository>().To<OnceRiskFactorNotificationRepository>().WithConstructorArgument("connectionString", trashDataBaseConnectionString);
 
             NinjectKernel.Bind<IAuthenticationProvider>().To<AuthenticationProvider>();
+            NinjectKernel.Bind<INotificationManager>().To<NotificationManager>()
+                .WithConstructorArgument("startDayFromHour", 0)
+                .WithConstructorArgument("endDayFromHour", 0)
+                .WithConstructorArgument("reservHoursForAnsver", 0)
+                .WithConstructorArgument("minutesCountForNotificationAnswer", 0);
         }
     }
 }

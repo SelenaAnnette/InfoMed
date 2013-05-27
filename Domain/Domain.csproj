@@ -92,6 +92,7 @@
     <Compile Include="Research\PersonConsultationResearch.cs" />
     <Compile Include="Research\Research.cs" />
     <Compile Include="RiskFactor\AssignedRiskFactor.cs" />
+    <Compile Include="RiskFactor\OnceRiskFactorNotification.cs" />
     <Compile Include="RiskFactor\PersonRiskFactor.cs" />
     <Compile Include="StringValueAttribute.cs" />
     <Compile Include="Symptom\AssignedSymptom.cs" />

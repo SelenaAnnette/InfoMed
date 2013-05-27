@@ -3,15 +3,18 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Text;
     using System.Threading;
 
     using DataLayer.Persistence.Measuring;
     using DataLayer.Persistence.Medicament;
     using DataLayer.Persistence.Message;
+    using DataLayer.Persistence.RiskFactor;
 
     using Domain.Measuring;
     using Domain.Medicament;    
     using Domain.Message;
+    using Domain.RiskFactor;
 
     using ServerLogic.Logger;
 
@@ -27,6 +30,8 @@
 
         private readonly IMeasuringNotificationRepository measuringNotificationRepository;
 
+        private readonly IOnceRiskFactorNotificationRepository onceRiskFactorNotificationRepository;
+
         private readonly NotificationFactory notificationFactory;
 
         private readonly MeasuringNotificationFactory measuringNotificationFactory;
@@ -41,14 +46,18 @@
 
         private readonly ILogger logger;
 
+        private readonly OnceRiskFactorNotificationFactory onceRiskFactorNotificationFactory;
+
         public NotificationManager(IAssignedMedicamentRepository assignedMedicamentRepository, INotificationRepository notificationRepository,
             IMedicamentFormRepository medicamentFormRepository, IAssignedMeasuringRepository assignedMeasuringRepository, IMeasuringNotificationRepository measuringNotificationRepository,
+            IOnceRiskFactorNotificationRepository onceRiskFactorNotificationRepository,
             int startDayFromHour, int endDayFromHour, int reservHoursForAnsver, int minutesCountForNotificationAnswer, ILogger logger)
         {
             this.assignedMedicamentRepository = assignedMedicamentRepository;
             this.assignedMeasuringRepository = assignedMeasuringRepository;
             this.medicamentFormRepository = medicamentFormRepository;
             this.measuringNotificationRepository = measuringNotificationRepository;
+            this.onceRiskFactorNotificationRepository = onceRiskFactorNotificationRepository;
             this.logger = logger;
             this.notificationRepository = notificationRepository;                        
             this.notificationFactory = new NotificationFactory();
@@ -57,12 +66,32 @@
             this.endDayFromHour = endDayFromHour;
             this.reservHoursForAnsver = reservHoursForAnsver;
             this.minutesCountForNotificationAnswer = minutesCountForNotificationAnswer;
+            this.onceRiskFactorNotificationFactory = new OnceRiskFactorNotificationFactory();
         }
 
         public void CreateNewNotifications()
         {            
             this.CreateAssignedMedicamentNotifications();
             this.CreateAssignedMeasuringNotifications();
+        }
+
+        public void CreateOnceRiskFactorNotification(Guid personId, IEnumerable<RiskFactor> riskFactors)
+        {
+            StringBuilder text = new StringBuilder(string.Empty);
+            riskFactors.ToList().ForEach(v =>
+                {
+                    text = text.AppendFormat("{0}, ", v.Title);
+                });
+
+            text = text.Remove(text.Length - 2, 2);
+            string strText =
+                string.Format(
+                    "Заполните на сайте InfoMed текущие значения для следущих факторов риска: {0}", text);
+
+            var onceRiskFactorNotification = this.onceRiskFactorNotificationFactory.Create(
+                Guid.NewGuid(), personId, DateTime.Now, strText);
+
+            this.onceRiskFactorNotificationRepository.CreateOrUpdateEntity(onceRiskFactorNotification);
         }
 
         public IEnumerable<Notification> GetNotificationsForSending()
@@ -85,6 +114,12 @@
             return this.measuringNotificationRepository.GetEntitiesByQuery(v => v.IsActive && v.SendingDate <= DateTime.Now && v.PersonId == personId);
         }
 
+        public IEnumerable<OnceRiskFactorNotification> GetRiskFactorsNotificationsForSending()
+        {
+            return
+                this.onceRiskFactorNotificationRepository.GetEntitiesByQuery(v => v.IsActive);
+        }
+
         public void CloseNonAnsweredNotifications()
         {
             this.CloseNonAnsweredMedicamentNotifications();
@@ -104,10 +139,23 @@
             else
             {
                 var measuringNotification = this.measuringNotificationRepository.GetEntityById(notificationId);
-                measuringNotification.IsActive = false;
-                measuringNotification.ExecutedDate = DateTime.Now;
-                this.measuringNotificationRepository.CreateOrUpdateEntity(measuringNotification);
-                this.logger.LogMessage(string.Format("MeasuringNotification {0} was closed", measuringNotification.Id));
+                if (measuringNotification != null)
+                {
+                    measuringNotification.IsActive = false;
+                    measuringNotification.ExecutedDate = DateTime.Now;
+                    this.measuringNotificationRepository.CreateOrUpdateEntity(measuringNotification);
+                    this.logger.LogMessage(
+                        string.Format("MeasuringNotification {0} was closed", measuringNotification.Id));
+                }
+                else
+                {
+                    var onceRiskFactorNotification =
+                        this.onceRiskFactorNotificationRepository.GetEntityById(notificationId);
+                    onceRiskFactorNotification.IsActive = false;
+                    this.onceRiskFactorNotificationRepository.CreateOrUpdateEntity(onceRiskFactorNotification);
+                    this.logger.LogMessage(
+                        string.Format("OnceRiskfactorNotification {0} was closed", onceRiskFactorNotification.Id));
+                }
             }
             
         }

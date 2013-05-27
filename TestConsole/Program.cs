@@ -8,6 +8,7 @@
     using DataLayer.Persistence.Medicament;
     using DataLayer.Persistence.Message;
     using DataLayer.Persistence.Person;
+    using DataLayer.Persistence.RiskFactor;
 
     using Domain.Group;
     using Domain.Person;
@@ -15,6 +16,7 @@
     using Ninject;
 
     using ServerLogic.Logger;
+    using ServerLogic.Notification;
     using ServerLogic.Security;
 
     using SmsModule;
@@ -27,10 +29,58 @@
             //MainTest();
 //            PersonTest();
 //            PersonContactTest();
-            CredentialsTest();
+//            CredentialsTest();
+            NotificationTest();
             Console.WriteLine("Tests are completed");
             Console.WriteLine("Press any key...");
             Console.ReadKey();
+        }
+
+        private static void NotificationTest()
+        {
+            var riskFactorsRepository = Binder.NinjectKernel.Get<IRiskFactorRepository>();
+            var riskFactorsFactory = new RiskFactorFactory();
+            var riskFactor1 = riskFactorsFactory.Create(Guid.NewGuid(), "TestRiskFactor1", "HZ");
+            riskFactorsRepository.CreateOrUpdateEntity(riskFactor1);
+            Console.WriteLine("RiskFactor1 was created");
+
+            var riskFactor2 = riskFactorsFactory.Create(Guid.NewGuid(), "TestRiskFactor2", "HZ");
+            riskFactorsRepository.CreateOrUpdateEntity(riskFactor2);
+            Console.WriteLine("RiskFactor2 was created");
+
+            var personRepository = Binder.NinjectKernel.Get<IPersonRepository>();
+            var personFactory = new PersonFactory();
+            var person = personFactory.Create(Guid.NewGuid(), "TestPerson", "TestPerson", "TestPerson", DateTime.Now, Sex.Man);
+            personRepository.CreateOrUpdateEntity(person);
+            Console.WriteLine("Person was created");
+
+            var notificationManager = Binder.NinjectKernel.Get<INotificationManager>();
+            var riskFactors = riskFactorsRepository.GetAll();
+            notificationManager.CreateOnceRiskFactorNotification(person.Id, riskFactors);
+            Console.WriteLine("Notifications were created");
+
+            var notifications = notificationManager.GetRiskFactorsNotificationsForSending();
+            foreach (var onceRiskFactorNotification in notifications)
+            {
+                notificationManager.CloseNotificationById(onceRiskFactorNotification.Id);
+            }
+            Console.WriteLine("Notifications were closed");
+
+            var onceRiskFactorNotificationRepository = Binder.NinjectKernel.Get<IOnceRiskFactorNotificationRepository>();
+            foreach (var onceRiskFactorNotification in notifications)
+            {
+                onceRiskFactorNotificationRepository.DeleteEntity(onceRiskFactorNotification.Id);      
+            }
+            Console.WriteLine("Notifications were deleted");
+
+            foreach (var riskFactor in riskFactors)
+            {
+                riskFactorsRepository.DeleteEntity(riskFactor.Id);
+            }
+            Console.WriteLine("RiskFactors were deleted");
+
+            personRepository.DeleteEntity(person.Id);
+            Console.WriteLine("Person was deleted");
         }
     
         private static void PersonTest()
