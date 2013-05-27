@@ -5,8 +5,9 @@
     using System.ComponentModel.DataAnnotations.Schema;
 
     [Table("Credentials")]
-    public class Credentials : DomainBase
+    public class Credentials
     {        
+        [Key, ForeignKey("Person")]
         public Guid PersonId { get; set; }
 
         [Required]
@@ -15,7 +16,7 @@
         [Required]
         public string Password { get; set; }
 
-        [InverseProperty("Credentials")]
-        public virtual Person Person { get; set; }
+        [Required]
+        public Person Person { get; set; }
     }
 }

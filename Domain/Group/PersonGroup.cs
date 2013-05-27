@@ -7,10 +7,12 @@
     using Domain.Person;
 
     [Table("PersonGroup")]
-    public class PersonGroup : DomainBase
+    public class PersonGroup
     {
+        [Key, Column(Order = 1)]
         public Guid PersonId { get; set; }
 
+        [Key, Column(Order = 2)]
         public Guid GroupId { get; set; }
 
         [Required]

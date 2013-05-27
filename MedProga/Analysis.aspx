@@ -12,6 +12,11 @@
                 <asp:TextBox ID="TextBox_to" runat="server" MaxLength="19"></asp:TextBox>
             </td> 
         </tr>
+         <tr>
+            <td>
+                <asp:PlaceHolder ID="PlaceHolder_analysis" runat="server"></asp:PlaceHolder>
+            </td> 
+        </tr>
         <tr>
             <td>
                 <asp:CheckBoxList ID="CheckBoxList_Parameters" runat="server" RepeatColumns="3">

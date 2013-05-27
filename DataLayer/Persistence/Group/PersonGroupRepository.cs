@@ -24,10 +24,7 @@
 
         public PersonGroup GetEntityById(Guid id)
         {
-            using (var context = new DomainContext(this.ConnectionString))
-            {
-                return context.PersonGroups.Include("Person").Include("Group").FirstOrDefault(v => v.Id == id);
-            }
+            throw new NotImplementedException("this method is not implemented");
         }
 
         public IEnumerable<PersonGroup> GetEntitiesByQuery(Func<PersonGroup, bool> query)
@@ -52,7 +49,7 @@
 
             using (var context = new DomainContext(this.ConnectionString))
             {
-                if (this.GetEntityById(entity.Id) == null)
+                if (!this.GetEntitiesByQuery(v => v.GroupId == entity.GroupId && v.PersonId == entity.PersonId).Any())
                 {
                     context.PersonGroups.Add(entity);
                 }
@@ -69,17 +66,7 @@
 
         public void DeleteEntity(Guid id)
         {
-            using (var context = new DomainContext(this.ConnectionString))
-            {
-                var personGroups = context.PersonGroups.FirstOrDefault(v => v.Id == id);
-                if (personGroups == null)
-                {
-                    return;
-                }
-
-                context.PersonGroups.Remove(personGroups);
-                context.SaveChanges();
-            }
+            throw new NotImplementedException("this method is not implemented");
         }        
     }
 }

@@ -6,9 +6,9 @@
 
     public class PersonGroupFactory
     {
-        public PersonGroup Create(Guid id, Guid personId, Guid groupId, DateTime entryDate)
+        public PersonGroup Create(Guid personId, Guid groupId, DateTime entryDate)
         {
-            return new PersonGroup { Id = id, PersonId = personId, GroupId = groupId, EntryDate = entryDate };
+            return new PersonGroup { PersonId = personId, GroupId = groupId, EntryDate = entryDate };
         }
     }
 }

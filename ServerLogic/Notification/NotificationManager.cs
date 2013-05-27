@@ -2,19 +2,13 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading;
+    using System.Linq;    
 
-    using DataLayer.Persistence.Measuring;
     using DataLayer.Persistence.Medicament;
-    using DataLayer.Persistence.Message;
-    using DataLayer.Persistence.RiskFactor;
+    using DataLayer.Persistence.Message;    
 
-    using Domain.Measuring;
     using Domain.Medicament;    
     using Domain.Message;
-    using Domain.RiskFactor;
 
     using ServerLogic.Logger;
 
@@ -22,19 +16,11 @@
     {
         private readonly IAssignedMedicamentRepository assignedMedicamentRepository;
 
-        private readonly IAssignedMeasuringRepository assignedMeasuringRepository;
-
         private readonly IMedicamentFormRepository medicamentFormRepository;
 
         private readonly INotificationRepository notificationRepository;
 
-        private readonly IMeasuringNotificationRepository measuringNotificationRepository;
-
-        private readonly IOnceRiskFactorNotificationRepository onceRiskFactorNotificationRepository;
-
         private readonly NotificationFactory notificationFactory;
-
-        private readonly MeasuringNotificationFactory measuringNotificationFactory;
 
         private readonly int startDayFromHour;
 
@@ -46,52 +32,35 @@
 
         private readonly ILogger logger;
 
-        private readonly OnceRiskFactorNotificationFactory onceRiskFactorNotificationFactory;
-
         public NotificationManager(IAssignedMedicamentRepository assignedMedicamentRepository, INotificationRepository notificationRepository,
-            IMedicamentFormRepository medicamentFormRepository, IAssignedMeasuringRepository assignedMeasuringRepository, IMeasuringNotificationRepository measuringNotificationRepository,
-            IOnceRiskFactorNotificationRepository onceRiskFactorNotificationRepository,
+            IMedicamentFormRepository medicamentFormRepository,
             int startDayFromHour, int endDayFromHour, int reservHoursForAnsver, int minutesCountForNotificationAnswer, ILogger logger)
         {
             this.assignedMedicamentRepository = assignedMedicamentRepository;
-            this.assignedMeasuringRepository = assignedMeasuringRepository;
             this.medicamentFormRepository = medicamentFormRepository;
-            this.measuringNotificationRepository = measuringNotificationRepository;
-            this.onceRiskFactorNotificationRepository = onceRiskFactorNotificationRepository;
             this.logger = logger;
             this.notificationRepository = notificationRepository;                        
             this.notificationFactory = new NotificationFactory();
-            this.measuringNotificationFactory = new MeasuringNotificationFactory();
             this.startDayFromHour = startDayFromHour;
             this.endDayFromHour = endDayFromHour;
             this.reservHoursForAnsver = reservHoursForAnsver;
             this.minutesCountForNotificationAnswer = minutesCountForNotificationAnswer;
-            this.onceRiskFactorNotificationFactory = new OnceRiskFactorNotificationFactory();
         }
 
         public void CreateNewNotifications()
         {            
-            this.CreateAssignedMedicamentNotifications();
-            this.CreateAssignedMeasuringNotifications();
-        }
+            var assignedMedicaments = this.assignedMedicamentRepository.GetEntitiesByQuery(v => v.StartDate.Date <= DateTime.Now.Date && v.FinishDate.Date >= DateTime.Now.Date);
+            assignedMedicaments.AsParallel().ForAll(assignedMedicament =>
+            {
+                var notification = this.notificationRepository.GetEntitiesByQuery(
+                    v =>
+                    v.IsActive && v.AssignedMedicamentId == assignedMedicament.Id).FirstOrDefault();
 
-        public void CreateOnceRiskFactorNotification(Guid personId, IEnumerable<RiskFactor> riskFactors)
-        {
-            StringBuilder text = new StringBuilder(string.Empty);
-            riskFactors.ToList().ForEach(v =>
+                if (notification == null)
                 {
-                    text = text.AppendFormat("{0}, ", v.Title);
-                });
-
-            text = text.Remove(text.Length - 2, 2);
-            string strText =
-                string.Format(
-                    "Заполните на сайте InfoMed текущие значения для следущих факторов риска: {0}", text);
-
-            var onceRiskFactorNotification = this.onceRiskFactorNotificationFactory.Create(
-                Guid.NewGuid(), personId, DateTime.Now, strText);
-
-            this.onceRiskFactorNotificationRepository.CreateOrUpdateEntity(onceRiskFactorNotification);
+                    this.CreateNewNotification(assignedMedicament);
+                }                
+            });            
         }
 
         public IEnumerable<Notification> GetNotificationsForSending()
@@ -99,81 +68,12 @@
             return this.notificationRepository.GetEntitiesByQuery(v => v.IsActive && v.SendingDate <= DateTime.Now);
         }
 
-        public IEnumerable<MeasuringNotification> GetMeasuringNotificationsForSending()
-        {
-            return this.measuringNotificationRepository.GetEntitiesByQuery(v => v.IsActive && v.SendingDate <= DateTime.Now);
-        }
-
         public IEnumerable<Notification> GetNotificationsForPerson(Guid personId)
         {
             return this.notificationRepository.GetEntitiesByQuery(v => v.IsActive && v.SendingDate <= DateTime.Now && v.PersonId == personId);
         }
 
-        public IEnumerable<MeasuringNotification> GetMeasuringNotificationsForPerson(Guid personId)
-        {
-            return this.measuringNotificationRepository.GetEntitiesByQuery(v => v.IsActive && v.SendingDate <= DateTime.Now && v.PersonId == personId);
-        }
-
-        public IEnumerable<OnceRiskFactorNotification> GetRiskFactorsNotificationsForSending()
-        {
-            return
-                this.onceRiskFactorNotificationRepository.GetEntitiesByQuery(v => v.IsActive);
-        }
-
         public void CloseNonAnsweredNotifications()
-        {
-            this.CloseNonAnsweredMedicamentNotifications();
-            this.CloseNonAnsweredMeasuringNotifications();
-        }
-
-        public void CloseNotificationById(Guid notificationId)
-        {
-            var notification = this.notificationRepository.GetEntityById(notificationId);
-            if (notification != null)
-            {
-                notification.IsActive = false;
-                notification.ExecutedDate = DateTime.Now;
-                this.notificationRepository.CreateOrUpdateEntity(notification);
-                this.logger.LogMessage(string.Format("Notification {0} was closed", notification.Id));    
-            }
-            else
-            {
-                var measuringNotification = this.measuringNotificationRepository.GetEntityById(notificationId);
-                if (measuringNotification != null)
-                {
-                    measuringNotification.IsActive = false;
-                    measuringNotification.ExecutedDate = DateTime.Now;
-                    this.measuringNotificationRepository.CreateOrUpdateEntity(measuringNotification);
-                    this.logger.LogMessage(
-                        string.Format("MeasuringNotification {0} was closed", measuringNotification.Id));
-                }
-                else
-                {
-                    var onceRiskFactorNotification =
-                        this.onceRiskFactorNotificationRepository.GetEntityById(notificationId);
-                    onceRiskFactorNotification.IsActive = false;
-                    this.onceRiskFactorNotificationRepository.CreateOrUpdateEntity(onceRiskFactorNotification);
-                    this.logger.LogMessage(
-                        string.Format("OnceRiskfactorNotification {0} was closed", onceRiskFactorNotification.Id));
-                }
-            }
-            
-        }
-
-        private void CloseNonAnsweredMeasuringNotifications()
-        {
-            var nonAnsweredNotifications = this.measuringNotificationRepository.GetEntitiesByQuery(
-                v => v.IsActive && (DateTime.Now - v.SendingDate).TotalMinutes >= this.minutesCountForNotificationAnswer);
-            nonAnsweredNotifications.AsParallel().ForAll(
-                nonAnsweredNotification =>
-                {
-                    nonAnsweredNotification.IsActive = false;
-                    this.measuringNotificationRepository.CreateOrUpdateEntity(nonAnsweredNotification);
-                    this.logger.LogMessage(string.Format("MeasuringNotification {0} was closed as non-answered", nonAnsweredNotification.Id));
-                });
-        }
-
-        private void CloseNonAnsweredMedicamentNotifications()
         {
             var nonAnsweredNotifications = this.notificationRepository.GetEntitiesByQuery(
                 v => v.IsActive && (DateTime.Now - v.SendingDate).TotalMinutes >= this.minutesCountForNotificationAnswer);
@@ -186,81 +86,13 @@
                     });
         }
 
-        private void CreateAssignedMedicamentNotifications()
+        public void CloseNotificationById(Guid notificationId)
         {
-            var assignedMedicaments = this.assignedMedicamentRepository.GetEntitiesByQuery(v => v.StartDate.Date <= DateTime.Now.Date && v.FinishDate.Date >= DateTime.Now.Date);
-            assignedMedicaments.AsParallel().ForAll(assignedMedicament =>
-            {
-                var notification = this.notificationRepository.GetEntitiesByQuery(
-                    v =>
-                    v.IsActive && v.AssignedMedicamentId == assignedMedicament.Id).FirstOrDefault();
-
-                if (notification == null)
-                {
-                    this.CreateNewNotification(assignedMedicament);
-                }
-            });  
-        }
-
-        private void CreateAssignedMeasuringNotifications()
-        {
-            var assignedMeasurings = this.assignedMeasuringRepository.GetEntitiesByQuery(v => v.StartDate.Date <= DateTime.Now.Date && v.FinishDate.Date >= DateTime.Now.Date);
-            assignedMeasurings.AsParallel().ForAll(assignedMeasuring =>
-            {
-                var measuringNotification = this.measuringNotificationRepository.GetEntitiesByQuery(
-                    v =>
-                    v.IsActive && v.AssignedMeasuringId == assignedMeasuring.Id).FirstOrDefault();
-
-                if (measuringNotification == null)
-                {
-                    this.CreateNewNotification(assignedMeasuring);
-                }
-            }); 
-        }
-
-        private void CreateNewNotification(AssignedMeasuring assignedMeasuring)
-        {
-            var periodInMinutes = this.GetPeriodInMinutes(assignedMeasuring.Frequency);
-            if (this.IsDailyNotificationCountEnough(assignedMeasuring))
-            {
-                return;
-            }
-
-            DateTime sendingDate;
-            var measuringNotification = this.GetLastAnsweredNotification(assignedMeasuring);
-
-            if (measuringNotification == null)
-            {
-                var nonAnsweredNotification = this.GetLastNonAnsweredNotification(assignedMeasuring);
-                if (nonAnsweredNotification == null)
-                {
-                    sendingDate = new DateTime(
-                        assignedMeasuring.StartDate.Year, assignedMeasuring.StartDate.Month, assignedMeasuring.StartDate.Day, this.startDayFromHour, 0, 0);
-                }
-                else
-                {
-                    sendingDate = this.GetSendingDate(nonAnsweredNotification.SendingDate, periodInMinutes);
-                }
-            }
-            else
-            {
-                sendingDate = this.GetSendingDate(measuringNotification.ExecutedDate.Value, periodInMinutes);
-            }
-
-            if (sendingDate.Date >= assignedMeasuring.FinishDate.Date)
-            {
-                return;
-            }
-
-            var newNotification = this.measuringNotificationFactory.Create(
-                        Guid.NewGuid(),
-                        assignedMeasuring.Id,
-                        assignedMeasuring.PersonConsultation.PatientId,
-                        assignedMeasuring.MeasuringTypeId,
-                        sendingDate,
-                        this.GetNotificationMessage(assignedMeasuring));
-            this.measuringNotificationRepository.CreateOrUpdateEntity(newNotification);
-            this.logger.LogMessage(string.Format("MeasuringNotification {0} was created", newNotification.Id));
+            var notification = this.notificationRepository.GetEntityById(notificationId);
+            notification.IsActive = false;
+            notification.ExecutedDate = DateTime.Now;
+            this.notificationRepository.CreateOrUpdateEntity(notification);
+            this.logger.LogMessage(string.Format("Notification {0} was closed", notification.Id));
         }
 
         private void CreateNewNotification(AssignedMedicament assignedMedicament)
@@ -308,14 +140,6 @@
             this.logger.LogMessage(string.Format("Notification {0} was created", newNotification.Id));
         }
 
-        private MeasuringNotification GetLastAnsweredNotification(AssignedMeasuring assignedMeasuring)
-        {
-            return this.measuringNotificationRepository.GetEntitiesByQuery(
-                v => !v.IsActive && v.AssignedMeasuringId == assignedMeasuring.Id && v.ExecutedDate.HasValue)
-                       .OrderByDescending(v => v.ExecutedDate)
-                       .FirstOrDefault();
-        }
-
         private Notification GetLastAnsweredNotification(AssignedMedicament assignedMedicament)
         {
             return this.notificationRepository.GetEntitiesByQuery(
@@ -324,34 +148,11 @@
                        .FirstOrDefault();
         }
 
-        private MeasuringNotification GetLastNonAnsweredNotification(AssignedMeasuring assignedMeasuring)
-        {
-            return this.measuringNotificationRepository.GetEntitiesByQuery(
-                v =>
-                !v.IsActive && v.AssignedMeasuringId == assignedMeasuring.Id && !v.ExecutedDate.HasValue).OrderByDescending(v => v.SendingDate).FirstOrDefault();
-        }
-
         private Notification GetLastNonAnsweredNotification(AssignedMedicament assignedMedicament)
         {
             return this.notificationRepository.GetEntitiesByQuery(
                 v =>
                 !v.IsActive && v.AssignedMedicamentId == assignedMedicament.Id && !v.ExecutedDate.HasValue).OrderByDescending(v => v.SendingDate).FirstOrDefault();
-        }
-
-        private bool IsDailyNotificationCountEnough(AssignedMeasuring assignedMeasuring)
-        {
-            if (assignedMeasuring.Frequency >= 1)
-            {
-                return false;
-            }
-
-            var maxDailyNotificationCount = (int)Math.Round(1 / assignedMeasuring.Frequency);
-            var dailyNotificationCount = this.measuringNotificationRepository.GetEntitiesByQuery(
-                v =>
-                v.AssignedMeasuringId == assignedMeasuring.Id
-                && v.SendingDate.Date == DateTime.Now.Date).Count();
-
-            return maxDailyNotificationCount == dailyNotificationCount;
         }
 
         private bool IsDailyNotificationCountEnough(AssignedMedicament assignedMedicament)
@@ -399,15 +200,6 @@
             }
             
             return new DateTime(sendingDate.Year, sendingDate.Month, sendingDate.Day, sendingDate.Hour, sendingDate.Minute, 0);            
-        }
-
-        private string GetNotificationMessage(AssignedMeasuring assignedMeasuring)
-        {
-            return string.Format(
-                "Измерьте {0} в единицах {1} с кодом {2}",
-                assignedMeasuring.MeasuringType.Title,
-                assignedMeasuring.MeasuringType.Measuring,
-                assignedMeasuring.MeasuringType.Code);
         }
 
         private string GetNotificationMessage(AssignedMedicament assignedMedicament)

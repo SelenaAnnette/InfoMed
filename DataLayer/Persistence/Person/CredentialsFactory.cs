@@ -6,9 +6,9 @@
 
     public class CredentialsFactory
     {
-        public Credentials Create(Guid id, Guid personId, string login, string password)
+        public Credentials Create(Person person, string login, string password)
         {
-            return new Credentials { Id = id, PersonId = personId, Login = login, Password = password };
+            return new Credentials { PersonId = person.Id, Login = login, Password = password };
         }
     }
 }

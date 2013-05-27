@@ -133,9 +133,6 @@
     <Compile Include="Persistence\Research\ResearchRepository.cs" />
     <Compile Include="Persistence\Research\PersonConsultationResearchFactory.cs" />
     <Compile Include="Persistence\Research\PersonConsultationResearchRepository.cs" />
-    <Compile Include="Persistence\RiskFactor\IRiskOnceRiskFactorNotificationRepository.cs" />
-    <Compile Include="Persistence\RiskFactor\OnceRiskFactorNotificationFactory.cs" />
-    <Compile Include="Persistence\RiskFactor\OnceRiskFactorNotificationRepository.cs" />
     <Compile Include="Persistence\RiskFactor\IPersonRiskFactorRepository.cs" />
     <Compile Include="Persistence\RiskFactor\PersonRiskFactorFactory.cs" />
     <Compile Include="Persistence\RiskFactor\PersonRiskFactorRepository.cs" />

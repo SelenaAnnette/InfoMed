@@ -23,14 +23,23 @@ namespace MedProga
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            
-            var measuringTypeRepo = Binder.NinjectKernel.Get<IMeasuringTypeRepository>();
-            var parameters = measuringTypeRepo.GetAll();
-            parameters = parameters.OrderBy(p => p.Title);
-            var parametersArray = parameters.ToArray();
-            for (int i = 0; i < parametersArray.Length; i++)
+            try
             {
-                this.CheckBoxList_Parameters.Items.Add(parametersArray[i].Title);
+                var measuringTypeRepo = Binder.NinjectKernel.Get<IMeasuringTypeRepository>();
+                var parameters = measuringTypeRepo.GetAll();
+                parameters = parameters.OrderBy(p => p.Title);
+                var parametersArray = parameters.ToArray();
+                for (int i = 0; i < parametersArray.Length; i++)
+                {
+                    this.CheckBoxList_Parameters.Items.Add(parametersArray[i].Title);
+                }
+            }
+            catch (Exception)
+            {
+                Label label = new Label();
+                label.ID = "Label_default";
+                label.Text = "Соединение с базой данных установить не удалось";
+                PlaceHolder_analysis.Controls.Add(label);
             }
         }
 

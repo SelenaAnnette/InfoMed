@@ -6,14 +6,14 @@
 
     public class AssignedMedicamentMeasuringFactory
     {
-        public AssignedMedicamentMeasuring Create(Guid id, Guid measuringTypeId, Guid assignedMedicamentId, int timeIntervalInSeconds)
+        public AssignedMedicamentMeasuring Create(Guid id, Guid measuringTypeId, Guid assignedMedicamentId, DateTime timeInterval)
         {
             return new AssignedMedicamentMeasuring
             {
                 Id = id,
                 AssignedMedicamentId = assignedMedicamentId,
                 MeasuringTypeId = measuringTypeId,
-                TimeIntervalInSeconds = timeIntervalInSeconds
+                TimeIntervar = timeInterval
             };
         }
     }

@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using Domain.Person;
 
     [Table("Groups")]
     public class Group : DomainBase
@@ -12,14 +13,5 @@
 
         [InverseProperty("Group")]
         public virtual ICollection<PersonGroup> PersonGroups { get; set; }
-    }
-
-
-    public enum Groups
-    {
-        [StringValue("Doctor")]
-        Doctor,
-        [StringValue("Patient")]
-        Patient
     }
 }
