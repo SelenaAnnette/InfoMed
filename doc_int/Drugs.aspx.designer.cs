@@ -211,42 +211,6 @@ namespace doc_int {
         protected global::System.Web.UI.WebControls.Calendar Calendar1;
         
         /// <summary>
-        /// Measuring элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox Measuring;
-        
-        /// <summary>
-        /// DropDownList1 элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
-        
-        /// <summary>
-        /// timeInterval_hour элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox timeInterval_hour;
-        
-        /// <summary>
-        /// timeInterval_min элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox timeInterval_min;
-        
-        /// <summary>
         /// Button1 элемент управления.
         /// </summary>
         /// <remarks>

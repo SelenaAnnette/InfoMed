@@ -47,7 +47,8 @@
         [InverseProperty("Person")]
         public virtual ICollection<AssignedRiskFactor> AssignedRiskFactors { get; set; }
 
-        public Credentials Credentials { get; set; }
+        [InverseProperty("Person")]
+        public virtual ICollection<Credentials> Credentials { get; set; }
 
         [InverseProperty("Person")]
         public virtual ICollection<PersonGroup> PersonGroups { get; set; }

@@ -67,11 +67,8 @@
     <Content Include="Account\ChangePasswordSuccess.aspx" />
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Register.aspx" />
-    <Content Include="Messages.aspx" />
     <Content Include="patient_info_input.aspx" />
-    <Content Include="risk_factors_notifications.aspx" />
     <Content Include="Styles\Site.css" />
-    <Content Include="Patients.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.4.1.js" />
@@ -123,20 +120,6 @@
     <Compile Include="Account\Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Messages.aspx.cs">
-      <DependentUpon>Messages.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Messages.aspx.designer.cs">
-      <DependentUpon>Messages.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Patients.aspx.cs">
-      <DependentUpon>Patients.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Patients.aspx.designer.cs">
-      <DependentUpon>Patients.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -152,13 +135,6 @@
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
-    </Compile>
-    <Compile Include="risk_factors_notifications.aspx.cs">
-      <DependentUpon>risk_factors_notifications.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="risk_factors_notifications.aspx.designer.cs">
-      <DependentUpon>risk_factors_notifications.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>

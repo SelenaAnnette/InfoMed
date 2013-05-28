@@ -38,7 +38,7 @@ namespace doc_int
         public int eachDay;
         public Guid conType;
         public Guid wayType;
-        public Guid doc_id = new Guid("E69188D9-ADC1-4757-AA4B-B5E97A518212");
+        public Guid doc_id = new Guid("F8F6EED5-8FF9-40EE-95A6-A4C1A83BD76B");
         public Guid Guid_const;
 
         public IPersonConsultationRepository consultationRepo = Binder.NinjectKernel.Get<IPersonConsultationRepository>();
@@ -48,8 +48,7 @@ namespace doc_int
         public IAssignedMedicamentRepository AssignedMedicamentRepo = Binder.NinjectKernel.Get<IAssignedMedicamentRepository>();
         public AssignedMedicamentFactory AssignedMedicamentFactory = new AssignedMedicamentFactory();
         public PersonConsultationFactory PersonConsultationFactory = new PersonConsultationFactory();
-        public AssignedMedicamentMeasuringFactory AssignedMedicamentMeasuringFactory = new AssignedMedicamentMeasuringFactory();
-        public IAssignedMedicamentMeasuringRepository AssignedMedicamentMeasuringRepository = Binder.NinjectKernel.Get<IAssignedMedicamentMeasuringRepository>();
+
 
 
         protected void Page_PreRender(object sender, EventArgs e)
@@ -130,6 +129,8 @@ namespace doc_int
                 TextBox10.Visible = true;
             }
 
+
+
         }
 
         public void GridView2_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -175,29 +176,10 @@ namespace doc_int
                         DateTime convertedDate = DateTime.Parse(Label1.Text);
                         DateTime end = convertedDate.AddDays(Convert.ToInt32(dayCount.Text));
 
-                        Guid AssignedMedicamentId = Guid.NewGuid();
+                        var AssignedMedicament = AssignedMedicamentFactory.Create(Guid.NewGuid(), Guid_const, Guid_drug, wayType, Convert.ToDouble(dosage.Text), convertedDate, Convert.ToInt16(dayCount.Text), timesAtDay, eachDay);
+                         AssignedMedicamentRepo.CreateOrUpdateEntity(AssignedMedicament);
 
 
-
-
-                        if (Measuring.Checked == true)
-                        {
-                            Guid Type = new Guid(DropDownList1.SelectedValue);
-                            var AssignedMeasuringMedicament = AssignedMedicamentMeasuringFactory.Create(Guid.NewGuid(), Type, AssignedMedicamentId, Convert.ToInt32(timeInterval_hour.Text) * 3600 + Convert.ToInt32(timeInterval_min.Text) * 60);
-                            AssignedMedicamentMeasuringRepository.CreateOrUpdateEntity(AssignedMeasuringMedicament);
-                            var AssignedMedicament = AssignedMedicamentFactory.Create(AssignedMedicamentId, Guid_const, Guid_drug, wayType, Convert.ToDouble(dosage.Text), convertedDate, Convert.ToInt16(dayCount.Text), timesAtDay, eachDay);
-                            AssignedMedicamentRepo.CreateOrUpdateEntity(AssignedMedicament);
-                        }
-                        else
-                        {
-                            var AssignedMedicament = AssignedMedicamentFactory.Create(AssignedMedicamentId, Guid_const, Guid_drug, wayType, Convert.ToDouble(dosage.Text), convertedDate, Convert.ToInt16(dayCount.Text), timesAtDay, eachDay);
-                            AssignedMedicamentRepo.CreateOrUpdateEntity(AssignedMedicament);
-                        }
-
-
-
-
-                        
 
 
 
@@ -229,6 +211,8 @@ namespace doc_int
         {
             Label1.Text = Calendar1.SelectedDate.ToShortDateString();
         }
+
+
 
         protected void Button2_Click(object sender, EventArgs e)
         {
@@ -280,6 +264,9 @@ namespace doc_int
             Button3.Enabled = false;
 
             consultationRepo.CreateOrUpdateEntity(PersonConsultation);
+
+
+
         }
 
         protected void Button4_Click(object sender, EventArgs e)
@@ -291,7 +278,13 @@ namespace doc_int
                 Button3.Visible = false;
                 Button3.Enabled = true;
                 TextBox10.Visible = false;
+
+
         }
+
+
+
+
     }
 }
 

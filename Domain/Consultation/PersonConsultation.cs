@@ -58,5 +58,8 @@
 
         [InverseProperty("PersonConsultation")]
         public virtual ICollection<AssignedMedicament> AssignedMedicaments { get; set; }
+
+        [InverseProperty("PersonConsultation")]
+        public virtual ICollection<AssignedMeasuring> AssignedMeasurings { get; set; }
     }
 }

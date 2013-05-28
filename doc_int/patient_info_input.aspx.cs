@@ -434,22 +434,9 @@ namespace doc_int
                     }
                 }
             }
-
-
-
-            /*if (FirstNameBox0.Text != "" && MiddleNameBox0.Text != "" && LastNameBox0.Text != "")
-            {
-                var personChange = PersonFactory.Create(Guid_pat, FirstNameBox.Text, MiddleNameBox.Text, LastNameBox.Text);
-                personRepo.CreateOrUpdateEntity(personChange);
-            }
-            else
-            { 
-                Label1.Text = "FATAL ERROR!";             
-            }*/
-
-
             
-          
+
+           
             PhoneBox0.Visible = false;
             PatientCardNumBox0.Visible = false;
             InsuranceBox0.Visible = false;           
@@ -457,7 +444,9 @@ namespace doc_int
             EmailBox0.Visible = false;
             AddressBox0.Visible = false;
 
-        }      
+        }
+
+       
 
     }
 }
