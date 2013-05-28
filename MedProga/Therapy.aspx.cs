@@ -43,22 +43,26 @@ namespace MedProga
             var drugs = medicamentRep.GetAll();
             var aplicWayRep = Binder.NinjectKernel.Get<IMedicamentApplicationWayRepository>();
             var aplicWays = aplicWayRep.GetAll();
-            this.GridView_drugs.DataSource = from asM in assignedMed
-                                             join drug in drugs on asM.MedicamentId equals drug.Id
-                                             join aplicWay in aplicWays on asM.MedicamentApplicationWayId equals aplicWay.Id
-                                             select
-                                                 new
-                                                     {
-                                                         Название = drug.Name,
-                                                         Описание = drug.Description,
-                                                         СпособПриема = aplicWay.Name,
-                                                         Доза = asM.Dosage,
-                                                         Частота = asM.Frequency,
-                                                         С = asM.StartDate,
-                                                         По = asM.FinishDate
-                                                     };
-            if (assignedMed.Count() > 0) Label_drugs.Visible = true;
-            this.GridView_drugs.DataBind();
+            if (assignedMed.Count() > 0)
+            {
+                this.GridView_drugs.DataSource = from asM in assignedMed
+                                                 join drug in drugs on asM.MedicamentId equals drug.Id
+                                                 join aplicWay in aplicWays on asM.MedicamentApplicationWayId equals
+                                                     aplicWay.Id
+                                                 select
+                                                     new
+                                                         {
+                                                             Название = drug.Name,
+                                                             Описание = drug.Description,
+                                                             СпособПриема = aplicWay.Name,
+                                                             Доза = asM.Dosage,
+                                                             Частота = asM.Frequency,
+                                                             С = asM.StartDate,
+                                                             По = asM.FinishDate
+                                                         };
+                if (assignedMed.Count() > 0) Label_drugs.Visible = true;
+                this.GridView_drugs.DataBind();
+            }
         }
     }
 }

@@ -28,18 +28,56 @@ namespace MedProga
                 var measuringTypeRepo = Binder.NinjectKernel.Get<IMeasuringTypeRepository>();
                 var parameters = measuringTypeRepo.GetAll();
                 parameters = parameters.OrderBy(p => p.Title);
-                var parametersArray = parameters.ToArray();
-                for (int i = 0; i < parametersArray.Length; i++)
-                {
-                    this.CheckBoxList_Parameters.Items.Add(parametersArray[i].Title);
-                }
+                //try
+                //{
+                    var parametersArray = parameters.ToArray();
+                    for (int i = 0; i < parametersArray.Length; i++)
+                    {
+                        this.CheckBoxList_Parameters.Items.Add(parametersArray[i].Title);
+                    }
+                //}
+                //catch (Exception)
+                //{
+                //    Label label = new Label();
+                //    label.ID = "Label_default";
+                //    label.Text = "Нет параметров для анализа";
+                //    PlaceHolder_analysis.Controls.Add(label);
+                //}
+                //var personsRepo = Binder.NinjectKernel.Get<IPersonRepository>();
+                //var perId = personsRepo.GetEntitiesByQuery(p => p.LastName == "Glazunov").First().Id;
+                //var personMeasuringRepo = Binder.NinjectKernel.Get<IPersonMeasuringRepository>();
+                //var perMeasuring = personMeasuringRepo.GetEntitiesByQuery(pM => pM.PersonId == perId);
+                //var personConsultationMeasuringRepo = Binder.NinjectKernel.Get<IPersonConsultationMeasuringRepository>();
+                //var perConsultationMeasuring =
+                //    personConsultationMeasuringRepo.GetEntitiesByQuery(pcM => pcM.PersonConsultation.PatientId == perId);
+
+                //var parameters = from pM in perMeasuring
+                //                 join pcM in perConsultationMeasuring on pM.PersonId equals
+                //                      pcM.PersonConsultation.PatientId
+                //                  select pcM.MeasuringType.Title;
+                //parameters = parameters.OrderBy(p => p);
+                //try
+                //{
+                //    var parametersArray = parameters.ToArray();
+                //    for (int i = 0; i < parametersArray.Length; i++)
+                //    {
+                //        this.CheckBoxList_Parameters.Items.Add(parametersArray[i].Title);
+                //    }
+                //}
+                //catch (Exception)
+                //{
+                    //Label label = new Label();
+                    //label.ID = "Label_default";
+                    //label.Text = "Нет параметров для анализа";
+                    //PlaceHolder_analysis.Controls.Add(label);
+                //}
             }
             catch (Exception)
             {
                 Label label = new Label();
                 label.ID = "Label_default";
                 label.Text = "Соединение с базой данных установить не удалось";
-                PlaceHolder_analysis.Controls.Add(label);
+                this.PlaceHolder_analysis.Controls.Add(label);
             }
         }
 
