@@ -168,7 +168,20 @@
                         </tr>
                         <tr>
                             <td>
-                                &nbsp;</td>
+                                <asp:CheckBox ID="Measuring" runat="server" Text="Замеры" />
+                                <br />
+                                <br />
+                                <asp:DropDownList ID="DropDownList1" runat="server">
+                                    <asp:ListItem Selected="True" Value="B2AB9366-3621-4067-B8F8-0741111D6B58">Вес</asp:ListItem>
+                                    <asp:ListItem Value="061ECDED-8E47-4652-A0AC-2619D3DED3F0">Частота дыхательных движений</asp:ListItem>
+                                    <asp:ListItem Value="7D48F462-B556-43C9-BDDC-2FA952A11337">Диастолическое АД</asp:ListItem>
+                                </asp:DropDownList>
+                                <br />
+                                Сделать замер через<br />
+                                <asp:TextBox ID="timeInterval_hour" runat="server" Width="35px">0</asp:TextBox>
+                                часов
+                                <asp:TextBox ID="timeInterval_min" runat="server" Type="Number"  Width="35px">5</asp:TextBox>
+                                &nbsp;минут после приёма препарата</td>
                             <td style="text-align: center">
                                 <asp:Button ID="Button1" runat="server" onclick="Button1_Click" 
                                     Text="Выписать" />
