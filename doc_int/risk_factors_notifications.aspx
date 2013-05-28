@@ -39,7 +39,8 @@
                 </asp:GridView>
                 <asp:TextBox ID="TextBox1" runat="server" ReadOnly="True"></asp:TextBox>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <asp:Button ID="Button2" runat="server" onclick="Button2_Click" Text="Button" />
+                <asp:Button ID="Button2" runat="server" onclick="Button2_Click" 
+                    Text="Отправить" />
                 <br />
             </td>
             <td>
