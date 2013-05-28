@@ -49,7 +49,7 @@ namespace doc_int
         public AssignedMedicamentFactory AssignedMedicamentFactory = new AssignedMedicamentFactory();
         public PersonConsultationFactory PersonConsultationFactory = new PersonConsultationFactory();
         public AssignedMedicamentMeasuringFactory AssignedMedicamentMeasuringFactory = new AssignedMedicamentMeasuringFactory();
-        public AssignedMedicamentMeasuringRepository AssignedMedicamentMeasuringRepository = new AssignedMedicamentMeasuringRepository();
+        public IAssignedMedicamentMeasuringRepository AssignedMedicamentMeasuringRepository = Binder.NinjectKernel.Get<IAssignedMedicamentMeasuringRepository>();
 
 
         protected void Page_PreRender(object sender, EventArgs e)
@@ -129,8 +129,6 @@ namespace doc_int
                 Button3.Visible = true;
                 TextBox10.Visible = true;
             }
-
-
 
         }
 
