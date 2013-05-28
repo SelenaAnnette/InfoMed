@@ -12,6 +12,7 @@ using System.Web.UI.DataVisualization.Charting;
 
 namespace MedProga
 {
+    using System.Collections;
     using DataLayer.Persistence.Measuring;
     using DataLayer.Persistence.Person;
     using Domain.Measuring;
@@ -25,59 +26,33 @@ namespace MedProga
         {
             try
             {
+                var personMeasuringRepo = Binder.NinjectKernel.Get<IPersonMeasuringRepository>();
+                var personsRepo = Binder.NinjectKernel.Get<IPersonRepository>();
+                var perId = personsRepo.GetEntitiesByQuery(p => p.LastName == "Glazunov").First().Id;
+                var perMeasuring = personMeasuringRepo.GetEntitiesByQuery(pM => pM.PersonId == perId);
+                var perMeasuringIds = (from pM in perMeasuring select pM.MeasuringTypeId).Distinct().ToList();
                 var measuringTypeRepo = Binder.NinjectKernel.Get<IMeasuringTypeRepository>();
-                var parameters = measuringTypeRepo.GetAll();
-                parameters = parameters.OrderBy(p => p.Title);
-                //try
-                //{
-                    var parametersArray = parameters.ToArray();
-                    for (int i = 0; i < parametersArray.Length; i++)
+                var measType = measuringTypeRepo.GetAll().ToList();
+                var parList = new List<string> { };
+                foreach (var mt in measType)
+                {
+                    for (int i = 0; i < perMeasuringIds.Count; i++)
                     {
-                        this.CheckBoxList_Parameters.Items.Add(parametersArray[i].Title);
+                        if (perMeasuringIds.Any(pM => pM == mt.Id) && (!parList.Contains(mt.Title)))
+                        {
+                            parList.Add(mt.Title);
+                        }
                     }
-                //}
-                //catch (Exception)
-                //{
-                //    Label label = new Label();
-                //    label.ID = "Label_default";
-                //    label.Text = "Нет параметров для анализа";
-                //    PlaceHolder_analysis.Controls.Add(label);
-                //}
-                //var personsRepo = Binder.NinjectKernel.Get<IPersonRepository>();
-                //var perId = personsRepo.GetEntitiesByQuery(p => p.LastName == "Glazunov").First().Id;
-                //var personMeasuringRepo = Binder.NinjectKernel.Get<IPersonMeasuringRepository>();
-                //var perMeasuring = personMeasuringRepo.GetEntitiesByQuery(pM => pM.PersonId == perId);
-                //var personConsultationMeasuringRepo = Binder.NinjectKernel.Get<IPersonConsultationMeasuringRepository>();
-                //var perConsultationMeasuring =
-                //    personConsultationMeasuringRepo.GetEntitiesByQuery(pcM => pcM.PersonConsultation.PatientId == perId);
-
-                //var parameters = from pM in perMeasuring
-                //                 join pcM in perConsultationMeasuring on pM.PersonId equals
-                //                      pcM.PersonConsultation.PatientId
-                //                  select pcM.MeasuringType.Title;
-                //parameters = parameters.OrderBy(p => p);
-                //try
-                //{
-                //    var parametersArray = parameters.ToArray();
-                //    for (int i = 0; i < parametersArray.Length; i++)
-                //    {
-                //        this.CheckBoxList_Parameters.Items.Add(parametersArray[i].Title);
-                //    }
-                //}
-                //catch (Exception)
-                //{
-                    //Label label = new Label();
-                    //label.ID = "Label_default";
-                    //label.Text = "Нет параметров для анализа";
-                    //PlaceHolder_analysis.Controls.Add(label);
-                //}
+                }
+                var parSortedList = parList.OrderBy(s => s);
+                for (int i = 0; i < parSortedList.Count(); i++)
+                {
+                    this.CheckBoxList_Parameters.Items.Add(parSortedList.ElementAt(i));
+                }
             }
             catch (Exception)
             {
-                Label label = new Label();
-                label.ID = "Label_default";
-                label.Text = "Соединение с базой данных установить не удалось";
-                this.PlaceHolder_analysis.Controls.Add(label);
+                
             }
         }
 
@@ -92,6 +67,11 @@ namespace MedProga
                 try
                 {
                     dateFrom = Convert.ToDateTime(this.TextBox_from.Text);
+                    if (dateFrom > DateTime.Now)
+                    {
+                        dateFrom = DateTime.Now;
+                        this.TextBox_from.Text = Convert.ToString(dateFrom);
+                    }
                 }
                 catch (Exception)
                 {
@@ -103,11 +83,25 @@ namespace MedProga
                 try
                 {
                     dateTo = Convert.ToDateTime(this.TextBox_to.Text);
+                    if (dateTo > DateTime.Now)
+                    {
+                        dateTo = DateTime.Now;
+                        this.TextBox_to.Text = Convert.ToString(dateTo);
+                    }
                 }
                 catch (Exception)
                 {
                     this.TextBox_to.Text = string.Empty;
                 }
+            }
+            DateTime dateInter;
+            if (dateFrom > dateTo)
+            {
+                dateInter = dateFrom;
+                dateFrom = dateTo;
+                dateTo = dateInter;
+                if (dateFrom != DateTime.MinValue) this.TextBox_from.Text = Convert.ToString(dateFrom);
+                if (dateTo != DateTime.MaxValue) this.TextBox_to.Text = Convert.ToString(dateTo);
             }
             var personMeasuringRepo = Binder.NinjectKernel.Get<IPersonMeasuringRepository>();
             var personsRepo = Binder.NinjectKernel.Get<IPersonRepository>();
@@ -119,9 +113,7 @@ namespace MedProga
                 var partOfPersonMeasuring =
                     personMeasuringRepo.GetEntitiesByQuery(
                         m =>
-                        m.PersonId == perId 
-                        && dateFrom <= m.MeasuringDate 
-                        && m.MeasuringDate <= dateTo
+                        m.PersonId == perId && m.MeasuringDate >= dateFrom && m.MeasuringDate <= dateTo
                         && m.MeasuringTypeId == measId);
                 partOfPersonMeasuring = partOfPersonMeasuring.OrderBy(m => m.MeasuringDate);
                 personMeasuring.AddRange(partOfPersonMeasuring);
@@ -131,9 +123,7 @@ namespace MedProga
                 var analysis =
                     personMeasuringRepo.GetEntitiesByQuery(
                         m =>
-                        m.PersonId == perId 
-                        && m.MeasuringDate >= dateFrom 
-                        && m.MeasuringDate <= dateTo
+                        m.PersonId == perId && m.MeasuringDate >= dateFrom && m.MeasuringDate <= dateTo
                         && m.MeasuringTypeId == measId);
                 analysis = analysis.OrderBy(a => a.MeasuringDate);
                 var chartArray = analysis.ToArray();
@@ -189,8 +179,8 @@ namespace MedProga
             this.CheckBoxList_Parameters.Items.Clear();
             this.Page_Load(sender, e);
         }
-       
-        protected void Button_clear_selection_Click(object sender, EventArgs e)
+
+        protected void Button_deselect_all_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < this.CheckBoxList_Parameters.Items.Count; i++)
             {

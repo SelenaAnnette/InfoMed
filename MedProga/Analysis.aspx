@@ -12,11 +12,6 @@
                 <asp:TextBox ID="TextBox_to" runat="server" MaxLength="19"></asp:TextBox>
             </td> 
         </tr>
-         <tr>
-            <td>
-                <asp:PlaceHolder ID="PlaceHolder_analysis" runat="server"></asp:PlaceHolder>
-            </td> 
-        </tr>
         <tr>
             <td>
                 <asp:CheckBoxList ID="CheckBoxList_Parameters" runat="server" RepeatColumns="3">
@@ -26,15 +21,14 @@
         <tr>
             <td> 
                 <asp:Button ID="Button_analysis" runat="server" Text="Проанализировать" 
-                    onclick="Button_analysis_Click" Width="130px" Height="25px"/>
-                <asp:Button ID="Button_clear_selection" runat="server" 
-                    onclick="Button_clear_selection_Click" Text="Очистить выделение" 
-                    Width="130px" Height="25px"/>
+                    onclick="Button_analysis_Click" Width="150px" />
+                <asp:Button ID="Button_deselect_all" runat="server" 
+                    onclick="Button_deselect_all_Click" Text="Снять выделение" Width="150px" />
             </td>
         </tr>
         <tr> 
             <td class="style1"> 
-                <asp:GridView ID="GridView_analysis" runat="server">
+                <asp:GridView ID="GridView_analysis" runat="server" Height="200px">
                 </asp:GridView>
                 <asp:Chart ID="Chart_analysis" runat="server" Height="200" Width="616px" 
                     Visible="False">
@@ -44,6 +38,10 @@
                     </chartareas>
                 </asp:Chart>
             </td>
+        </tr>
+            <tr>
+            <td class="style1">
+                &nbsp;</td>
         </tr>
     </table>
 </asp:Content>

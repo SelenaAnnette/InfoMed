@@ -25,54 +25,45 @@ namespace MedProga
 
         public void Page_Load(object sender, EventArgs e)
         {
-            //try
-            //{
+            try
+            {
+                DateTime dt = new DateTime();
+                dt = DateTime.Now;
                 var measuringTypeRepo = Binder.NinjectKernel.Get<IMeasuringTypeRepository>();
                 var parameters = measuringTypeRepo.GetAll();
                 parameters = parameters.OrderBy(p => p.Title);
-                //try
-                //{
-                    var parametersArray = parameters.ToArray();
+                var parametersArray = parameters.ToArray();
+                this.label = new Label();
+                this.tb = new TextBox();
+                if (parametersArray.Count() != 0)
+                {
+                    this.label.ID = "Label_date_time";
+                    this.label.Text = "Дата и время";
+                    this.tb.ID = "TextBox_date_time";
+                    this.tb.MaxLength = 19;
+                    this.PlaceHolder_parameters.Controls.Add(this.label);
+                    this.PlaceHolder_parameters.Controls.Add(this.tb);
+                }
+                for (int i = 0; i < parametersArray.Count(); i++)
+                {
                     this.label = new Label();
+                    this.label.ID = "Label" + i;
+                    this.label.Text = parametersArray[i].Title;
                     this.tb = new TextBox();
-                    if (parametersArray.Count() != 0)
-                    {
-                        this.label.ID = "Label_date_time";
-                        this.label.Text = "Дата и время";
-                        this.tb.ID = "TextBox_date_time";
-                        this.tb.MaxLength = 19;
-                        this.PlaceHolder_parameters.Controls.Add(this.label);
-                        this.PlaceHolder_parameters.Controls.Add(this.tb);
-                        for (int i = 0; i < parametersArray.Count(); i++)
-                        {
-                            this.label = new Label();
-                            this.label.ID = "Label" + i;
-                            this.label.Text = parametersArray[i].Title;
-                            this.tb = new TextBox();
-                            this.tb.ID = "TextBox" + i;
-                            this.tb.MaxLength = 3;
-                            this.quantity += 1;
-                            this.PlaceHolder_parameters.Controls.Add(new LiteralControl("<br />"));
-                            this.PlaceHolder_parameters.Controls.Add(this.label);
-                            this.PlaceHolder_parameters.Controls.Add(this.tb);
-                        }
-                    }
-                //}
-                //catch (Exception)
-                //{
-                //    this.label = new Label();
-                //    this.label.ID = "Label_default";
-                //    this.label.Text = "Нет параметров для измерения";
-                //    this.PlaceHolder_parameters.Controls.Add(this.label);
-                //}
-            //}
-            //catch (Exception)
-            //{
-            //    //this.label = new Label();
-            //    //this.label.ID = "Label_default";
-            //    //this.label.Text = "Соединение с базой данных установить не удалось";
-            //    //this.PlaceHolder_parameters.Controls.Add(this.label);
-            //}
+                    this.tb.ID = "TextBox" + i;
+                    this.tb.MaxLength = 3;
+                    this.quantity += 1;
+                    this.PlaceHolder_parameters.Controls.Add(new LiteralControl("<br />"));
+                    this.PlaceHolder_parameters.Controls.Add(this.label);
+                    this.PlaceHolder_parameters.Controls.Add(this.tb);
+                }
+            }
+            catch (Exception)
+            {
+                this.label.ID = "Label_default";
+                this.label.Text = "Соединение с базой данных установить не удалось";
+                this.PlaceHolder_parameters.Controls.Add(this.label);
+            }
         }
 
         public void Button_parameters_Click(object sender, EventArgs e)
@@ -88,6 +79,11 @@ namespace MedProga
             {
                 this.tb = ((TextBox)PlaceHolder_parameters.FindControl("TextBox_date_time"));
                 dt = Convert.ToDateTime(this.tb.Text);
+                if (dt > DateTime.Now)
+                {
+                    this.tb.Text = string.Empty;
+                    dt = DateTime.Now;
+                }
             }
             catch (Exception)
             {

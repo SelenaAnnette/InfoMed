@@ -49,15 +49,6 @@ namespace MedProga {
         protected global::System.Web.UI.WebControls.TextBox TextBox_to;
         
         /// <summary>
-        /// PlaceHolder_analysis элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder PlaceHolder_analysis;
-        
-        /// <summary>
         /// CheckBoxList_Parameters элемент управления.
         /// </summary>
         /// <remarks>
@@ -76,13 +67,13 @@ namespace MedProga {
         protected global::System.Web.UI.WebControls.Button Button_analysis;
         
         /// <summary>
-        /// Button_clear_selection элемент управления.
+        /// Button_deselect_all элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button_clear_selection;
+        protected global::System.Web.UI.WebControls.Button Button_deselect_all;
         
         /// <summary>
         /// GridView_analysis элемент управления.

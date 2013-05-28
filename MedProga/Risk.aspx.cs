@@ -60,7 +60,6 @@ namespace MedProga
             }
             catch (Exception)
             {
-                this.label = new Label();
                 this.label.ID = "Label_default";
                 this.label.Text = "Соединение с базой данных установить не удалось";
                 this.PlaceHolder_risk.Controls.Add(this.label);
@@ -80,6 +79,11 @@ namespace MedProga
             {
                 this.tb = ((TextBox)PlaceHolder_risk.FindControl("TextBox_date_time"));
                 dt = Convert.ToDateTime(this.tb.Text);
+                if (dt > DateTime.Now)
+                {
+                    this.tb.Text = string.Empty;
+                    dt = DateTime.Now;
+                }
             }
             catch (Exception)
             {
