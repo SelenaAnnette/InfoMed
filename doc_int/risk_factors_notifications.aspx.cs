@@ -77,19 +77,28 @@ namespace doc_int
 
         protected void Button2_Click(object sender, EventArgs e)
         {
-
-            var list = new List<RiskFactor>();
-            Guid person = new Guid(TextBox1.Text);
-            for (int i = 0; i < this.CheckBoxList_Parameters.Items.Count; i++)
+            if (Session["Update"].ToString() == ViewState["Update"].ToString())
             {
-
-                if (this.CheckBoxList_Parameters.Items[i].Selected)
+                try
                 {
-                    var risk_factor = RiskFactorRepository.GetEntitiesByQuery(mi => mi.Title == CheckBoxList_Parameters.Items[i].Text).First();
-                    list.Add(risk_factor);
+                    var list = new List<RiskFactor>();
+                    Guid person = new Guid(TextBox1.Text);
+                    for (int i = 0; i < this.CheckBoxList_Parameters.Items.Count; i++)
+                    {
+
+                        if (this.CheckBoxList_Parameters.Items[i].Selected)
+                        {
+                            var risk_factor = RiskFactorRepository.GetEntitiesByQuery(mi => mi.Title == CheckBoxList_Parameters.Items[i].Text).First();
+                            list.Add(risk_factor);
+                        }
+                    }
+                    NotificationManager.CreateOnceRiskFactorNotification(person, list);
+                }
+                catch (Exception m)
+                {
+                    Label1.Text = m.Message;
                 }
             }
-            NotificationManager.CreateOnceRiskFactorNotification(person, list);
         }
     }
 }

@@ -15,7 +15,8 @@
                     Text="Отправить напоминание об обновлении факторов риска" />
             </td>
             <td>
-                &nbsp;</td>
+                <asp:Label ID="Label1" runat="server"></asp:Label>
+            </td>
         </tr>
         <tr>
             <td>
