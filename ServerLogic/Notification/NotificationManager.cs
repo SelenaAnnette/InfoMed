@@ -44,21 +44,21 @@
 
         private readonly int minutesCountForNotificationAnswer;
 
-        private readonly ILogger logger;
+//        private readonly ILogger logger;
 
         private readonly OnceRiskFactorNotificationFactory onceRiskFactorNotificationFactory;
 
         public NotificationManager(IAssignedMedicamentRepository assignedMedicamentRepository, INotificationRepository notificationRepository,
             IMedicamentFormRepository medicamentFormRepository, IAssignedMeasuringRepository assignedMeasuringRepository, IMeasuringNotificationRepository measuringNotificationRepository,
             IOnceRiskFactorNotificationRepository onceRiskFactorNotificationRepository,
-            int startDayFromHour, int endDayFromHour, int reservHoursForAnsver, int minutesCountForNotificationAnswer, ILogger logger)
+            int startDayFromHour, int endDayFromHour, int reservHoursForAnsver, int minutesCountForNotificationAnswer)
         {
             this.assignedMedicamentRepository = assignedMedicamentRepository;
             this.assignedMeasuringRepository = assignedMeasuringRepository;
             this.medicamentFormRepository = medicamentFormRepository;
             this.measuringNotificationRepository = measuringNotificationRepository;
             this.onceRiskFactorNotificationRepository = onceRiskFactorNotificationRepository;
-            this.logger = logger;
+//            this.logger = logger;
             this.notificationRepository = notificationRepository;                        
             this.notificationFactory = new NotificationFactory();
             this.measuringNotificationFactory = new MeasuringNotificationFactory();
@@ -134,7 +134,7 @@
                 notification.IsActive = false;
                 notification.ExecutedDate = DateTime.Now;
                 this.notificationRepository.CreateOrUpdateEntity(notification);
-                this.logger.LogMessage(string.Format("Notification {0} was closed", notification.Id));    
+//                this.logger.LogMessage(string.Format("Notification {0} was closed", notification.Id));    
             }
             else
             {
@@ -144,8 +144,8 @@
                     measuringNotification.IsActive = false;
                     measuringNotification.ExecutedDate = DateTime.Now;
                     this.measuringNotificationRepository.CreateOrUpdateEntity(measuringNotification);
-                    this.logger.LogMessage(
-                        string.Format("MeasuringNotification {0} was closed", measuringNotification.Id));
+//                    this.logger.LogMessage(
+//                        string.Format("MeasuringNotification {0} was closed", measuringNotification.Id));
                 }
                 else
                 {
@@ -153,8 +153,8 @@
                         this.onceRiskFactorNotificationRepository.GetEntityById(notificationId);
                     onceRiskFactorNotification.IsActive = false;
                     this.onceRiskFactorNotificationRepository.CreateOrUpdateEntity(onceRiskFactorNotification);
-                    this.logger.LogMessage(
-                        string.Format("OnceRiskfactorNotification {0} was closed", onceRiskFactorNotification.Id));
+//                    this.logger.LogMessage(
+//                        string.Format("OnceRiskfactorNotification {0} was closed", onceRiskFactorNotification.Id));
                 }
             }
             
@@ -169,7 +169,7 @@
                 {
                     nonAnsweredNotification.IsActive = false;
                     this.measuringNotificationRepository.CreateOrUpdateEntity(nonAnsweredNotification);
-                    this.logger.LogMessage(string.Format("MeasuringNotification {0} was closed as non-answered", nonAnsweredNotification.Id));
+//                    this.logger.LogMessage(string.Format("MeasuringNotification {0} was closed as non-answered", nonAnsweredNotification.Id));
                 });
         }
 
@@ -182,7 +182,7 @@
                     {
                         nonAnsweredNotification.IsActive = false;
                         this.notificationRepository.CreateOrUpdateEntity(nonAnsweredNotification);
-                        this.logger.LogMessage(string.Format("Notification {0} was closed as non-answered", nonAnsweredNotification.Id));
+//                        this.logger.LogMessage(string.Format("Notification {0} was closed as non-answered", nonAnsweredNotification.Id));
                     });
         }
 
@@ -260,7 +260,7 @@
                         sendingDate,
                         this.GetNotificationMessage(assignedMeasuring));
             this.measuringNotificationRepository.CreateOrUpdateEntity(newNotification);
-            this.logger.LogMessage(string.Format("MeasuringNotification {0} was created", newNotification.Id));
+//            this.logger.LogMessage(string.Format("MeasuringNotification {0} was created", newNotification.Id));
         }
 
         private void CreateNewNotification(AssignedMedicament assignedMedicament)
@@ -305,7 +305,7 @@
                         sendingDate,
                         this.GetNotificationMessage(assignedMedicament));
             this.notificationRepository.CreateOrUpdateEntity(newNotification);
-            this.logger.LogMessage(string.Format("Notification {0} was created", newNotification.Id));
+//            this.logger.LogMessage(string.Format("Notification {0} was created", newNotification.Id));
         }
 
         private MeasuringNotification GetLastAnsweredNotification(AssignedMeasuring assignedMeasuring)
