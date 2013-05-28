@@ -11,20 +11,26 @@ using System.ComponentModel;
 using System.Web;
 using System.Web.SessionState;
 
+
+
+
 namespace doc_int
 {    
-    using Domain.Medicament;
     using System.Collections;
     using DataLayer.Persistence.RiskFactor;
     using DataLayer.Persistence.Person;
     using Ninject;
-    
+    using ServerLogic.Notification;
+    using System.Collections.Generic;
+    using Domain.RiskFactor;
+
 
     public partial class risk_factors_notifications : System.Web.UI.Page
     {
         Guid id_risk_factor;
         public IPersonRepository personRepo = Binder.NinjectKernel.Get<IPersonRepository>();
         public IRiskFactorRepository RiskFactorRepository = Binder.NinjectKernel.Get<IRiskFactorRepository>();
+        public INotificationManager NotificationManager = Binder.NinjectKernel.Get<INotificationManager>();
         
 
         protected void Page_PreRender(object sender, EventArgs e)
@@ -72,15 +78,18 @@ namespace doc_int
         protected void Button2_Click(object sender, EventArgs e)
         {
 
-            //var list = new List<RiskFactor>()
-
+            var list = new List<RiskFactor>();
+            Guid person = new Guid(TextBox1.Text);
             for (int i = 0; i < this.CheckBoxList_Parameters.Items.Count; i++)
             {
+
                 if (this.CheckBoxList_Parameters.Items[i].Selected)
                 {
-                    id_risk_factor = RiskFactorRepository.GetEntitiesByQuery(mi => mi.Title == CheckBoxList_Parameters.Items[i].Text).First().Id;                    
+                    var risk_factor = RiskFactorRepository.GetEntitiesByQuery(mi => mi.Title == CheckBoxList_Parameters.Items[i].Text).First();
+                    list.Add(risk_factor);
                 }
             }
+            NotificationManager.CreateOnceRiskFactorNotification(person, list);
         }
     }
 }
