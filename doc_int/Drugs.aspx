@@ -52,7 +52,7 @@
                 <asp:Panel ID="Panel2" runat="server" Height="100%" Visible="False" 
                     Width="100%">
                     <asp:RadioButton ID="RadioButton3" runat="server" GroupName="consultationTypes" 
-                        Text="Внеплановый визит" />
+                        Text="Внеплановый визит" Checked="True" />
                     <br />
                     <asp:RadioButton ID="RadioButton4" runat="server" GroupName="consultationTypes"                        
                         Text="Контрольный визит по плану" />
@@ -89,21 +89,10 @@
                     Width="100%">
                     <table class="style1">
                         <tr>
-                            <td>
-                                2. Выберите препарат</td>
-                            <td>
-                                <asp:Label ID="Label2" runat="server" 
-                                    Text="3. Укажите необходимые данные для ввыписки препарата."></asp:Label>
-                            </td>
-                            <td>
-                                <asp:Label ID="Label1" runat="server" 
-                                    Text="4. Выберите дату начала приёма препарата"></asp:Label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
+                            <td colspan="3">
+                                2. Выберите препарат<br />
                                 <asp:GridView ID="GridView2" runat="server" CellPadding="4" ForeColor="#333333" 
-                                    GridLines="None" onrowcommand="GridView2_RowCommand" Width="350px">
+                                    GridLines="None" onrowcommand="GridView2_RowCommand" Width="100%">
                                     <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                                     <Columns>
                                         <asp:CommandField ShowSelectButton="True" />
@@ -120,7 +109,17 @@
                                     <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
                                 </asp:GridView>
                             </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                3. Укажите необходимые параметры для выписки</td>
                             <td>
+                                <asp:Label ID="Label1" runat="server" 
+                                    Text="4. Выберите дату начала приёма препарата"></asp:Label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
                                 Пациент<asp:TextBox ID="TextBox1" runat="server" Height="21px"></asp:TextBox>
                                 <br />
                                 Препарат<asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
@@ -142,8 +141,8 @@
                                 &nbsp;дня/дней.<br />
                                 <br />
                                 Способ приёма препарата:<br />
-                                <asp:RadioButton ID="RadioButton7" runat="server" GroupName="way" 
-                                    Text="Энтернальный (ингаляционный)" Checked="True" />
+                                <asp:RadioButton ID="RadioButton7" runat="server" Checked="True" 
+                                    GroupName="way" Text="Энтернальный (ингаляционный)" />
                                 &nbsp;<asp:RadioButton ID="RadioButton8" runat="server" GroupName="way" 
                                     Text="Парентальный" />
                                 <br />
@@ -175,6 +174,13 @@
                                     <asp:ListItem Selected="True" Value="B2AB9366-3621-4067-B8F8-0741111D6B58">Вес</asp:ListItem>
                                     <asp:ListItem Value="061ECDED-8E47-4652-A0AC-2619D3DED3F0">Частота дыхательных движений</asp:ListItem>
                                     <asp:ListItem Value="7D48F462-B556-43C9-BDDC-2FA952A11337">Диастолическое АД</asp:ListItem>
+                                    <asp:ListItem Value="E4FDBDC9-BF20-4153-8617-43D512579045">Окружность бедер</asp:ListItem>
+                                    <asp:ListItem Value="0B087A92-00A2-4600-8A1B-5447D19973AF">Пульс</asp:ListItem>
+                                    <asp:ListItem Value="156843F0-A4BF-403F-A3C9-83B7D51C1134">Окружность талии</asp:ListItem>
+                                    <asp:ListItem Value="C432F591-08C3-47D2-861F-A6EA11B44C49">Систолическое АД</asp:ListItem>
+                                    <asp:ListItem Value="C5549572-A8AE-4403-911A-A9BDF1CA09D0">Рост</asp:ListItem>
+                                    <asp:ListItem Value="43160D2D-430F-46A1-9F37-E8BB1FC6056F">Аксиллярная температура</asp:ListItem>
+                                    <asp:ListItem Value="126A977B-7244-4757-AD81-F3CA422C5FAE">Частота сердечных сокращений</asp:ListItem>
                                 </asp:DropDownList>
                                 <br />
                                 Сделать замер через<br />
@@ -188,23 +194,26 @@
                                 <br />
                                 <asp:Button ID="Button4" runat="server" Enabled="False" onclick="Button4_Click" 
                                     Text="Завершить консультацию" />
+                                <br />
+                                <br />
+                                <asp:Label ID="Label2" runat="server"></asp:Label>
                             </td>
                             <td>
-                                ConId<asp:TextBox ID="TextBox10" runat="server" ReadOnly="True" Visible="False"></asp:TextBox>
+                                ConId<br /> <asp:TextBox ID="TextBox10" runat="server" ReadOnly="True" Visible="False"></asp:TextBox>
                                 <br />
-                                ID 1<asp:TextBox ID="TextBox3" runat="server" ReadOnly="True"></asp:TextBox>
+                                ID 1<br /> <asp:TextBox ID="TextBox3" runat="server" ReadOnly="True"></asp:TextBox>
                                 <br />
-                                ID 2<asp:TextBox ID="TextBox4" runat="server" ReadOnly="True"></asp:TextBox>
+                                ID 2<br /> <asp:TextBox ID="TextBox4" runat="server" ReadOnly="True"></asp:TextBox>
                                 <br />
-                                Доза<asp:TextBox ID="TextBox5" runat="server" ReadOnly="True"></asp:TextBox>
+                                Доза<br /> <asp:TextBox ID="TextBox5" runat="server" ReadOnly="True"></asp:TextBox>
                                 <br />
-                                Начало<asp:TextBox ID="TextBox6" runat="server" ReadOnly="True"></asp:TextBox>
+                                Начало<br /> <asp:TextBox ID="TextBox6" runat="server" ReadOnly="True"></asp:TextBox>
                                 <br />
-                                Кол-во дней<asp:TextBox ID="TextBox7" runat="server" ReadOnly="True"></asp:TextBox>
+                                Кол-во дней<br /> <asp:TextBox ID="TextBox7" runat="server" ReadOnly="True"></asp:TextBox>
                                 <br />
-                                Сколько в день<asp:TextBox ID="TextBox8" runat="server" ReadOnly="True"></asp:TextBox>
+                                Сколько в день<br /> <asp:TextBox ID="TextBox8" runat="server" ReadOnly="True"></asp:TextBox>
                                 <br />
-                                Через сколько дней<asp:TextBox ID="TextBox9" runat="server" ReadOnly="True"></asp:TextBox>
+                                Через сколько дней<br /> <asp:TextBox ID="TextBox9" runat="server" ReadOnly="True"></asp:TextBox>
                                 <br />
                                 <asp:Button ID="Button2" runat="server" onclick="Button2_Click" 
                                     Text="Проверка" />

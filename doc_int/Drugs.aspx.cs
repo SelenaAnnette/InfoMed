@@ -183,10 +183,11 @@ namespace doc_int
                         if (Measuring.Checked == true)
                         {
                             Guid Type = new Guid(DropDownList1.SelectedValue);
-                            var AssignedMeasuringMedicament = AssignedMedicamentMeasuringFactory.Create(Guid.NewGuid(), Type, AssignedMedicamentId, Convert.ToInt32(timeInterval_hour.Text) * 3600 + Convert.ToInt32(timeInterval_min.Text) * 60);
-                            AssignedMedicamentMeasuringRepository.CreateOrUpdateEntity(AssignedMeasuringMedicament);
                             var AssignedMedicament = AssignedMedicamentFactory.Create(AssignedMedicamentId, Guid_const, Guid_drug, wayType, Convert.ToDouble(dosage.Text), convertedDate, Convert.ToInt16(dayCount.Text), timesAtDay, eachDay);
                             AssignedMedicamentRepo.CreateOrUpdateEntity(AssignedMedicament);
+                            var AssignedMeasuringMedicament = AssignedMedicamentMeasuringFactory.Create(Guid.NewGuid(), Type, AssignedMedicamentId, Convert.ToInt32(timeInterval_hour.Text) * 3600 + Convert.ToInt32(timeInterval_min.Text) * 60);
+                            AssignedMedicamentMeasuringRepository.CreateOrUpdateEntity(AssignedMeasuringMedicament);
+
                         }
                         else
                         {
