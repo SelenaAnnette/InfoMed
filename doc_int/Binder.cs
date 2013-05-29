@@ -19,6 +19,7 @@
 
     using Ninject;
 
+    using ServerLogic.Logger;
     using ServerLogic.Notification;
     using ServerLogic.Security;
 
@@ -90,6 +91,7 @@
             NinjectKernel.Bind<IOnceRiskFactorNotificationRepository>().To<OnceRiskFactorNotificationRepository>().WithConstructorArgument("connectionString", trashDataBaseConnectionString);
 
             NinjectKernel.Bind<IAuthenticationProvider>().To<AuthenticationProvider>();
+            NinjectKernel.Bind<ILogger>().To<FileLogger>();
             NinjectKernel.Bind<INotificationManager>().To<NotificationManager>()
                 .WithConstructorArgument("startDayFromHour", 0)
                 .WithConstructorArgument("endDayFromHour", 0)

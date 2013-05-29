@@ -24,6 +24,7 @@
 
     using Ninject;
 
+    using ServerLogic.Logger;
     using ServerLogic.Security;
 
     /// <summary>
@@ -124,6 +125,7 @@
             this.ninjectKernel.Bind<IOnceRiskFactorNotificationRepository>().To<OnceRiskFactorNotificationRepository>().WithConstructorArgument("connectionString", trashDataBaseConnectionString);
 
             this.ninjectKernel.Bind<IAuthenticationProvider>().To<AuthenticationProvider>();
+            this.ninjectKernel.Bind<ILogger>().To<FileLogger>();
         }
     }
 }
