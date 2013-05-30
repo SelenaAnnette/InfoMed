@@ -94,6 +94,7 @@
     <Compile Include="RiskFactor\AssignedRiskFactor.cs" />
     <Compile Include="RiskFactor\OnceRiskFactorNotification.cs" />
     <Compile Include="RiskFactor\PersonRiskFactor.cs" />
+    <Compile Include="Sms\DomainSms.cs" />
     <Compile Include="StringValueAttribute.cs" />
     <Compile Include="Symptom\AssignedSymptom.cs" />
     <Compile Include="RiskFactor\RiskFactor.cs" />
@@ -106,9 +107,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Sms\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

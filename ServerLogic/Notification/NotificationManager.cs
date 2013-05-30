@@ -404,7 +404,7 @@
         private string GetNotificationMessage(AssignedMeasuring assignedMeasuring)
         {
             return string.Format(
-                "Измерьте {0} в единицах {1} с кодом {2}",
+                "Измерьте {0} в единицах {1} с кодом {2}. Отправьте ответ \"изм {2} Х\", где X - значение",
                 assignedMeasuring.MeasuringType.Title,
                 assignedMeasuring.MeasuringType.Measuring,
                 assignedMeasuring.MeasuringType.Code);
@@ -414,7 +414,7 @@
         {
             var medicamentForm = this.medicamentFormRepository.GetEntityById(assignedMedicament.Medicament.MedicamentFormId);
             return string.Format(
-                "Примите {0} {1} {2} с кодом {3}",
+                "Примите {0} {1} {2} с кодом {3}. Отправьте ответ \"преп {3}\"",
                 assignedMedicament.Medicament.Name,
                 assignedMedicament.Dosage,
                 medicamentForm.Name,

@@ -145,6 +145,9 @@
     <Compile Include="Persistence\RiskFactor\IPersonRiskFactorRepository.cs" />
     <Compile Include="Persistence\RiskFactor\PersonRiskFactorFactory.cs" />
     <Compile Include="Persistence\RiskFactor\PersonRiskFactorRepository.cs" />
+    <Compile Include="Persistence\Sms\IDomainSmsRepository.cs" />
+    <Compile Include="Persistence\Sms\DomainSmsFactory.cs" />
+    <Compile Include="Persistence\Sms\DomainSmsRepository.cs" />
     <Compile Include="Persistence\Symptom\IPersonConsultationSymptomRepository.cs" />
     <Compile Include="Persistence\Symptom\IPersonSymptomRepository.cs" />
     <Compile Include="Persistence\Symptom\PersonConsultationSymptomFactory.cs" />

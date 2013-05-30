@@ -15,6 +15,7 @@
     using DataLayer.Persistence.Person;
     using DataLayer.Persistence.Research;
     using DataLayer.Persistence.RiskFactor;
+    using DataLayer.Persistence.Sms;
     using DataLayer.Persistence.Symptom;
 
     using Ninject;
@@ -92,6 +93,7 @@
             NinjectKernel.Bind<IPersonSymptomRepository>().To<PersonSymptomRepository>().WithConstructorArgument("connectionString", trashDataBaseConnectionString);
             NinjectKernel.Bind<IMeasuringNotificationRepository>().To<MeasuringNotificationRepository>().WithConstructorArgument("connectionString", trashDataBaseConnectionString);
             NinjectKernel.Bind<IOnceRiskFactorNotificationRepository>().To<OnceRiskFactorNotificationRepository>().WithConstructorArgument("connectionString", trashDataBaseConnectionString);
+            NinjectKernel.Bind<IDomainSmsRepository>().To<DomainSmsRepository>().WithConstructorArgument("connectionString", trashDataBaseConnectionString);
 
             NinjectKernel.Bind<ILogger>().To<FileLogger>();
             NinjectKernel.Bind<IAuthenticationProvider>().To<AuthenticationProvider>();
@@ -107,9 +109,12 @@
                 .WithConstructorArgument("notificationSendingFrequencyInMinutes", Properties.Settings.Default.NotificationSendingFrequencyInMinutes)
                 .WithConstructorArgument("notificationClosingFrequencyInMinutes", Properties.Settings.Default.NotificationClosingFrequencyInMinutes)
                 .WithConstructorArgument("delayStartForNotificationTimersInSeconds", Properties.Settings.Default.DelayStartForNotificationTimersInSeconds)                
-                .WithConstructorArgument("sendAndReceiveSms", Properties.Settings.Default.SendAndReceiveSms)                
+                .WithConstructorArgument("sendAndReceiveSms", Properties.Settings.Default.SendAndReceiveSms)
+                .WithConstructorArgument("delayStartToCheckSmsInSeconds", Properties.Settings.Default.DelayStartToCheckSmsInSeconds)
+                .WithConstructorArgument("checkSmsIntervalInMinutes", Properties.Settings.Default.CheckSmsIntervalInMinutes)
                 .WithConstructorArgument("periodOfModemCheckConnectionInSeconds", Properties.Settings.Default.PeriodOfModemCheckConnectionInSeconds);
 
+            NinjectKernel.Bind<ISmsManager>().To<SmsManager>();
             NinjectKernel.Bind<IModem>().To<Modem>().InSingletonScope();
         }
     }
