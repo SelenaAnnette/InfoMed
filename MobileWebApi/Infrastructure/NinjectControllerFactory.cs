@@ -20,10 +20,12 @@
     using DataLayer.Persistence.Person;
     using DataLayer.Persistence.Research;
     using DataLayer.Persistence.RiskFactor;
+    using DataLayer.Persistence.Sms;
     using DataLayer.Persistence.Symptom;
 
     using Ninject;
 
+    using ServerLogic.Logger;
     using ServerLogic.Security;
 
     /// <summary>
@@ -122,8 +124,10 @@
             this.ninjectKernel.Bind<IPersonSymptomRepository>().To<PersonSymptomRepository>().WithConstructorArgument("connectionString", trashDataBaseConnectionString);
             this.ninjectKernel.Bind<IMeasuringNotificationRepository>().To<MeasuringNotificationRepository>().WithConstructorArgument("connectionString", trashDataBaseConnectionString);
             this.ninjectKernel.Bind<IOnceRiskFactorNotificationRepository>().To<OnceRiskFactorNotificationRepository>().WithConstructorArgument("connectionString", trashDataBaseConnectionString);
+            this.ninjectKernel.Bind<IDomainSmsRepository>().To<DomainSmsRepository>().WithConstructorArgument("connectionString", trashDataBaseConnectionString);
 
             this.ninjectKernel.Bind<IAuthenticationProvider>().To<AuthenticationProvider>();
+            this.ninjectKernel.Bind<ILogger>().To<FileLogger>();
         }
     }
 }

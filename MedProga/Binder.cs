@@ -13,6 +13,7 @@
     using DataLayer.Persistence.Person;
     using DataLayer.Persistence.Research;
     using DataLayer.Persistence.RiskFactor;
+    using DataLayer.Persistence.Sms;
     using DataLayer.Persistence.Symptom;
     using DataLayer.Persistence.Medicament;
     using DataLayer.Persistence.Measuring;    
@@ -89,6 +90,7 @@
             NinjectKernel.Bind<IPersonSymptomRepository>().To<PersonSymptomRepository>().WithConstructorArgument("connectionString", trashDataBaseConnectionString);
             NinjectKernel.Bind<IMeasuringNotificationRepository>().To<MeasuringNotificationRepository>().WithConstructorArgument("connectionString", trashDataBaseConnectionString);
             NinjectKernel.Bind<IOnceRiskFactorNotificationRepository>().To<OnceRiskFactorNotificationRepository>().WithConstructorArgument("connectionString", trashDataBaseConnectionString);
+            NinjectKernel.Bind<IDomainSmsRepository>().To<DomainSmsRepository>().WithConstructorArgument("connectionString", trashDataBaseConnectionString);
 
             NinjectKernel.Bind<ILogger>().To<FileLogger>();
             NinjectKernel.Bind<IAuthenticationProvider>().To<AuthenticationProvider>();

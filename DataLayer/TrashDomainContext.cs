@@ -6,6 +6,7 @@
     using Domain.Medicament;
     using Domain.Message;    
     using Domain.RiskFactor;
+    using Domain.Sms;
     using Domain.Symptom;
 
     class TrashDomainContext : DbContext
@@ -31,5 +32,7 @@
         public DbSet<PersonRiskFactor> PersonRiskFactors { get; set; }
 
         public DbSet<PersonSymptom> PersonSymptoms { get; set; }
+
+        public DbSet<DomainSms> DomainSmses { get; set; }
     }
 }

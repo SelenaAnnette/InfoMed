@@ -94,6 +94,7 @@
     <Compile Include="RiskFactor\AssignedRiskFactor.cs" />
     <Compile Include="RiskFactor\OnceRiskFactorNotification.cs" />
     <Compile Include="RiskFactor\PersonRiskFactor.cs" />
+    <Compile Include="Sms\DomainSms.cs" />
     <Compile Include="StringValueAttribute.cs" />
     <Compile Include="Symptom\AssignedSymptom.cs" />
     <Compile Include="RiskFactor\RiskFactor.cs" />

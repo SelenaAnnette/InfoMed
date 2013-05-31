@@ -7,6 +7,7 @@
     using DataLayer.Persistence.Person;
 
     using ServerLogic.Logger;
+    using ServerLogic.Sms;
 
     using SmsModule;
 
@@ -28,6 +29,10 @@
 
         private readonly int delayStartForNotificationTimersInSeconds;
 
+        private readonly int delayStartToCheckSmsInSeconds;
+
+        private readonly int checkSmsIntervalInMinutes;
+
         private readonly bool sendAndReceiveSms;
 
         private readonly IModem modem;
@@ -42,18 +47,25 @@
 
         private readonly ILogger logger;
 
+        private Timer checkingTimer;
+
+        private ISmsManager smsManager;
+
         public NotificationService(INotificationManager notificationManager, int notificationCreationFrequencyInMinutes, int notificationSendingFrequencyInMinutes,
             IModem modem, bool sendAndReceiveSms, int notificationClosingFrequencyInMinutes, int periodOfModemCheckConnectionInSeconds, IPersonContactRepository personContactRepository,
-            int delayStartForNotificationTimersInSeconds, ILogger logger)
+            int delayStartForNotificationTimersInSeconds, ILogger logger, int delayStartToCheckSmsInSeconds, int checkSmsIntervalInMinutes, ISmsManager smsManager)
         {            
             this.notificationManager = notificationManager;
             this.logger = logger;
             this.notificationCreationFrequencyInMinutes = notificationCreationFrequencyInMinutes;
+            this.delayStartToCheckSmsInSeconds = delayStartToCheckSmsInSeconds;
+            this.checkSmsIntervalInMinutes = checkSmsIntervalInMinutes;
             this.notificationSendingFrequencyInMinutes = notificationSendingFrequencyInMinutes;
             this.notificationClosingFrequencyInMinutes = notificationClosingFrequencyInMinutes;                        
             this.personContactRepository = personContactRepository;
             this.sendAndReceiveSms = sendAndReceiveSms;
-            this.modem = modem;            
+            this.modem = modem;
+            this.smsManager = smsManager;            
             this.periodOfModemCheckConnectionInSeconds = periodOfModemCheckConnectionInSeconds;
             this.delayStartForNotificationTimersInSeconds = delayStartForNotificationTimersInSeconds;
         }
@@ -74,6 +86,8 @@
             this.sendingTimer = new Timer(this.SendNotifications, this, TimeSpan.FromSeconds(this.delayStartForNotificationTimersInSeconds),
                 TimeSpan.FromMinutes(this.notificationSendingFrequencyInMinutes));
             this.modemTimer = new Timer(this.CheckModemConnection, this, TimeSpan.FromSeconds(this.delayStartForNotificationTimersInSeconds), TimeSpan.FromSeconds(this.periodOfModemCheckConnectionInSeconds));
+            this.checkingTimer = new Timer(this.CheckSms, this, TimeSpan.FromSeconds(this.delayStartToCheckSmsInSeconds),
+                TimeSpan.FromMinutes(this.checkSmsIntervalInMinutes));
         }        
 
         public void StopService()
@@ -87,6 +101,19 @@
 
             this.sendingTimer.Dispose();
             this.modemTimer.Dispose();
+            this.checkingTimer.Dispose();
+        }
+
+        private void CheckSms(object state)
+        {
+            var smses = this.modem.GetAllSms();
+            this.smsManager.SaveNewSmses(smses);
+            this.smsManager.CheckSmsForNotifications();
+
+            if (DateTime.Now.Hour == 8)
+            {
+                this.modem.DeleteByDate(DateTime.Now.AddDays(-1));
+            }
         }
 
         private void CreateNotifications(object state)

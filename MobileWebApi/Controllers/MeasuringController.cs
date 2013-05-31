@@ -25,7 +25,12 @@
         [HttpGet]
         public JsonResult GetMeasuringTypes()
         {
-            return this.Json(this.measuringTypeRepository.GetAll().ToList(), JsonRequestBehavior.AllowGet);
+            var measuringTypes = this.measuringTypeRepository.GetAll().ToList();
+            measuringTypes.ForEach(v => { v.AssignedMedicamentMeasurings = null;
+                                            v.AssignedMeasurings = null;
+                                            v.PersonConsultationMeasurings = null;
+            });
+            return this.Json(measuringTypes, JsonRequestBehavior.AllowGet);
         }
 
         // POST: /Measuring/AddPersonMeasuring
