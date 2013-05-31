@@ -14,7 +14,7 @@
                 <asp:Label ID="Label_date" runat="server" Text="Дата и время"></asp:Label>
             </td>
             <td> 
-                <asp:TextBox ID="TextBox_date_time" runat="server" MaxLength="10"></asp:TextBox>
+                <asp:TextBox ID="TextBox_date_time" runat="server" MaxLength="19"></asp:TextBox>
             </td>
         </tr>
         <tr> 
@@ -29,4 +29,6 @@
     </table>
     <asp:Button ID="Button_complaints" runat="server" Text="Сохранить" 
         onclick="Button_complaints_Click" />
+    <asp:Button ID="Button_deselect_all" runat="server" 
+        onclick="Button_deselect_all_Click" Text="Снять выделение" />
 </asp:Content>

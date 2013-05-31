@@ -79,6 +79,11 @@ namespace MedProga
             {
                 this.tb = ((TextBox)PlaceHolder_risk.FindControl("TextBox_date_time"));
                 dt = Convert.ToDateTime(this.tb.Text);
+                if (dt > DateTime.Now)
+                {
+                    this.tb.Text = string.Empty;
+                    dt = DateTime.Now;
+                }
             }
             catch (Exception)
             {

@@ -21,7 +21,9 @@
         <tr>
             <td> 
                 <asp:Button ID="Button_analysis" runat="server" Text="Проанализировать" 
-                    onclick="Button_analysis_Click" />
+                    onclick="Button_analysis_Click" Width="150px" />
+                <asp:Button ID="Button_deselect_all" runat="server" 
+                    onclick="Button_deselect_all_Click" Text="Снять выделение" Width="150px" />
             </td>
         </tr>
         <tr> 

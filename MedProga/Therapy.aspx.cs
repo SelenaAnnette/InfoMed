@@ -25,12 +25,12 @@ namespace MedProga
         protected void Button_show_drugs_Click(object sender, EventArgs e)
         {
             this.Label_drugs.Visible = false;
-            DateTime date = DateTime.Now;
+            DateTime dt = DateTime.Now;
             if (this.TextBox_date_time.Text != string.Empty)
             {
                 try
                 {
-                    date = Convert.ToDateTime(this.TextBox_date_time.Text);
+                    dt = Convert.ToDateTime(this.TextBox_date_time.Text);
                 }
                 catch (Exception)
                 {
@@ -43,7 +43,7 @@ namespace MedProga
             var assignedMed = assignedMedRep.GetEntitiesByQuery(
                 p => 
                 p.PersonConsultation.PatientId == perId &&
-                p.StartDate <= date && date <= p.FinishDate);
+                p.StartDate <= dt && dt <= p.FinishDate);
             var medicamentRep = Binder.NinjectKernel.Get<IMedicamentRepository>();
             var drugs = medicamentRep.GetAll();
             var aplicWayRep = Binder.NinjectKernel.Get<IMedicamentApplicationWayRepository>();
