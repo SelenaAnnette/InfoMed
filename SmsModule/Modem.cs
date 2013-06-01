@@ -13,12 +13,11 @@
         private const int PortTimeOut = 100; //пока без таймаута вручную , устанавливается автоматический таймаут при инициализации.
         private const int SmsTimeOut = 100;
 
-        private object lockObject;
+        private static object LockObject = new object();
 
         public Modem()
         {
-            this.serialPort = new SerialPort();
-            this.lockObject = new object();            
+            this.serialPort = new SerialPort();          
         }
 
         ~Modem()
@@ -28,7 +27,7 @@
         //public
         public bool Initialize() //если модем найден и инициализирован, то вернет true, иначе false
         {
-            lock (this.lockObject)
+            lock (LockObject)
             {
 
                 serialPort = new SerialPort();
@@ -80,7 +79,7 @@
         {
             if (serialPort.PortName != "")
             {
-                lock (this.lockObject)
+                lock (LockObject)
                 {
                     SendCommandToModem("AT");
                     ReadRespondFromModem();
@@ -104,7 +103,7 @@
 
         public bool SendSms(string phone_number, string message)
         {
-            lock (this.lockObject)
+            lock (LockObject)
             {
                 string Final_Respond = "";
                 if (serialPort.IsOpen)
@@ -161,7 +160,7 @@
 
         public Sms[] GetAllSms() //возвращает все смс как массив объектов смс со всем расшифрованными данными
         {
-            lock (this.lockObject)
+            lock (LockObject)
             {
                 Sms[] My_Sms__Array = new Sms[100];
                 string AllSms = "";
@@ -198,7 +197,7 @@
 
         public bool DeleteByDate(DateTime dt)//дата время не включительно, относительно параметра
         {
-            lock (this.lockObject)
+            lock (LockObject)
             {
                 Sms[] AllSms = new Sms[100];
                 int counter = 0; //счетчик удаленных СМС

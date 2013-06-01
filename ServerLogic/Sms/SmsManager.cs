@@ -61,6 +61,11 @@
         {
             foreach (var sms in smses)
             {
+                if (sms == null)
+                {
+                    continue;    
+                }
+
                 var domainSms = this.domainSmsRepository.GetEntitiesByQuery(v => v.SenderNumber == sms.From && v.SendingDate == sms.DTime && v.Text == sms.Text).FirstOrDefault();
                 if (domainSms != null)
                 {
@@ -124,6 +129,8 @@
                     }
                     if (splittedSms[0].ToLower() == "преп")
                     {
+                        var test = this.assignedMedicamentRepository.GetEntitiesByQuery(m => m.Medicament.Code == splittedSms[1]);
+                        var test2 = this.assignedMedicamentRepository.GetEntitiesByQuery(m => m.PersonConsultation.PatientId == person.Id);
                         var assignedMedicament = this.assignedMedicamentRepository.GetEntitiesByQuery(m => m.Medicament.Code == splittedSms[1] && m.PersonConsultation.PatientId == person.Id).FirstOrDefault();
                         if (assignedMedicament == null)
                         {
@@ -143,6 +150,9 @@
                         notification.IsActive = false;
                         this.notificationRepository.CreateOrUpdateEntity(notification);
                     }
+
+                    v.IsRead = true;
+                    this.domainSmsRepository.CreateOrUpdateEntity(v);
                 });
         }
     }
