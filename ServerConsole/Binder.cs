@@ -114,7 +114,6 @@
                 .WithConstructorArgument("checkSmsIntervalInMinutes", Properties.Settings.Default.CheckSmsIntervalInMinutes)
                 .WithConstructorArgument("periodOfModemCheckConnectionInSeconds", Properties.Settings.Default.PeriodOfModemCheckConnectionInSeconds);
 
-            NinjectKernel.Bind<ISmsManager>().To<SmsManager>();
             NinjectKernel.Bind<IModem>().To<Modem>().InSingletonScope();
         }
     }

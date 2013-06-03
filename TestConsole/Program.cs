@@ -26,7 +26,7 @@
         private static readonly ILogger Logger  = Binder.NinjectKernel.Get<ILogger>();
         static void Main(string[] args)
         {            
-            //MainTest();
+            MainTest();
 //            PersonTest();
 //            PersonContactTest();
 //            CredentialsTest();
@@ -252,19 +252,31 @@
             finally
             {
                 personContactRepository.DeleteEntity(personContact.Id);
-                Console.WriteLine("Person mobile contact wad deleted");
+                Console.WriteLine("Person mobile contact was deleted");
 
                 notificationRepository.DeleteEntity(notification.Id);
-                Console.WriteLine("Notification wad deleted");
+                Console.WriteLine("Notification was deleted");
 
                 assignedMedicamentRepository.DeleteEntity(assignedMedicament.Id);
-                Console.WriteLine("Assigned medicament wad deleted");
+                Console.WriteLine("Assigned medicament was deleted");
+
+                medicamentApplicationWayRepository.DeleteEntity(medicamentApplicationWay.Id);
+                Console.WriteLine("MedicamentApplicationWay was deleted");
+
+                personConsultationRepository.DeleteEntity(personConsultation.Id);
+                Console.WriteLine("PersonConsultation was deleted");
+
+                consultationTypeRepository.DeleteEntity(consultationType.Id);
+                Console.WriteLine("ConsultationType was deleted");
 
                 medicamentRepository.DeleteEntity(medicament.Id);
-                Console.WriteLine("Medicament wad deleted");
+                Console.WriteLine("Medicament was deleted");
+
+                medicamentFormRepository.DeleteEntity(medicamentForm.Id);
+                Console.WriteLine("MedicamentForm was deleted");
 
                 personRepository.DeleteEntity(person.Id);
-                Console.WriteLine("Person wad deleted");
+                Console.WriteLine("Person was deleted");
 
                 Console.WriteLine("Press any key...");
                 Console.ReadKey();
