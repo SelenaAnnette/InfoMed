@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -28,6 +29,10 @@ namespace MedProga
             {
                 var contactMes = contactFac.Create(Guid.NewGuid(), perId, Guid.NewGuid(), this.TextBox_contact.Text,dt);
                 contactRep.CreateOrUpdateEntity(contactMes);
+                Label labelSave = (Label)Master.FindControl("Label_save");
+                labelSave.Text = "Сообщение успешно отправлено";
+                //Color of text
+                labelSave.ForeColor = Color.FromArgb(0, 144, 36);
             }
         }
     }

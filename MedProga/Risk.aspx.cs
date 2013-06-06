@@ -36,7 +36,7 @@ namespace MedProga
                 if (riskFactorsArray.Count() != 0)
                 {
                     this.label.ID = "Label_date_time";
-                    this.label.Text = "Дата и время";
+                    this.label.Text = "Введите дату и время";
                     this.tb.ID = "TextBox_date_time";
                     this.tb.MaxLength = 19;
                     this.PlaceHolder_risk.Controls.Add(this.label);
@@ -51,6 +51,9 @@ namespace MedProga
                     this.tb = new TextBox();
                     this.tb.ID = "TextBox" + i;
                     this.tb.MaxLength = 3;
+                    if (riskFactorsArray[i].Title == "Крепость принятого алкоголя") this.tb.MaxLength = 2;
+                    if (riskFactorsArray[i].Title == "Количество поглощенных с пищей калорий") this.tb.MaxLength = 4;
+                    this.tb.ToolTip = "Введите значение для данного фактора риска";
                     this.quantity += 1;
                     this.PlaceHolder_risk.Controls.Add(new LiteralControl("<br />"));
                     this.PlaceHolder_risk.Controls.Add(this.label);
@@ -68,6 +71,8 @@ namespace MedProga
 
         protected void Button_risk_Click(object sender, EventArgs e)
         {
+            int countRF = 0;
+            int countSavedRF = 0;
             DateTime dt = new DateTime();
             string personSurname = "Glazunov";
             var riskFactorRep = Binder.NinjectKernel.Get<IRiskFactorRepository>();
@@ -79,6 +84,7 @@ namespace MedProga
             {
                 this.tb = ((TextBox)PlaceHolder_risk.FindControl("TextBox_date_time"));
                 dt = Convert.ToDateTime(this.tb.Text);
+                this.tb.Text = Convert.ToString(dt);
                 if (dt > DateTime.Now)
                 {
                     this.tb.Text = string.Empty;
@@ -105,11 +111,30 @@ namespace MedProga
                         var riskFactor = personRiskFactorFac.Create(
                             Guid.NewGuid(), perId, riskFacId, riskFactorValue, dt);
                         personRiskFactorRep.CreateOrUpdateEntity(riskFactor);
+                        countSavedRF += 1;
+                        this.tb.BackColor = Color.FromArgb(255, 255, 255);
                     }
                     catch (Exception)
                     {
                         tb.Text = string.Empty;
                         tb.BackColor = Color.FromArgb(255, 255, 183);
+                    }
+                    countRF += 1;
+                }
+                Label labelSave = (Label)Master.FindControl("Label_save");
+                if (countRF > 0)
+                {
+                    if (countSavedRF == countRF)
+                    {
+                        labelSave.Text = "Сохранение прошло успешно";
+                        //Color of text
+                        labelSave.ForeColor = Color.FromArgb(0, 144, 36);
+                    }
+                    else
+                    {
+                        labelSave.Text = "Сохранены не все введенные результаты измерений";
+                        //Color of text
+                        labelSave.ForeColor = Color.FromArgb(105, 105, 105);
                     }
                 }
             }

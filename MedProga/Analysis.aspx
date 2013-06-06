@@ -6,11 +6,24 @@
     <table>
         <tr>
             <td>
-                <asp:Label ID="Label_from" runat="server" Text="C"></asp:Label>
-                <asp:TextBox ID="TextBox_from" runat="server" MaxLength="19"></asp:TextBox>
-                <asp:Label ID="Label_to" runat="server" Text="По"></asp:Label>
-                <asp:TextBox ID="TextBox_to" runat="server" MaxLength="19"></asp:TextBox>
+                <asp:Label ID="Label_specify_dates" runat="server" 
+                    Text="Задайте промежуток времени "></asp:Label>
             </td> 
+        </tr>
+        <tr>
+            <td>
+                <asp:Label ID="Label_from" runat="server" Text="C"></asp:Label>
+                <asp:TextBox ID="TextBox_from" runat="server" MaxLength="19" 
+                    ToolTip="Введите дату начала периода для анализа"></asp:TextBox>
+                <asp:Label ID="Label_to" runat="server" Text="По"></asp:Label>
+                <asp:TextBox ID="TextBox_to" runat="server" MaxLength="19" 
+                    ToolTip="Введите дату окончания периода для анализа"></asp:TextBox>
+            </td> 
+        </tr>
+        <tr>
+            <td>
+                <asp:Label ID="Label_select_parameters" runat="server"></asp:Label>
+            </td>
         </tr>
         <tr>
             <td>

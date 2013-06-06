@@ -14,12 +14,13 @@
                 <asp:Label ID="Label_date" runat="server" Text="Дата и время"></asp:Label>
             </td>
             <td> 
-                <asp:TextBox ID="TextBox_date_time" runat="server" MaxLength="19"></asp:TextBox>
+                <asp:TextBox ID="TextBox_date_time" runat="server" MaxLength="19" 
+                    ToolTip="Введите дату и время появления симптомов"></asp:TextBox>
             </td>
         </tr>
         <tr> 
             <td class="style1" style="vertical-align: top"> 
-                <asp:Label ID="Label_symptoms" runat="server" Text="Симптомы"></asp:Label>
+                <asp:Label ID="Label_symptoms" runat="server"></asp:Label>
             </td>
             <td>
                 <asp:CheckBoxList ID="CheckBoxList_symptoms" runat="server" RepeatColumns="4">

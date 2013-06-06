@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -10,6 +11,7 @@ using System.Web.UI.WebControls;
 
 namespace MedProga
 {
+    
     using DataLayer.Persistence.Person;
     using DataLayer.Persistence.Symptom;
 
@@ -20,6 +22,7 @@ namespace MedProga
         private DateTime dt;
         protected void Page_Load(object sender, EventArgs e)
         {
+            Label_symptoms.Text = "Нет симптомов для выбора";
             try
             {
                 var symptomsRepo = Binder.NinjectKernel.Get<ISymptomRepository>();
@@ -34,6 +37,7 @@ namespace MedProga
                 {
                     this.CheckBoxList_symptoms.Items.Add(sympSortedList.ElementAt(i));
                 }
+                if (sympSortedList.Count() > 0) Label_symptoms.Text = "Симптомы";
             }
             catch (Exception)
             {
@@ -62,19 +66,23 @@ namespace MedProga
                         try
                         {
                             dt = Convert.ToDateTime(this.TextBox_date_time.Text);
+                            this.TextBox_date_time.Text = Convert.ToString(dt);
                             if (dt > DateTime.Now)
                             {
-                                this.TextBox_date_time.Text = string.Empty;
                                 dt = DateTime.Now;
                             }
                         }
                         catch (Exception)
                         {
-                            this.TextBox_date_time.Text = string.Empty;
                             dt = DateTime.Now;
                         }
+                        this.TextBox_date_time.Text = string.Empty;
                         var perSymp = personSymptomsFac.Create(Guid.NewGuid(), perId, sympId, dt);
                         personSymptomsRep.CreateOrUpdateEntity(perSymp);
+                        Label labelSave = (Label)Master.FindControl("Label_save");
+                        labelSave.Text = "Сохранение прошло успешно";
+                        //Color of text
+                        labelSave.ForeColor = Color.FromArgb(0, 144, 36);
                     }
                 }
                 this.CheckBoxList_symptoms.Items.Clear();

@@ -13,6 +13,15 @@ namespace MedProga {
     public partial class Analysis {
         
         /// <summary>
+        /// Label_specify_dates элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label_specify_dates;
+        
+        /// <summary>
         /// Label_from элемент управления.
         /// </summary>
         /// <remarks>
@@ -47,6 +56,15 @@ namespace MedProga {
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBox_to;
+        
+        /// <summary>
+        /// Label_select_parameters элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label_select_parameters;
         
         /// <summary>
         /// CheckBoxList_Parameters элемент управления.

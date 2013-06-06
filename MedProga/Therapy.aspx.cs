@@ -25,12 +25,14 @@ namespace MedProga
         protected void Button_show_drugs_Click(object sender, EventArgs e)
         {
             this.Label_drugs.Visible = false;
+            this.Label_drugs.Text = "Нет назначенных препаратов";
             DateTime dt = DateTime.Now;
             if (this.TextBox_date_time.Text != string.Empty)
             {
                 try
                 {
                     dt = Convert.ToDateTime(this.TextBox_date_time.Text);
+                    this.TextBox_date_time.Text = Convert.ToString(dt);
                 }
                 catch (Exception)
                 {
@@ -62,7 +64,11 @@ namespace MedProga
                                                          С = asM.StartDate,
                                                          По = asM.FinishDate
                                                      };
-            if (assignedMed.Count() > 0) Label_drugs.Visible = true;
+            if (assignedMed.Count() > 0)
+            {
+                Label_drugs.Text = "Назначенные препараты";
+            }
+            Label_drugs.Visible = true;
             this.GridView_drugs.DataBind();
         }
     }

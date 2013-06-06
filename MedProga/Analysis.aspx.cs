@@ -26,6 +26,7 @@ namespace MedProga
         {
             try
             {
+                Label_select_parameters.Text = "Нет параметров для анализа";
                 var personMeasuringRepo = Binder.NinjectKernel.Get<IPersonMeasuringRepository>();
                 var personsRepo = Binder.NinjectKernel.Get<IPersonRepository>();
                 var perId = personsRepo.GetEntitiesByQuery(p => p.LastName == "Glazunov").First().Id;
@@ -33,7 +34,11 @@ namespace MedProga
                 var perMeasuringIds = (from pM in perMeasuring select pM.MeasuringTypeId).Distinct().ToList();
                 var measuringTypeRepo = Binder.NinjectKernel.Get<IMeasuringTypeRepository>();
                 var measType = measuringTypeRepo.GetAll().ToList();
-                var parList = new List<string> { };
+                var parList = new List<string> {};
+                if (measType.Count() > 0)
+                {
+                    Label_select_parameters.Text = "Выберите параметры для анализа";
+                }
                 foreach (var mt in measType)
                 {
                     for (int i = 0; i < perMeasuringIds.Count; i++)

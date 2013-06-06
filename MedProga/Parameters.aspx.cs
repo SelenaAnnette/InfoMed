@@ -38,7 +38,7 @@ namespace MedProga
                 if (parametersArray.Count() != 0)
                 {
                     this.label.ID = "Label_date_time";
-                    this.label.Text = "Дата и время";
+                    this.label.Text = "Введите дату и время измерений";
                     this.tb.ID = "TextBox_date_time";
                     this.tb.MaxLength = 19;
                     this.PlaceHolder_parameters.Controls.Add(this.label);
@@ -52,6 +52,7 @@ namespace MedProga
                     this.tb = new TextBox();
                     this.tb.ID = "TextBox" + i;
                     this.tb.MaxLength = 3;
+                    this.tb.ToolTip = "Введите результаты измерений";
                     this.quantity += 1;
                     this.PlaceHolder_parameters.Controls.Add(new LiteralControl("<br />"));
                     this.PlaceHolder_parameters.Controls.Add(this.label);
@@ -68,6 +69,8 @@ namespace MedProga
 
         public void Button_parameters_Click(object sender, EventArgs e)
         {
+            int countPars = 0;
+            int countSavedPars = 0;
             DateTime dt = new DateTime();
             string personSurname = "Glazunov";
             var measuringTypeRepo = Binder.NinjectKernel.Get<IMeasuringTypeRepository>();
@@ -79,6 +82,7 @@ namespace MedProga
             {
                 this.tb = ((TextBox)PlaceHolder_parameters.FindControl("TextBox_date_time"));
                 dt = Convert.ToDateTime(this.tb.Text);
+                this.tb.Text = Convert.ToString(dt);
                 if (dt > DateTime.Now)
                 {
                     this.tb.Text = string.Empty;
@@ -105,11 +109,30 @@ namespace MedProga
                         double parValue = Convert.ToDouble(this.tb.Text);
                         var par = personMeasuringFactory.Create(Guid.NewGuid(), parId, personId, dt, parValue);
                         personMeasuringRepo.CreateOrUpdateEntity(par);
+                        countSavedPars += 1;
+                        this.tb.BackColor = Color.FromArgb(255, 255, 255);
                     }
                     catch (Exception)
                     {
                         this.tb.BackColor = Color.FromArgb(255, 255, 183);
                         this.tb.Text = string.Empty;
+                    }
+                    countPars += 1;
+                }
+                Label labelSave = (Label)Master.FindControl("Label_save");
+                if (countPars > 0)
+                {
+                    if (countSavedPars == countPars)
+                    {
+                        labelSave.Text = "Сохранение прошло успешно";
+                        //Color of text
+                        labelSave.ForeColor = Color.FromArgb(0, 144, 36);
+                    }
+                    else
+                    {
+                        labelSave.Text = "Сохранены не все введенные результаты измерений";
+                        //Color of text
+                        labelSave.ForeColor = Color.FromArgb(105, 105, 105);
                     }
                 }
             }
