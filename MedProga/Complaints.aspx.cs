@@ -66,17 +66,17 @@ namespace MedProga
                         try
                         {
                             dt = Convert.ToDateTime(this.TextBox_date_time.Text);
-                            this.TextBox_date_time.Text = Convert.ToString(dt);
                             if (dt > DateTime.Now)
                             {
                                 dt = DateTime.Now;
                             }
+                            this.TextBox_date_time.Text = Convert.ToString(dt);
                         }
                         catch (Exception)
                         {
                             dt = DateTime.Now;
+                            this.TextBox_date_time.Text = Convert.ToString(dt);
                         }
-                        this.TextBox_date_time.Text = string.Empty;
                         var perSymp = personSymptomsFac.Create(Guid.NewGuid(), perId, sympId, dt);
                         personSymptomsRep.CreateOrUpdateEntity(perSymp);
                         Label labelSave = (Label)Master.FindControl("Label_save");

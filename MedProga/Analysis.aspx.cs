@@ -75,8 +75,8 @@ namespace MedProga
                     if (dateFrom > DateTime.Now)
                     {
                         dateFrom = DateTime.Now;
-                        this.TextBox_from.Text = Convert.ToString(dateFrom);
                     }
+                    this.TextBox_from.Text = Convert.ToString(dateFrom);
                 }
                 catch (Exception)
                 {
@@ -91,8 +91,8 @@ namespace MedProga
                     if (dateTo > DateTime.Now)
                     {
                         dateTo = DateTime.Now;
-                        this.TextBox_to.Text = Convert.ToString(dateTo);
                     }
+                    this.TextBox_to.Text = Convert.ToString(dateTo);
                 }
                 catch (Exception)
                 {

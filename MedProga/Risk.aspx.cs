@@ -90,11 +90,12 @@ namespace MedProga
                     this.tb.Text = string.Empty;
                     dt = DateTime.Now;
                 }
+                this.tb.Text = Convert.ToString(dt);
             }
             catch (Exception)
             {
-                this.tb.Text = string.Empty;
                 dt = DateTime.Now;
+                this.tb.Text = Convert.ToString(dt);
             }
             for (int i = 0; i < this.quantity; i++)
             {

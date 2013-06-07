@@ -36,7 +36,7 @@ namespace MedProga
                 }
                 catch (Exception)
                 {
-                    this.TextBox_date_time.Text = string.Empty;
+                    this.TextBox_date_time.Text = Convert.ToString(dt);
                 }
             }
             var assignedMedRep = Binder.NinjectKernel.Get<IAssignedMedicamentRepository>();
