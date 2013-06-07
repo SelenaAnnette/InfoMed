@@ -435,8 +435,7 @@ namespace doc_int
                 }
             }
             
-
-           
+          
             PhoneBox0.Visible = false;
             PatientCardNumBox0.Visible = false;
             InsuranceBox0.Visible = false;           
@@ -444,9 +443,7 @@ namespace doc_int
             EmailBox0.Visible = false;
             AddressBox0.Visible = false;
 
-        }
-
-       
+        }      
 
     }
 }
