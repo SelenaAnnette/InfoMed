@@ -114,11 +114,13 @@ namespace MedProga
                         personRiskFactorRep.CreateOrUpdateEntity(riskFactor);
                         countSavedRF += 1;
                         this.tb.BackColor = Color.FromArgb(255, 255, 255);
+                        this.tb.ToolTip = "Введите значение для данного фактора риска";
                     }
                     catch (Exception)
                     {
                         tb.Text = string.Empty;
                         tb.BackColor = Color.FromArgb(255, 255, 183);
+                        this.tb.ToolTip = "Введены данные неверного типа";
                     }
                     countRF += 1;
                 }

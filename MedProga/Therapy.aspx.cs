@@ -39,6 +39,7 @@ namespace MedProga
                     this.TextBox_date_time.Text = Convert.ToString(dt);
                 }
             }
+            this.TextBox_date_time.Text = Convert.ToString(dt);
             var assignedMedRep = Binder.NinjectKernel.Get<IAssignedMedicamentRepository>();
             var personsRep = Binder.NinjectKernel.Get<IPersonRepository>();
             var perId = personsRep.GetEntitiesByQuery(p => p.LastName == "Glazunov").First().Id;

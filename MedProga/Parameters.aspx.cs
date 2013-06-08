@@ -112,11 +112,13 @@ namespace MedProga
                         personMeasuringRepo.CreateOrUpdateEntity(par);
                         countSavedPars += 1;
                         this.tb.BackColor = Color.FromArgb(255, 255, 255);
+                        this.tb.ToolTip = "Введите значение для данного фактора риска";
                     }
                     catch (Exception)
                     {
                         this.tb.BackColor = Color.FromArgb(255, 255, 183);
                         this.tb.Text = string.Empty;
+                        this.tb.ToolTip = "Введены данные неверного типа";
                     }
                     countPars += 1;
                 }
