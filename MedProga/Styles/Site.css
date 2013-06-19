@@ -307,4 +307,11 @@ table
     margin:0px;
 }
 
+p 
+{
+    text-align: justify;
+    margin-top: 0.3em;
+    margin-bottom: 0.3em;
+}
+
 

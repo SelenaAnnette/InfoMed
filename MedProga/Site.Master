@@ -23,6 +23,10 @@
                         <asp:MenuItem NavigateUrl="~/Reminders.aspx" Text="Напоминания" />
                         <asp:MenuItem NavigateUrl="~/Contact.aspx" Text="Внеплановый контакт с врачом" />
                         <asp:MenuItem NavigateUrl="~/Analysis.aspx" Text="Анализ" />
+                        <asp:MenuItem NavigateUrl="~/Guide.aspx" Text="Руководство пользователя" 
+                            Value="Руководство пользователя"></asp:MenuItem>
+                        <asp:MenuItem NavigateUrl="~/About.aspx" Text="О программе" Value="О программе">
+                        </asp:MenuItem>
                     </Items>
                 </asp:Menu>
             </div>

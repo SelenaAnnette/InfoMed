@@ -64,6 +64,7 @@
     <Reference Include="System.Web.ApplicationServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="About.aspx" />
     <Content Include="Account\ChangePassword.aspx" />
     <Content Include="Account\ChangePasswordSuccess.aspx" />
     <Content Include="Account\Login.aspx" />
@@ -71,6 +72,7 @@
     <Content Include="Analysis.aspx" />
     <Content Include="Complaints.aspx" />
     <Content Include="Contact.aspx" />
+    <Content Include="Guide.aspx" />
     <Content Include="Parameters.aspx" />
     <Content Include="Reminders.aspx" />
     <Content Include="Risk.aspx" />
@@ -91,6 +93,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="About.aspx.cs">
+      <DependentUpon>About.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="About.aspx.designer.cs">
+      <DependentUpon>About.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Account\ChangePassword.aspx.cs">
       <DependentUpon>ChangePassword.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -143,6 +152,13 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Guide.aspx.cs">
+      <DependentUpon>Guide.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Guide.aspx.designer.cs">
+      <DependentUpon>Guide.aspx</DependentUpon>
     </Compile>
     <Compile Include="Parameters.aspx.cs">
       <DependentUpon>Parameters.aspx</DependentUpon>
